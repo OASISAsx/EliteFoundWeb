@@ -102,3 +102,10 @@ body {
   background-size: 300% 300%;
   animation: gradientShift 15s ease infinite;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+/* .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} */

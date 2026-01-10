@@ -3,6 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import WorkCarousel from "./WorkCarousel";
+import UIShowcase from "./StockCarousel";
 
 export default function SlotReel() {
   const icons = [
@@ -143,11 +145,12 @@ export default function SlotReel() {
               </p>
               <p className="text-gray-300 leading-relaxed">
                 Worked as a Full-Stack Developer designing and delivering
-                scalable web applications with modern frontend and backend
+                scalable web applications ERP with modern frontend and backend
                 technologies. Led development using Vue, React, and Next.js,
                 integrated APIs with Node.js and Prisma, managed relational and
-                NoSQL databases, and implemented automated CI/CD workflows with
-                GitHub Actions for cloud deployments on Plesk and Render.
+                Managed relational (SQL) and NoSQL databases while implementing
+                automated CI/CD workflows using GitHub Actions. GitHub Actions
+                for cloud deployments on Plesk and Render.
               </p>
             </motion.div>
 
@@ -171,7 +174,7 @@ export default function SlotReel() {
                 />
               </div>
               <p className="text-gray-400 text-sm mb-3 mt-10">
-                2021 – 2023 (Dexon technologies Co., Ltd)
+                4 months 2022 – 2023 (Dexon technologies Co., Ltd)
               </p>
               <p className="text-gray-300 leading-relaxed">
                 Assisted in developing web applications and gained experience in
@@ -199,6 +202,16 @@ export default function SlotReel() {
             className="object-contain"
           />
         </motion.div>
+      </section>
+      <section className="min-h-screen snap-start flex justify-center">
+        <div className="w-full max-w-7xl px-6 pt-24">
+          <WorkCarousel />
+        </div>
+      </section>
+      <section className="min-h-screen snap-start flex justify-center">
+        <div className="w-full max-w-7xl px-6 pt-24">
+          <UIShowcase />
+        </div>
       </section>
     </div>
   );

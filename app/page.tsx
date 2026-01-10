@@ -18,7 +18,7 @@ import Snowfall from "react-snowfall";
 import { useRouter } from "next/navigation";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-// import { signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const greetingText = "Hi, I'm Nanthawat Inthisaen";
 const rotatingWords = [
@@ -169,6 +169,13 @@ const food: [string, string, string, number, number][] = [
 export default function TypewriterHero() {
   const [show, setShow] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const { status, data: session } = useSession();
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -185,7 +192,6 @@ export default function TypewriterHero() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const router = useRouter();
   // Typewriter logic (เหมือนเดิม)
   const greetingCount = useMotionValue(0);
   const greetingRounded = useTransform(greetingCount, Math.round);
@@ -287,12 +293,12 @@ export default function TypewriterHero() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      {/* <button
+      <button
         onClick={() => signOut({ callbackUrl: "/" })}
         className="w-full bg-blue-500 text-white py-2 rounded"
       >
         Logout
-      </button> */}
+      </button>
       <section className="flex min-h-screen items-center justify-center  px-6">
         <Snowfall snowflakeCount={50} />
 
