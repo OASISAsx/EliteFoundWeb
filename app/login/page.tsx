@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/app/actions/signup-action";
+import { motion } from "framer-motion";
 import {
   Alert,
   AlertTitle,
@@ -75,7 +76,7 @@ export default function AuthPage() {
           showAlert("success", "Welcome Back", "Initializing your session...");
           setTimeout(() => {
             router.push("/");
-          }, 1500);
+          }, 1000);
         }
       } else {
         // Register logic
@@ -242,6 +243,27 @@ export default function AuthPage() {
               )}
             </button>
           </div>
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => signIn("google")}
+            className="relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 p-[1px] focus:outline-none"
+          >
+            <motion.div
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "100%" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+            />
+
+            <div className="relative z-10 flex items-center justify-center gap-2 rounded-xl bg-black/80 px-6 py-3 text-white font-semibold">
+              <img
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                className="w-5 h-5"
+              />
+              Login with Google
+            </div>
+          </motion.button>
         </div>
 
         {/* Footer Info */}

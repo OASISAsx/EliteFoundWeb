@@ -27,14 +27,11 @@ export async function registerUser(
     }
 
     // เรียก API endpoint ของคุณที่ /api/auth/signup
-    const response = await axios.post(
-      `${process.env.NEXTAUTH_URL}/api/auth/signup`,
-      {
-        name,
-        email,
-        password,
-      }
-    );
+    const response = await axios.post(`${process.env.API_URL}/register`, {
+      name,
+      email,
+      password,
+    });
 
     return {
       success: true,

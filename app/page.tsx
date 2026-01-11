@@ -174,6 +174,8 @@ export default function TypewriterHero() {
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login");
+    } else if (!session?.user.usersInformationId) {
+      router.push("/about");
     }
   }, [status, router]);
   useEffect(() => {

@@ -10,13 +10,13 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 🔒 protect /protected/*
-  if (pathname.startsWith("/")) {
+  if (pathname.startsWith("/about")) {
     // ❌ ยังไม่ login
     if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));
     } else if (token) {
       console.log("User ID from middleware:", token.sub);
-      pathname.startsWith("/");
+      pathname.startsWith("/about");
     }
 
     // ❌ ไม่ใช่ admin
@@ -29,5 +29,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["//:path*"],
+  matcher: ["/about/:path*"],
 };
