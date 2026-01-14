@@ -2,6 +2,7 @@ import NextAuth, { type NextAuthOptions, type DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios, { AxiosError } from "axios";
 import GoogleProvider from "next-auth/providers/google";
+import { UsersInformation } from "@/app/types/userInfomation.type";
 
 declare module "next-auth" {
   interface Session {
@@ -10,7 +11,7 @@ declare module "next-auth" {
       name: string;
       email: string;
       usersInformationId: string | null;
-      usersInformation: any | null;
+      usersInformation: UsersInformation | null;
     };
   }
 }
@@ -41,7 +42,7 @@ export const authOptions: NextAuthOptions = {
               name: string;
               email: string;
               usersInformationId: string | null;
-              usersInformation: any | null;
+              usersInformation: UsersInformation | null;
             };
           }>(`${process.env.API_URL}/login`, {
             email: credentials.email,
@@ -85,8 +86,8 @@ export const authOptions: NextAuthOptions = {
         const dbUser = res.data.data;
 
         user.id = dbUser.id;
-        (user as any).usersInformationId = dbUser.usersInformationId;
-        (user as any).usersInformation = dbUser.usersInformation;
+        // (user as any).usersInformationId = dbUser.usersInformationId;
+        // (user as any).usersInformation = dbUser.usersInformation;
       }
 
       return true;
@@ -95,8 +96,6 @@ export const authOptions: NextAuthOptions = {
     jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.usersInformationId = (user as any).usersInformationId;
-        token.usersInformation = (user as any).usersInformation;
       }
       return token;
     },
@@ -104,8 +103,6 @@ export const authOptions: NextAuthOptions = {
     session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.usersInformationId = token.usersInformationId as any;
-        session.user.usersInformation = token.usersInformation as any;
       }
       return session;
     },
