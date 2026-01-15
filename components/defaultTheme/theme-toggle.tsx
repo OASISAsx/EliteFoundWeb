@@ -7,8 +7,10 @@ export default function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!mounted) setMounted(true);
+  }, [mounted]);
 
   const current = theme === "system" ? resolvedTheme : theme;
 

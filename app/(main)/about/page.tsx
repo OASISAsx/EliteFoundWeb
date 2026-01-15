@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useGetUserStore } from "../../../stores/user.store";
 
 interface UploadResult {
@@ -69,7 +70,13 @@ export default function UploadPage() {
       {result && (
         <div className="mt-4">
           <pre>{JSON.stringify(result, null, 2)}</pre>
-          <img src={result.url} className="w-64 mt-2 rounded" />
+          <Image
+            src={result.url}
+            alt="Upload result"
+            width={256}
+            height={256}
+            className="w-64 mt-2 rounded"
+          />
         </div>
       )}
     </div>

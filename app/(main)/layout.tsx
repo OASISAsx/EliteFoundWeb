@@ -1,4 +1,3 @@
-import BackgroundDark from "@/components/Background/BackgroundDark";
 import Navbar from "@/components/Navbar/Navbar";
 
 export default function MainLayout({

@@ -58,7 +58,7 @@ export default function UsersInformationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0b0f1a] to-black flex justify-center items-center p-6">
+    <div className="min-h-screen bg-linear-to-br from-[#0b0f1a] to-black flex justify-center items-center p-6">
       <form
         onSubmit={handleSubmit}
         className="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-8 max-w-6xl w-full shadow-xl"

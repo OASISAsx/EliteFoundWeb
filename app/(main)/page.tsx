@@ -1,6 +1,5 @@
 "use client";
 import { useSession } from "next-auth/react";
-import ThemeToggleClient from "../../components/defaultTheme/theme-toggle-client";
 import { useUserStore } from "@/stores/user.store";
 import { useEffect } from "react";
 import BackgroundDark from "@/components/Background/BackgroundDark";

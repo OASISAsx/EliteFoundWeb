@@ -201,7 +201,7 @@ export default function AuthPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="relative w-full group overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600 p-[1px] focus:outline-none"
+              className="relative w-full group overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600 focus:outline-none"
             >
               <div className="relative bg-[#0a0a0c] group-hover:bg-transparent transition-all duration-300 py-3 rounded-[11px] flex items-center justify-center">
                 <span className="text-white font-semibold tracking-wider uppercase">
