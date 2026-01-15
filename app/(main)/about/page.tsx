@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useUserStore } from "../stores/user.store";
+import { useGetUserStore } from "../../../stores/user.store";
 
 interface UploadResult {
   url: string;
@@ -13,7 +13,7 @@ export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null);
   const [subName, setSubName] = useState("");
   const [result, setResult] = useState<UploadResult | null>(null);
-  const { users, fetchUsers, loading } = useUserStore();
+  const { users, fetchUsers, loading } = useGetUserStore();
 
   const handleSubmit = async () => {
     if (!file) return alert("Select file");

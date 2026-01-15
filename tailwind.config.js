@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "accent-blue": "#0ea5e9",
-        "accent-darkblue": "#1e3a8a",
+        primary: "#6366f1",
+        secondary: "#020617",
       },
       fontFamily: {
         sans: ["Geist Sans", "Arial", "Helvetica", "sans-serif"],

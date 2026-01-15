@@ -1,15 +1,17 @@
+import { UsersInformation } from "./userInfomation.type";
+
 export interface User {
   id: string;
-  email: string;
   name: string;
+  email: string;
   usersInformationId: string | null;
+  usersInformation: UsersInformation | null;
 }
 
 export interface LoginPayload {
   email: string;
   password: string;
 }
-
 export interface UserListStore {
   users: User[];
   loading: boolean;
@@ -21,4 +23,16 @@ export interface LoginStore {
   loading: boolean;
   login: (payload: LoginPayload) => Promise<void>;
   logout: () => void;
+}
+
+export interface RegisterPayload {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface RegisterStore {
+  user: User | null;
+  loading: boolean;
+  register: (payload: RegisterPayload) => Promise<void>;
 }

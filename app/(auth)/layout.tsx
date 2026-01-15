@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { getServerSession } from "next-auth";
-import Providers from "./providers";
+// import Providers from "./providers";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Navbar from "@/components/Navbar/Navbar";
 
@@ -23,10 +23,10 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers session={session}>
-          {/* <Navbar /> */}
-          {children}
-        </Providers>
+        {/* <Providers session={session}> */}
+        {/* <Navbar /> */}
+        {children}
+        {/* </Providers> */}
       </body>
     </html>
   );

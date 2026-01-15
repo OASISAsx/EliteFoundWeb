@@ -1,11 +1,11 @@
 "use client";
 
 import { TextField, Button, LinearProgress } from "@mui/material";
-import { useUploadFileStore } from "../stores/uploadFile.store";
-import { UsersInformation } from "../types/userInfomation.type";
+import { useUploadFileStore } from "../../stores/uploadFile.store";
+import { UsersInformation } from "../../types/userInfomation.type";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { useCreateUserInformationStore } from "../stores/userInformation.store";
+import { useCreateUserInformationStore } from "../../stores/userInformation.store";
 
 export default function UsersInformationForm() {
   const { files, uploadFile, uploading, uploadProgress, uploadError } =

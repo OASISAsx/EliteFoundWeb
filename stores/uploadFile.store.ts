@@ -36,11 +36,9 @@ const useUploadFileStore = create<UploadFileState>((set) => ({
           [subName]: res.data,
         },
       }));
-    } catch (err: any) {
-      console.error("Upload error:", err);
-      set({ uploadError: err.message || "Upload failed" });
-    } finally {
-      set({ uploading: false });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Upload failed";
+      set({ uploadError: message });
     }
   },
 }));

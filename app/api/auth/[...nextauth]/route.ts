@@ -2,7 +2,7 @@ import NextAuth, { type NextAuthOptions, type DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios, { AxiosError } from "axios";
 import GoogleProvider from "next-auth/providers/google";
-import { UsersInformation } from "@/app/types/userInfomation.type";
+import { UsersInformation } from "@/types/userInfomation.type";
 
 declare module "next-auth" {
   interface Session {
@@ -21,7 +21,14 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope:
+            "openid email profile https://www.googleapis.com/auth/user.birthday.read",
+        },
+      },
     }),
+
     CredentialsProvider({
       name: "Credentials",
 
@@ -75,6 +82,9 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async signIn({ user, account, profile }) {
+      console.log("GOOGLE USER", user);
+      console.log("GOOGLE PROFILE", profile);
+      console.log("GOOGLE ACCOUNT", account);
       if (account?.provider === "google") {
         const res = await axios.post(`${process.env.API_URL}/loginGoogle`, {
           email: user.email,
@@ -86,6 +96,7 @@ export const authOptions: NextAuthOptions = {
         const dbUser = res.data.data;
 
         user.id = dbUser.id;
+        // console.log("DB USER:", dbUser);
         // (user as any).usersInformationId = dbUser.usersInformationId;
         // (user as any).usersInformation = dbUser.usersInformation;
       }

@@ -1,17 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { registerUser } from "@/app/actions/signup-action";
+// import { registerUser } from "@/app/actions/signup-action";
 import { motion } from "framer-motion";
-import {
-  Alert,
-  AlertTitle,
-  Snackbar,
-  Box,
-  CircularProgress,
-} from "@mui/material";
+import { useRegisterStore } from "@/stores/user.store";
+
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import {
   CheckCircleOutline,
   ErrorOutline,
@@ -26,6 +23,7 @@ interface AlertState {
 }
 
 export default function AuthPage() {
+  const { register } = useRegisterStore();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -79,28 +77,28 @@ export default function AuthPage() {
           }, 1000);
         }
       } else {
-        // Register logic
-        const response = await registerUser(name, email, password);
+        const form = { name, email, password };
 
-        if (response.success) {
-          console.log("Registration successful:", response.data);
+        try {
+          const result = await register(form);
+
+          console.log("Registration successful:", result);
+
           showAlert(
             "success",
             "Identity Established",
             "Your account has been created successfully. Please sign in now."
           );
+
           setTimeout(() => {
             setIsLogin(true);
             setEmail("");
             setPassword("");
             setName("");
           }, 2000);
-        } else {
-          showAlert(
-            "error",
-            "Registration Failed",
-            response.error || response.message
-          );
+        } catch (err) {
+          const message = err instanceof Error ? err.message : "Upload failed";
+          showAlert("error", message, "Registration failed. Please try again.");
         }
       }
     } catch (err) {
@@ -129,16 +127,13 @@ export default function AuthPage() {
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/20 blur-[120px] animate-pulse" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-600/20 blur-[120px] animate-pulse" />
 
-      {/* Grid Background Effect */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-
       <div className="relative z-10 w-full max-w-md px-4">
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-2xl shadow-2xl shadow-black/50">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-2 tracking-tighter">
-              {isLogin ? "NEURAL ACCESS" : "CREATE IDENTITY"}
-            </h1>
+            <p className=" text-4xl font-bold dark:text-white/10  from-blue-400 to-purple-500 bg-clip-text  mb-2 tracking-tighter bg-linear-to-r">
+              {isLogin ? "Login" : "Create Account"}
+            </p>
             <p className="text-gray-400 text-sm uppercase tracking-[0.2em]">
               {isLogin
                 ? "Enter your credentials to sync"
@@ -206,7 +201,7 @@ export default function AuthPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="relative w-full group overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 p-[1px] focus:outline-none"
+              className="relative w-full group overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600 p-[1px] focus:outline-none"
             >
               <div className="relative bg-[#0a0a0c] group-hover:bg-transparent transition-all duration-300 py-3 rounded-[11px] flex items-center justify-center">
                 <span className="text-white font-semibold tracking-wider uppercase">
@@ -226,11 +221,11 @@ export default function AuthPage() {
           <div className="mt-8 text-center">
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-gray-500 hover:text-blue-400 transition-colors duration-300"
+              className="text-sm pb-4 text-gray-500 hover:text-blue-400 transition-colors duration-300"
             >
               {isLogin ? (
                 <>
-                  Don't have an account?{" "}
+                  Don&apos;t have an account?{" "}
                   <span className="text-blue-400 font-medium">
                     Register Access
                   </span>
@@ -247,19 +242,21 @@ export default function AuthPage() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => signIn("google")}
-            className="relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 p-[1px] focus:outline-none"
+            className="relative w-full  overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600  focus:outline-none"
           >
             <motion.div
               initial={{ x: "-100%" }}
               whileHover={{ x: "100%" }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+              className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent"
             />
 
-            <div className="relative z-10 flex items-center justify-center gap-2 rounded-xl bg-black/80 px-6 py-3 text-white font-semibold">
-              <img
+            <div className="relative z-10 flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-white font-semibold">
+              <Image
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
-                className="w-5 h-5"
+                alt="Google logo"
+                width={20}
+                height={20}
               />
               Login with Google
             </div>
