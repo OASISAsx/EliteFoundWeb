@@ -10,15 +10,23 @@ import type {
 } from "../types/user.type";
 import { API } from "../constants/apiPath";
 
-const useGetUserStore = create<UserListStore>((set) => ({
+const useUserStore = create<UserListStore>((set, get) => ({
   users: [],
+  user: null,
   loading: false,
+  page: 1,
+  limit: 10,
 
   fetchUsers: async () => {
+    const { page, limit } = get();
+
     set({ loading: true });
 
     try {
-      const res = await serverApi.get(API.USER.GET_ALL);
+      const res = await serverApi.get(API.USER.GET_ALL, {
+        params: { page, limit },
+      });
+
       set({ users: res.data.data });
     } catch (err) {
       console.error(err);
@@ -26,19 +34,25 @@ const useGetUserStore = create<UserListStore>((set) => ({
       set({ loading: false });
     }
   },
-}));
 
-interface UserStore {
-  user: User | null;
-  setUser: (u: User) => void;
-  logout: () => void;
-}
-
-const useUserStore = create<UserStore>((set) => ({
-  user: null,
   setUser: (u) => set({ user: u }),
+
   logout: () => set({ user: null }),
+
+  setPage: (p) => set({ page: p }),
 }));
+
+// interface UserStore {
+//   user: User | null;
+//   setUser: (u: User) => void;
+//   logout: () => void;
+// }
+
+// const useUserStore = create<UserStore>((set) => ({
+//   user: null,
+//   setUser: (u) => set({ user: u }),
+//   logout: () => set({ user: null }),
+// }));
 
 const useLoginStore = create<LoginStore>((set) => ({
   user: null,
@@ -82,4 +96,4 @@ const useRegisterStore = create<RegisterStore>((set) => ({
   },
 }));
 
-export { useGetUserStore, useUserStore, useLoginStore, useRegisterStore };
+export { useUserStore, useLoginStore, useRegisterStore };

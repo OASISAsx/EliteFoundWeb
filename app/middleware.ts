@@ -9,25 +9,23 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  // 🔒 protect /protected/*
-  if (pathname.startsWith("/about")) {
-    // ❌ ยังไม่ login
-    if (!token) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    } else if (token) {
-      console.log("User ID from middleware:", token.sub);
-      pathname.startsWith("/about");
-    }
+  const protectedRoutes = ["/", "/about"];
 
-    // ❌ ไม่ใช่ admin
-    // if (token.role !== "admin") {
-    //   return NextResponse.redirect(new URL("/login", request.url));
-    // }
+  const isProtected = protectedRoutes.some(
+    (p) => pathname === p || pathname.startsWith(p + "/")
+  );
+
+  if (isProtected && !token) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  if (pathname.startsWith("/login") && token) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/about/:path*"],
+  matcher: ["/", "/about/:path*", "/login"],
 };

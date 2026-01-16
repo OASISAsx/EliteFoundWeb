@@ -4,13 +4,25 @@ import Link from "next/link";
 import Image from "next/image";
 import ThemeToggleClient from "@/components/defaultTheme/theme-toggle-client";
 import { signOut } from "next-auth/react";
+import { useUserStore } from "@/stores/user.store";
 // import { useUserStore } from "@/stores/user.store";
 export default function Navbar() {
-  const handleLogout = () => {
-    signOut({ callbackUrl: "/login" });
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    useUserStore.getState().logout();
+    window.location.href = "/login";
   };
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 dark:bg-sky-950/60 border-b border-gray-200 dark:border-white/10 shadow-sm">
+    <nav
+      className="
+  fixed top-0 left-0 w-full z-50
+  backdrop-blur-md
+
+  border-b border-gray-200 dark:border-white/10
+  shadow-sm
+"
+    >
       {/* <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/20 blur-[120px] animate-pulse" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-600/20 blur-[120px] animate-pulse" /> */}
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">

@@ -1,50 +1,135 @@
-export interface UsersInformation {
+import { Dayjs } from "dayjs";
+
+export interface UserInformation {
   id?: string;
 
-  full_name: string;
-  last_name: string;
-  tel: string;
+  firstName: string;
+  lastName: string;
+  citizenId: string;
+  dateOfBirth: Date;
 
-  address: string;
+  gender?: string | null;
+  nationality?: string | null;
+  maritalStatus?: string | null;
+
+  phone: string;
+  email?: string | null;
+  lineId?: string | null;
+  facebook?: string | null;
+
+  currentAddress: string;
+  registeredAddress?: string | null;
   province: string;
   district: string;
-  sub_district: string;
-  zip_code: string;
+  zipcode: string;
 
-  id_card: string;
-  date_of_birth: string; // ISO string จาก API
-  number_back_card: string;
+  occupation: string;
+  companyName?: string | null;
+  companyAddress?: string | null;
+  position?: string | null;
+  salaryPerMonth: number;
+  otherIncome?: number | null;
+  workYears: number;
+  employmentType: string; // fulltime | freelance | business
 
-  cardImage?: string;
-  statementImage: string;
+  bankName: string;
+  bankAccountName: string;
+  bankAccountNumber: string;
 
-  work_place: string;
-  position_work: string;
-  salary: string;
+  monthlyExpense: number;
+  existingDebt: boolean;
+  debtAmount?: number | null;
+  debtInstallmentPerMonth?: number | null;
 
-  certificateImage?: string;
-  age_work: string;
-  userId: string;
-  status?: string;
+  kycStatus: string; // pending | approved | rejected
+  creditScore?: number | null;
+  riskLevel?: string | null;
+
+  loanStatus: string; // pending | approved | rejected
+
+  id_card_image: string;
+
+  selfie_with_id: string;
+  salary_slip: string;
+  bank_statement: string;
+  house_document: string;
+  other_files: string[];
+
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface CreateUserInformationInput {
+  firstName: string;
+  lastName: string;
+  citizenId: string;
+  dateOfBirth: Date;
+
+  gender: string;
+  nationality?: string | null;
+  maritalStatus?: string | null;
+
+  phone: string;
+  email?: string | null;
+  lineId?: string | null;
+  facebook?: string | null;
+
+  currentAddress: string;
+  registeredAddress?: string | null;
+  province: string;
+  district: string;
+  zipcode: string;
+
+  occupation: string;
+  companyName?: string | null;
+  companyAddress?: string | null;
+  position?: string | null;
+  salaryPerMonth: number;
+  otherIncome?: number | null;
+  workYears: number;
+  employmentType: string; // fulltime | freelance | business
+
+  bankName: string;
+  bankAccountName: string;
+  bankAccountNumber: string;
+
+  monthlyExpense: number;
+  existingDebt: boolean;
+  debtAmount?: number | null;
+  debtInstallmentPerMonth?: number | null;
+
+  kycStatus?: string; // default = pending
+  creditScore?: number | null;
+  riskLevel?: string | null;
+
+  loanStatus?: string; // default = pending
+
+  id_card_image: string;
+  idCardFile: File | null;
+  selfie_with_id: string;
+  salary_slip: string[];
+  bank_statement: string;
+  house_document: string;
+  other_files: string[];
+  salarySlipUpload: File[];
 }
 
 export interface UserInformationStore {
-  userInformation: UsersInformation | null;
+  userInformation: UserInformation | null;
   loading: boolean;
   fetchUserInformation: (userId: string) => Promise<void>;
 }
 
 export interface UpdateInformationStore {
-  userInformation: UsersInformation | null;
+  userInformation: UserInformation | null;
   loading: boolean;
   updateUserInformation: (
     userId: string,
-    data: UsersInformation
+    data: UserInformation
   ) => Promise<void>;
 }
 
 export interface CreateInformationStore {
-  userInformation: UsersInformation | null;
+  userInformation: UserInformation | null;
   loading: boolean;
-  createInformation: (data: UsersInformation) => Promise<void>;
+  createInformation: (data: UserInformation) => Promise<void>;
 }

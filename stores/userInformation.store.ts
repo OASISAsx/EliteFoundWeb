@@ -4,7 +4,7 @@ import type {
   CreateInformationStore,
   UpdateInformationStore,
   UserInformationStore,
-  UsersInformation,
+  UserInformation,
 } from "../types/userInfomation.type";
 import { API } from "../constants/apiPath";
 
@@ -29,7 +29,7 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
 const useCreateUserInformationStore = create<CreateInformationStore>((set) => ({
   userInformation: null,
   loading: false,
-  createInformation: async (data: UsersInformation) => {
+  createInformation: async (data: UserInformation) => {
     set({ loading: true });
     try {
       const res = await serverApi.post(API.USER_INFORMATION.CREATE, data);

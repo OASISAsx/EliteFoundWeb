@@ -2,7 +2,7 @@ import NextAuth, { type NextAuthOptions, type DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios, { AxiosError } from "axios";
 import GoogleProvider from "next-auth/providers/google";
-import { UsersInformation } from "@/types/userInfomation.type";
+import { UserInformation } from "@/types/userInfomation.type";
 
 declare module "next-auth" {
   interface Session {
@@ -11,8 +11,18 @@ declare module "next-auth" {
       name: string;
       email: string;
       usersInformationId: string | null;
-      usersInformation: UsersInformation | null;
+      usersInformation: UserInformation | null;
     };
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    name: string;
+    email: string;
+    usersInformationId?: string | null;
+    usersInformation?: UserInformation | null;
   }
 }
 
@@ -49,7 +59,7 @@ export const authOptions: NextAuthOptions = {
               name: string;
               email: string;
               usersInformationId: string | null;
-              usersInformation: UsersInformation | null;
+              usersInformation: UserInformation | null;
             };
           }>(`${process.env.API_URL}/login`, {
             email: credentials.email,
@@ -96,9 +106,8 @@ export const authOptions: NextAuthOptions = {
         const dbUser = res.data.data;
 
         user.id = dbUser.id;
-        // console.log("DB USER:", dbUser);
-        // (user as any).usersInformationId = dbUser.usersInformationId;
-        // (user as any).usersInformation = dbUser.usersInformation;
+        (user as any).usersInformationId = dbUser.usersInformationId;
+        (user as any).usersInformation = dbUser.usersInformation;
       }
 
       return true;
@@ -107,6 +116,10 @@ export const authOptions: NextAuthOptions = {
     jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.name = user.name || "";
+        token.email = user.email || "";
+        token.usersInformationId = (user as any).usersInformationId;
+        token.usersInformation = (user as any).usersInformation;
       }
       return token;
     },
@@ -114,6 +127,10 @@ export const authOptions: NextAuthOptions = {
     session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+        session.user.usersInformationId = token.usersInformationId as string;
+        session.user.usersInformation = token.usersInformation as any;
       }
       return session;
     },

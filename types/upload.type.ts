@@ -9,10 +9,29 @@ export interface UploadFilesMap {
   certificate?: UploadFileResult;
 }
 
+// export interface UploadFileState {
+//   files: UploadFilesMap;
+//   uploading: boolean;
+//   uploadProgress: number;
+//   uploadError: string | null;
+//   uploadFile: (
+//     file: File,
+//     subName: keyof UploadFilesMap
+//   ) => Promise<UploadFileResult>;
+// }
+
 export interface UploadFileState {
   files: UploadFilesMap;
+  multiFiles: UploadFileResult[];
+
   uploading: boolean;
   uploadProgress: number;
   uploadError: string | null;
-  uploadFile: (file: File, subName: keyof UploadFilesMap) => Promise<void>;
+
+  uploadFile: (
+    file: File,
+    subName: keyof UploadFilesMap
+  ) => Promise<UploadFileResult>;
+
+  uploadMultiple: (files: File[]) => Promise<UploadFileResult[]>;
 }

@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { getSession, signIn } from "next-auth/react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 // import { registerUser } from "@/app/actions/signup-action";
 import { motion } from "framer-motion";
 import { useRegisterStore } from "@/stores/user.store";
 
-import { Alert, AlertTitle, Snackbar } from "@mui/material";
+import { Alert, AlertTitle, Button, Snackbar } from "@mui/material";
 import {
   CheckCircleOutline,
   ErrorOutline,
@@ -29,6 +29,8 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { data: session, status } = useSession();
+
   const [alert, setAlert] = useState<AlertState>({
     open: false,
     type: "info",
@@ -112,14 +114,10 @@ export default function AuthPage() {
   };
 
   useEffect(() => {
-    const checkSession = async () => {
-      const session = await getSession();
-      if (session) {
-        router.push("/");
-      }
-    };
-    checkSession();
-  }, [router]);
+    if (status === "authenticated") {
+      router.replace("/");
+    }
+  }, [status]);
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#0a0a0c]">
@@ -198,23 +196,21 @@ export default function AuthPage() {
               />
             </div>
 
-            <button
+            <Button
               type="submit"
               disabled={isLoading}
-              className="relative w-full group overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600 focus:outline-none"
+              className="relative w-full  overflow-hidden bg-linear-to-r from-blue-600 to-blue-500 focus:outline-none"
             >
-              <div className="relative bg-[#0a0a0c] group-hover:bg-transparent transition-all duration-300 py-3 rounded-[11px] flex items-center justify-center">
-                <span className="text-white font-semibold tracking-wider uppercase">
-                  {isLoading ? (
-                    <div className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  ) : isLogin ? (
-                    "Initialize Session"
-                  ) : (
-                    "Establish Identity"
-                  )}
-                </span>
-              </div>
-            </button>
+              <span className="text-white font-semibold tracking-wider uppercase">
+                {isLoading ? (
+                  <div className="h-5  bg-linear-to-r w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : isLogin ? (
+                  "Initialize Session"
+                ) : (
+                  "Establish Identity"
+                )}
+              </span>
+            </Button>
           </form>
 
           {/* Switcher */}
@@ -242,7 +238,7 @@ export default function AuthPage() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => signIn("google")}
-            className="relative w-full  overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600  focus:outline-none"
+            className="relative w-full  cursor-pointer overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600  focus:outline-none"
           >
             <motion.div
               initial={{ x: "-100%" }}

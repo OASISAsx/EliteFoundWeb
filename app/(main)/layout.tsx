@@ -1,4 +1,14 @@
+"use client";
+
 import Navbar from "@/components/Navbar/Navbar";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Anuphan } from "next/font/google";
+
+const anuphan = Anuphan({
+  subsets: ["thai"],
+  weight: ["400"],
+});
 
 export default function MainLayout({
   children,
@@ -6,9 +16,13 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" style={anuphan.style}>
       <Navbar />
-      <main className="pt-16">{children}</main>
+      <main className="pt-16">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {children}
+        </LocalizationProvider>
+      </main>
     </div>
   );
 }

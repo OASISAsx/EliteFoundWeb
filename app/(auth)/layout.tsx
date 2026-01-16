@@ -16,14 +16,5 @@ export default async function RootLayout({
 }) {
   // const session = await getServerSession(authOptions);
 
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        {/* <Providers session={session}> */}
-        {/* <Navbar /> */}
-        {children}
-        {/* </Providers> */}
-      </body>
-    </html>
-  );
+  return <div className="auth-layout">{children}</div>;
 }

@@ -8,9 +8,10 @@ export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (!mounted) setMounted(true);
-  }, [mounted]);
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // 🔥 กัน hydration mismatch
 
   const current = theme === "system" ? resolvedTheme : theme;
 
