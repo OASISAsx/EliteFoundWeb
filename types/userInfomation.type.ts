@@ -17,46 +17,18 @@ export interface UserInformation {
   lineId?: string | null;
   facebook?: string | null;
 
-  currentAddress: string;
-  registeredAddress?: string | null;
-  province: string;
-  district: string;
-  zipcode: string;
+  currentAddress?: string;
+  provinceCode?: number | null;
+  districtCode?: number | null;
+  subdistrictCode?: number | null;
+  zipcode?: string | null;
 
-  occupation: string;
-  companyName?: string | null;
-  companyAddress?: string | null;
-  position?: string | null;
-  salaryPerMonth: number;
-  otherIncome?: number | null;
-  workYears: number;
-  employmentType: string; // fulltime | freelance | business
-
-  bankName: string;
-  bankAccountName: string;
-  bankAccountNumber: string;
-
-  monthlyExpense: number;
-  existingDebt: boolean;
-  debtAmount?: number | null;
-  debtInstallmentPerMonth?: number | null;
-
-  kycStatus: string; // pending | approved | rejected
-  creditScore?: number | null;
-  riskLevel?: string | null;
-
-  loanStatus: string; // pending | approved | rejected
+  loanStatus?: string; // pending | approved | rejected
 
   id_card_image: string;
-
-  selfie_with_id: string;
-  salary_slip: string;
-  bank_statement: string;
-  house_document: string;
   other_files: string[];
-
-  createdAt: Date;
-  updatedAt: Date;
+  userId?: string;
+  JobDetail?: jobDetail | null;
 }
 export interface CreateUserInformationInput {
   firstName: string;
@@ -73,50 +45,25 @@ export interface CreateUserInformationInput {
   lineId?: string | null;
   facebook?: string | null;
 
-  currentAddress: string;
-  registeredAddress?: string | null;
-  province: string;
-  district: string;
-  zipcode: string;
-
-  occupation: string;
-  companyName?: string | null;
-  companyAddress?: string | null;
-  position?: string | null;
-  salaryPerMonth: number;
-  otherIncome?: number | null;
-  workYears: number;
-  employmentType: string; // fulltime | freelance | business
-
-  bankName: string;
-  bankAccountName: string;
-  bankAccountNumber: string;
-
-  monthlyExpense: number;
-  existingDebt: boolean;
-  debtAmount?: number | null;
-  debtInstallmentPerMonth?: number | null;
-
-  kycStatus?: string; // default = pending
-  creditScore?: number | null;
-  riskLevel?: string | null;
+  currentAddress?: string;
+  provinceCode?: number | null;
+  districtCode?: number | null;
+  subdistrictCode?: number | null;
+  zipcode?: string | null;
 
   loanStatus?: string; // default = pending
 
   id_card_image: string;
-  idCardFile: File | null;
-  selfie_with_id: string;
-  salary_slip: string[];
-  bank_statement: string;
-  house_document: string;
   other_files: string[];
-  salarySlipUpload: File[];
+  userId?: string;
 }
-
 export interface UserInformationStore {
   userInformation: UserInformation | null;
   loading: boolean;
+
   fetchUserInformation: (userId: string) => Promise<void>;
+  createInformation: (data: UserInformation) => Promise<void>;
+  updateInformation: (data: UserInformation, id: string) => Promise<void>;
 }
 
 export interface UpdateInformationStore {
@@ -124,7 +71,7 @@ export interface UpdateInformationStore {
   loading: boolean;
   updateUserInformation: (
     userId: string,
-    data: UserInformation
+    data: UserInformation,
   ) => Promise<void>;
 }
 

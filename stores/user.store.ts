@@ -12,6 +12,7 @@ import { API } from "../constants/apiPath";
 
 const useUserStore = create<UserListStore>((set, get) => ({
   users: [],
+  userDeail: null,
   user: null,
   loading: false,
   page: 1,
@@ -28,6 +29,30 @@ const useUserStore = create<UserListStore>((set, get) => ({
       });
 
       set({ users: res.data.data });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  fetchUser: async (id: string) => {
+    set({ loading: true });
+    try {
+      const res = await serverApi.post(API.USER.GET_BY_ID(id));
+      set({ user: res.data.data });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  fetchUserDetail: async (id: string) => {
+    set({ loading: true });
+    try {
+      const res = await serverApi.post(API.USER.GET_BY_ID(id));
+      set({ userDeail: res.data.data.usersInformation });
     } catch (err) {
       console.error(err);
     } finally {

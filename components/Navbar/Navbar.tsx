@@ -29,10 +29,10 @@ export default function Navbar() {
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src=".\images\EF.jpg" // ใส่โลโก้คุณ
+            src=".\images\logoEF.png" // ใส่โลโก้คุณ
             alt="Logo"
-            width={140}
-            height={80}
+            width={70}
+            height={90}
             className="rounded-lg"
           />
           {/* <span className="font-bold text-lg text-gray-900 dark:text-white">
@@ -45,8 +45,8 @@ export default function Navbar() {
           <Link href="/" className="hover:text-blue-500 transition">
             Home
           </Link>
-          <Link href="/about" className="hover:text-blue-500 transition">
-            About
+          <Link href="/personalized" className="hover:text-blue-500 transition">
+            Personalized
           </Link>
           <Link href="/services" className="hover:text-blue-500 transition">
             Services

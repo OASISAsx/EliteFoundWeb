@@ -10,9 +10,6 @@ import {
   Box,
   Typography,
   CircularProgress,
-  Snackbar,
-  Alert,
-  TextareaAutosize,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
@@ -22,7 +19,6 @@ import { CreateUserInformationInput } from "@/types/userInfomation.type";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useUserInformationStore } from "@/stores/userInformation.store";
-import { DatePicker } from "@mui/x-date-pickers";
 
 import dayjs, { Dayjs } from "dayjs";
 import UploadIDCard from "@/components/UploadIDCard";
@@ -51,50 +47,37 @@ export default function UsersInformationForm() {
     message: "",
     severity: "success" as "success" | "error" | "info" | "warning",
   });
+  const [salaryPreviews, setSalaryPreviews] = useState<string[]>([]);
+  const [salaryFiles, setSalaryFiles] = useState<File[]>([]);
 
-  const { fetchUser, user } = useUserStore();
+  const { fetchUserDetail, userDeail } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
   const [idCardFile, setCardFile] = useState<File | null>(null);
   const [otherFiles, setOtherFiles] = useState<File[] | null>(null);
-  const [form, setForm] = useState<CreateUserInformationInput>({
-    firstName: "",
-    lastName: "",
-    citizenId: "",
-    dateOfBirth: new Date(),
-    gender: "",
-    nationality: null,
-    maritalStatus: null,
-    phone: "",
-    email: null,
-    lineId: null,
-    facebook: null,
-    loanStatus: "pending",
-    currentAddress: "",
-    provinceCode: null,
-    districtCode: null,
-    subdistrictCode: null,
-    zipcode: "",
-    id_card_image: "",
-    // idCardFile: null,
-    // otherFiles: [],
-
-    other_files: [],
+  const [form, setForm] = useState<jobDetail>({
+    occupation: "",
+    companyName: "",
+    companyAddress: "",
+    position: "",
+    salaryPerMonth: 0,
+    otherIncome: 0,
+    workYears: 0,
+    employmentType: "",
+    salarySlip: [],
+    usersInformationId: "",
   });
   useEffect(() => {
     if (session?.user?.id) {
-      fetchUser(session.user.id);
+      fetchUserDetail(session.user.id);
     }
   }, [session?.user?.id]);
 
   useEffect(() => {
-    if (user?.usersInformation) {
-      setForm(user.usersInformation);
+    if (userDeail?.jobDetail) {
+      setForm(userDeail.jobDetail);
     }
-  }, [user]);
+  }, [userDeail]);
 
-  // const handleChange = (e: any) => {
-  //   setForm({ ...form, [e.target.name]: e.target.value });
-  // };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({
       ...prev,
@@ -115,53 +98,34 @@ export default function UsersInformationForm() {
     try {
       setIsLoading(true);
 
-      const cardPromise = idCardFile
-        ? uploadFile(idCardFile, "card")
-        : Promise.resolve(null);
-
       const salaryPromise =
         otherFiles && otherFiles.length > 0
           ? uploadMultiple(otherFiles)
           : Promise.resolve([]);
 
-      const [cardFile, salaryFiles] = await Promise.all([
-        cardPromise,
-        salaryPromise,
-      ]);
-
-      const cardUrl = cardFile?.url ?? "";
+      const [salaryFiles] = await Promise.all([salaryPromise]);
 
       const otherFilesList = Array.isArray(salaryFiles)
         ? salaryFiles.filter((f) => f?.url).map((f) => f.url)
         : [];
 
-      const payload: CreateUserInformationInput = {
+      const payload: jobDetail = {
         ...form,
-        id_card_image: cardUrl || form.id_card_image,
-        other_files:
-          otherFilesList.length > 0 ? otherFilesList : form.other_files,
-        userId: session?.user.id,
+        salarySlip:
+          otherFilesList.length > 0 ? otherFilesList : form.salarySlip,
       };
 
-      if (user?.usersInformation) {
-        await updateInformation(payload, user?.usersInformationId);
+      if (userDeail?.jobDetail) {
+        await updateInformation(payload, userDeail?.jobDetail);
       } else {
         await createInformation(payload);
       }
-
-      setIsLoading(true);
-
-      setTimeout(() => {
-        setToast({
-          open: true,
-          message: "บันทึกข้อมูลสำเร็จ",
-          severity: "success",
-        });
-
-        setTimeout(() => {
-          route.push("/jobDetails");
-        }, 600);
-      }, 400);
+      route.push("/");
+      setToast({
+        open: true,
+        message: "บันทึกข้อมูลสำเร็จ",
+        severity: "success",
+      });
     } catch (error) {
       console.error(error);
 
@@ -188,25 +152,19 @@ export default function UsersInformationForm() {
           onClose={() => setToast({ ...toast, open: false })}
         />
 
-        {isLoading && (
-          <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-            <CircularProgress />
-          </div>
-        )}
-
         <p className=" text-2xl font-bold text-center mb-8 transition-colors duration-300">
-          ข้อมูลส่วนตัว
+          รายละเอียดการทำงาน
         </p>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
               required
               fullWidth
-              id="firstName"
-              name="firstName"
-              label="ชื่อ"
+              id="companyName"
+              name="companyName"
+              label="บริษัท"
               variant="filled"
-              value={form.firstName}
+              value={form.companyName}
               onChange={handleChange}
             />
           </Grid>
@@ -214,11 +172,11 @@ export default function UsersInformationForm() {
             <TextField
               required
               fullWidth
-              id="lastName"
-              name="lastName"
-              label="นามสกุล"
+              id="occupation"
+              name="occupation"
+              label="อาชีพ"
               variant="filled"
-              value={form.lastName}
+              value={form.occupation}
               onChange={handleChange}
             />
           </Grid>
@@ -226,136 +184,87 @@ export default function UsersInformationForm() {
             <TextField
               required
               fullWidth
-              id="citizenId"
-              name="citizenId"
-              label="เลขบัตรประชาชน"
+              id="position"
+              name="position"
+              label="ตำแหน่งงาน"
               variant="filled"
-              value={form.citizenId}
+              value={form.position}
               onChange={handleChange}
             />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            sx={{
-              pb: 2,
-              "& .MuiInputBase-input": {
-                fontWeight: 600,
-              },
-              "& .MuiInputLabel-root": {
-                fontWeight: 600,
-              },
-            }}
-          >
-            <CustomDatePicker
-              label="วันเดือนปีเกิด"
-              value={dayjs(form.dateOfBirth)}
-              onChange={(newValue) => {
-                setForm((prev: any) => ({
-                  ...prev,
-                  dateOfBirth: newValue ? newValue.toDate() : null,
-                }));
-              }}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              type="number"
+              id="salaryPerMonth"
+              name="salaryPerMonth"
+              label="เงินเดือน"
+              variant="filled"
+              value={form.salaryPerMonth}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              type="number"
+              id="otherIncome"
+              name="otherIncome"
+              label="รายได้อื่นๆ"
+              variant="filled"
+              value={form.otherIncome}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              type="number"
+              id="workYears"
+              name="workYears"
+              label="ระยะเวลาการทำงาน (ปี)"
+              variant="filled"
+              value={form.workYears}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth variant="filled">
-              <InputLabel id="gender-label">เพศ</InputLabel>
+              <InputLabel id="employmentType-label">
+                ประเภทการจ้างงาน
+              </InputLabel>
               <Select
                 required
-                labelId="gender-label"
-                id="gender"
-                name="gender"
-                value={form.gender || ""}
+                labelId="employmentType-label"
+                id="employmentType"
+                name="employmentType"
+                value={form.employmentType || ""}
                 onChange={handleSelectChange}
               >
-                {/* <MenuItem value="">
-                  <em>None</em>
-                </MenuItem> */}
-                <MenuItem value="male">ชาย</MenuItem>
-                <MenuItem value="female">หญิง</MenuItem>
+                <MenuItem value="fulltime">งานประจำ</MenuItem>
+                <MenuItem value="parttime">พนักงานพาร์ทไทม์</MenuItem>
+                <MenuItem value="contract">พนักงานสัญญาจ้าง</MenuItem>
+                <MenuItem value="temporary">พนักงานชั่วคราว</MenuItem>
+                <MenuItem value="probation">ช่วงทดลองงาน</MenuItem>
+                <MenuItem value="intern">นักศึกษาฝึกงาน</MenuItem>
+                <MenuItem value="freelance">ฟรีแลนซ์</MenuItem>
+                <MenuItem value="self_employed">
+                  เจ้าของกิจการ / อาชีพอิสระ
+                </MenuItem>
+                <MenuItem value="business_owner">เจ้าของบริษัท</MenuItem>
+                <MenuItem value="government">ข้าราชการ</MenuItem>
+                <MenuItem value="state_enterprise">รัฐวิสาหกิจ</MenuItem>
                 <MenuItem value="other">อื่นๆ</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="nationality"
-              name="nationality"
-              label="สัญชาติ"
-              variant="filled"
-              value={form.nationality || ""}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="phone"
-              name="phone"
-              label="เบอร์โทรศัพท์"
-              variant="filled"
-              value={form.phone || ""}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth variant="filled">
-              <InputLabel id="maritalStatus-label">สถานภาพ</InputLabel>
-              <Select
-                required
-                labelId="maritalStatus-label"
-                id="maritalStatus"
-                name="maritalStatus"
-                value={form.maritalStatus || ""}
-                onChange={handleSelectChange}
-              >
-                {/* <MenuItem value="">
-                  <em>None</em>
-                </MenuItem> */}
-                <MenuItem value="single">โสด</MenuItem>
-                <MenuItem value="married">สมรส</MenuItem>
-                <MenuItem value="divorced">หย่า</MenuItem>
-                <MenuItem value="other">อื่นๆ</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            {" "}
-            <UploadIDCard
-              value={idCardFile}
-              previewUrl={form.id_card_image}
-              onChange={(file) => {
-                console.log(file, "file");
-                setCardFile(file);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <AddressSelect
-              value={{
-                provinceCode: form.provinceCode,
-                districtCode: form.districtCode,
-                subdistrictCode: form.subdistrictCode,
-                currentAddress: form.currentAddress,
-              }}
-              onChange={(val) =>
-                setForm((prev) => ({
-                  ...prev,
-                  ...val,
-                }))
-              }
-            />
           </Grid>
 
           <Grid item xs={12} sm={6}>
             <InputLabel id="otherFiles-label">
-              เอกสารอื่นๆ (เพื่อการอนุมัติง่ายขึ้น)
+              สลิปเงินเดือน (ย้อนหลัง 6 เดือน)
             </InputLabel>
             <Input
               className="pt-6"
@@ -364,17 +273,42 @@ export default function UsersInformationForm() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const files = e.target.files;
                 if (!files) return;
-                setOtherFiles(Array.from(files));
+
+                const arr = Array.from(files);
+
+                setSalaryFiles(arr);
+
+                const previews = arr.map((file) => URL.createObjectURL(file));
+                setSalaryPreviews(previews);
               }}
             />
-            {form.other_files && form.other_files.length > 0 && (
+            {salaryPreviews.length > 0 && (
+              <Box mt={2}>
+                <Typography variant="subtitle2">รูปที่เลือก</Typography>
+
+                <Box display="flex" gap={2} flexWrap="wrap" mt={1}>
+                  {salaryPreviews.map((src, index) => (
+                    <Image
+                      key={index}
+                      src={src}
+                      alt={`preview-${index}`}
+                      width={120}
+                      height={80}
+                      style={{ objectFit: "cover", borderRadius: 6 }}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            )}
+
+            {form.salarySlip && form.salarySlip.length > 0 && (
               <Box mt={2}>
                 <Typography variant="subtitle2">
                   เอกสารที่อัปโหลดแล้ว
                 </Typography>
 
                 <Box display="flex" gap={2} flexWrap="wrap" mt={1}>
-                  {form.other_files.map((url: string, index: number) => (
+                  {form.salarySlip.map((url: string, index: number) => (
                     <Image
                       key={index}
                       src={url}

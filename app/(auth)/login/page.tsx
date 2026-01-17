@@ -42,7 +42,7 @@ export default function AuthPage() {
   const showAlert = (
     type: "success" | "error" | "info",
     title: string,
-    message: string
+    message: string,
   ) => {
     setAlert({
       open: true,
@@ -89,7 +89,7 @@ export default function AuthPage() {
           showAlert(
             "success",
             "Identity Established",
-            "Your account has been created successfully. Please sign in now."
+            "Your account has been created successfully. Please sign in now.",
           );
 
           setTimeout(() => {
@@ -129,7 +129,7 @@ export default function AuthPage() {
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-2xl shadow-2xl shadow-black/50">
           {/* Header */}
           <div className="text-center mb-8">
-            <p className=" text-4xl font-bold dark:text-white/10  from-blue-400 to-purple-500 bg-clip-text  mb-2 tracking-tighter bg-linear-to-r">
+            <p className=" text-3xl font-bold dark:text-white/10  from-blue-400 to-purple-500 bg-clip-text  mb-2 tracking-tighter bg-linear-to-r">
               {isLogin ? "Login" : "Create Account"}
             </p>
             <p className="text-gray-400 text-sm uppercase tracking-[0.2em]">
@@ -304,29 +304,29 @@ export default function AuthPage() {
               alert.type === "success"
                 ? "rgba(16, 185, 129, 0.15)"
                 : alert.type === "error"
-                ? "rgba(239, 68, 68, 0.15)"
-                : "rgba(59, 130, 246, 0.15)",
+                  ? "rgba(239, 68, 68, 0.15)"
+                  : "rgba(59, 130, 246, 0.15)",
             border:
               alert.type === "success"
                 ? "1px solid rgba(16, 185, 129, 0.5)"
                 : alert.type === "error"
-                ? "1px solid rgba(239, 68, 68, 0.5)"
-                : "1px solid rgba(59, 130, 246, 0.5)",
+                  ? "1px solid rgba(239, 68, 68, 0.5)"
+                  : "1px solid rgba(59, 130, 246, 0.5)",
             borderRadius: "12px",
             backdropFilter: "blur(10px)",
             color:
               alert.type === "success"
                 ? "#10b981"
                 : alert.type === "error"
-                ? "#ef4444"
-                : "#3b82f6",
+                  ? "#ef4444"
+                  : "#3b82f6",
             "& .MuiAlert-icon": {
               color:
                 alert.type === "success"
                   ? "#10b981"
                   : alert.type === "error"
-                  ? "#ef4444"
-                  : "#3b82f6",
+                    ? "#ef4444"
+                    : "#3b82f6",
             },
             "& .MuiAlertTitle-root": {
               fontWeight: 600,
@@ -341,8 +341,8 @@ export default function AuthPage() {
               alert.type === "success"
                 ? "0 0 20px rgba(16, 185, 129, 0.3)"
                 : alert.type === "error"
-                ? "0 0 20px rgba(239, 68, 68, 0.3)"
-                : "0 0 20px rgba(59, 130, 246, 0.3)",
+                  ? "0 0 20px rgba(239, 68, 68, 0.3)"
+                  : "0 0 20px rgba(59, 130, 246, 0.3)",
           }}
         >
           <AlertTitle>{alert.title}</AlertTitle>

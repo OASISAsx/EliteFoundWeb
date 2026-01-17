@@ -19,6 +19,55 @@ export const lightMuiTheme = createTheme({
   },
 
   components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#E8E8E8",
+          borderRadius: 10,
+          fontWeightMedium: 600,
+          fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
+          color: "#2c2f33",
+        },
+        notchedOutline: {
+          borderColor: "#6c6cff",
+        },
+        input: {
+          padding: "14px 12px",
+          fontWeightMedium: 600,
+          fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
+        },
+      },
+    },
+
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          color: "#2c2f33",
+          fontWeightMedium: 600,
+          fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
+        },
+      },
+    },
+
+    // MuiInputLabel: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: "#fff",
+    //       "&.Mui-focused": { color: "#6c6cff" },
+    //     },
+    //     shrink: {
+    //       color: "#6c6cff",
+    //     },
+    //   },
+    // },
+
+    // MuiIconButton: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: "#fff",
+    //     },
+    //   },
+    // },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
@@ -35,12 +84,15 @@ export const lightMuiTheme = createTheme({
           backgroundColor: "#E8E8E8",
           fontWeight: 600,
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif", // 👈 ใส่ตรงนี้แทน
-          "&:hover": {
-            backgroundColor: "transparent",
-          },
           "& input:-webkit-autofill": {
             WebkitBoxShadow: "0 0 0 1000px #E8E8E8 inset",
             WebkitTextFillColor: "#2c2f33",
+          },
+          "&:before, &:after": {
+            borderBottom: "none",
+          },
+          "&:hover:not(.Mui-disabled):before": {
+            borderBottom: "none",
           },
         },
         input: {
@@ -74,7 +126,6 @@ export const lightMuiTheme = createTheme({
     },
   },
 });
-
 export const darkMuiTheme = createTheme({
   palette: { mode: "dark" },
 
@@ -86,6 +137,53 @@ export const darkMuiTheme = createTheme({
   },
 
   components: {
+    /* ================= PICKERS ================= */
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#2c2f33",
+          borderRadius: 10,
+          color: "#fff",
+        },
+        notchedOutline: {
+          borderColor: "#6c6cff",
+        },
+        input: {
+          padding: "14px 12px",
+          fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
+        },
+      },
+    },
+
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          color: "#fff",
+          fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
+        },
+      },
+    },
+
+    // MuiInputLabel: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: "#fff",
+    //       "&.Mui-focused": { color: "#6c6cff" },
+    //     },
+    //     shrink: {
+    //       color: "#6c6cff",
+    //     },
+    //   },
+    // },
+
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: "#fff",
+        },
+      },
+    },
+    /* ================= BASELINE ================= */
     MuiCssBaseline: {
       styleOverrides: {
         body: {
@@ -94,19 +192,26 @@ export const darkMuiTheme = createTheme({
       },
     },
 
+    /* ================= FILLED INPUT ================= */
     MuiFilledInput: {
       styleOverrides: {
         root: {
           marginBottom: 20,
           borderRadius: 10,
           backgroundColor: "#2c2f33",
-          fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif", // 👈 ใส่ตรงนี้แทน
+          fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
           "&:hover": {
             backgroundColor: "#2c2f33",
           },
           "& input:-webkit-autofill": {
             WebkitBoxShadow: "0 0 0 1000px #2c2f33 inset",
             WebkitTextFillColor: "#fff",
+          },
+          "&:before, &:after": {
+            borderBottom: "none",
+          },
+          "&:hover:not(.Mui-disabled):before": {
+            borderBottom: "none",
           },
         },
         input: {
@@ -117,6 +222,7 @@ export const darkMuiTheme = createTheme({
       },
     },
 
+    /* ================= LABEL ================= */
     MuiInputLabel: {
       styleOverrides: {
         root: {
@@ -130,10 +236,19 @@ export const darkMuiTheme = createTheme({
           transform: "translate(12px, 14px) scale(1)",
         },
         shrink: {
-          color: "#fff",
+          // color: "#6c6cff",
           transform: "translate(12px, -20px) scale(0.85)",
         },
       },
     },
+
+    /* ================= ICON ================= */
+    // MuiIconButton: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: "#6c6cff",
+    //     },
+    //   },
+    // },
   },
 });

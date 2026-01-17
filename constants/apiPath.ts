@@ -7,7 +7,7 @@ export const API = {
 
   USER: {
     GET_ALL: "/users",
-    GET_BY_ID: (id: string) => `/users/${id}`,
+    GET_BY_ID: (id: string) => `/user/${id}`,
   },
 
   USER_INFORMATION: {
@@ -19,5 +19,13 @@ export const API = {
   UPLOAD: {
     FILE: "/upload/single",
     FILE_MULTIPLE: "/upload/multi",
+  },
+
+  ADDRESS_DROPDOWN: {
+    province: "/provinces",
+    district: (provinceCode: string) =>
+      `/districts?provinceCode=${provinceCode}`,
+    subdistrict: (districtCode: string) =>
+      `/subdistricts?districtCode=${districtCode}`,
   },
 };

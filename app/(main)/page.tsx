@@ -11,10 +11,12 @@ export default function Page() {
 
   useEffect(() => {
     if (status === "loading") return;
-
+    console.log(session, "session");
     if (!session?.user) {
       router.replace("/login");
       return;
+    } else if (!session?.user.usersInformationId) {
+      router.replace("/personalized");
     }
 
     useUserStore.getState().setUser(session.user);
@@ -24,7 +26,14 @@ export default function Page() {
 
   return (
     <main className="flex min-h-screen items-center justify-center">
-      <div>{session?.user?.name}</div>
+      <div>{session?.user.name}</div>
+      <div>
+        {typeof session?.user.usersInformation === "string"
+          ? session?.user.usersInformation
+          : ""}
+      </div>
+      {/* <div>{session?.user.name}</div>
+      <div>{session?.user.name}</div> */}
     </main>
   );
 }

@@ -6,19 +6,13 @@ import { useRef, useState } from "react";
 
 interface Props {
   value?: File | null;
+  previewUrl?: string | null;
   onChange: (file: File | null) => void;
 }
-
-export default function UploadIDCard({ value, onChange }: Props) {
+export default function UploadIDCard({ value, previewUrl, onChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(
-    value ? URL.createObjectURL(value) : null,
-  );
 
-  const handleFile = (file: File) => {
-    setPreview(URL.createObjectURL(file));
-    onChange(file);
-  };
+  const preview = value ? URL.createObjectURL(value) : previewUrl || null;
 
   return (
     <Box
@@ -40,7 +34,7 @@ export default function UploadIDCard({ value, onChange }: Props) {
         accept="image/*"
         onChange={(e) => {
           if (e.target.files?.[0]) {
-            handleFile(e.target.files[0]);
+            onChange(e.target.files[0]);
           }
         }}
       />
@@ -54,9 +48,6 @@ export default function UploadIDCard({ value, onChange }: Props) {
           style={{
             objectFit: "cover",
             borderRadius: 8,
-            display: "flex",
-            justifyContent: "center",
-            textAlign: "center",
           }}
         />
       ) : (

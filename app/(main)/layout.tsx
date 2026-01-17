@@ -16,10 +16,14 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background" style={anuphan.style}>
+    <div
+      className="min-h-screen bg-background"
+      style={anuphan.style}
+      suppressHydrationWarning
+    >
       <Navbar />
       <main className="pt-16">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} >
           {children}
         </LocalizationProvider>
       </main>

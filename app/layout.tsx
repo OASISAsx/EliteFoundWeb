@@ -26,7 +26,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="th" suppressHydrationWarning>
+    <html lang="th" suppressHydrationWarning >
       <body className={anuphan.className}>
         <Providers session={session}>
           {/* <Navbar /> */}

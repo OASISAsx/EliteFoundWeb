@@ -13,14 +13,16 @@ export interface LoginPayload {
   password: string;
 }
 export interface UserListStore {
-  users: User[];
-  user: User | null;
+  users: any[];
+  user: any | null;
   loading: boolean;
   page: number;
   limit: number;
-
+  userDeail: any | null;
   fetchUsers: () => Promise<void>;
-  setUser: (u: User) => void;
+  fetchUser: (id: string) => Promise<void>;
+  fetchUserDetail: (id: string) => Promise<void>;
+  setUser: (u: any) => void;
   logout: () => void;
   setPage: (p: number) => void;
 }

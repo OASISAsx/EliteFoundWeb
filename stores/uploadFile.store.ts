@@ -30,7 +30,7 @@ export const useUploadFileStore = create<UploadFileState>((set) => ({
         },
       });
 
-      const fileData: UploadFileResult = res.data.data;
+      const fileData: UploadFileResult = res.data;
 
       set((state) => ({
         files: {
