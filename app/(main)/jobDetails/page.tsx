@@ -188,7 +188,7 @@ export default function UsersInformationForm() {
         </div>
 
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -200,7 +200,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               rows={3}
@@ -214,7 +214,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -226,7 +226,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -238,7 +238,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -251,7 +251,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -264,7 +264,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -277,7 +277,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <FormControl fullWidth variant="filled">
               <InputLabel id="employmentType-label">
                 ประเภทการจ้างงาน
@@ -308,7 +308,7 @@ export default function UsersInformationForm() {
             </FormControl>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <InputLabel id="otherFiles-label">
               สลิปเงินเดือน (ย้อนหลัง 6 เดือน)
             </InputLabel>
@@ -373,7 +373,7 @@ export default function UsersInformationForm() {
           </Grid>
         </Grid>
         <Grid container justifyContent="flex-end">
-          <Grid item xs={12} sm={4} md={2}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Button
               type="submit"
               variant="contained"

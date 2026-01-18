@@ -149,7 +149,7 @@ export default function AddressSelect({ value, onChange }: Props) {
         },
       }}
     >
-      <Grid item xs={12} sm={6} sx={{ pb: 1 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 1 }}>
         <FormControl fullWidth>
           <InputLabel>จังหวัด</InputLabel>
           <Select
@@ -166,7 +166,7 @@ export default function AddressSelect({ value, onChange }: Props) {
         </FormControl>
       </Grid>
 
-      <Grid item xs={12} sm={6} sx={{ pb: 1 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 1 }}>
         <FormControl fullWidth disabled={!province}>
           <InputLabel>อำเภอ</InputLabel>
           <Select
@@ -183,7 +183,7 @@ export default function AddressSelect({ value, onChange }: Props) {
         </FormControl>
       </Grid>
 
-      <Grid item xs={12} sm={6} sx={{ pb: 4 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 4 }}>
         <FormControl fullWidth disabled={!district}>
           <InputLabel>ตำบล</InputLabel>
           <Select
@@ -199,7 +199,7 @@ export default function AddressSelect({ value, onChange }: Props) {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={12} sm={12} sx={{ pb: 1 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 1 }}>
         <TextField
           label="ที่อยู่ปัจจุบัน"
           multiline

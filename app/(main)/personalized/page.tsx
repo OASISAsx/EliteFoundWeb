@@ -219,7 +219,7 @@ export default function UsersInformationForm() {
         </div>
 
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -231,7 +231,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -243,7 +243,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -256,9 +256,7 @@ export default function UsersInformationForm() {
             />
           </Grid>
           <Grid
-            item
-            xs={12}
-            sm={6}
+            size={{ xs: 12, sm: 6, md: 4 }}
             sx={{
               pb: 2,
               "& .MuiInputBase-input": {
@@ -280,7 +278,7 @@ export default function UsersInformationForm() {
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <FormControl fullWidth variant="filled">
               <InputLabel id="gender-label">เพศ</InputLabel>
               <Select
@@ -300,7 +298,7 @@ export default function UsersInformationForm() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -312,7 +310,7 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <TextField
               required
               fullWidth
@@ -325,7 +323,7 @@ export default function UsersInformationForm() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <FormControl fullWidth variant="filled">
               <InputLabel id="maritalStatus-label">สถานภาพ</InputLabel>
               <Select
@@ -346,7 +344,7 @@ export default function UsersInformationForm() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid size={{ xs: 12, sm: 12 }}>
             {" "}
             <UploadIDCard
               value={idCardFile}
@@ -357,7 +355,7 @@ export default function UsersInformationForm() {
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid size={{ xs: 12, sm: 12 }}>
             <AddressSelect
               value={{
                 provinceCode: form.provinceCode,
@@ -374,7 +372,7 @@ export default function UsersInformationForm() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <InputLabel id="otherFiles-label">
               เอกสารอื่นๆ (เพื่อการอนุมัติง่ายขึ้น)
             </InputLabel>
@@ -414,7 +412,7 @@ export default function UsersInformationForm() {
           </Grid>
         </Grid>
         <Grid container justifyContent="flex-end">
-          <Grid item xs={12} sm={4} md={2}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Button
               type="submit"
               variant="contained"
