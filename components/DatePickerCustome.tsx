@@ -48,6 +48,7 @@ export default function CustomDatePicker({ label, value, onChange }: Props) {
                 backgroundColor: (theme) =>
                   theme.palette.mode === "dark" ? "#2c2f33" : "#E8E8E8", // ตาม theme คุณ
                 borderRadius: "10px",
+                height: "49px",
 
                 // Target notchedOutline โดยตรง (ขอบจริง ๆ)
                 "& .MuiPickersOutlinedInput-notchedOutline": {
@@ -72,7 +73,7 @@ export default function CustomDatePicker({ label, value, onChange }: Props) {
 
                 // Focus state (ใช้ primary color จาก theme เพื่อสวยและ consistent)
                 "&.Mui-focused .MuiPickersOutlinedInput-notchedOutline": {
-                  borderColor: (theme) => theme.palette.primary.main, // เช่น #6c6cff จาก theme คุณ
+                  borderColor: (theme) => theme.palette.primary.main,
                   borderWidth: "2px", // หนาขึ้นตอน focus เหมือน MUI default
                 },
               },

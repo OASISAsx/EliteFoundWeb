@@ -209,6 +209,13 @@ export default function AddressSelect({ value, onChange }: Props) {
           onChange={(e) =>
             handleAddressChange(e as React.ChangeEvent<HTMLTextAreaElement>)
           }
+          variant="filled"
+          sx={{
+            "& textarea": {
+              marginTop: "-30px",
+              marginLeft: "-10px",
+            },
+          }}
         />
       </Grid>
     </Grid>

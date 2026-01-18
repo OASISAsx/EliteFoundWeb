@@ -32,6 +32,8 @@ import { useUserStore } from "@/stores/user.store";
 import AddressSelect from "@/components/AddressSelect";
 import ToastAlert from "@/components/ToastAlert";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
+import { formatPhoneNumber } from "@/app/helper/formatPhoneNumber";
 
 export default function UsersInformationForm() {
   const route = useRouter();
@@ -53,7 +55,7 @@ export default function UsersInformationForm() {
     severity: "success" as "success" | "error" | "info" | "warning",
   });
 
-  const { fetchUser, user } = useUserStore();
+  const { fetchUserDetail, userDeail } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
   const [idCardFile, setCardFile] = useState<File | null>(null);
   const [otherFiles, setOtherFiles] = useState<File[] | null>(null);
@@ -83,19 +85,24 @@ export default function UsersInformationForm() {
   });
   useEffect(() => {
     if (session?.user?.id) {
-      fetchUser(session.user.id);
+      fetchUserDetail(session.user.id);
     }
   }, [session?.user?.id]);
 
   useEffect(() => {
-    if (user?.usersInformation) {
-      setForm(user.usersInformation);
+    if (userDeail) {
+      setForm(userDeail);
     }
-  }, [user]);
+  }, [userDeail]);
 
-  // const handleChange = (e: any) => {
-  //   setForm({ ...form, [e.target.name]: e.target.value });
-  // };
+  const handleChangeTypePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // 1. ดึงเฉพาะตัวเลขออกมา (Raw Value)
+    const rawValue = e.target.value.replace(/\D/g, "").slice(0, 10);
+
+    // 2. เก็บเฉพาะตัวเลขลงใน state (ไม่มีขีด)
+    setForm({ ...form, phone: rawValue });
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({
       ...prev,
@@ -138,6 +145,7 @@ export default function UsersInformationForm() {
 
       const payload: CreateUserInformationInput = {
         ...form,
+
         dateOfBirth: dayjs(form.dateOfBirth).toDate(),
         id_card_image: cardUrl || form.id_card_image,
         other_files:
@@ -145,8 +153,8 @@ export default function UsersInformationForm() {
         userId: session?.user.id,
       };
 
-      if (user?.usersInformation) {
-        await updateInformation(payload, user?.usersInformationId);
+      if (userDeail) {
+        await updateInformation(payload, userDeail.id!);
       } else {
         await createInformation(payload);
       }
@@ -154,16 +162,16 @@ export default function UsersInformationForm() {
       setIsLoading(true);
 
       setTimeout(() => {
-        setToast({
-          open: true,
-          message: "บันทึกข้อมูลสำเร็จ",
-          severity: "success",
-        });
+        // setToast({
+        //   open: true,
+        //   message: "บันทึกข้อมูลสำเร็จ",
+        //   severity: "success",
+        // });
 
         setTimeout(() => {
           route.push("/jobDetails");
-        }, 600);
-      }, 400);
+        }, 100);
+      });
     } catch (error) {
       console.error(error);
 
@@ -201,12 +209,8 @@ export default function UsersInformationForm() {
         severity={toast.severity}
         onClose={() => setToast({ ...toast, open: false })}
       />
+      {isLoading ? <Loading /> : !isLoading}
 
-      {isLoading && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <CircularProgress />
-        </div>
-      )}
       <form
         onSubmit={handleSubmit}
         className="xs:pt-20 border border-white/20 rounded-2xl p-8 max-w-6xl w-full shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md"
@@ -252,7 +256,19 @@ export default function UsersInformationForm() {
               label="เลขบัตรประชาชน"
               variant="filled"
               value={form.citizenId}
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "");
+                if (value.length <= 13) {
+                  setForm({ ...form, citizenId: value });
+                }
+              }}
+              slotProps={{
+                htmlInput: {
+                  maxLength: 13,
+                  inputMode: "numeric",
+                },
+              }}
             />
           </Grid>
           <Grid
@@ -318,8 +334,15 @@ export default function UsersInformationForm() {
               name="phone"
               label="เบอร์โทรศัพท์"
               variant="filled"
-              value={form.phone || ""}
-              onChange={handleChange}
+              // นำค่าจาก state มา format ก่อนแสดงผลในช่องกรอก
+              value={formatPhoneNumber(form.phone || "")}
+              onChange={handleChangeTypePhone}
+              slotProps={{
+                htmlInput: {
+                  inputMode: "numeric",
+                },
+              }}
+              placeholder="099-999-9999"
             />
           </Grid>
 

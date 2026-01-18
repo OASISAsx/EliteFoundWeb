@@ -1,5 +1,8 @@
 import { JobDetail } from "./jobDetail.type";
-import { UserInformation } from "./userInfomation.type";
+import {
+  CreateUserInformationInput,
+  UserInformation,
+} from "./userInfomation.type";
 
 export interface User {
   id: string;
@@ -15,14 +18,14 @@ export interface LoginPayload {
 }
 export interface UserListStore {
   users: any[];
-  user: any | null;
+  user: User | null;
   loading: boolean;
   page: number;
   limit: number;
-  userDeail: UserInformation | null; // ✅ แก้ตรงนี้
+  userDeail: UserInformation | null;
   fetchUsers: () => Promise<void>;
   fetchUser: (id: string) => Promise<void>;
-  fetchUserDetail: (id: string) => Promise<void>;
+  fetchUserDetail: (id: string) => Promise<UserInformation | null>;
   setUser: (u: any) => void;
   logout: () => void;
   setPage: (p: number) => void;

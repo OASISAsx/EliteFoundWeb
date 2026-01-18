@@ -37,7 +37,7 @@ export interface CreateUserInformationInput {
   citizenId: string;
   dateOfBirth: Date;
 
-  gender: string;
+  gender?: string | null;
   nationality?: string | null;
   maritalStatus?: string | null;
 

@@ -52,9 +52,14 @@ const useUserStore = create<UserListStore>((set, get) => ({
     set({ loading: true });
     try {
       const res = await serverApi.post(API.USER.GET_BY_ID(id));
-      set({ userDeail: res.data.data.usersInformation });
+      const detail = res.data.data.usersInformation;
+
+      set({ userDeail: detail });
+
+      return detail; // *** คืนค่ากลับไปให้คนเรียกใช้ ***
     } catch (err) {
       console.error(err);
+      return null;
     } finally {
       set({ loading: false });
     }

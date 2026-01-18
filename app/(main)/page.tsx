@@ -1,44 +1,50 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useUserStore } from "@/stores/user.store";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@mui/material";
 
 export default function Page() {
-  const { fetchUser, user } = useUserStore();
+  const { fetchUserDetail, userDeail } = useUserStore();
   const { data: session, status } = useSession();
   const router = useRouter();
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    useUserStore.getState().logout();
+    window.location.href = "/login";
+  };
 
   useEffect(() => {
-    if (status === "loading") return;
+    const checkUserStatus = async () => {
+      if (status === "loading") return;
 
-    if (!session?.user) {
-      router.replace("/login");
-      return;
-    }
+      if (!session?.user) {
+        router.replace("/login");
+        return;
+      }
 
-    useUserStore.getState().setUser(session.user);
-  }, [session, status, router]);
+      const latestDetail = await fetchUserDetail(session.user.id);
 
-  useEffect(() => {
-    if (!user) return;
+      console.log(latestDetail, "latest user detail");
 
-    if (!user.usersInformationId) {
-      router.replace("/personalized");
-    }
-  }, [user, router]);
+      if (!latestDetail || !latestDetail.id) {
+        console.log("No user detail found, redirecting...");
+        router.replace("/personalized");
+      }
+    };
 
-  if (status === "loading") return null;
+    checkUserStatus();
+  }, [status, session, router, fetchUserDetail]);
 
   return (
     <main className="flex min-h-screen items-center justify-center">
       <div>{session?.user.name}</div>
-      <div>
-        {typeof session?.user.usersInformation === "string"
-          ? session?.user.usersInformation
-          : ""}
-      </div>
+
+      <Button onClick={() => handleLogout()} className="bg-blue-700 ">
+        LOGOUT
+      </Button>
       {/* <div>{session?.user.name}</div>
       <div>{session?.user.name}</div> */}
     </main>

@@ -27,6 +27,9 @@ import ToastAlert from "@/components/ToastAlert";
 import { useRouter } from "next/navigation";
 import { JobDetail } from "@/types/jobDetail.type";
 import { useUserJobDetailnStore } from "@/stores/jobDetail.store";
+import CustomDatePicker from "@/components/DatePickerCustome";
+import dayjs from "dayjs";
+import Loading from "@/components/Loading";
 
 export default function UsersInformationForm() {
   const route = useRouter();
@@ -64,6 +67,7 @@ export default function UsersInformationForm() {
     employmentType: "",
     salarySlip: [],
     usersInformationId: "",
+    startDate: new Date(),
   });
   useEffect(() => {
     if (session?.user?.id) {
@@ -170,11 +174,7 @@ export default function UsersInformationForm() {
         severity={toast.severity}
         onClose={() => setToast({ ...toast, open: false })}
       />
-      {isLoading && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <CircularProgress />
-        </div>
-      )}
+      {isLoading ? <Loading /> : !isLoading}
       <form
         onSubmit={handleSubmit}
         className="xs:pt-20 border border-white/20 rounded-2xl p-8 max-w-6xl w-full shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md"
@@ -188,7 +188,7 @@ export default function UsersInformationForm() {
         </div>
 
         <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <TextField
               required
               fullWidth
@@ -200,7 +200,19 @@ export default function UsersInformationForm() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            <CustomDatePicker
+              label="วันที่เริ่มงาน"
+              value={dayjs(form.startDate)}
+              onChange={(newValue) => {
+                setForm((prev: any) => ({
+                  ...prev,
+                  startDate: newValue ? newValue.toDate() : null,
+                }));
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 12, md: 12 }}>
             <TextField
               required
               rows={3}
@@ -210,6 +222,12 @@ export default function UsersInformationForm() {
               name="companyAddress"
               label="ที่อยู่บริษัท"
               variant="filled"
+              sx={{
+                "& textarea": {
+                  marginTop: "-30px",
+                  marginLeft: "-10px",
+                },
+              }}
               value={form.companyAddress}
               onChange={handleChange}
             />

@@ -16,6 +16,17 @@ module.exports = {
         sans: ["Geist Sans", "Arial", "Helvetica", "sans-serif"],
         mono: ["Fira Code", "monospace"],
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+        "progress-loading": "progress 2s ease-in-out infinite",
+      },
+      keyframes: {
+        progress: {
+          "0%": { transform: "translateX(-100%) scaleX(0.2)" },
+          "50%": { transform: "translateX(0%) scaleX(0.5)" },
+          "100%": { transform: "translateX(100%) scaleX(0.2)" },
+        },
+      },
       theme: {
         screens: {
           sm: "640px",

@@ -4,7 +4,7 @@ import { ThemeProvider as NextThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiCacheProvider from "@/app/mui-cache-provider";
+// import MuiCacheProvider from "@/app/mui-cache-provider";
 import {
   lightMuiTheme,
   darkMuiTheme,
@@ -54,12 +54,10 @@ export default function Providers({ children, session }: any) {
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="th">
       <SessionProvider session={session}>
         <NextThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <MuiCacheProvider>
-            <MuiThemeSync>
-              <BackgroundDark />
-              {children}
-            </MuiThemeSync>
-          </MuiCacheProvider>
+          <MuiThemeSync>
+            <BackgroundDark />
+            {children}
+          </MuiThemeSync>
         </NextThemeProvider>
       </SessionProvider>
     </LocalizationProvider>

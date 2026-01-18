@@ -10,6 +10,7 @@ export interface JobDetail {
   employmentType: string;
   salarySlip: string[];
   usersInformationId?: string;
+  startDate?: Date;
 }
 
 export interface UserjobDetailStore {

@@ -129,7 +129,7 @@ export default function AuthPage() {
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-2xl shadow-2xl shadow-black/50">
           {/* Header */}
           <div className="text-center mb-8">
-            <p className=" text-3xl font-bold dark:text-white/10  from-blue-400 to-purple-500 bg-clip-text  mb-2 tracking-tighter bg-linear-to-r">
+            <p className=" text-2xl font-bold dark:text-white/10  from-blue-400 to-purple-500 bg-clip-text  mb-2 bg-linear-to-r">
               {isLogin ? "Login" : "Create Account"}
             </p>
             <p className="text-gray-400 text-sm uppercase tracking-[0.2em]">
