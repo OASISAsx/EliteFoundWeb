@@ -6,21 +6,28 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const { fetchUser, user } = useUserStore();
   const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
     if (status === "loading") return;
-    console.log(session, "session");
+
     if (!session?.user) {
       router.replace("/login");
       return;
-    } else if (!session?.user.usersInformationId) {
-      router.replace("/personalized");
     }
 
     useUserStore.getState().setUser(session.user);
   }, [session, status, router]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    if (!user.usersInformationId) {
+      router.replace("/personalized");
+    }
+  }, [user, router]);
 
   if (status === "loading") return null;
 
