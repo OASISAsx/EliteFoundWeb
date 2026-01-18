@@ -1,3 +1,4 @@
+import { JobDetail } from "./jobDetail.type";
 import { UserInformation } from "./userInfomation.type";
 
 export interface User {
@@ -18,7 +19,7 @@ export interface UserListStore {
   loading: boolean;
   page: number;
   limit: number;
-  userDeail: any | null;
+  userDeail: UserInformation | null; // ✅ แก้ตรงนี้
   fetchUsers: () => Promise<void>;
   fetchUser: (id: string) => Promise<void>;
   fetchUserDetail: (id: string) => Promise<void>;

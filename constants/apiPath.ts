@@ -16,6 +16,12 @@ export const API = {
     UPDATE: (id: string) => `/information/${id}`,
   },
 
+  JOB_DETAIL: {
+    // GET_BY_ID: "/information/user",
+    CREATE: "/jobDetail",
+    UPDATE: (id: string) => `/jobDetail/${id}`,
+  },
+
   UPLOAD: {
     FILE: "/upload/single",
     FILE_MULTIPLE: "/upload/multi",

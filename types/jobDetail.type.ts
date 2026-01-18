@@ -1,4 +1,4 @@
-interface jobDetail {
+export interface JobDetail {
   id?: string;
   occupation: string;
   companyName: string;
@@ -10,4 +10,13 @@ interface jobDetail {
   employmentType: string;
   salarySlip: string[];
   usersInformationId?: string;
+}
+
+export interface UserjobDetailStore {
+  jobDetail: JobDetail | null;
+  loading: boolean;
+
+  // fetchUserInformation: (userId: string) => Promise<void>;
+  createJobDetail: (data: JobDetail) => Promise<void>;
+  updateJobDetail: (data: JobDetail, id: string) => Promise<void>;
 }

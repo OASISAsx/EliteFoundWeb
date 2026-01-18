@@ -1,4 +1,5 @@
 import { Dayjs } from "dayjs";
+import { JobDetail } from "./jobDetail.type";
 
 export interface UserInformation {
   id?: string;
@@ -28,7 +29,7 @@ export interface UserInformation {
   id_card_image: string;
   other_files: string[];
   userId?: string;
-  JobDetail?: jobDetail | null;
+  JobDetail?: JobDetail | null;
 }
 export interface CreateUserInformationInput {
   firstName: string;

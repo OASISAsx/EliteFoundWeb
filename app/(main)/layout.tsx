@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Anuphan } from "next/font/google";
+import "@/lib/dayjs";
 
 const anuphan = Anuphan({
   subsets: ["thai"],
@@ -23,7 +24,7 @@ export default function MainLayout({
     >
       <Navbar />
       <main className="pt-16">
-        <LocalizationProvider dateAdapter={AdapterDayjs} >
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="th">
           {children}
         </LocalizationProvider>
       </main>

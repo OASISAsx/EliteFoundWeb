@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --bg-main: #f5f7fa;
-  --text-main: #171717;
+  --bg-main: #6a6f75;
+  --text-main: #ffffff;
   --glow-blue: rgba(14, 165, 233, 0.35);
   --glow-purple: rgba(168, 85, 247, 0.35);
 }
 
 .dark {
   --bg-main: #050512;
-  --text-main: #ededed;
+  --text-main: #ffffff;
   --glow-blue: rgba(59, 130, 246, 0.35);
   --glow-purple: rgba(168, 85, 247, 0.35);
 }
@@ -21,17 +21,3 @@ body {
     background 0.3s,
     color 0.3s;
 }
-
-/* @layer base {
-  textarea {
-    @apply w-full rounded-xl border border-gray-300 bg-gray-100
-      px-4 py-3 text-sm font-bold text-gray-800
-      placeholder-gray-400
-      outline-none transition
-      focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30;
-  }
-
-  .dark textarea {
-    @apply bg-[#2c2f33] border-white/10 text-white placeholder-gray-400;
-  }
-} */

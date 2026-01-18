@@ -10,6 +10,7 @@ import {
   Box,
   Typography,
   CircularProgress,
+  Divider,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
@@ -20,13 +21,12 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useUserInformationStore } from "@/stores/userInformation.store";
 
-import dayjs, { Dayjs } from "dayjs";
-import UploadIDCard from "@/components/UploadIDCard";
-import CustomDatePicker from "@/components/DatePickerCustome";
 import { useUserStore } from "@/stores/user.store";
-import AddressSelect from "@/components/AddressSelect";
+
 import ToastAlert from "@/components/ToastAlert";
 import { useRouter } from "next/navigation";
+import { JobDetail } from "@/types/jobDetail.type";
+import { useUserJobDetailnStore } from "@/stores/jobDetail.store";
 
 export default function UsersInformationForm() {
   const route = useRouter();
@@ -40,8 +40,7 @@ export default function UsersInformationForm() {
   } = useUploadFileStore();
   // const [date, setDate] = useState<Dayjs | null>(null);
   const { data: session } = useSession();
-  const { fetchUserInformation, createInformation, updateInformation } =
-    useUserInformationStore();
+  const { createJobDetail, updateJobDetail } = useUserJobDetailnStore();
   const [toast, setToast] = useState({
     open: false,
     message: "",
@@ -54,7 +53,7 @@ export default function UsersInformationForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [idCardFile, setCardFile] = useState<File | null>(null);
   const [otherFiles, setOtherFiles] = useState<File[] | null>(null);
-  const [form, setForm] = useState<jobDetail>({
+  const [form, setForm] = useState<JobDetail>({
     occupation: "",
     companyName: "",
     companyAddress: "",
@@ -73,8 +72,8 @@ export default function UsersInformationForm() {
   }, [session?.user?.id]);
 
   useEffect(() => {
-    if (userDeail?.jobDetail) {
-      setForm(userDeail.jobDetail);
+    if (userDeail?.JobDetail) {
+      setForm(userDeail.JobDetail);
     }
   }, [userDeail]);
 
@@ -97,35 +96,44 @@ export default function UsersInformationForm() {
 
     try {
       setIsLoading(true);
+      if (!userDeail) {
+        return route.push("/personalized");
+      }
+      const FilesSlip =
+        salaryFiles && salaryFiles.length > 0
+          ? await uploadMultiple(salaryFiles)
+          : [];
 
-      const salaryPromise =
-        otherFiles && otherFiles.length > 0
-          ? uploadMultiple(otherFiles)
-          : Promise.resolve([]);
+      console.log(userDeail, "userDeail");
 
-      const [salaryFiles] = await Promise.all([salaryPromise]);
+      const otherFilesList = FilesSlip.filter((f) => f?.url).map((f) => f.url);
 
-      const otherFilesList = Array.isArray(salaryFiles)
-        ? salaryFiles.filter((f) => f?.url).map((f) => f.url)
-        : [];
-
-      const payload: jobDetail = {
+      const payload: JobDetail = {
         ...form,
         salarySlip:
           otherFilesList.length > 0 ? otherFilesList : form.salarySlip,
+        usersInformationId: userDeail.id,
       };
 
-      if (userDeail?.jobDetail) {
-        await updateInformation(payload, userDeail?.jobDetail);
+      if (userDeail?.JobDetail?.id) {
+        await updateJobDetail(payload, userDeail.JobDetail.id);
       } else {
-        await createInformation(payload);
+        await createJobDetail(payload);
       }
-      route.push("/");
-      setToast({
-        open: true,
-        message: "บันทึกข้อมูลสำเร็จ",
-        severity: "success",
-      });
+
+      setIsLoading(true);
+
+      setTimeout(() => {
+        setToast({
+          open: true,
+          message: "บันทึกข้อมูลสำเร็จ",
+          severity: "success",
+        });
+
+        setTimeout(() => {
+          route.push("/");
+        }, 600);
+      }, 400);
     } catch (error) {
       console.error(error);
 
@@ -140,21 +148,45 @@ export default function UsersInformationForm() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center p-6 sm:pt-4 pt-12">
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        p: 3, // p-6
+        pt: {
+          xs: 8,
+          sm: 8,
+          md: 10,
+          lg: 12,
+          xl: 12,
+        },
+      }}
+    >
+      <ToastAlert
+        open={toast.open}
+        message={toast.message}
+        severity={toast.severity}
+        onClose={() => setToast({ ...toast, open: false })}
+      />
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+          <CircularProgress />
+        </div>
+      )}
       <form
         onSubmit={handleSubmit}
-        className=" xs:pt-20 border border-white/10 rounded-2xl p-8 max-w-6xl w-full shadow-xl"
+        className="xs:pt-20 border border-white/20 rounded-2xl p-8 max-w-6xl w-full shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md"
       >
-        <ToastAlert
-          open={toast.open}
-          message={toast.message}
-          severity={toast.severity}
-          onClose={() => setToast({ ...toast, open: false })}
-        />
+        <div className="pb-10">
+          {" "}
+          <p className=" text-2xl font-bold text-center mb-8 transition-colors duration-300">
+            รายละเอียดการทำงาน
+          </p>
+          <Divider />
+        </div>
 
-        <p className=" text-2xl font-bold text-center mb-8 transition-colors duration-300">
-          รายละเอียดการทำงาน
-        </p>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -165,6 +197,20 @@ export default function UsersInformationForm() {
               label="บริษัท"
               variant="filled"
               value={form.companyName}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              required
+              rows={3}
+              multiline
+              fullWidth
+              id="companyAddress"
+              name="companyAddress"
+              label="ที่อยู่บริษัท"
+              variant="filled"
+              value={form.companyAddress}
               onChange={handleChange}
             />
           </Grid>
@@ -333,17 +379,27 @@ export default function UsersInformationForm() {
               variant="contained"
               disabled={isLoading}
               fullWidth
-              sx={{
+              sx={(theme) => ({
                 mt: 4,
                 py: 1.5,
                 borderRadius: 6,
-                background: "linear-gradient(to right,#3b82f6,#8b5cf6)",
-                color: "white",
+                boxShadow:
+                  theme.palette.mode === "dark"
+                    ? "0 1px 10px #A9B6DE"
+                    : "0 1px 10px #252F4A",
+                background:
+                  theme.palette.mode === "dark"
+                    ? "linear-gradient(to right,#9891CC,#7799F7)"
+                    : "linear-gradient(to right,#2563eb,#7c3aed)",
+
                 fontWeight: 600,
                 "&:hover": {
-                  background: "linear-gradient(to right,#2563eb,#7c3aed)",
+                  background:
+                    theme.palette.mode === "dark"
+                      ? "linear-gradient(to right,#2563eb,#7c3aed)"
+                      : "linear-gradient(to right,#1d4ed8,#6d28d9)",
                 },
-              }}
+              })}
               startIcon={
                 isLoading && <CircularProgress size={18} color="inherit" />
               }
@@ -353,6 +409,6 @@ export default function UsersInformationForm() {
           </Grid>
         </Grid>
       </form>
-    </div>
+    </Box>
   );
 }

@@ -51,7 +51,10 @@ export default function ToastAlert({
       onClose={onClose}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       TransitionComponent={SlideTransition}
-      sx={{ mt: 2 }}
+      sx={{
+        mt: 2,
+        zIndex: 2000,
+      }}
     >
       <Alert
         onClose={onClose}

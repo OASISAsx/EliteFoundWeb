@@ -28,9 +28,9 @@ export const lightMuiTheme = createTheme({
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
           color: "#2c2f33",
         },
-        notchedOutline: {
-          borderColor: "#6c6cff",
-        },
+        // notchedOutline: {
+        //   borderColor: "#6c6cff",
+        // },
         input: {
           padding: "14px 12px",
           fontWeightMedium: 600,
@@ -82,7 +82,9 @@ export const lightMuiTheme = createTheme({
           marginBottom: 20,
           borderRadius: 10,
           backgroundColor: "#E8E8E8",
+          border: "1.5px solid rgba(0,0,0,0.12)",
           fontWeight: 600,
+
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif", // 👈 ใส่ตรงนี้แทน
           "& input:-webkit-autofill": {
             WebkitBoxShadow: "0 0 0 1000px #E8E8E8 inset",
@@ -145,9 +147,9 @@ export const darkMuiTheme = createTheme({
           borderRadius: 10,
           color: "#fff",
         },
-        notchedOutline: {
-          borderColor: "#6c6cff",
-        },
+        // notchedOutline: {
+        //   borderColor: "#6c6cff",
+        // },
         input: {
           padding: "14px 12px",
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
@@ -198,6 +200,7 @@ export const darkMuiTheme = createTheme({
         root: {
           marginBottom: 20,
           borderRadius: 10,
+          border: "1px solid rgba(255,255,255,0.12)",
           backgroundColor: "#2c2f33",
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
           "&:hover": {

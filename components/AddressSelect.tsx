@@ -119,6 +119,7 @@ export default function AddressSelect({ value, onChange }: Props) {
       currentAddress: val,
     });
   };
+
   const handleSubdistrictChange = (e: SelectChangeEvent<number>) => {
     const code = Number(e.target.value);
     setSubdistrict(code);
@@ -199,25 +200,15 @@ export default function AddressSelect({ value, onChange }: Props) {
         </FormControl>
       </Grid>
       <Grid item xs={12} sm={12} sx={{ pb: 1 }}>
-        {/* <textarea
-          value={currentAddress}
-          onChange={handleAddressChange}
-          rows={4}
-          placeholder="กรอกที่อยู่ปัจจุบัน"
-          className="
-    w-full rounded-xl border border-gray-300  font-bold
-    px-4 py-3 text-sm text-gray-800
-    placeholder-gray-400
-    focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30
-    outline-none transition"
-        /> */}
         <TextField
           label="ที่อยู่ปัจจุบัน"
           multiline
           rows={3}
           fullWidth
           value={currentAddress}
-          onChange={(e) => setCurrentAddress(e.target.value)}
+          onChange={(e) =>
+            handleAddressChange(e as React.ChangeEvent<HTMLTextAreaElement>)
+          }
         />
       </Grid>
     </Grid>

@@ -13,6 +13,7 @@ import {
   Snackbar,
   Alert,
   TextareaAutosize,
+  Divider,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
@@ -137,6 +138,7 @@ export default function UsersInformationForm() {
 
       const payload: CreateUserInformationInput = {
         ...form,
+        dateOfBirth: dayjs(form.dateOfBirth).toDate(),
         id_card_image: cardUrl || form.id_card_image,
         other_files:
           otherFilesList.length > 0 ? otherFilesList : form.other_files,
@@ -176,27 +178,46 @@ export default function UsersInformationForm() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center p-6 sm:pt-4 pt-12">
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+
+        p: 3, // p-6
+        pt: {
+          xs: 8,
+          sm: 8,
+          md: 10,
+          lg: 12,
+          xl: 12,
+        },
+      }}
+    >
+      <ToastAlert
+        open={toast.open}
+        message={toast.message}
+        severity={toast.severity}
+        onClose={() => setToast({ ...toast, open: false })}
+      />
+
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+          <CircularProgress />
+        </div>
+      )}
       <form
         onSubmit={handleSubmit}
-        className=" xs:pt-20 border border-white/10 rounded-2xl p-8 max-w-6xl w-full shadow-xl"
+        className="xs:pt-20 border border-white/20 rounded-2xl p-8 max-w-6xl w-full shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md"
       >
-        <ToastAlert
-          open={toast.open}
-          message={toast.message}
-          severity={toast.severity}
-          onClose={() => setToast({ ...toast, open: false })}
-        />
+        <div className="pb-10">
+          <p className=" text-2xl font-bold text-center mb-8 transition-colors duration-300">
+            ข้อมูลส่วนตัว
+          </p>
+          <Divider />
+        </div>
 
-        {isLoading && (
-          <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-            <CircularProgress />
-          </div>
-        )}
-
-        <p className=" text-2xl font-bold text-center mb-8 transition-colors duration-300">
-          ข้อมูลส่วนตัว
-        </p>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -399,17 +420,27 @@ export default function UsersInformationForm() {
               variant="contained"
               disabled={isLoading}
               fullWidth
-              sx={{
+              sx={(theme) => ({
                 mt: 4,
                 py: 1.5,
                 borderRadius: 6,
-                background: "linear-gradient(to right,#3b82f6,#8b5cf6)",
-                color: "white",
+                boxShadow:
+                  theme.palette.mode === "dark"
+                    ? "0 1px 10px #A9B6DE"
+                    : "0 1px 10px #252F4A",
+                background:
+                  theme.palette.mode === "dark"
+                    ? "linear-gradient(to right,#9891CC,#7799F7)"
+                    : "linear-gradient(to right,#2563eb,#7c3aed)",
+
                 fontWeight: 600,
                 "&:hover": {
-                  background: "linear-gradient(to right,#2563eb,#7c3aed)",
+                  background:
+                    theme.palette.mode === "dark"
+                      ? "linear-gradient(to right,#2563eb,#7c3aed)"
+                      : "linear-gradient(to right,#1d4ed8,#6d28d9)",
                 },
-              }}
+              })}
               startIcon={
                 isLoading && <CircularProgress size={18} color="inherit" />
               }
@@ -419,6 +450,6 @@ export default function UsersInformationForm() {
           </Grid>
         </Grid>
       </form>
-    </div>
+    </Box>
   );
 }
