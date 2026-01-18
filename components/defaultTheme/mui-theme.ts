@@ -100,7 +100,7 @@ export const lightMuiTheme = createTheme({
         input: {
           fontWeight: 600,
           padding: "14px 12px",
-          fontSize: 14,
+          fontSize: 16,
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
         },
       },
@@ -109,7 +109,7 @@ export const lightMuiTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontSize: 14,
+          fontSize: 16,
 
           fontWeight: 600,
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
@@ -219,7 +219,7 @@ export const darkMuiTheme = createTheme({
         },
         input: {
           padding: "14px 12px",
-          fontSize: 14,
+          fontSize: 16,
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
         },
       },
@@ -229,7 +229,7 @@ export const darkMuiTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: 500,
           fontFamily: "Anuphan, Roboto, Helvetica, Arial, sans-serif",
           color: "#fff",

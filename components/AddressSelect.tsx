@@ -142,7 +142,7 @@ export default function AddressSelect({ value, onChange }: Props) {
       sx={{
         "& .MuiInputBase-input, & .MuiSelect-select": {
           fontWeight: 600,
-          fontSize: 13,
+          fontSize: 16,
         },
         "& .MuiInputLabel-root": {
           fontWeight: 600,
