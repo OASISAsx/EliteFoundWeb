@@ -111,77 +111,41 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async signIn({ user, account, profile }) {
-      console.log("[SIGNIN] Provider:", account?.provider);
-      console.log("[SIGNIN] GOOGLE USER:", user);
-      console.log("[SIGNIN] GOOGLE PROFILE:", profile);
-      console.log("[SIGNIN] GOOGLE ACCOUNT:", account);
+    jwt: async ({ token, user, account, profile }) => {
+      // ===== GOOGLE LOGIN =====
+      if (account?.provider === "google" && profile) {
+        const res = await axios.post(`${process.env.API_URL}/loginGoogle`, {
+          email: profile.email,
+          name: profile.name,
+          googleId: profile.sub,
+        });
 
-      if (account?.provider === "google") {
-        try {
-          console.log(
-            "[SIGNIN] Calling backend /loginGoogle with email:",
-            user.email,
-          );
-
-          const res = await axios.post<{
-            success: boolean;
-            data: {
-              id: string;
-              name: string;
-              email: string;
-              usersInformationId: string | null;
-              usersInformation: UserInformation | null;
-            };
-          }>(`${process.env.API_URL}/loginGoogle`, {
-            email: user.email,
-            name: user.name,
-            image: user.image,
-            googleId: profile?.sub,
-          });
-
-          console.log("[SIGNIN] Backend /loginGoogle response:", res.data);
-
-          if (!res.data.success || !res.data.data?.id) {
-            console.error("[SIGNIN] Backend sync failed:", res.data);
-            // ถ้า backend error ยังให้ login ได้ (ไม่บังคับ sync)
-            // return true; // หรือ return false ถ้าต้องการให้ fail
-          } else {
-            const dbUser = res.data.data;
-
-            user.id = dbUser.id;
-            (user as any).usersInformationId = dbUser.usersInformationId;
-            (user as any).usersInformation = dbUser.usersInformation;
-          }
-        } catch (error) {
-          const err = error as AxiosError;
-          console.error("[SIGNIN] Axios error in /loginGoogle:", {
-            message: err.message,
-            status: err.response?.status,
-            data: err.response?.data,
-          });
-          // ถ้า backend ล่ม ยังให้ login ผ่านได้ (optional)
-          // return true;
+        if (res.data?.data?.id) {
+          token.id = String(res.data.data.id);
+          token.name = res.data.data.name;
+          token.email = res.data.data.email;
+          token.usersInformationId = res.data.data.usersInformationId ?? null;
+          token.usersInformation = res.data.data.usersInformation ?? null;
         }
+
+        return token;
       }
 
-      return true; // ให้ signIn ผ่านเสมอ (หรือ false ถ้าต้องการ fail เมื่อ backend error)
-    },
-
-    jwt({ token, user }) {
+      // ===== CREDENTIALS LOGIN =====
       if (user) {
-        token.id = user.id;
+        token.id = String(user.id);
         token.name = user.name || "";
         token.email = user.email || "";
-        token.usersInformationId = (user as any).usersInformationId;
-        token.usersInformation = (user as any).usersInformation;
+        token.usersInformationId = (user as any).usersInformationId ?? null;
+        token.usersInformation = (user as any).usersInformation ?? null;
       }
+
       return token;
     },
 
     session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        session.user.id = String(token.id);
         session.user.name = token.name as string;
         session.user.email = token.email as string;
         session.user.usersInformationId = token.usersInformationId as
