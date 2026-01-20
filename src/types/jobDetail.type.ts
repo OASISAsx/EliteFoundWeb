@@ -17,7 +17,13 @@ export interface UserjobDetailStore {
   jobDetail: JobDetail | null;
   loading: boolean;
   status: boolean;
-  // fetchUserInformation: (userId: string) => Promise<void>;
-  createJobDetail: (data: JobDetail) => Promise<void>;
-  updateJobDetail: (data: JobDetail, id: string) => Promise<void>;
+  message?: string;
+  createJobDetail: (data: JobDetail) => Promise<boolean>;
+  updateJobDetail: (data: JobDetail, id: string) => Promise<boolean>;
+}
+
+export interface ApiResponseJob<T> {
+  success: boolean;
+  message: string;
+  data: T;
 }

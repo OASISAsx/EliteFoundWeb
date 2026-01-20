@@ -4,14 +4,16 @@ import type { UserBankStore } from "../types/bankInformation.type";
 import { API } from "@/src/constants/apiPath";
 
 const useUserUserBankStore = create<UserBankStore>((set) => ({
-  BankInformation: null,
+  bankData: null,
   loading: false,
 
-  fetchUser: async (id) => {
+  fetchBank: async (usersInformationId) => {
     set({ loading: true });
     try {
-      const res = await serverApi.get(API.BANKINFORMATION.GET_BY_ID(id));
-      set({ BankInformation: res.data.data });
+      const res = await serverApi.get(
+        API.BANKINFORMATION.GET_BY_ID(usersInformationId),
+      );
+      set({ bankData: res.data.data });
     } finally {
       set({ loading: false });
     }
@@ -21,7 +23,7 @@ const useUserUserBankStore = create<UserBankStore>((set) => ({
     set({ loading: true });
     try {
       const res = await serverApi.post(API.BANKINFORMATION.CREATE, data);
-      set({ BankInformation: res.data.data });
+      set({ bankData: res.data.data });
     } finally {
       set({ loading: false });
     }
@@ -32,7 +34,7 @@ const useUserUserBankStore = create<UserBankStore>((set) => ({
     try {
       const { usersInformation, usersInformationId, ...rest } = data;
       const res = await serverApi.put(API.BANKINFORMATION.UPDATE(id), rest);
-      set({ BankInformation: res.data.data });
+      set({ bankData: res.data.data });
     } finally {
       set({ loading: false });
     }

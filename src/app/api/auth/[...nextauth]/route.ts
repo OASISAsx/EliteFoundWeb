@@ -13,6 +13,7 @@ declare module "next-auth" {
       email: string;
       usersInformationId: string | null;
       usersInformation: UserInformation | null;
+      backendToken: string;
     };
   }
 }
@@ -24,6 +25,7 @@ declare module "next-auth/jwt" {
     email: string;
     usersInformationId?: string | null;
     usersInformation?: UserInformation | null;
+    backendToken: string;
   }
 }
 
@@ -63,26 +65,12 @@ export const authOptions: NextAuthOptions = {
           );
           console.log("[CREDENTIALS] API_URL:", process.env.API_URL);
 
-          const res = await axios.post<{
-            success: boolean;
-            data: {
-              id: string;
-              name: string;
-              email: string;
-              usersInformationId: string | null;
-              usersInformation: UserInformation | null;
-            };
-          }>(`${process.env.API_URL}/login`, {
+          const res = await axios.post(`${process.env.API_URL}/login`, {
             email: credentials.email,
             password: credentials.password,
           });
 
-          console.log("[CREDENTIALS] Backend response:", res.data);
-
-          if (!res.data.success || !res.data.data?.id) {
-            console.error("[CREDENTIALS] Backend login failed:", res.data);
-            return null;
-          }
+          if (!res.data.success || !res.data.data?.id) return null;
 
           const user = res.data.data;
 
@@ -92,6 +80,7 @@ export const authOptions: NextAuthOptions = {
             email: user.email,
             usersInformationId: user.usersInformationId,
             usersInformation: user.usersInformation,
+            backendToken: res.data.token, // ✅ เอาจาก root response
           };
         } catch (error) {
           const err = error as AxiosError;
@@ -126,6 +115,7 @@ export const authOptions: NextAuthOptions = {
           token.email = res.data.data.email;
           token.usersInformationId = res.data.data.usersInformationId ?? null;
           token.usersInformation = res.data.data.usersInformation ?? null;
+          token.backendToken = res.data.token;
         }
 
         return token;
@@ -138,6 +128,7 @@ export const authOptions: NextAuthOptions = {
         token.email = user.email || "";
         token.usersInformationId = (user as any).usersInformationId ?? null;
         token.usersInformation = (user as any).usersInformation ?? null;
+        token.backendToken = (user as any).backendToken; // ✅ สำคัญมาก
       }
 
       return token;
@@ -148,13 +139,12 @@ export const authOptions: NextAuthOptions = {
         session.user.id = String(token.id);
         session.user.name = token.name as string;
         session.user.email = token.email as string;
-        session.user.usersInformationId = token.usersInformationId as
-          | string
-          | null;
+        session.user.usersInformationId = token.usersInformationId as any;
         session.user.usersInformation = token.usersInformation as any;
+        session.user.backendToken = token.backendToken as string; // ✅
       }
       return session;
-    },
+    },  
   },
 };
 

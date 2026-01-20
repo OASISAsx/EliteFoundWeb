@@ -24,8 +24,11 @@ export interface UserListStore {
   limit: number;
   userDeail: UserInformation | null;
   fetchUsers: () => Promise<void>;
-  fetchUser: (id: string) => Promise<void>;
-  fetchUserDetail: (id: string) => Promise<UserInformation | null>;
+  fetchUser: (id: string, token: string) => Promise<void>;
+  fetchUserDetail: (
+    id: string,
+    token: string,
+  ) => Promise<UserInformation | null>;
   setUser: (u: any) => void;
   logout: () => void;
   setPage: (p: number) => void;

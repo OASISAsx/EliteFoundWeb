@@ -1,38 +1,61 @@
 import { create } from "zustand";
 import { serverApi } from "../services/api";
-import type { JobDetail, UserjobDetailStore } from "../types/jobDetail.type";
+import type {
+  ApiResponseJob,
+  JobDetail,
+  UserjobDetailStore,
+} from "../types/jobDetail.type";
 import { API } from "@/src/constants/apiPath";
+import { ApiResponse } from "../types/userInfomation.type";
 
 const useUserJobDetailnStore = create<UserjobDetailStore>((set) => ({
   jobDetail: null,
   loading: false,
   status: false,
-
-  createJobDetail: async (data: JobDetail) => {
+  message: "",
+  createJobDetail: async (data: JobDetail): Promise<boolean> => {
     set({ loading: true });
+
     try {
-      const res = await serverApi.post(API.JOB_DETAIL.CREATE, data);
-      set({ jobDetail: res.data.data });
+      const res = await serverApi.post<ApiResponseJob<JobDetail>>(
+        API.JOB_DETAIL.CREATE,
+        data,
+      );
+
+      set({
+        jobDetail: res.data.data,
+        status: res.data.success,
+        message: res.data.message,
+      });
+
+      return res.data.success;
     } catch (err) {
-      console.error(err);
-      throw err;
+      set({ status: false });
+      return false;
     } finally {
       set({ loading: false });
     }
   },
 
-  updateJobDetail: async (data: JobDetail, id: string) => {
+  updateJobDetail: async (data: JobDetail, id: string): Promise<boolean> => {
     set({ loading: true });
+
     try {
-      const { ...rest } = data;
+      const res = await serverApi.put<ApiResponseJob<JobDetail>>(
+        API.JOB_DETAIL.UPDATE(id),
+        data,
+      );
 
-      const res = await serverApi.put(API.JOB_DETAIL.UPDATE(id), rest);
+      set({
+        jobDetail: res.data.data,
+        status: res.data.success,
+        message: res.data.message,
+      });
 
-      set({ jobDetail: res.data.data, status: res.data.success });
+      return res.data.success; // 🔥 สำคัญ
     } catch (err) {
-      console.error(err);
-      console.error("Update error:", err);
-      throw err;
+      set({ status: false });
+      return false;
     } finally {
       set({ loading: false });
     }

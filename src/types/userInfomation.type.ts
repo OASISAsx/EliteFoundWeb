@@ -34,6 +34,13 @@ export interface UserInformation {
   BankInformationId?: number | null;
   bankInformation?: BankInformation | null | undefined;
 }
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
+}
+
 export interface CreateUserInformationInput {
   firstName: string;
   lastName: string;
@@ -65,9 +72,14 @@ export interface UserInformationStore {
   userInformation: UserInformation | null;
   loading: boolean;
   status: boolean;
+  message: string;
+
   fetchUserInformation: (userId: string) => Promise<void>;
-  createInformation: (data: UserInformation) => Promise<void>;
-  updateInformation: (data: UserInformation, id: string) => Promise<void>;
+  createInformation: (data: UserInformation) => Promise<ActionResult>;
+  updateInformation: (
+    data: UserInformation,
+    id: string,
+  ) => Promise<ActionResult>;
 }
 
 export interface UpdateInformationStore {

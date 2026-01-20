@@ -47,8 +47,13 @@ export default function UsersInformationForm() {
   } = useUploadFileStore();
   // const [date, setDate] = useState<Dayjs | null>(null);
   const { data: session } = useSession();
-  const { fetchUserInformation, createInformation, updateInformation } =
-    useUserInformationStore();
+  const {
+    message,
+    status,
+    fetchUserInformation,
+    createInformation,
+    updateInformation,
+  } = useUserInformationStore();
   const [toast, setToast] = useState({
     open: false,
     message: "",
@@ -85,7 +90,7 @@ export default function UsersInformationForm() {
   });
   useEffect(() => {
     if (session?.user?.id) {
-      fetchUserDetail(session.user.id);
+      fetchUserDetail(session.user.id, session.user.backendToken);
     }
   }, [session?.user?.id]);
 
@@ -145,34 +150,30 @@ export default function UsersInformationForm() {
 
       const payload: CreateUserInformationInput = {
         ...form,
-
         dateOfBirth: dayjs(form.dateOfBirth).toDate(),
         id_card_image: cardUrl || form.id_card_image,
         other_files:
           otherFilesList.length > 0 ? otherFilesList : form.other_files,
         userId: session?.user.id,
       };
+      let res: ActionResult;
 
       if (userDeail) {
-        console.log(payload, "payload");
-        await updateInformation(payload, userDeail.id!);
+        res = await updateInformation(payload, userDeail.id!);
+        console.log(res, "res");
       } else {
-        await createInformation(payload);
+        res = await createInformation(payload);
       }
-
-      setIsLoading(true);
-
-      setTimeout(() => {
-        // setToast({
-        //   open: true,
-        //   message: "บันทึกข้อมูลสำเร็จ",
-        //   severity: "success",
-        // });
-
-        setTimeout(() => {
-          route.push("/jobDetails");
-        }, 100);
-      });
+      console.log(res, "res");
+      if (res.success) {
+        route.push("/jobDetails");
+      } else {
+        setToast({
+          open: true,
+          message: res.message,
+          severity: "warning",
+        });
+      }
     } catch (error) {
       console.error(error);
 

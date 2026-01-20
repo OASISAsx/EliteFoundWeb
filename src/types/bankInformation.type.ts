@@ -50,9 +50,9 @@ export interface BankCrateAndUpdate {
 // export type UpdateBankInput = Partial<CreateBankInput>;
 
 export interface UserBankStore {
-  BankInformation: BankInformation | null;
+  bankData: BankInformation | null;
   loading: boolean;
-  fetchUser: (id: string) => Promise<void>;
+  fetchBank: (id: string) => Promise<void>;
   createBank: (data: BankCrateAndUpdate) => Promise<void>;
   updateBank: (data: BankCrateAndUpdate, id: string) => Promise<void>;
 }

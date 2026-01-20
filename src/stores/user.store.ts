@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { serverApi } from "../services/api";
+const token = localStorage.getItem("next-auth.session-token");
+
 import type {
   LoginPayload,
   LoginStore,
@@ -36,10 +38,19 @@ const useUserStore = create<UserListStore>((set, get) => ({
     }
   },
 
-  fetchUser: async (id: string) => {
+  fetchUser: async (id: string, token: string) => {
     set({ loading: true });
     try {
-      const res = await serverApi.post(API.USER.GET_BY_ID(id));
+      const res = await serverApi.post(
+        API.USER.GET_BY_ID(id),
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
       set({ user: res.data.data });
     } catch (err) {
       console.error(err);
@@ -48,10 +59,18 @@ const useUserStore = create<UserListStore>((set, get) => ({
     }
   },
 
-  fetchUserDetail: async (id: string) => {
+  fetchUserDetail: async (id: string, token: string) => {
     set({ loading: true });
     try {
-      const res = await serverApi.post(API.USER.GET_BY_ID(id));
+      const res = await serverApi.post(
+        API.USER.GET_BY_ID(id),
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       const detail = res.data.data.usersInformation;
 
       set({ userDeail: detail });

@@ -51,7 +51,7 @@ export default function UsersInformationForm() {
   });
   const [salaryPreviews, setSalaryPreviews] = useState<string[]>([]);
   const [salaryFiles, setSalaryFiles] = useState<File[]>([]);
-  const { fetchUser, BankInformation, createBank, updateBank } =
+  const { fetchBank, bankData, createBank, updateBank } =
     useUserUserBankStore();
   const { fetchUserInformation, userInformation } = useUserInformationStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -75,18 +75,24 @@ export default function UsersInformationForm() {
   }, [session?.user?.id]);
 
   useEffect(() => {
+    console.log(bankData, "BankInformation 1");
+  }, [bankData]);
+
+  useEffect(() => {
     if (!userInformation?.id) return;
-    fetchUser(userInformation.id);
+    console.log(userInformation, "userInformation");
+    fetchBank(userInformation?.id);
+    // console.log(bankData, "BankInformation");
   }, [userInformation?.id]);
 
   useEffect(() => {
-    if (!BankInformation) return;
+    if (!bankData) return;
 
     setForm((prev) => ({
       ...prev,
-      ...BankInformation,
+      ...bankData,
     }));
-  }, [BankInformation]);
+  }, [bankData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({
@@ -121,20 +127,22 @@ export default function UsersInformationForm() {
         ...form,
         bankStatementFiles:
           otherFilesList.length > 0 ? otherFilesList : form.bankStatementFiles,
-        usersInformationId: userInformation.id,
+        usersInformationId: userInformation?.id,
       };
 
-      if (BankInformation?.id) {
-        await updateBank(payload, BankInformation.id);
+      if (bankData?.id) {
+        await updateBank(payload, bankData.id);
       } else {
         await createBank(payload);
       }
-
-      setToast({
-        open: true,
-        message: "บันทึกข้อมูลสำเร็จ",
-        severity: "success",
-      });
+      if (bankData) {
+        setToast({
+          open: true,
+          message: "บันทึกข้อมูลสำเร็จ",
+          severity: "success",
+        });
+        route.push("/");
+      }
     } catch (error) {
       console.error(error);
 
@@ -282,7 +290,7 @@ export default function UsersInformationForm() {
               type="number"
               id="debtInstallmentPerMonth"
               name="debtInstallmentPerMonth"
-              label="รายได้อื่นๆ"
+              label="หนี้ที่ต้องชำระต่อเดือน"
               variant="filled"
               value={form.debtInstallmentPerMonth}
               onChange={handleChange}

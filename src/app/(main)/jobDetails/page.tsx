@@ -71,7 +71,7 @@ export default function UsersInformationForm() {
   });
   useEffect(() => {
     if (session?.user?.id) {
-      fetchUserDetail(session.user.id);
+      fetchUserDetail(session.user.id, session.user.backendToken);
     }
   }, [session?.user?.id]);
 
@@ -118,15 +118,32 @@ export default function UsersInformationForm() {
           otherFilesList.length > 0 ? otherFilesList : form.salarySlip,
         usersInformationId: userDeail.id,
       };
+      let res: boolean;
 
       if (userDeail?.JobDetail?.id) {
-        await updateJobDetail(payload, userDeail.JobDetail.id);
+        res = await updateJobDetail(payload, userDeail.JobDetail.id);
       } else {
-        await createJobDetail(payload);
+        res = await createJobDetail(payload);
       }
-      if (status) {
-        setIsLoading(true);
+
+      if (res) {
         route.push("/bankInformation");
+      } else {
+        setToast({
+          open: true,
+          message: "err",
+          severity: "warning",
+        });
+      }
+
+      if (res) {
+        route.push("/bankInformation");
+      } else {
+        setToast({
+          open: true,
+          message: "err",
+          severity: "warning",
+        });
       }
     } catch (error) {
       console.error(error);

@@ -26,7 +26,10 @@ export default function Page() {
         return;
       }
 
-      const latestDetail = await fetchUserDetail(session.user.id);
+      const latestDetail = await fetchUserDetail(
+        session.user.id,
+        session.user.backendToken,
+      );
 
       console.log(latestDetail, "latest user detail");
 
