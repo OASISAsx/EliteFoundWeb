@@ -28,6 +28,12 @@ export const API = {
     UPDATE: (id: string) => `/BankInformation/${id}`,
   },
 
+  LOANCONTACT: {
+    GET_BY_ID: (id: string) => `/loanContact/${id}`,
+    CREATE: "/loanContact",
+    UPDATE: (id: string) => `/loanContact/${id}`,
+  },
+
   UPLOAD: {
     FILE: "/upload/single",
     FILE_MULTIPLE: "/upload/multi",

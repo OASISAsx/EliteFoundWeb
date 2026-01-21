@@ -186,6 +186,9 @@ export default function DashboardPage() {
   const movePage = () => {
     router.push("/personalized");
   };
+  const formContact = () => {
+    router.push("/formLoanContact");
+  };
   return (
     <Box sx={{ p: 2, pt: 6 }}>
       <Box sx={{ p: { xs: 2, md: 4 } }}>
@@ -194,7 +197,7 @@ export default function DashboardPage() {
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          sx={{ mb: 4 }}
+          sx={{ mb: 4, width: "230px" }}
         >
           <Button
             onClick={movePage}
@@ -209,6 +212,20 @@ export default function DashboardPage() {
             }}
           >
             ข้อมมูลส่วนตัว
+          </Button>
+          <Button
+            onClick={formContact}
+            variant="contained"
+            disableElevation
+            sx={{
+              borderRadius: "10px",
+              textTransform: "none",
+              fontWeight: 600,
+              bgcolor: "primary.light",
+              color: "#000",
+            }}
+          >
+            กู้ยืมสินเชื้อ
           </Button>
 
           {/* <Box>

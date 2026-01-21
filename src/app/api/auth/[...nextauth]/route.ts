@@ -30,7 +30,6 @@ declare module "next-auth/jwt" {
 }
 
 export const authOptions: NextAuthOptions = {
-  // เพิ่ม debug สำหรับ production (จะ log เฉพาะ error ใน prod)
   debug: process.env.NODE_ENV === "development",
 
   providers: [
@@ -144,7 +143,7 @@ export const authOptions: NextAuthOptions = {
         session.user.backendToken = token.backendToken as string; // ✅
       }
       return session;
-    },  
+    },
   },
 };
 

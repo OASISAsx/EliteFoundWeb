@@ -163,7 +163,7 @@ export default function UsersInformationForm() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        p: 3, // p-6
+        p: 3,
         pt: {
           xs: 8,
           sm: 8,

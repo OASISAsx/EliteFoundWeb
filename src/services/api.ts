@@ -5,7 +5,6 @@ export const serverApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-// 🔹 ใส่ token ให้ทุก request อัตโนมัติ
 serverApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
