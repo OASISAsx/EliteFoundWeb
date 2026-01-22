@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Card,
@@ -34,8 +34,16 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useRouter } from "next/navigation";
+import { HourglassTop } from "@mui/icons-material";
+import { useStatusMainStore } from "@/src/stores/mainStatus.store";
+import { useSession } from "next-auth/react";
+import { useUserStore } from "@/src/stores/user.store";
+import { StatsGrid } from "@/src/components/StatsGrid";
+import { useLoanContactStore } from "@/src/stores/loanContact.store ";
+import LoanTable from "./LoanTable";
 
 // ---------------- TYPES ----------------
+
 interface LoanRow {
   id: number;
   name: string;
@@ -45,36 +53,37 @@ interface LoanRow {
 }
 
 // ---------------- MOCK DATA ----------------
-const stats = [
-  {
-    title: "Users",
-    value: "1,280",
-    icon: Users,
-    color: "#00f2ff",
-    change: "+12%",
-  },
-  {
-    title: "Requests",
-    value: "342",
-    icon: CreditCard,
-    color: "#bf5af2",
-    change: "+5.4%",
-  },
-  {
-    title: "Approved",
-    value: "210",
-    icon: CheckCircle,
-    color: "#32d74b",
-    change: "82%",
-  },
-  {
-    title: "Volume",
-    value: "฿12.5M",
-    icon: Banknote,
-    color: "#ffd60a",
-    change: "+2.1M",
-  },
-];
+// const stats = [
+//   {
+//     title: "จำนวนสัญญา",
+//     value: "342",
+//     icon: CreditCard,
+//     color: "#bf5af2",
+//     change: "+5.4%",
+//   },
+//   {
+//     title: "จำนวนเงินที่รออนุมัติ",
+//     value: "1,280",
+//     icon: HourglassTop,
+//     color: "#00f2ff",
+//     change: "+12%",
+//   },
+//   {
+//     title: "อนุมัติ",
+//     value: "210",
+//     icon: CheckCircle,
+//     color: "#32d74b",
+//     change: "82%",
+//   },
+
+//   {
+//     title: "จำนวนเงินที่ใช้",
+//     value: "฿12.5M",
+//     icon: Banknote,
+//     color: "#ffd60a",
+//     change: "+2.1M",
+//   },
+// ];
 
 const chartData = [
   { name: "Mon", v: 3200 },
@@ -182,7 +191,57 @@ const columns: GridColDef<LoanRow>[] = [
 ];
 
 export default function DashboardPage() {
+  const { fetchStatus, mainStatus } = useStatusMainStore();
   const router = useRouter();
+  const { fetchUserDetail, userDeail } = useUserStore();
+  const { data: session, status } = useSession();
+  const { fetchLoan, dataLoan } = useLoanContactStore();
+  const stats = [
+    {
+      title: "จำนวนสัญญา",
+      value: mainStatus?.totalContracts ?? 0,
+      icon: CreditCard,
+      color: "#bf5af2",
+      // change: calcPercentChange(
+      //   mainStatus?.totalContracts ?? 0,
+      //   mainStatus?.previousTotalContracts ?? 0,
+      // ),
+    },
+    {
+      title: "รออนุมัติ",
+      value: mainStatus?.pendingAmount ?? 0,
+      icon: HourglassTop,
+      color: "#00f2ff",
+    },
+    {
+      title: "อนุมัติแล้ว",
+      value: mainStatus?.approvedAmount
+        ? `${mainStatus.approvedAmount.toLocaleString()} ฿`
+        : "0 ฿",
+      icon: CheckCircle,
+      color: "#32d74b",
+    },
+    {
+      title: "วงเงินที่ใช้คืน",
+      value: `฿${mainStatus?.usedAmount?.toLocaleString() ?? 0}`,
+      icon: Banknote,
+      color: "#ffd60a",
+    },
+  ];
+
+  useEffect(() => {
+    if (!session?.user) return;
+
+    fetchUserDetail(session.user.id, session.user.backendToken);
+  }, [session?.user, fetchUserDetail]);
+
+  useEffect(() => {
+    if (!userDeail?.id) return;
+    fetchLoan(userDeail.id);
+    fetchStatus(userDeail.id);
+    console.log(mainStatus, "mainStatus");
+  }, [userDeail?.id, fetchStatus, fetchLoan]);
+
   const movePage = () => {
     router.push("/personalized");
   };
@@ -258,81 +317,13 @@ export default function DashboardPage() {
             View All
           </Button> */}
         </Stack>
-
         {/* STATS GRID - ใช้ Grid v2 size prop */}
-        <Grid container spacing={2} sx={{ mb: 4 }}>
-          {stats.map((item, i) => (
-            <Grid key={i} size={{ xs: 12, sm: 6, md: 3 }}>
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <Card
-                  sx={{
-                    //   bgcolor: "transparent",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: "16px",
-                    boxShadow: "none",
-                  }}
-                >
-                  <CardContent sx={{ p: 2.5 }}>
-                    <Stack
-                      direction="row"
-                      justifyContent="space-between"
-                      alignItems="start"
-                    >
-                      <Box
-                        sx={{
-                          p: 1,
-                          borderRadius: "10px",
-                          bgcolor: alpha(item.color, 0.1),
-                          color: item.color,
-                        }}
-                      >
-                        <item.icon size={18} />
-                      </Box>
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          color: "#32d74b",
-                          fontWeight: 700,
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 0.5,
-                        }}
-                      >
-                        <TrendingUp size={12} /> {item.change}
-                      </Typography>
-                    </Stack>
-                    <Box sx={{ mt: 2 }}>
-                      <Typography
-                        variant="caption"
-                        sx={{ color: "text.secondary", fontWeight: 500 }}
-                      >
-                        {item.title}
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        sx={{ fontWeight: 800, lineHeight: 1.2 }}
-                      >
-                        {item.value}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
-
+        <StatsGrid stats={stats} />
         {/* MAIN CONTENT - Grid v2 size prop */}
-        <Grid container spacing={3}>
-          {/* CHART - กราฟอันเดียว */}
+        <Grid container spacing={2}>
           <Grid size={{ xs: 12, lg: 7 }}>
             <Card
               sx={{
-                //   bgcolor: "transparent",
                 border: "1px solid rgba(255,255,255,0.1)",
                 borderRadius: "20px",
                 boxShadow: "none",
@@ -395,62 +386,7 @@ export default function DashboardPage() {
           </Grid>
 
           {/* TABLE */}
-          <Grid size={{ xs: 12, lg: 5 }}>
-            <Card
-              sx={{
-                // bgcolor: "transparent",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderRadius: "20px",
-                boxShadow: "none",
-              }}
-            >
-              <Box
-                sx={{
-                  p: 2.5,
-                  borderBottom: "1px solid rgba(255,255,255,0.05)",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-                  Latest Loan Requests
-                </Typography>
-                <Button
-                  size="small"
-                  endIcon={<ArrowUpRight size={14} />}
-                  sx={{
-                    color: "primary.main",
-                    textTransform: "none",
-                    fontWeight: 600,
-                  }}
-                >
-                  View All
-                </Button>
-              </Box>
-              <Box sx={{ height: 315, width: "100%", px: 1 }}>
-                <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  hideFooter
-                  disableRowSelectionOnClick
-                  sx={{
-                    border: "none",
-                    "& .MuiDataGrid-columnHeaders": {
-                      borderBottom: "1px solid rgba(255,255,255,0.05)",
-                    },
-                    "& .MuiDataGrid-cell": {
-                      borderBottom: "1px solid rgba(255,255,255,0.02)",
-                    },
-                    "& .MuiDataGrid-row:hover": {
-                      bgcolor: "rgba(255,255,255,0.02)",
-                    },
-                    fontSize: "13px",
-                  }}
-                />
-              </Box>
-            </Card>
-          </Grid>
+          <LoanTable loans={dataLoan} />
         </Grid>
       </Box>
     </Box>

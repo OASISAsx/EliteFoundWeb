@@ -62,11 +62,30 @@ export default function UsersInformationForm() {
     usersInformationId: "",
   });
 
+  // 1. fetch user เมื่อ session พร้อม
   useEffect(() => {
-    if (session?.user?.id) {
+    if (session?.user?.id && session?.user?.backendToken) {
       fetchUser(session.user.id, session.user.backendToken);
     }
-  }, [session?.user?.id]);
+  }, [session?.user?.id, session?.user?.backendToken]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    if (!user.usersInformationId) {
+      setToast({
+        open: true,
+        message: "โปรดกรอกข้อมูลส่วนตัว",
+        severity: "info",
+      });
+
+      const timer = setTimeout(() => {
+        route.push("/personalized");
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   if (userDeail?.JobDetail) {

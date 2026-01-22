@@ -38,6 +38,9 @@ export const API = {
     FILE: "/upload/single",
     FILE_MULTIPLE: "/upload/multi",
   },
+  MAIN_STATUS: {
+    GET_BY_ID: (id: string) => `/status/${id}`,
+  },
 
   ADDRESS_DROPDOWN: {
     province: "/provinces",

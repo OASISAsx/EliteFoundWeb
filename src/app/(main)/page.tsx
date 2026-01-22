@@ -33,10 +33,10 @@ export default function Page() {
 
       console.log(latestDetail, "latest user detail");
 
-      if (!latestDetail || !latestDetail.id) {
-        console.log("No user detail found, redirecting...");
-        router.replace("/personalized");
-      }
+      // if (!latestDetail || !latestDetail.id) {
+      //   console.log("No user detail found, redirecting...");
+      //   router.replace("/personalized");
+      // }
     };
 
     checkUserStatus();

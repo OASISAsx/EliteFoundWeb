@@ -17,10 +17,10 @@ export default function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="
-        relative w-20 h-10 rounded-full
+        relative w-[57px] h-7 rounded-full
         flex items-center px-1
         backdrop-blur-md
-        bg-gradient-to-r from-yellow-300/40 to-orange-400/40
+        bg-linear-to-r from-yellow-300/40 to-orange-400/40
         dark:from-indigo-600/40 dark:to-blue-600/40
         border border-white/30 dark:border-white/10
         shadow-lg
@@ -31,12 +31,12 @@ export default function ThemeToggle() {
       {/* Slider */}
       <div
         className={`
-          absolute top-1 left-1 w-8 h-8 rounded-full
+          absolute  left-0 bottom-0 w-7 h-7 rounded-full
           flex items-center justify-center
           bg-white dark:bg-gray-900
           shadow-md
           transition-all duration-500 ease-in-out
-          ${isDark ? "translate-x-10" : "translate-x-0"}
+          ${isDark ? "translate-x-7" : "translate-x-0"}
         `}
       >
         <span

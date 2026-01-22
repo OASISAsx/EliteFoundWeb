@@ -7,7 +7,7 @@ export interface LoanContract {
   termMonths: number;
   installmentPerMonth: number;
   loanType: "effective" | "flat";
-  status: "active" | "closed" | "cancelled";
+  status: "panding" | "closed" | "cancelled";
   startDate: string;
   usersInformationId: string;
   createdAt: string;
@@ -24,10 +24,12 @@ export interface CreateLoanContractBody {
 }
 
 export interface UserloanContactStore {
-  LoanContract: LoanContract | null;
+  LoanContract?: LoanContract | null;
+  dataLoan: LoanContract[];
   loading: boolean;
   status: boolean;
   message?: string;
+  fetchLoan: (id: string) => Promise<void>;
   createLoanContact: (data: CreateLoanContractBody) => Promise<boolean>;
   updateLoanContact: (
     data: CreateLoanContractBody,

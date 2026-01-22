@@ -15,9 +15,26 @@ import {
 
 const useLoanContactStore = create<UserloanContactStore>((set) => ({
   LoanContract: null,
+  dataLoan: [],
   loading: false,
   status: false,
   message: "",
+
+  fetchLoan: async (id: string) => {
+    set({ loading: true });
+
+    try {
+      const res = await serverApi.get(API.LOANCONTACT.GET_BY_ID(id));
+
+      set({ dataLoan: res.data.data });
+    } catch (err) {
+      console.error(err);
+      // set({ LoanContract: [] });
+    } finally {
+      set({ loading: false });
+    }
+  },
+
   createLoanContact: async (data: CreateLoanContractBody): Promise<boolean> => {
     set({ loading: true });
 

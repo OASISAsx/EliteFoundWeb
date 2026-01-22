@@ -201,7 +201,7 @@ export default function EnhancedLoanSchedule() {
           elevation={0}
           sx={{
             width: "210mm",
-            minHeight: "296mm",
+            minHeight: "290mm",
             boxSizing: "border-box",
             overflow: "hidden",
             p: "12mm",
@@ -307,7 +307,7 @@ export default function EnhancedLoanSchedule() {
                   color="primary"
                   sx={{
                     mb: 2,
-                    borderBottom: "2px solid",
+                    pb: 2,
                     borderColor: "primary.light",
                     display: "inline-block",
                   }}
@@ -376,7 +376,7 @@ export default function EnhancedLoanSchedule() {
                   color="primary"
                   sx={{
                     mb: 2,
-                    borderBottom: "2px solid",
+                    pb: 2,
                     borderColor: "primary.light",
                     display: "inline-block",
                   }}
