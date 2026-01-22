@@ -11,6 +11,7 @@ import {
   Typography,
   CircularProgress,
   Divider,
+  FormHelperText,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
@@ -120,16 +121,6 @@ export default function UsersInformationForm() {
       } else {
         throw new Error("Create loan failed");
       }
-
-      // if (res) {
-      //   route.push("/bankInformation");
-      // } else {
-      //   setToast({
-      //     open: true,
-      //     message: "err",
-      //     severity: "warning",
-      //   });
-      // }
     } catch (error) {
       console.error(error);
 
@@ -174,70 +165,26 @@ export default function UsersInformationForm() {
         <div className="pb-10">
           {" "}
           <p className=" text-2xl font-bold text-center mb-8 transition-colors duration-300">
-            รายละเอียดการทำงาน
+            กู้สินเชื่อ
           </p>
           <Divider />
         </div>
 
         <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+          <Grid size={{ xs: 12, sm: 12, md: 12 }}>
             <TextField
               required
               fullWidth
               id="loanAmount"
               name="loanAmount"
-              label="จำนวนเงินที่ต้องการ"
+              label="จำนวนเงินที่ต้องการ (บาท)"
               variant="filled"
               value={form.loanAmount || ""}
               onChange={handleChange}
+              // helperText="ระบุจำนวนเงินที่ต้องการกู้ยืมเป็นตัวเลขเท่านั้น"
             />
           </Grid>
-          {/* <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            <CustomDatePicker
-              label="วันที่เริ่มงาน"
-              value={dayjs(form.startDate)}
-              onChange={(newValue) => {
-                setForm((prev: any) => ({
-                  ...prev,
-                  startDate: newValue ? newValue.toDate() : null,
-                }));
-              }}
-            />
-          </Grid> */}
-          {/* <Grid size={{ xs: 12, sm: 12, md: 12 }}>
-            <TextField
-              required
-              rows={3}
-              multiline
-              fullWidth
-              id="companyAddress"
-              name="companyAddress"
-              label="ที่อยู่บริษัท"
-              variant="filled"
-              sx={{
-                "& textarea": {
-                  marginTop: "-30px",
-                  marginLeft: "-10px",
-                },
-              }}
-              value={form.companyAddress}
-              onChange={handleChange}
-            />
-          </Grid> */}
-          {/* <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <TextField
-              required
-              fullWidth
-              id="loanType"
-              name="loanType"
-              label="วัตถุประสงค์"
-              variant="filled"
-              value={form.loanType || ""}
-              onChange={handleChange}
-            />
-          </Grid> */}
-
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <FormControl fullWidth variant="filled" required>
               <InputLabel id="loanType-label">วัตถุประสงค์</InputLabel>
               <Select
@@ -266,12 +213,15 @@ export default function UsersInformationForm() {
                 <MenuItem value="personal">ใช้จ่ายส่วนตัว</MenuItem>
                 <MenuItem value="other">อื่นๆ</MenuItem>
               </Select>
+              {/* <FormHelperText>
+                เลือกวัตถุประสงค์ที่ใกล้เคียงกับการใช้งานจริงมากที่สุด
+              </FormHelperText> */}
             </FormControl>
           </Grid>
 
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <FormControl fullWidth variant="filled">
-              <InputLabel id="termMonths-label">วัตถุประสงค์</InputLabel>
+              <InputLabel id="termMonths-label">ระยะเวลาผ่อน</InputLabel>
               <Select
                 value={form.termMonths ?? ""}
                 onChange={(e) => {
@@ -295,123 +245,16 @@ export default function UsersInformationForm() {
                   </MenuItem>
                 ))}
               </Select>
+              <FormHelperText>
+                ระยะเวลาผ่อนมีผลต่อยอดผ่อนต่อเดือนและดอกเบี้ยรวม
+              </FormHelperText>
             </FormControl>
           </Grid>
-          {/* <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <TextField
-              required
-              fullWidth
-              id="position"
-              name="position"
-              label="ตำแหน่งงาน"
-              variant="filled"
-              value={form.position}
-              onChange={handleChange}
-            />
-          </Grid> */}
-          {/* <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <TextField
-              required
-              fullWidth
-              type="number"
-              id="salaryPerMonth"
-              name="salaryPerMonth"
-              label="เงินเดือน"
-              variant="filled"
-              value={form.salaryPerMonth}
-              onChange={handleChange}
-            />
-          </Grid> */}
-          {/* <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <TextField
-              required
-              fullWidth
-              type="number"
-              id="otherIncome"
-              name="otherIncome"
-              label="รายได้อื่นๆ"
-              variant="filled"
-              value={form.otherIncome}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <TextField
-              required
-              fullWidth
-              type="number"
-              id="workYears"
-              name="workYears"
-              label="ระยะเวลาการทำงาน (ปี)"
-              variant="filled"
-              value={form.workYears}
-              onChange={handleChange}
-            />
-          </Grid> */}
-
-          {/* <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <InputLabel id="otherFiles-label">
-              สลิปเงินเดือน (ย้อนหลัง 6 เดือน)
-            </InputLabel>
-            <Input
-              className="pt-6"
-              type="file"
-              inputProps={{ multiple: true, accept: "image/*" }}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const files = e.target.files;
-                if (!files) return;
-
-                const arr = Array.from(files);
-
-                setSalaryFiles(arr);
-
-                const previews = arr.map((file) => URL.createObjectURL(file));
-                setSalaryPreviews(previews);
-              }}
-            />
-            {salaryPreviews.length > 0 && (
-              <Box mt={2}>
-                <Typography variant="subtitle2">รูปที่เลือก</Typography>
-
-                <Box display="flex" gap={2} flexWrap="wrap" mt={1}>
-                  {salaryPreviews.map((src, index) => (
-                    <Image
-                      key={index}
-                      src={src}
-                      alt={`preview-${index}`}
-                      width={120}
-                      height={80}
-                      style={{ objectFit: "cover", borderRadius: 6 }}
-                    />
-                  ))}
-                </Box>
-              </Box>
-            )}
-
-            {form.salarySlip && form.salarySlip.length > 0 && (
-              <Box mt={2}>
-                <Typography variant="subtitle2">
-                  เอกสารที่อัปโหลดแล้ว
-                </Typography>
-
-                <Box display="flex" gap={2} flexWrap="wrap" mt={1}>
-                  {form.salarySlip.map((url: string, index: number) => (
-                    <Image
-                      key={index}
-                      src={url}
-                      alt={`file-${index}`}
-                      width={120}
-                      height={80}
-                      style={{
-                        objectFit: "cover",
-                        borderRadius: 6,
-                      }}
-                    />
-                  ))}
-                </Box>
-              </Box>
-            )}
-          </Grid> */}
+          <p className="text-xs text-gray-500 mt-6 leading-relaxed">
+            หมายเหตุ: ข้อมูลที่แสดงเป็นเพียงการคำนวณเบื้องต้น
+            อัตราดอกเบี้ยและเงื่อนไขจริงอาจเปลี่ยนแปลงตามผลการพิจารณา
+            บริษัทขอสงวนสิทธิ์ในการอนุมัติสินเชื่อ
+          </p>
         </Grid>
         <Grid container justifyContent="flex-end">
           <Grid size={{ xs: 12, sm: 6, md: 4 }}>

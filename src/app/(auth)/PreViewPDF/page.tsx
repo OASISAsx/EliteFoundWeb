@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { border, padding } from "@mui/system";
 import html2pdf from "html2pdf.js";
+import Image from "next/image";
 import { useRef } from "react";
 
 // สร้าง Theme ที่ดูเป็นทางการและสะอาดตา
@@ -244,9 +245,16 @@ export default function EnhancedLoanSchedule() {
               </Typography>
             </Grid>
             <Grid size={4} sx={{ textAlign: "right" }}>
-              <Typography variant="h4" sx={{ color: "#e0e0e0", mb: 1 }}>
-                INVOICE
-              </Typography>
+              <div className="relative w-78 h-10 flex items-center justify-center gap-2 rounded-xl px-6 py-8 text-white font-semibold">
+                <Image
+                  src="/logoEF-v2.png"
+                  alt="EF logo"
+                  width={90}
+                  height={90}
+                  className="object-contain"
+                />
+              </div>
+
               <Box
                 sx={{
                   display: "inline-block",
