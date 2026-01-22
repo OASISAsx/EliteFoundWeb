@@ -161,13 +161,13 @@ export default function UsersInformationForm() {
         justifyContent: "center",
         alignItems: "center",
         p: 3, // p-6
-        pt: {
-          xs: 8,
-          sm: 8,
-          md: 10,
-          lg: 12,
-          xl: 12,
-        },
+        // pt: {
+        //   xs: 1,
+        //   sm: 2,
+        //   md: 6,
+        //   lg: 12,
+        //   xl: 12,
+        // },
       }}
     >
       <ToastAlert

@@ -12,6 +12,7 @@ import {
   Button,
   alpha,
   Grid,
+  IconButton,
 } from "@mui/material";
 
 import {
@@ -21,6 +22,7 @@ import {
   CheckCircle,
   ArrowUpRight,
   TrendingUp,
+  LogOutIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -36,11 +38,12 @@ import {
 import { useRouter } from "next/navigation";
 import { HourglassTop } from "@mui/icons-material";
 import { useStatusMainStore } from "@/src/stores/mainStatus.store";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useUserStore } from "@/src/stores/user.store";
 import { StatsGrid } from "@/src/components/StatsGrid";
 import { useLoanContactStore } from "@/src/stores/loanContact.store ";
 import LoanTable from "./LoanTable";
+import { width } from "@mui/system";
 
 // ---------------- TYPES ----------------
 
@@ -228,6 +231,31 @@ export default function DashboardPage() {
       color: "#ffd60a",
     },
   ];
+  const baseButton = {
+    borderRadius: "10px",
+    textTransform: "none",
+    fontWeight: 600,
+    minWidth: 140,
+  };
+
+  const buttonStyleDark = {
+    ...baseButton,
+    bgcolor: "primary.dark",
+    color: "#000",
+  };
+
+  const buttonStyleLight = {
+    ...baseButton,
+    bgcolor: "primary.light",
+    color: "#000",
+  };
+
+  const buttonStyleLogout = {
+    ...baseButton,
+    bgcolor: "error.light",
+    color: "#000",
+    width: "20px",
+  };
 
   useEffect(() => {
     if (!session?.user) return;
@@ -248,15 +276,24 @@ export default function DashboardPage() {
   const formContact = () => {
     router.push("/formLoanContact");
   };
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    useUserStore.getState().logout();
+    window.location.href = "/login";
+  };
   return (
     <Box sx={{ p: 2, pt: 6 }}>
       <Box sx={{ p: { xs: 2, md: 4 } }}>
         {/* HEADER */}
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ mb: 4, width: "230px" }}
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            mb: 4,
+            gap: 1.0, // แทน spacing ของ Stack
+          }}
         >
           <Button
             onClick={movePage}
@@ -270,8 +307,9 @@ export default function DashboardPage() {
               color: "#000",
             }}
           >
-            ข้อมมูลส่วนตัว
+            ข้อมูลส่วนตัว
           </Button>
+
           <Button
             onClick={formContact}
             variant="contained"
@@ -284,39 +322,25 @@ export default function DashboardPage() {
               color: "#000",
             }}
           >
-            กู้ยืมสินเชื้อ
+            กู้ยืมสินเชื่อ
           </Button>
 
-          {/* <Box>
-            <Typography
-              variant="h4"
-              fontWeight={900}
-              sx={{
-                background: (theme) =>
-                  theme.palette.mode === "dark"
-                    ? "linear-gradient(to right, #fff, #cbd5e1, #64748b)"
-                    : "linear-gradient(to right, #0f172a, #334155, #64748b)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              DASHBOARD{" "}
-            </Typography>
-          </Box> */}
-          {/* <Button
-            variant="contained"
-            disableElevation
+          <IconButton
+            onClick={handleLogout}
             sx={{
-              borderRadius: "10px",
-              textTransform: "none",
-              fontWeight: 600,
-              bgcolor: "primary.main",
+              bgcolor: "error.light",
               color: "#000",
+              borderRadius: "10px",
+              p: 1.2,
+              "&:hover": {
+                bgcolor: "error.main",
+              },
             }}
           >
-            View All
-          </Button> */}
-        </Stack>
+            <LogOutIcon />
+          </IconButton>
+        </Box>
+
         {/* STATS GRID - ใช้ Grid v2 size prop */}
         <StatsGrid stats={stats} />
         {/* MAIN CONTENT - Grid v2 size prop */}

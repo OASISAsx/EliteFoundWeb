@@ -12,10 +12,12 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
   loading: false,
   status: false,
   message: "",
-  fetchUserInformation: async (userId: string) => {
+  fetchUserInformation: async (usersInformationId: string) => {
     set({ loading: true });
     try {
-      const res = await serverApi.get(API.USER_INFORMATION.GET_BY_ID(userId));
+      const res = await serverApi.get(
+        API.USER_INFORMATION.GET_BY_ID(usersInformationId),
+      );
       set({ userInformation: res.data.data });
     } catch (err) {
       console.error(err);

@@ -134,6 +134,11 @@ export default function UsersInformationForm() {
         await updateBank(payload, bankData.id);
       } else {
         await createBank(payload);
+        setToast({
+          open: true,
+          message: "บันทึกข้อมูลสำเร็จ",
+          severity: "success",
+        });
       }
       if (bankData) {
         setToast({
@@ -141,8 +146,8 @@ export default function UsersInformationForm() {
           message: "บันทึกข้อมูลสำเร็จ",
           severity: "success",
         });
-        route.push("/");
       }
+      route.push("/");
     } catch (error) {
       console.error(error);
 
