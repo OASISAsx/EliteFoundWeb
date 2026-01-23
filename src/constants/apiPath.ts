@@ -6,7 +6,7 @@ export const API = {
   },
 
   USER: {
-    GET_ALL: "/users",
+    GET_ALL: "/usersAll",
     GET_BY_ID: (id: string) => `/user/${id}`,
   },
 
@@ -39,7 +39,7 @@ export const API = {
     FILE_MULTIPLE: "/upload/multi",
   },
   MAIN_STATUS: {
-    GET_BY_ID: (id: string) => `/status/${id}`,
+    GET_BY_ID: (usersInformationId: string) => `/status/${usersInformationId}`,
   },
 
   ADDRESS_DROPDOWN: {

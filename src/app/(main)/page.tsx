@@ -26,12 +26,12 @@ export default function Page() {
         return;
       }
 
-      const latestDetail = await fetchUserDetail(
-        session.user.id,
-        session.user.backendToken,
-      );
+      // const latestDetail = await fetchUserDetail(
+      //   session.user.id,
+      //   session.user.backendToken,
+      // );
 
-      console.log(latestDetail, "latest user detail");
+      // console.log(latestDetail, "latest user detail");
 
       // if (!latestDetail || !latestDetail.id) {
       //   console.log("No user detail found, redirecting...");
@@ -40,7 +40,7 @@ export default function Page() {
     };
 
     checkUserStatus();
-  }, [status, session, router, fetchUserDetail]);
+  }, [status, session, router]);
 
   return <DashboardPage />;
 }

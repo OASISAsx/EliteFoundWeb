@@ -14,6 +14,7 @@ declare module "next-auth" {
       usersInformationId: string | null;
       usersInformation: UserInformation | null;
       backendToken: string;
+      userRoles: any;
     };
   }
 }
@@ -80,6 +81,8 @@ export const authOptions: NextAuthOptions = {
             usersInformationId: user.usersInformationId,
             usersInformation: user.usersInformation,
             backendToken: res.data.token, // ✅ เอาจาก root response
+            userRoles: user.userRoles,
+            // roleName: user.userRoles,
           };
         } catch (error) {
           const err = error as AxiosError;
@@ -115,6 +118,7 @@ export const authOptions: NextAuthOptions = {
           token.usersInformationId = res.data.data.usersInformationId ?? null;
           token.usersInformation = res.data.data.usersInformation ?? null;
           token.backendToken = res.data.token;
+          token.userRoles = res.data.data.userRoles;
         }
 
         return token;
@@ -128,6 +132,7 @@ export const authOptions: NextAuthOptions = {
         token.usersInformationId = (user as any).usersInformationId ?? null;
         token.usersInformation = (user as any).usersInformation ?? null;
         token.backendToken = (user as any).backendToken; // ✅ สำคัญมาก
+        token.userRoles = (user as any).userRoles;
       }
 
       return token;
@@ -141,6 +146,7 @@ export const authOptions: NextAuthOptions = {
         session.user.usersInformationId = token.usersInformationId as any;
         session.user.usersInformation = token.usersInformation as any;
         session.user.backendToken = token.backendToken as string; // ✅
+        session.user.userRoles = token.userRoles as any;
       }
       return session;
     },

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Box,
   Card,
@@ -196,7 +196,7 @@ const columns: GridColDef<LoanRow>[] = [
 export default function DashboardPage() {
   const { fetchStatus, mainStatus } = useStatusMainStore();
   const router = useRouter();
-  const { fetchUserDetail, userDeail } = useUserStore();
+  const { fetchUsers, fetchUserDetail, userDeail } = useUserStore();
   const { data: session, status } = useSession();
   const { fetchLoan, dataLoan } = useLoanContactStore();
   const stats = [
@@ -257,9 +257,13 @@ export default function DashboardPage() {
     width: "20px",
   };
 
+  const fetchedRef = useRef(false);
+
   useEffect(() => {
     if (!session?.user) return;
+    if (fetchedRef.current) return;
 
+    fetchedRef.current = true;
     fetchUserDetail(session.user.id, session.user.backendToken);
   }, [session?.user, fetchUserDetail]);
 
@@ -269,6 +273,24 @@ export default function DashboardPage() {
     fetchStatus(userDeail.id);
     console.log(mainStatus, "mainStatus");
   }, [userDeail?.id, fetchStatus, fetchLoan]);
+
+  const called = useRef(false);
+
+  useEffect(() => {
+    if (!session?.user || called.current) return;
+
+    const role = session.user.userRoles.find(
+      (r: any) => r.role.name === "ADMIN",
+    );
+
+    if (!role) {
+      console.warn("ADMIN role not found");
+      return;
+    }
+
+    called.current = true;
+    fetchUsers(role.role.apiSecret, session.user.backendToken);
+  }, [session?.user?.id]);
 
   const movePage = () => {
     router.push("/personalized");
@@ -291,6 +313,9 @@ export default function DashboardPage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            // flexDirection: { xs: "column", sm: "row" },
+
+            width: { sx: "100px", sm: "220px", md: "220px" },
             mb: 4,
             gap: 1.0, // แทน spacing ของ Stack
           }}
@@ -325,7 +350,7 @@ export default function DashboardPage() {
             กู้ยืมสินเชื่อ
           </Button>
 
-          <IconButton
+          {/* <IconButton
             onClick={handleLogout}
             sx={{
               bgcolor: "error.light",
@@ -338,7 +363,7 @@ export default function DashboardPage() {
             }}
           >
             <LogOutIcon />
-          </IconButton>
+          </IconButton> */}
         </Box>
 
         {/* STATS GRID - ใช้ Grid v2 size prop */}

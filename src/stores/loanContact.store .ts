@@ -29,7 +29,6 @@ const useLoanContactStore = create<UserloanContactStore>((set) => ({
       set({ dataLoan: res.data.data });
     } catch (err) {
       console.error(err);
-      // set({ LoanContract: [] });
     } finally {
       set({ loading: false });
     }

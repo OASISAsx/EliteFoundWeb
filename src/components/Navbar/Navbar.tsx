@@ -5,6 +5,8 @@ import Image from "next/image";
 import ThemeToggleClient from "@/src/components/defaultTheme/theme-toggle-client";
 import { signOut } from "next-auth/react";
 import { useUserStore } from "@/src/stores/user.store";
+import { IconButton } from "@mui/material";
+import { LogOutIcon } from "lucide-react";
 // import { useUserStore } from "@/stores/user.store";
 export default function Navbar() {
   const handleLogout = async () => {
@@ -41,7 +43,7 @@ export default function Navbar() {
         </Link>
 
         {/* MENU */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+        {/* <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link href="/" className="hover:text-blue-500 transition">
             Home
           </Link>
@@ -63,11 +65,24 @@ export default function Navbar() {
           >
             Logout
           </Link>
-        </div>
+        </div> */}
 
         {/* RIGHT ACTION */}
         <div className="flex items-center gap-4">
           <ThemeToggleClient />
+          <IconButton
+            onClick={handleLogout}
+            sx={{
+              // bgcolor: "error.light",
+              borderRadius: "10px",
+              p: 1.2,
+              "&:hover": {
+                // bgcolor: "error.main",
+              },
+            }}
+          >
+            <LogOutIcon />
+          </IconButton>
         </div>
       </div>
     </nav>

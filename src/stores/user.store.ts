@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { serverApi } from "../services/api";
-const token = localStorage.getItem("next-auth.session-token");
+// const token = localStorage.getItem("next-auth.session-token");
 
 import type {
   LoginPayload,
@@ -11,30 +11,50 @@ import type {
   UserListStore,
 } from "../types/user.type";
 import { API } from "../constants/apiPath";
+import { createSecurePayload } from "./createSecurePayload";
+let isFetchingUsers = false;
 
 const useUserStore = create<UserListStore>((set, get) => ({
   users: [],
   userDeail: null,
   user: null,
   loading: false,
+  loadingUsers: false, // 👈 แยก
   page: 1,
   limit: 10,
 
-  fetchUsers: async () => {
-    const { page, limit } = get();
+  fetchUsers: async (roleSecret: string, token: string) => {
+    const { page, limit, loadingUsers } = get();
 
-    set({ loading: true });
+    console.log("🧪 fetchUsers called, loadingUsers =", loadingUsers);
+
+    if (loadingUsers) return;
+
+    set({ loadingUsers: true });
 
     try {
-      const res = await serverApi.get(API.USER.GET_ALL, {
-        params: { page, limit },
-      });
+      const { encryptedPayload, signature, timestamp } = createSecurePayload(
+        { page, limit },
+        roleSecret,
+      );
+
+      const res = await serverApi.post(
+        API.USER.GET_ALL,
+        { payload: encryptedPayload },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "x-timestamp": timestamp,
+            "x-signature": signature,
+          },
+        },
+      );
 
       set({ users: res.data.data });
     } catch (err) {
-      console.error(err);
+      console.error("fetchUsers error:", err);
     } finally {
-      set({ loading: false });
+      set({ loadingUsers: false });
     }
   },
 
@@ -51,7 +71,7 @@ const useUserStore = create<UserListStore>((set, get) => ({
         },
       );
 
-      set({ user: res.data.data });
+      set({ user: res.data.data[0] });
     } catch (err) {
       console.error(err);
     } finally {
@@ -71,7 +91,7 @@ const useUserStore = create<UserListStore>((set, get) => ({
           },
         },
       );
-      const detail = res.data.data.usersInformation;
+      const detail = res.data.data[0].usersInformation;
 
       set({ userDeail: detail });
 

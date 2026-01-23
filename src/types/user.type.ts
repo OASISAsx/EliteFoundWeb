@@ -20,10 +20,11 @@ export interface UserListStore {
   users: any[];
   user: User | null;
   loading: boolean;
+  loadingUsers: boolean;
   page: number;
   limit: number;
   userDeail: UserInformation | null;
-  fetchUsers: () => Promise<void>;
+  fetchUsers: (roleSecret: string, token: string) => Promise<void>;
   fetchUser: (id: string, token: string) => Promise<void>;
   fetchUserDetail: (
     id: string,
