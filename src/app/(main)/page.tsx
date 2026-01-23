@@ -40,7 +40,7 @@ export default function Page() {
     };
 
     checkUserStatus();
-  }, [status, session, router]);
+  }, [status, session, router, fetchUserDetail]);
 
   return <DashboardPage />;
 }
