@@ -9,12 +9,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "accent-blue": "#0ea5e9",
-        "accent-darkblue": "#1e3a8a",
+        primary: "#6366f1",
+        secondary: "#020617",
       },
       fontFamily: {
         sans: ["Geist Sans", "Arial", "Helvetica", "sans-serif"],
         mono: ["Fira Code", "monospace"],
+      },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+        "progress-loading": "progress 2s ease-in-out infinite",
+      },
+      keyframes: {
+        progress: {
+          "0%": { transform: "translateX(-100%) scaleX(0.2)" },
+          "50%": { transform: "translateX(0%) scaleX(0.5)" },
+          "100%": { transform: "translateX(100%) scaleX(0.2)" },
+        },
       },
       theme: {
         screens: {

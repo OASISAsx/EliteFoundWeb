@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --bg-main: #6a6f75;
+  --text-main: #ffffff;
+  --glow-blue: rgba(14, 165, 233, 0.35);
+  --glow-purple: rgba(168, 85, 247, 0.35);
+}
+
+.dark {
+  --bg-main: #050512;
+  --text-main: #ffffff;
+  --glow-blue: rgba(59, 130, 246, 0.35);
+  --glow-purple: rgba(168, 85, 247, 0.35);
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
