@@ -273,30 +273,36 @@ export default function DashboardPage() {
     fetchStatus(userDeail.id);
     console.log(mainStatus, "mainStatus");
   }, [userDeail?.id, fetchStatus, fetchLoan]);
+  const roles = session?.user?.userRoles?.map((ur: any) => ur.role.name);
 
-  const called = useRef(false);
+  const isUser = roles?.includes("ADMIN");
 
-  useEffect(() => {
-    if (!session?.user || called.current) return;
+  // const called = useRef(false);
 
-    const role = session.user.userRoles.find(
-      (r: any) => r.role.name === "ADMIN",
-    );
+  // useEffect(() => {
+  //   if (!session?.user || called.current) return;
 
-    if (!role) {
-      console.warn("ADMIN role not found");
-      return;
-    }
+  //   const role = session.user.userRoles.find(
+  //     (r: any) => r.role.name === "ADMIN",
+  //   );
 
-    called.current = true;
-    fetchUsers(role.role.apiSecret, session.user.backendToken);
-  }, [session?.user?.id]);
+  //   if (!role) {
+  //     console.warn("ADMIN role not found");
+  //     return;
+  //   }
+
+  //   called.current = true;
+  //   fetchUsers(role.role.apiSecret, session.user.backendToken);
+  // }, [session?.user?.id]);
 
   const movePage = () => {
     router.push("/personalized");
   };
   const formContact = () => {
     router.push("/formLoanContact");
+  };
+  const ListContact = () => {
+    router.push("/loanContactApproval");
   };
   const handleLogout = async () => {
     await signOut({ redirect: false });
@@ -315,7 +321,7 @@ export default function DashboardPage() {
             justifyContent: "space-between",
             // flexDirection: { xs: "column", sm: "row" },
 
-            width: { sx: "100px", sm: "220px", md: "220px" },
+            width: { sx: "120px", sm: "340px", md: "350px" },
             mb: 4,
             gap: 1.0, // แทน spacing ของ Stack
           }}
@@ -349,7 +355,22 @@ export default function DashboardPage() {
           >
             กู้ยืมสินเชื่อ
           </Button>
-
+          {isUser && (
+            <Button
+              onClick={ListContact}
+              variant="contained"
+              disableElevation
+              sx={{
+                borderRadius: "10px",
+                textTransform: "none",
+                fontWeight: 600,
+                bgcolor: "primary.light",
+                color: "#000",
+              }}
+            >
+              รายการกู้สินเชื่อ
+            </Button>
+          )}
           {/* <IconButton
             onClick={handleLogout}
             sx={{

@@ -12,14 +12,67 @@ import {
   LoanContract,
   UserloanContactStore,
 } from "../types/loanContact";
+import { createSecurePayload } from "./createSecurePayload";
 
-const useLoanContactStore = create<UserloanContactStore>((set) => ({
+const useLoanContactStore = create<UserloanContactStore>((set, get) => ({
   LoanContract: null,
   dataLoan: [],
   loading: false,
   status: false,
   message: "",
+  page: 0,
+  pageSize: 10,
+  rowCount: 0,
+  loadingAllLoan: false,
+  mainStatus: null,
 
+  setPagination: (page: number, pageSize: number) =>
+    set((state) => ({
+      page,
+      pageSize,
+    })),
+
+  fetchAllLoan: async (
+    page: number,
+    pageSize: number,
+    roleSecret: string,
+    token: string,
+  ) => {
+    if (get().loadingAllLoan) return;
+    set({ loadingAllLoan: true });
+    console.log(page, pageSize, "fetchAllLoan");
+    try {
+      const { encryptedPayload, signature, timestamp } = createSecurePayload(
+        {
+          page: page + 1, // backend 1-based
+          limit: pageSize,
+        },
+        roleSecret,
+      );
+
+      const res = await serverApi.post(
+        API.LOANCONTACT.GET_ALL,
+        { payload: encryptedPayload },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "x-timestamp": timestamp,
+            "x-signature": signature,
+          },
+        },
+      );
+
+      set({
+        dataLoan: res.data.data,
+        rowCount: res.data.meta.total,
+        mainStatus: res.data.status,
+        page,
+        pageSize,
+      });
+    } finally {
+      set({ loadingAllLoan: false });
+    }
+  },
   fetchLoan: async (id: string) => {
     set({ loading: true });
 

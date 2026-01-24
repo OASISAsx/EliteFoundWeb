@@ -5,6 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Anuphan } from "next/font/google";
 import "@/src/lib/dayjs";
+import Sidebar from "@/src/components/SideBar";
 
 const anuphan = Anuphan({
   subsets: ["thai"],
@@ -19,6 +20,7 @@ export default function MainLayout({
   return (
     <div className={`min-h-screen bg-background ${anuphan.className}`}>
       <Navbar />
+      {/* <Sidebar /> */}
       <main className="pt-16">
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="th">
           {children}

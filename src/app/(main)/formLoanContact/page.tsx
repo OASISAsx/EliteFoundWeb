@@ -198,9 +198,13 @@ export default function UsersInformationForm() {
               name="loanAmount"
               label="จำนวนเงินที่ต้องการ (บาท)"
               variant="filled"
-              value={form.loanAmount || ""}
+              type="number" // ✅ สำคัญ
+              value={form.loanAmount ?? ""}
               onChange={handleChange}
-              // helperText="ระบุจำนวนเงินที่ต้องการกู้ยืมเป็นตัวเลขเท่านั้น"
+              // inputProps={{
+              //   min: 0,
+              //   step: 100, // 👈 ปรับตาม business
+              // }}
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
