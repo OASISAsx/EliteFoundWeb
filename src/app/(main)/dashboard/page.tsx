@@ -318,12 +318,10 @@ export default function DashboardPage() {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            // flexDirection: { xs: "column", sm: "row" },
-
-            width: { sx: "120px", sm: "340px", md: "350px" },
+            justifyContent: { xs: "center", sm: "flex-start" },
+            flexWrap: "wrap",
+            gap: 1.5,
             mb: 4,
-            gap: 1.0, // แทน spacing ของ Stack
           }}
         >
           <Button
@@ -336,6 +334,7 @@ export default function DashboardPage() {
               fontWeight: 600,
               bgcolor: "primary.dark",
               color: "#000",
+              minWidth: { xs: "120px", sm: "160px" },
             }}
           >
             ข้อมูลส่วนตัว
@@ -351,10 +350,12 @@ export default function DashboardPage() {
               fontWeight: 600,
               bgcolor: "primary.light",
               color: "#000",
+              minWidth: { xs: "120px", sm: "160px" },
             }}
           >
             กู้ยืมสินเชื่อ
           </Button>
+
           {isUser && (
             <Button
               onClick={ListContact}
@@ -366,12 +367,15 @@ export default function DashboardPage() {
                 fontWeight: 600,
                 bgcolor: "primary.light",
                 color: "#000",
+                minWidth: { xs: "120px", sm: "160px" },
               }}
             >
               รายการกู้สินเชื่อ
             </Button>
           )}
-          {/* <IconButton
+        </Box>
+
+        {/* <IconButton
             onClick={handleLogout}
             sx={{
               bgcolor: "error.light",
@@ -385,7 +389,6 @@ export default function DashboardPage() {
           >
             <LogOutIcon />
           </IconButton> */}
-        </Box>
 
         {/* STATS GRID - ใช้ Grid v2 size prop */}
         <StatsGrid stats={stats} />

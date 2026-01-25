@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Drawer,
@@ -14,6 +14,7 @@ import {
   styled,
   useTheme,
   Tooltip,
+  ListItem,
 } from "@mui/material";
 import {
   HomeOutlined,
@@ -29,6 +30,11 @@ import {
   MenuOpen,
   Menu,
 } from "@mui/icons-material";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import ThemeToggleClient from "./defaultTheme/theme-toggle-client";
+import { User2Icon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const drawerWidth = 270;
 const collapsedWidth = 88;
@@ -41,12 +47,18 @@ const SidebarWrapper = styled(Box, {
   height: "100%",
   display: "flex",
   flexDirection: "column",
-  backgroundColor: "#fff",
+
+  backgroundColor: theme.palette.background.paper,
+
   borderRight: `1px solid ${theme.palette.divider}`,
+
+  color: theme.palette.text.primary,
+
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
+
   overflowX: "hidden",
 }));
 
@@ -89,7 +101,7 @@ const UserProfileBox = styled(Box, {
   marginTop: "auto",
   padding: theme.spacing(2),
   margin: theme.spacing(2),
-  backgroundColor: "#e3f2fd",
+  backgroundColor: theme.palette.mode === "dark" ? "#2c2f33" : "#E8E8E8",
   borderRadius: "12px",
   display: "flex",
   alignItems: "center",
@@ -104,6 +116,7 @@ const UserProfileBox = styled(Box, {
 interface NavItem {
   title: string;
   icon?: React.ReactNode;
+  path?: string;
   chip?: string;
   chipColor?:
     | "primary"
@@ -122,10 +135,11 @@ const navItems: { section: string; items: NavItem[] }[] = [
     section: "HOME",
     items: [
       {
-        title: "Modern",
-        icon: <DashboardOutlined />,
-        chip: "New",
-        chipColor: "primary",
+        title: "USER LIST",
+        icon: <User2Icon />,
+        path: "/usersApproval",
+        // chip: "New",
+        // chipColor: "primary",
       },
       { title: "Analytical", icon: <BarChartOutlined /> },
       { title: "eCommerce", icon: <ShoppingCartOutlined /> },
@@ -172,7 +186,17 @@ export const Sidebar: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState("Modern");
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
+  const fetchedRef = useRef(false);
+  useEffect(() => {
+    if (!session?.user) return;
+    if (fetchedRef.current) return;
+
+    fetchedRef.current = true;
+    // fetchUserDetail(session.user.id, session.user.backendToken);
+  }, [session?.user]);
   const handleToggleSidebar = () => {
     setCollapsed(!collapsed);
     if (!collapsed) setOpenSubMenu(null); // Close submenus when collapsing
@@ -191,17 +215,24 @@ export const Sidebar: React.FC = () => {
     const hasChildren = item.children && item.children.length > 0;
     const isSelected = selectedItem === item.title;
 
+    const handleClick = () => {
+      if (hasChildren) {
+        handleSubMenuClick(item.title);
+        return;
+      }
+
+      setSelectedItem(item.title);
+
+      if (item.path) {
+        router.push(item.path);
+      }
+    };
+
     const content = (
       <StyledListItemButton
         collapsed={collapsed}
         selected={isSelected}
-        onClick={() => {
-          if (hasChildren) {
-            handleSubMenuClick(item.title);
-          } else {
-            setSelectedItem(item.title);
-          }
-        }}
+        onClick={handleClick}
         sx={{ pl: isSubItem && !collapsed ? 4 : 2 }}
       >
         {item.icon && (
@@ -225,6 +256,7 @@ export const Sidebar: React.FC = () => {
                 fontWeight: isSelected ? 600 : 400,
               }}
             />
+
             {item.chip && (
               <Chip
                 label={item.chip}
@@ -234,6 +266,7 @@ export const Sidebar: React.FC = () => {
                 sx={{ height: 20, fontSize: "0.65rem" }}
               />
             )}
+
             {hasChildren &&
               (openSubMenu === item.title ? (
                 <ExpandLess fontSize="small" />
@@ -272,25 +305,26 @@ export const Sidebar: React.FC = () => {
 
   return (
     <Drawer
+      className="sidebar"
       variant="permanent"
-      sx={(theme) => ({
+      sx={{
         width: collapsed ? collapsedWidth : drawerWidth,
         flexShrink: 0,
 
-        whiteSpace: "nowrap",
-        boxSizing: "border-box",
         "& .MuiDrawer-paper": {
           width: collapsed ? collapsedWidth : drawerWidth,
-          boxSizing: "border-box",
           border: "none",
-          //   transition: (theme) =>
-          //     theme.transitions.create("width", {
-          //       easing: theme.transitions.easing.sharp,
-          //       duration: theme.transitions.duration.enteringScreen,
-          //     }),
+
+          overflowY: "auto",
           overflowX: "hidden",
+          scrollbarWidth: "none", // Firefox
+          msOverflowStyle: "none", // IE/Edge legacy
+
+          "&::-webkit-scrollbar": {
+            display: "none", // Chrome/Safari
+          },
         },
-      })}
+      }}
     >
       <SidebarWrapper collapsed={collapsed}>
         {/* Logo Section with Toggle Button */}
@@ -307,17 +341,38 @@ export const Sidebar: React.FC = () => {
           })}
         >
           {!collapsed && (
-            <Typography variant="h6" fontWeight={700} color="primary">
-              MODERNIZE
-            </Typography>
+            <Image
+              src=".\images\logoEF.png" // ใส่โลโก้คุณ
+              alt="Logo"
+              width={80}
+              height={90}
+              className="rounded-lg"
+            />
+            // <Typography variant="h6" fontWeight={700} color="primary">
+            //   MODERNIZE
+            // </Typography>
           )}
+          {!collapsed && <ThemeToggleClient />}
           <IconButton onClick={handleToggleSidebar} size="small">
             {collapsed ? <Menu /> : <MenuOpen />}
           </IconButton>
         </Box>
 
         {/* Navigation List */}
-        <Box sx={{ overflowY: "auto", overflowX: "hidden", flex: 1 }}>
+        <Box
+          sx={{
+            overflowY: "auto",
+            overflowX: "hidden",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+
+            flex: 1,
+          }}
+        >
           {navItems.map((section) => (
             <List key={section.section} disablePadding>
               <NavSectionTitle collapsed={collapsed} variant="overline">
@@ -329,23 +384,32 @@ export const Sidebar: React.FC = () => {
         </Box>
 
         {/* User Profile Section */}
+        {/* User Profile Section */}
         <UserProfileBox collapsed={collapsed}>
           <Avatar
-            alt="Mathew"
-            src="https://mui.com/static/images/avatar/1.jpg"
+            alt={session?.user?.name || "User"}
+            src={session?.user?.image || "/avatar.png"}
             sx={{ width: 40, height: 40 }}
           />
+
           {!collapsed && (
             <>
               <Box sx={{ flex: 1, overflow: "hidden" }}>
                 <Typography variant="subtitle2" fontWeight={700} noWrap>
-                  Mathew
+                  {session?.user?.name || "Loading..."}
                 </Typography>
+
                 <Typography variant="caption" color="text.secondary" noWrap>
-                  Designer
+                  {session?.user?.userRoles?.map((ur: any) => ur.role.name) ||
+                    "USER"}
                 </Typography>
               </Box>
-              <IconButton size="small" color="primary">
+
+              <IconButton
+                size="small"
+                color="primary"
+                onClick={() => signOut()}
+              >
                 <PowerSettingsNew fontSize="small" />
               </IconButton>
             </>

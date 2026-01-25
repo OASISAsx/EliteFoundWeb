@@ -20,11 +20,18 @@ const useUserStore = create<UserListStore>((set, get) => ({
   user: null,
   loading: false,
   loadingUsers: false, // 👈 แยก
-  page: 1,
-  limit: 10,
+  page: 0,
+  pageSize: 10,
+  total: 0,
+
+  setPagination: (page: number, pageSize: number) =>
+    set((state) => ({
+      page,
+      pageSize,
+    })),
 
   fetchUsers: async (roleSecret: string, token: string) => {
-    const { page, limit, loadingUsers } = get();
+    const { total, page, pageSize, loadingUsers } = get();
 
     console.log("🧪 fetchUsers called, loadingUsers =", loadingUsers);
 
@@ -34,7 +41,7 @@ const useUserStore = create<UserListStore>((set, get) => ({
 
     try {
       const { encryptedPayload, signature, timestamp } = createSecurePayload(
-        { page, limit },
+        { page, pageSize },
         roleSecret,
       );
 
@@ -50,7 +57,7 @@ const useUserStore = create<UserListStore>((set, get) => ({
         },
       );
 
-      set({ users: res.data.data });
+      set({ users: res.data.data, total });
     } catch (err) {
       console.error("fetchUsers error:", err);
     } finally {

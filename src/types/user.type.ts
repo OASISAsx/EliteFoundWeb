@@ -8,6 +8,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  status: string;
   usersInformationId: string | null;
   usersInformation: UserInformation | null;
 }
@@ -22,10 +23,12 @@ export interface UserListStore {
   loading: boolean;
   loadingUsers: boolean;
   page: number;
-  limit: number;
+  pageSize: number;
+  total: number;
   userDeail: UserInformation | null;
   fetchUsers: (roleSecret: string, token: string) => Promise<void>;
   fetchUser: (id: string, token: string) => Promise<void>;
+  setPagination: (page: number, pageSize: number) => void;
   fetchUserDetail: (
     id: string,
     token: string,

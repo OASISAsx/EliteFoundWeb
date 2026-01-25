@@ -1,21 +1,21 @@
 "use client";
-interface LoanContract {
-  id: string;
-  contractNumber: string;
-  borrowerName: string;
-  borrowerPhone: string;
-  loanAmount: number;
-  interestRate: number;
-  duration: number; // เดือน
-  purpose: string;
-  submittedDate: string;
-  status: "PENDING" | "APPROVED" | "ACTIVE" | "COMPLETED" | "REJECT";
-  monthlyPayment: number;
-  totalRepayment: number;
-  creditScore: number;
-  employmentStatus: string;
-  monthlyIncome: number;
-}
+// interface LoanContract {
+//   id: string;
+//   contractNumber: string;
+//   borrowerName: string;
+//   borrowerPhone: string;
+//   loanAmount: number;
+//   interestRate: number;
+//   duration: number; // เดือน
+//   purpose: string;
+//   submittedDate: string;
+//   status: "PENDING" | "APPROVED" | "ACTIVE" | "COMPLETED" | "REJECT";
+//   monthlyPayment: number;
+//   totalRepayment: number;
+//   creditScore: number;
+//   employmentStatus: string;
+//   monthlyIncome: number;
+// }
 
 import React, { useEffect, useRef, useState } from "react";
 
@@ -36,27 +36,29 @@ import LoanStatusCards from "@/src/components/cardLoanStatus";
 import LoanTable from "./LoanTable";
 import LoanDetailDialog from "./LoanDetailDialog";
 import { renderStatusChip } from "@/src/components/renderStatusChip";
+import { User } from "@/src/types/user.type";
+// import { User } from "next-auth";
 // import { LoanContract, mockLoanContracts } from "@/lib/mockData";
 
 export default function LoanApprovalTable() {
   // const [loans, setLoans] = useState<LoanContract[]>(mockLoanContracts);
 
-  const [selectedLoan, setSelectedLoan] = useState<LoanContract | null>(null);
+  const [selectedLoan, setSelectedLoan] = useState<User | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [actionType, setActionType] = useState<
-    "PENDING" | "APPROVED" | "ACTIVE" | "COMPLETED" | "REJECT"
-  >("PENDING");
+    "PENDING" | "APPROVED" | "ACTIVE"
+  >("ACTIVE");
   const [remarks, setRemarks] = useState("");
   const { data: session, status } = useSession();
   const {
-    fetchAllLoan,
-    dataLoan,
-    mainStatus,
+    loadingUsers,
+    users,
     page,
     pageSize,
-    rowCount,
+    fetchUsers,
+    total,
     setPagination,
-  } = useLoanContactStore();
+  } = useUserStore();
 
   // const called = useRef(false);
 
@@ -69,12 +71,7 @@ export default function LoanApprovalTable() {
 
     if (!role) return;
     console.log(page, pageSize, "useEff");
-    fetchAllLoan(
-      page,
-      pageSize,
-      role.role.apiSecret,
-      session.user.backendToken,
-    );
+    fetchUsers(role.role.apiSecret, session.user.backendToken);
   }, [page, pageSize, session?.user?.id]);
 
   const data = {
@@ -89,10 +86,10 @@ export default function LoanApprovalTable() {
 
   // Handle action
   const handleAction = (
-    loan: LoanContract,
-    type: "PENDING" | "APPROVED" | "ACTIVE" | "COMPLETED" | "REJECT",
+    user: User,
+    type: "PENDING" | "APPROVED" | "ACTIVE",
   ) => {
-    setSelectedLoan(loan);
+    setSelectedLoan(user);
     setActionType(type);
     setOpenDialog(true);
     setRemarks("");
@@ -102,7 +99,7 @@ export default function LoanApprovalTable() {
   const handleSubmit = () => {
     if (!selectedLoan) return;
 
-    const updatedLoans = dataLoan.map((loan) =>
+    const updatedLoans = users.map((loan) =>
       loan.id === selectedLoan.id
         ? {
             ...loan,
@@ -116,72 +113,99 @@ export default function LoanApprovalTable() {
     setSelectedLoan(null);
   };
 
-  const loanColumns: GridColDef[] = [
+  const borrowerColumns: GridColDef[] = [
     {
-      field: "loanNo",
-      headerName: "เลขที่สัญญา",
-      flex: 0.9,
-      minWidth: 140,
-    },
-    {
-      field: "borrower",
-      headerName: "รายชื่อ",
-      flex: 1.2,
+      field: "name",
+      headerName: "ชื่อผู้กู้",
+      flex: 1.4,
       minWidth: 180,
       valueGetter: (_, row) =>
-        `${row.usersInformation?.firstName ?? ""} ${
+        `${row.usersInformation?.firstName ?? "-"} ${
           row.usersInformation?.lastName ?? ""
         }`,
     },
+
     {
-      field: "loanAmount",
-      headerName: "วงเงินกู้",
-      flex: 1,
-      minWidth: 150,
-      align: "right",
-      headerAlign: "right",
-      valueFormatter: (value) =>
-        Number(value).toLocaleString("th-TH", {
-          style: "currency",
-          currency: "THB",
-        }),
+      field: "citizenId",
+      headerName: "เลขบัตรประชาชน",
+      flex: 1.2,
+      minWidth: 160,
+      valueGetter: (_, row) => row.usersInformation?.citizenId ?? "-",
     },
+
     {
-      field: "loanType",
-      headerName: "วัตถุประสงค์",
-      flex: 1,
-      minWidth: 150,
-    },
-    {
-      field: "status",
-      headerName: "สถานะ",
-      flex: 0.8,
-      minWidth: 120,
-      renderCell: (params) => renderStatusChip(params.value),
-    },
-    {
-      field: "createdAt",
-      headerName: "วันที่สร้าง",
+      field: "phone",
+      headerName: "เบอร์โทร",
       flex: 1,
       minWidth: 140,
-      valueFormatter: (value) => new Date(value).toLocaleDateString("th-TH"),
+      valueGetter: (_, row) => row.usersInformation?.phone ?? "-",
     },
+
+    {
+      field: "occupation",
+      headerName: "อาชีพ",
+      flex: 1.2,
+      minWidth: 160,
+      valueGetter: (_, row) =>
+        row.usersInformation?.JobDetail?.occupation ?? "-",
+    },
+
+    {
+      field: "salary",
+      headerName: "รายได้/เดือน",
+      flex: 1.1,
+      minWidth: 160,
+      align: "right",
+      headerAlign: "right",
+      valueGetter: (_, row) => row.usersInformation?.JobDetail?.salaryPerMonth,
+      // valueFormatter: ({ value }) =>
+      //   value
+      //     ? Number(value).toLocaleString("th-TH", {
+      //         style: "currency",
+      //         currency: "THB",
+      //       })
+      //     : "-",
+    },
+
+    {
+      field: "status",
+      headerName: "สถานะคำขอกู้",
+      flex: 1,
+      minWidth: 140,
+      renderCell: (params) =>
+        renderStatusChip(params.row.usersInformation?.status),
+    },
+
+    {
+      field: "createdAt",
+      headerName: "วันที่สมัคร",
+      flex: 1.1,
+      minWidth: 150,
+      valueGetter: (_, row) => row.usersInformation?.createdAt,
+      // valueFormatter: ({ value }) =>
+      //   value ? new Date(value).toLocaleDateString("th-TH") : "-",
+    },
+
     {
       field: "actions",
       headerName: "จัดการ",
-      width: 180,
+      minWidth: 160,
       sortable: false,
+      filterable: false,
       renderCell: (params: GridRenderCellParams) => {
-        const loan = params.row as LoanContract;
-        const isPending = loan.status === "PENDING";
+        const user = params.row as any;
+        const status = user.usersInformation?.loanStatus;
+
+        const isPending = status === "PENDING";
 
         return (
           <Stack direction="row" spacing={1}>
+            {/* ดูรายละเอียด */}
             <Tooltip title="ดูรายละเอียด">
               <IconButton
                 size="small"
-                onClick={() => handleAction(loan, "PENDING")}
-                className="text-blue-600"
+                onClick={() => handleAction(user, "PENDING")}
+                sx={{ color: "primary.main" }}
               >
                 <Visibility fontSize="small" />
               </IconButton>
@@ -192,8 +216,8 @@ export default function LoanApprovalTable() {
                 <Tooltip title="อนุมัติ">
                   <IconButton
                     size="small"
-                    onClick={() => handleAction(loan, "APPROVED")}
-                    className="text-green-600"
+                    onClick={() => handleAction(user, "PENDING")}
+                    sx={{ color: "success.main" }}
                   >
                     <CheckCircle fontSize="small" />
                   </IconButton>
@@ -202,8 +226,8 @@ export default function LoanApprovalTable() {
                 <Tooltip title="ปฏิเสธ">
                   <IconButton
                     size="small"
-                    onClick={() => handleAction(loan, "REJECT")}
-                    className="text-red-600"
+                    onClick={() => handleAction(user, "PENDING")}
+                    sx={{ color: "error.main" }}
                   >
                     <Cancel fontSize="small" />
                   </IconButton>
@@ -222,24 +246,24 @@ export default function LoanApprovalTable() {
         {/* Header */}
         <Box className="bg-linear-to-r from-violet-950 to-cyan-200  p-6 text-white">
           <Typography variant="h4" className="font-bold mb-2">
-            รายการสัญญา
+            ข้อมูลส่วนบุคคล
           </Typography>
           <Typography variant="body1" className="opacity-90">
-            จัดการและพิจารณาคำขอกู้เงินของลูกค้า
+            จัดการและตรวจสอบข้อมูลของลูกค้า
           </Typography>
         </Box>
 
         <Box className="p-6">
-          <LoanStatusCards status={mainStatus || data.status} />
+          {/* <LoanStatusCards status={mainStatus || data.status} /> */}
         </Box>
 
         {/* DataGrid */}
         <LoanTable
-          rows={dataLoan}
-          columns={loanColumns}
+          rows={users}
+          columns={borrowerColumns}
           page={page}
           pageSize={pageSize}
-          rowCount={rowCount}
+          rowCount={total}
           onPaginationChange={({ page, pageSize }) => {
             setPagination(page, pageSize);
           }}
