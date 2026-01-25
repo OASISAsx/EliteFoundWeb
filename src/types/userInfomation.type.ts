@@ -25,7 +25,7 @@ export interface UserInformation {
   subdistrictCode?: number | null;
   zipcode?: string | null;
 
-  loanStatus?: string; // pending | approved | rejected
+  status?: string; // pending | approved | rejected
 
   id_card_image: string;
   other_files: string[];
@@ -62,7 +62,7 @@ export interface CreateUserInformationInput {
   subdistrictCode?: number | null;
   zipcode?: string | null;
 
-  loanStatus?: string; // default = pending
+  status?: string; // default = pending
 
   id_card_image: string;
   other_files: string[];

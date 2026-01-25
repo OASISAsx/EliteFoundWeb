@@ -194,7 +194,7 @@ export default function LoanApprovalTable() {
       filterable: false,
       renderCell: (params: GridRenderCellParams) => {
         const user = params.row as any;
-        const status = user.usersInformation?.loanStatus;
+        const status = user.usersInformation?.status;
 
         const isPending = status === "PENDING";
 

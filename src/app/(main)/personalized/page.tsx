@@ -76,7 +76,7 @@ export default function UsersInformationForm() {
     email: null,
     lineId: null,
     facebook: null,
-    loanStatus: "pending",
+    status: "PENDING",
     currentAddress: "",
     provinceCode: null,
     districtCode: null,
