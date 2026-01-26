@@ -26,7 +26,7 @@ export interface UserInformation {
   zipcode?: string | null;
 
   status?: string; // pending | approved | rejected
-
+  createAt: string;
   id_card_image: string;
   other_files: string[];
   userId?: string;
