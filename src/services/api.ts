@@ -21,14 +21,14 @@ serverApi.interceptors.request.use(
 );
 
 // 🔹 ดัก 401 → logout อัตโนมัติ
-// serverApi.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (error.response?.status === 401) {
-//       localStorage.removeItem("token");
-//       await signOut({ callbackUrl: "/login" });
-//     }
+serverApi.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      await signOut({ callbackUrl: "/login" });
+    }
 
-//     return Promise.reject(error);
-//   },
-// );
+    return Promise.reject(error);
+  },
+);

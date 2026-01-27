@@ -95,9 +95,10 @@ export default function UsersInformationForm() {
   }, [session?.user?.id]);
 
   useEffect(() => {
-    if (userDeail) {
-      setForm(userDeail);
-    }
+    if (!userDeail)
+      if (userDeail) {
+        setForm(userDeail);
+      }
   }, [userDeail]);
 
   const handleChangeTypePhone = (e: React.ChangeEvent<HTMLInputElement>) => {

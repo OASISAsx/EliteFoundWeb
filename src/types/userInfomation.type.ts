@@ -26,7 +26,6 @@ export interface UserInformation {
   zipcode?: string | null;
 
   status?: string; // pending | approved | rejected
-  createAt: string;
   id_card_image: string;
   other_files: string[];
   userId?: string;
@@ -46,7 +45,6 @@ export interface CreateUserInformationInput {
   lastName: string;
   citizenId: string;
   dateOfBirth: Date;
-
   gender?: string | null;
   nationality?: string | null;
   maritalStatus?: string | null;

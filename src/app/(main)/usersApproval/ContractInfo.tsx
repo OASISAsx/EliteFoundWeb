@@ -55,7 +55,7 @@ export default function BorrowerInfo({ loan }: { loan: any }) {
         <Info label="สัญชาติ" value={user?.nationality} />
       </Section>
 
-      <Divider sx={{ my: 3 }} />
+      {/* <Divider sx={{ my: 3 }} /> */}
 
       {/* ===== Address ===== */}
       <Section title="ที่อยู่ปัจจุบัน">
@@ -66,7 +66,7 @@ export default function BorrowerInfo({ loan }: { loan: any }) {
         <Info label="รหัสไปรษณีย์" value={user?.zipcode} />
       </Section>
 
-      <Divider sx={{ my: 3 }} />
+      {/* <Divider sx={{ my: 3 }} /> */}
 
       {/* ===== Job Info ===== */}
       <Section title="ข้อมูลการทำงาน">
@@ -99,7 +99,7 @@ function Section({
 }) {
   return (
     <>
-      <Typography variant="subtitle1" fontWeight={600} mb={1.5} color="primary">
+      <Typography variant="subtitle1" fontWeight={600} p={4} color="primary">
         {title}
       </Typography>
 
@@ -112,12 +112,21 @@ function Section({
 
 function Info({ label, value }: { label: string; value?: string | number }) {
   return (
-    <div className="rounded-lg  px-3 py-2 bg-background">
+    <div>
       <Typography variant="caption" color="text.secondary">
         {label}
       </Typography>
-      <Typography fontWeight={500}>
-        {value !== null && value !== undefined && value !== "" ? value : "-"}
+
+      <Typography
+        fontWeight={500}
+        sx={{
+          borderBottom: "1px solid",
+          borderColor: "divider",
+          pb: 0.5,
+          minHeight: 22,
+        }}
+      >
+        {value || "-"}
       </Typography>
     </div>
   );

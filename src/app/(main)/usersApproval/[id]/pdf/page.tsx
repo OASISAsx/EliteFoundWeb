@@ -285,7 +285,7 @@ export default function EnhancedLoanSchedule() {
         name: `${userData.firstName} ${userData.lastName}`,
         idCard: userData.citizenId,
         address: `${userData.currentAddress} ต.${subdistrictName} อ.${districtName} จ.${provinceName} ${userData.zipcode}`,
-        contractDate: userData?.createAt,
+        // contractDate: userData?.createAt,
         image: userData.id_card_image,
       },
 
@@ -495,11 +495,11 @@ export default function EnhancedLoanSchedule() {
                         วันที่สร้าง:
                       </Typography>
                     </Grid>
-                    <Grid size={7}>
+                    {/* <Grid size={7}>
                       <Typography variant="body2">
                         {pdfData?.borrower.contractDate}
                       </Typography>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Box>
               </Grid>

@@ -26,22 +26,13 @@ export default function BorrowerInfo({ loan }: { loan: any }) {
       <Section title="ข้อมูลสัญญา">
         <Info label="เลขที่สัญญา" value={loan.loanNo} />
         <Info label="วงเงินกู้" value={formatCurrency(loan.loanAmount)} />
-        <Info
-          label="ระยะเวลา"
-          value={`${loan.termMonths} เดือน`}
-        />
-        <Info
-          label="ดอกเบี้ย"
-          value={`${loan.interestRate}%`}
-        />
+        <Info label="ระยะเวลา" value={`${loan.termMonths} เดือน`} />
+        <Info label="ดอกเบี้ย" value={`${loan.interestRate}%`} />
         <Info
           label="ค่างวดต่อเดือน"
           value={formatCurrency(loan.installmentPerMonth)}
         />
-        <Info
-          label="วันที่เริ่มสัญญา"
-          value={formatDateTH(loan.startDate)}
-        />
+        <Info label="วันที่เริ่มสัญญา" value={formatDateTH(loan.startDate)} />
       </Section>
 
       <Divider sx={{ my: 3 }} />
@@ -55,10 +46,7 @@ export default function BorrowerInfo({ loan }: { loan: any }) {
         <Info label="เลขบัตรประชาชน" value={user.citizenId} />
         <Info label="เบอร์โทรศัพท์" value={user.phone} />
         <Info label="ที่อยู่" value={user.currentAddress} />
-        <Info
-          label="วันเกิด"
-          value={formatDateTH(user.dateOfBirth)}
-        />
+        <Info label="วันเกิด" value={formatDateTH(user.dateOfBirth)} />
         <Info label="สถานภาพ" value={user.maritalStatus} />
       </Section>
 
@@ -98,35 +86,31 @@ function Section({
 }) {
   return (
     <>
-      <Typography
-        variant="subtitle1"
-        fontWeight={600}
-        mb={1.5}
-        color="primary"
-      >
+      <Typography variant="subtitle1" fontWeight={600} mb={1.5} color="primary">
         {title}
       </Typography>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {children}
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">{children}</div>
     </>
   );
 }
 
-function Info({
-  label,
-  value,
-}: {
-  label: string;
-  value?: string | number;
-}) {
+function Info({ label, value }: { label: string; value?: string | number }) {
   return (
     <div>
       <Typography variant="caption" color="text.secondary">
         {label}
       </Typography>
-      <Typography fontWeight={500}>
+
+      <Typography
+        fontWeight={500}
+        sx={{
+          borderBottom: "1px solid",
+          borderColor: "divider",
+          pb: 0.5,
+          minHeight: 22,
+        }}
+      >
         {value || "-"}
       </Typography>
     </div>
