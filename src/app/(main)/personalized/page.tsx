@@ -34,6 +34,7 @@ import ToastAlert from "@/src/components/ToastAlert";
 import { useRouter } from "next/navigation";
 import Loading from "@/src/components/Loading";
 import { formatPhoneNumber } from "@/src/app/helper/formatPhoneNumber";
+import { ActionResultValue } from "@/src/types/ActionResult";
 
 export default function UsersInformationForm() {
   const route = useRouter();
@@ -157,7 +158,7 @@ export default function UsersInformationForm() {
           otherFilesList.length > 0 ? otherFilesList : form.other_files,
         userId: session?.user.id,
       };
-      let res: ActionResult;
+      let res: ActionResultValue;
 
       if (userDeail) {
         res = await updateInformation(payload, userDeail.id!);

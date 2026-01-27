@@ -1,6 +1,7 @@
 import { Dayjs } from "dayjs";
 import { JobDetail } from "./jobDetail.type";
 import { BankInformation } from "./bankInformation.type";
+import { ActionResultValue } from "./ActionResult";
 
 export interface UserInformation {
   id?: string;
@@ -73,11 +74,11 @@ export interface UserInformationStore {
   message: string;
 
   fetchUserInformation: (userId: string) => Promise<void>;
-  createInformation: (data: UserInformation) => Promise<ActionResult>;
+  createInformation: (data: UserInformation) => Promise<ActionResultValue>;
   updateInformation: (
     data: UserInformation,
     id: string,
-  ) => Promise<ActionResult>;
+  ) => Promise<ActionResultValue>;
 }
 
 export interface UpdateInformationStore {

@@ -6,6 +6,7 @@ import type {
   ApiResponse,
 } from "../types/userInfomation.type";
 import { API } from "../constants/apiPath";
+import { ActionResultValue } from "../types/ActionResult";
 
 const useUserInformationStore = create<UserInformationStore>((set) => ({
   userInformation: null,
@@ -26,7 +27,9 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
     }
   },
 
-  createInformation: async (data: UserInformation): Promise<ActionResult> => {
+  createInformation: async (
+    data: UserInformation,
+  ): Promise<ActionResultValue> => {
     set({ loading: true });
 
     try {
@@ -49,7 +52,7 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
   updateInformation: async (
     data: UserInformation,
     id: string,
-  ): Promise<ActionResult> => {
+  ): Promise<ActionResultValue> => {
     set({ loading: true });
 
     try {
