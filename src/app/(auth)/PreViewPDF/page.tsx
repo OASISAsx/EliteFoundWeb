@@ -89,7 +89,7 @@ export default function EnhancedLoanSchedule() {
   // ข้อมูลจำลองที่ละเอียด
   const loanData = {
     company: {
-      name: "Elite Found ",
+      name: "Elite Found  test",
       address:
         "123 อาคารรุ่งเรือง ชั้น 15 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพฯ 10110",
       taxId: "0-1234-56789-01-2",
