@@ -205,10 +205,6 @@ export default function DashboardPage() {
       value: mainStatus?.totalContracts ?? 0,
       icon: CreditCard,
       color: "#bf5af2",
-      // change: calcPercentChange(
-      //   mainStatus?.totalContracts ?? 0,
-      //   mainStatus?.previousTotalContracts ?? 0,
-      // ),
     },
     {
       title: "รออนุมัติ",
