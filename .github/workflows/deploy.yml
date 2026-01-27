@@ -1,4 +1,4 @@
-name: Auto Deploy
+name: Deploy
 
 on:
   push:
@@ -6,23 +6,21 @@ on:
       - Elite-Fund-web
 
 jobs:
-  merge-and-deploy:
-    runs-on: self-hosted
+  deploy:
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          fetch-depth: 0
-
-      - name: Merge Elite-Fund-web into build
-        run: |
-          git checkout build || git checkout -b build
-          git merge Elite-Fund-web
-          git push origin build
-
-      - name: Deploy with Docker
-        run: |
-          cd ~/EliteFoundWeb
-          git pull origin build
-          docker compose down
-          docker compose up -d --build
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/server/EliteFoundWeb
+            git pull origin Elite-Fund-web
+            docker compose down
+            docker compose up -d --build
