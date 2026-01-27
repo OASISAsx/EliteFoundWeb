@@ -312,7 +312,7 @@ export default function EnhancedLoanSchedule() {
                     display: "inline-block",
                   }}
                 >
-                  ข้อมูลผู้กู้ (Borrower Details)
+                  {/* ข้อมูลผู้กู้ (Borrower Details) */}
                 </Typography>
                 <Grid container spacing={1}>
                   <Grid size={4}>
