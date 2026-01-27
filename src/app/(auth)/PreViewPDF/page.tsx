@@ -350,7 +350,7 @@ export default function EnhancedLoanSchedule() {
 
                   <Grid size={4}>
                     <Typography variant="body2" color="text.secondary">
-                      วันที่ทำสัญญาk:
+                      วันที่ทำสัญญากห:
                     </Typography>
                   </Grid>
                   <Grid size={8}>
