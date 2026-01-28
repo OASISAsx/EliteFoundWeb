@@ -89,6 +89,47 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
       set({ loading: false });
     }
   },
+
+  updateAppoved: async (
+    approvedStatus: string,
+    id: string,
+  ): Promise<ActionResultValue> => {
+    set({ loading: true });
+
+    try {
+      const res = await serverApi.put<ApiResponse<UserInformation>>(
+        API.USER_INFORMATION.UPDATE(id),
+        {
+          status: approvedStatus,
+        },
+      );
+
+      set({
+        userInformation: res.data.data,
+        status: res.data.success,
+        message: res.data.message || "",
+      });
+
+      return {
+        success: res.data.success,
+        message: res.data.message || "",
+      };
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || "Update failed";
+
+      set({
+        status: false,
+        message: msg,
+      });
+
+      return {
+        success: false,
+        message: msg,
+      };
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));
 
 // const useCreateUserInformationStore = create<CreateInformationStore>((set) => ({

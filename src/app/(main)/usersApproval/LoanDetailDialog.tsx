@@ -20,7 +20,7 @@ type Props = {
   open: boolean;
   onClose: () => void;
   loan: any;
-  actionType: "PENDING" | "APPROVED" | "ACTIVE";
+  actionType: "PENDING" | "APPROVED" | "REJECTED";
   remarks: string;
   setRemarks: (v: string) => void;
   onSubmit: () => void;
@@ -69,7 +69,7 @@ export default function LoanDetailDialog({
           ปิด
         </Button>
 
-        {actionType === "PENDING" && (
+        {actionType === "APPROVED" && (
           <Button
             variant="contained"
             color="success"
@@ -80,7 +80,7 @@ export default function LoanDetailDialog({
           </Button>
         )}
 
-        {actionType === "PENDING" && (
+        {actionType === "REJECTED" && (
           <Button
             variant="contained"
             color="error"

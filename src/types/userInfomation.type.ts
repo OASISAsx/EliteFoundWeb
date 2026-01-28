@@ -79,6 +79,10 @@ export interface UserInformationStore {
     data: UserInformation,
     id: string,
   ) => Promise<ActionResultValue>;
+  updateAppoved: (
+    AppovedStatus: string,
+    id: string,
+  ) => Promise<ActionResultValue>;
 }
 
 export interface UpdateInformationStore {

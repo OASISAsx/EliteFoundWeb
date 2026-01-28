@@ -1,23 +1,6 @@
 "use client";
-// interface LoanContract {
-//   id: string;
-//   contractNumber: string;
-//   borrowerName: string;
-//   borrowerPhone: string;
-//   loanAmount: number;
-//   interestRate: number;
-//   duration: number; // เดือน
-//   purpose: string;
-//   submittedDate: string;
-//   status: "PENDING" | "APPROVED" | "ACTIVE" | "COMPLETED" | "REJECT";
-//   monthlyPayment: number;
-//   totalRepayment: number;
-//   creditScore: number;
-//   employmentStatus: string;
-//   monthlyIncome: number;
-// }
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import {
@@ -37,6 +20,8 @@ import LoanTable from "./LoanTable";
 import LoanDetailDialog from "./LoanDetailDialog";
 import { renderStatusChip } from "@/src/components/renderStatusChip";
 import { User } from "@/src/types/user.type";
+import { useUserInformationStore } from "@/src/stores/userInformation.store";
+import { formatDateTH } from "../../helper/formatDateTH";
 // import { User } from "next-auth";
 // import { LoanContract, mockLoanContracts } from "@/lib/mockData";
 
@@ -46,10 +31,11 @@ export default function LoanApprovalTable() {
   const [selectedLoan, setSelectedLoan] = useState<User | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [actionType, setActionType] = useState<
-    "PENDING" | "APPROVED" | "ACTIVE"
-  >("ACTIVE");
+    "PENDING" | "APPROVED" | "REJECTED"
+  >("PENDING");
   const [remarks, setRemarks] = useState("");
   const { data: session, status } = useSession();
+  const { updateAppoved } = useUserInformationStore();
   const {
     loadingUsers,
     users,
@@ -60,9 +46,7 @@ export default function LoanApprovalTable() {
     setPagination,
   } = useUserStore();
 
-  // const called = useRef(false);
-
-  useEffect(() => {
+  const fetchData = useCallback(async () => {
     if (!session?.user) return;
 
     const role = session.user.userRoles.find(
@@ -70,9 +54,15 @@ export default function LoanApprovalTable() {
     );
 
     if (!role) return;
-    console.log(page, pageSize, "useEff");
+
     fetchUsers(role.role.apiSecret, session.user.backendToken);
-  }, [page, pageSize, session?.user?.id]);
+  }, [session?.user, page, pageSize]);
+
+  useEffect(() => {
+    if (!openDialog) {
+      fetchData();
+    }
+  }, [page, pageSize, openDialog, session?.user?.id]);
 
   const data = {
     status: {
@@ -80,14 +70,14 @@ export default function LoanApprovalTable() {
       APPROVED: 0,
       ACTIVE: 0,
       COMPLETED: 0,
-      REJECTED: 0,
+      REJECTEDED: 0,
     },
   };
 
   // Handle action
   const handleAction = (
     user: User,
-    type: "PENDING" | "APPROVED" | "ACTIVE",
+    type: "PENDING" | "APPROVED" | "REJECTED",
   ) => {
     setSelectedLoan(user);
     setActionType(type);
@@ -95,22 +85,17 @@ export default function LoanApprovalTable() {
     setRemarks("");
   };
 
-  // Submit action
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!selectedLoan) return;
 
-    const updatedLoans = users.map((loan) =>
-      loan.id === selectedLoan.id
-        ? {
-            ...loan,
-            status: actionType === "APPROVED" ? "APPROVED" : "REJECTED",
-          }
-        : loan,
-    );
+    const { usersInformationId } = selectedLoan;
 
-    // setDataLoan(updatedLoans); // ✅ ต้อง set กลับ
-    setOpenDialog(false);
-    setSelectedLoan(null);
+    try {
+      await updateAppoved(actionType, usersInformationId!);
+    } finally {
+      setOpenDialog(false);
+      setSelectedLoan(null);
+    }
   };
 
   const borrowerColumns: GridColDef[] = [
@@ -181,11 +166,11 @@ export default function LoanApprovalTable() {
       headerName: "วันที่สมัคร",
       flex: 1.1,
       minWidth: 150,
-      valueGetter: (_, row) => row.usersInformation?.createdAt,
-      // valueFormatter: ({ value }) =>
-      //   value ? new Date(value).toLocaleDateString("th-TH") : "-",
+      valueGetter: (_, row) =>
+        row.usersInformation?.createdAt
+          ? formatDateTH(row.usersInformation?.createdAt)
+          : "",
     },
-
     {
       field: "actions",
       headerName: "จัดการ",
@@ -216,7 +201,7 @@ export default function LoanApprovalTable() {
                 <Tooltip title="อนุมัติ">
                   <IconButton
                     size="small"
-                    onClick={() => handleAction(user, "PENDING")}
+                    onClick={() => handleAction(user, "APPROVED")}
                     sx={{ color: "success.main" }}
                   >
                     <CheckCircle fontSize="small" />
@@ -226,7 +211,7 @@ export default function LoanApprovalTable() {
                 <Tooltip title="ปฏิเสธ">
                   <IconButton
                     size="small"
-                    onClick={() => handleAction(user, "PENDING")}
+                    onClick={() => handleAction(user, "REJECTED")}
                     sx={{ color: "error.main" }}
                   >
                     <Cancel fontSize="small" />
