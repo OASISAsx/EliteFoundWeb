@@ -1,4 +1,11 @@
-import { Paper, Typography, Divider, Button, Box } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Divider,
+  Button,
+  Box,
+  TextField,
+} from "@mui/material";
 import { formatDateTH } from "../../helper/formatDateTH";
 import { formatCurrency } from "../../helper/formatCurrencyTHB";
 import { useRouter } from "next/navigation";
@@ -55,7 +62,7 @@ export default function BorrowerInfo({ loan }: { loan: any }) {
         <Info label="สัญชาติ" value={user?.nationality} />
       </Section>
 
-      {/* <Divider sx={{ my: 3 }} /> */}
+      <Divider sx={{ my: 3 }} />
 
       {/* ===== Address ===== */}
       <Section title="ที่อยู่ปัจจุบัน">
@@ -66,7 +73,7 @@ export default function BorrowerInfo({ loan }: { loan: any }) {
         <Info label="รหัสไปรษณีย์" value={user?.zipcode} />
       </Section>
 
-      {/* <Divider sx={{ my: 3 }} /> */}
+      <Divider sx={{ my: 3 }} />
 
       {/* ===== Job Info ===== */}
       <Section title="ข้อมูลการทำงาน">
@@ -99,7 +106,7 @@ function Section({
 }) {
   return (
     <>
-      <Typography variant="subtitle1" fontWeight={600} p={4} color="primary">
+      <Typography variant="subtitle1" fontWeight={600} pb={5} color="primary">
         {title}
       </Typography>
 
@@ -110,24 +117,28 @@ function Section({
   );
 }
 
-function Info({ label, value }: { label: string; value?: string | number }) {
+function Info({
+  label,
+  value,
+  onChange,
+  type = "text",
+  readOnly = false,
+}: {
+  label: string;
+  value?: string | number;
+  type?: string;
+  readOnly?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
   return (
-    <div>
-      <Typography variant="caption" color="text.secondary">
-        {label}
-      </Typography>
-
-      <Typography
-        fontWeight={500}
-        sx={{
-          borderBottom: "1px solid",
-          borderColor: "divider",
-          pb: 0.5,
-          minHeight: 22,
-        }}
-      >
-        {value || "-"}
-      </Typography>
-    </div>
+    <TextField
+      fullWidth
+      label={label}
+      variant="filled"
+      value={value ?? ""}
+      onChange={onChange}
+      type={type}
+      InputProps={{ readOnly }}
+    />
   );
 }

@@ -6,8 +6,10 @@ import { ClockIcon } from "@mui/x-date-pickers";
 import { CheckCircleIcon, XCircleIcon } from "lucide-react";
 // import { LOAN_STATUS_CONFIG } from "@/src/constants/statusDefault";
 
+type StatusCount = Partial<Record<string, number>>;
+
 type Props = {
-  status: Record<string, number>;
+  status: StatusCount;
 };
 
 export const LOAN_STATUS_CONFIG = {
@@ -39,30 +41,33 @@ export const LOAN_STATUS_CONFIG = {
 } as const;
 
 export default function LoanStatusCards({ status }: Props) {
+  console.log(status, "status");
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {Object.entries(LOAN_STATUS_CONFIG).map(([key, config]) => {
-        const Icon = config.icon;
-        const value = status[key] ?? 0;
+      {Object.entries(LOAN_STATUS_CONFIG)
+        .filter(([key]) => key in status)
+        .map(([key, config]) => {
+          const Icon = config.icon;
+          const value = status[key] ?? 0;
 
-        return (
-          <Card
-            key={key}
-            className="rounded-2xl shadow-sm hover:shadow-md transition"
-          >
-            <CardContent className="flex items-center gap-3">
-              <div className={`p-2 rounded-xl ${config.color}`}>
-                <Icon className="w-6 h-6" />
-              </div>
+          return (
+            <Card
+              key={key}
+              className="rounded-2xl shadow-sm hover:shadow-md transition"
+            >
+              <CardContent className="flex items-center gap-3">
+                <div className={`p-2 rounded-xl ${config.color}`}>
+                  <Icon className="w-6 h-6" />
+                </div>
 
-              <div>
-                <p className="text-sm text-gray-500">{config.label}</p>
-                <p className="text-2xl font-bold">{value}</p>
-              </div>
-            </CardContent>
-          </Card>
-        );
-      })}
+                <div>
+                  <p className="text-sm text-gray-500">{config.label}</p>
+                  <p className="text-2xl font-bold">{value}</p>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
     </div>
   );
 }

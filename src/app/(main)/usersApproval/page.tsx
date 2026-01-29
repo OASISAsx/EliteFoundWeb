@@ -38,6 +38,7 @@ export default function LoanApprovalTable() {
   const { updateAppoved } = useUserInformationStore();
   const {
     loadingUsers,
+    userStatus,
     users,
     page,
     pageSize,
@@ -45,6 +46,7 @@ export default function LoanApprovalTable() {
     total,
     setPagination,
   } = useUserStore();
+  const statusMap = userStatus ?? {};
 
   const fetchData = useCallback(async () => {
     if (!session?.user) return;
@@ -239,7 +241,7 @@ export default function LoanApprovalTable() {
         </Box>
 
         <Box className="p-6">
-          {/* <LoanStatusCards status={mainStatus || data.status} /> */}
+          <LoanStatusCards status={statusMap} />
         </Box>
 
         {/* DataGrid */}

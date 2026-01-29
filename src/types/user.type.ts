@@ -26,6 +26,7 @@ export interface UserListStore {
   pageSize: number;
   total: number;
   userDeail: UserInformation | null;
+  userStatus: string | null;
   fetchUsers: (roleSecret: string, token: string) => Promise<void>;
   fetchUser: (id: string, token: string) => Promise<void>;
   setPagination: (page: number, pageSize: number) => void;

@@ -23,6 +23,7 @@ const useUserStore = create<UserListStore>((set, get) => ({
   page: 0,
   pageSize: 10,
   total: 0,
+  userStatus: null,
 
   setPagination: (page: number, pageSize: number) =>
     set((state) => ({
@@ -57,7 +58,8 @@ const useUserStore = create<UserListStore>((set, get) => ({
         },
       );
 
-      set({ users: res.data.data, total });
+      set({ users: res.data.data, total, userStatus: res.data.status });
+      console.log(res.data.status, "res.data.status");
     } catch (err) {
       console.error("fetchUsers error:", err);
     } finally {

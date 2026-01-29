@@ -1,6 +1,14 @@
-import { Paper, Typography, Divider } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Divider,
+  TextField,
+  Button,
+  Box,
+} from "@mui/material";
 import { formatDateTH } from "../../helper/formatDateTH";
 import { formatCurrency } from "../../helper/formatCurrencyTHB";
+import { flex } from "@mui/system";
 
 export default function BorrowerInfo({ loan }: { loan: any }) {
   const user = loan.usersInformation;
@@ -18,10 +26,19 @@ export default function BorrowerInfo({ loan }: { loan: any }) {
       }}
     >
       {/* ===== Header ===== */}
-      <Typography variant="h6" fontWeight={600} mb={2}>
+      {/* <Typography variant="h6" fontWeight={600} mb={2}>
         รายละเอียดสัญญาเงินกู้
-      </Typography>
-
+      </Typography> */}
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            window.open(`/loanContactApproval/${loan.id}/pdf`, "_blank");
+          }}
+        >
+          ดาวน์โหลด PDF
+        </Button>
+      </Box>
       {/* ===== Loan Info ===== */}
       <Section title="ข้อมูลสัญญา">
         <Info label="เลขที่สัญญา" value={loan.loanNo} />
@@ -86,7 +103,7 @@ function Section({
 }) {
   return (
     <>
-      <Typography variant="subtitle1" fontWeight={600} mb={1.5} color="primary">
+      <Typography variant="subtitle1" fontWeight={600} mb={6.5} color="primary">
         {title}
       </Typography>
 
@@ -95,24 +112,28 @@ function Section({
   );
 }
 
-function Info({ label, value }: { label: string; value?: string | number }) {
+function Info({
+  label,
+  value,
+  onChange,
+  type = "text",
+  readOnly = false,
+}: {
+  label: string;
+  value?: string | number;
+  type?: string;
+  readOnly?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
   return (
-    <div>
-      <Typography variant="caption" color="text.secondary">
-        {label}
-      </Typography>
-
-      <Typography
-        fontWeight={500}
-        sx={{
-          borderBottom: "1px solid",
-          borderColor: "divider",
-          pb: 0.5,
-          minHeight: 22,
-        }}
-      >
-        {value || "-"}
-      </Typography>
-    </div>
+    <TextField
+      fullWidth
+      label={label}
+      variant="filled"
+      value={value ?? ""}
+      onChange={onChange}
+      type={type}
+      InputProps={{ readOnly }}
+    />
   );
 }

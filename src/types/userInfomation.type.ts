@@ -60,8 +60,7 @@ export interface CreateUserInformationInput {
   districtCode?: number | null;
   subdistrictCode?: number | null;
   zipcode?: string | null;
-
-  status?: string; // default = pending
+  status?: string;
 
   id_card_image: string;
   other_files: string[];
@@ -72,7 +71,6 @@ export interface UserInformationStore {
   loading: boolean;
   status: boolean;
   message: string;
-
   fetchUserInformation: (userId: string) => Promise<void>;
   createInformation: (data: UserInformation) => Promise<ActionResultValue>;
   updateInformation: (

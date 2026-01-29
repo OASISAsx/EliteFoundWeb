@@ -29,6 +29,8 @@ import {
   DashboardOutlined,
   MenuOpen,
   Menu,
+  RequestPageOutlined,
+  Dashboard,
 } from "@mui/icons-material";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -135,13 +137,24 @@ const navItems: { section: string; items: NavItem[] }[] = [
     section: "HOME",
     items: [
       {
+        title: "Dashboard",
+        icon: <Dashboard />,
+        path: "/",
+        // chip: "New",
+        // chipColor: "primary",
+      },
+      {
         title: "USER LIST",
         icon: <User2Icon />,
         path: "/usersApproval",
         // chip: "New",
         // chipColor: "primary",
       },
-      { title: "Analytical", icon: <BarChartOutlined /> },
+      {
+        title: "Lond Contact",
+        icon: <RequestPageOutlined />,
+        path: "/loanContactApproval",
+      },
       { title: "eCommerce", icon: <ShoppingCartOutlined /> },
     ],
   },

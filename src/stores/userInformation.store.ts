@@ -13,6 +13,8 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
   loading: false,
   status: false,
   message: "",
+
+
   fetchUserInformation: async (usersInformationId: string) => {
     set({ loading: true });
     try {
