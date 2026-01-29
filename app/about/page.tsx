@@ -5,6 +5,18 @@ import Image from "next/image";
 import { useRef } from "react";
 import WorkCarousel from "./WorkCarousel";
 import UIShowcase from "./StockCarousel";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { GitHub } from "@mui/icons-material";
 
 export default function SlotReel() {
   const icons = [
@@ -17,6 +29,94 @@ export default function SlotReel() {
     "./images/7.jpg",
     "./images/8.jpg",
   ];
+
+  const projects = [
+    {
+      id: 1,
+      title: "E-Commerce Platform",
+      description:
+        "แพลตฟอร์มอีคอมเมิร์ซที่ทันสมัย พัฒนาด้วย Next.js, TypeScript และ Stripe",
+      image:
+        "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
+      tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
+      github: "#",
+      demo: "#",
+    },
+    {
+      id: 2,
+      title: "Task Management System",
+      description:
+        "ระบบจัดการงานแบบ Real-time ที่ช่วยให้ทีมทำงานร่วมกันได้อย่างมีประสิทธิภาพ มีฟีเจอร์ Drag & Drop,",
+      image:
+        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+      tags: ["React", "Node.js", "Socket.io", "MongoDB"],
+      github: "#",
+      demo: "#",
+    },
+    {
+      id: 3,
+      title: "AI Chat Application",
+      description:
+        "แอปพลิเคชันแชทที่ใช้ AI ในการตอบคำถามและช่วยเหลือผู้ใช้ ผสานเทคโนโลยี Machine Learning และ Natural Language Processing เพื่อประสบการณ์การสนทนาที่เป็นธรรมชาติ",
+      image:
+        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+      tags: ["Python", "OpenAI", "FastAPI", "React"],
+      github: "#",
+      demo: "#",
+    },
+    {
+      id: 4,
+      title: "Portfolio Website Builder",
+      description:
+        "เครื่องมือสร้างเว็บไซต์พอร์ตโฟลิโอที่ใช้งานง่าย ด้วยระบบ Drag & Drop และเทมเพลตที่สวยงามหลากหลาย ผู้ใช้สามารถสร้างเว็บไซต์ของตัวเองได้ภายในไม่กี่นาที",
+      image:
+        "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
+      tags: ["Vue.js", "Tailwind", "Firebase", "Vite"],
+      github: "#",
+      demo: "#",
+    },
+    {
+      id: 5,
+      title: "Weather Forecast Dashboard",
+      description:
+        "แดชบอร์ดพยากรณ์อากาศที่แสดงข้อมูลสภาพอากาศแบบ Real-time พร้อมกราฟและแผนที่แบบ Interactive รองรับหลายภาษาและหลายสกุลเงิน",
+      image:
+        "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&q=80",
+      tags: ["React", "D3.js", "Weather API", "Material-UI"],
+      github: "#",
+      demo: "#",
+    },
+    {
+      id: 6,
+      title: "Social Media Analytics",
+      description:
+        "เครื่องมือวิเคราะห์โซเชียลมีเดียที่ช่วยติดตามและวิเคราะห์ประสิทธิภาพของโพสต์ มีระบบ Dashboard ที่แสดงข้อมูลเชิงลึก และรายงานที่ปรับแต่งได้",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+      tags: ["Angular", "Chart.js", "Express", "MySQL"],
+      github: "#",
+      demo: "#",
+    },
+  ];
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  // const scaleIn = {
+  //   hidden: { opacity: 0, scale: 0.8 },
+  //   visible: { opacity: 1, scale: 1 },
+  // };
 
   const heroRef = useRef<HTMLElement>(null);
   const isInView = useInView(heroRef, {
@@ -36,7 +136,130 @@ export default function SlotReel() {
         className="h-screen snap-start flex items-center justify-center"
         ref={heroRef}
       >
-        <div className="flex sm:w-[10%] md:w-[90%] lg:w-[95%] xl:w-full justify-center">
+        <Box
+          id="projects"
+          sx={{
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            py: 6,
+            px: { xs: 2, sm: 4, md: 6 }, // 👈 เพิ่มระยะห่างซ้ายขวา
+          }}
+        >
+          <Container maxWidth="xl">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+            >
+              {/* ===== Header ===== */}
+              <motion.div variants={fadeInUp}>
+                {/* <Typography
+                  variant="h3"
+                  align="center"
+                  sx={{ mb: 2, fontWeight: 700 }}
+                >
+                  โปรเจ็คที่ผ่านมา
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  align="center"
+                  color="text.secondary"
+                  sx={{ mb: 5 }}
+                >
+                  ผลงานที่ฉันภูมิใจและโปรเจ็คที่น่าสนใจที่ได้พัฒนา
+                </Typography> */}
+              </motion.div>
+
+              {/* ===== Projects Grid ===== */}
+              <Grid container spacing={7}>
+                {projects.map((project) => (
+                  <Grid size={{ xs: 12, sm: 6, md: 3 }} key={project.id}>
+                    <motion.div variants={fadeInUp} whileHover={{ y: -8 }}>
+                      <Card
+                        sx={{
+                          height: "400px",
+                          width: "300px",
+                          display: "flex",
+                          flexDirection: "column",
+                          transition: "0.3s",
+                          "&:hover": {
+                            boxShadow: 6,
+                          },
+                        }}
+                      >
+                        <CardMedia
+                          component="img"
+                          height="220"
+                          image={project.image}
+                          alt={project.title}
+                          sx={{ objectFit: "cover" }}
+                        />
+
+                        <CardContent sx={{ flexGrow: 1 }}>
+                          <Typography fontWeight={600} mb={1}>
+                            {project.title}
+                          </Typography>
+
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            mb={2}
+                          >
+                            {project.description}
+                          </Typography>
+
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexWrap: "wrap",
+                              gap: 1,
+                              mb: 2,
+                            }}
+                          >
+                            {project.tags.map((tag) => (
+                              <Chip
+                                key={tag}
+                                label={tag}
+                                size="small"
+                                color="primary"
+                              />
+                            ))}
+                          </Box>
+
+                          <Box sx={{ display: "flex", gap: 1 }}>
+                            <Button
+                              size="small"
+                              variant="outlined"
+                              startIcon={<GitHub />}
+                              href={project.github}
+                              fullWidth
+                            >
+                              Code
+                            </Button>
+
+                            <Button
+                              size="small"
+                              variant="contained"
+                              href={project.demo}
+                              fullWidth
+                            >
+                              Demo
+                            </Button>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            </motion.div>
+          </Container>
+        </Box>
+
+        {/* <div className="flex sm:w-[10%] md:w-[90%] lg:w-[95%] xl:w-full justify-center">
           {[0, 1, 2, 3, 4].map((col) => (
             <div
               key={col}
@@ -72,7 +295,7 @@ export default function SlotReel() {
               </motion.div>
             </div>
           ))}
-        </div>
+        </div> */}
         <motion.button
           onClick={scrollToNext}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white"

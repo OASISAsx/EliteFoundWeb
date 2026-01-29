@@ -18,8 +18,6 @@ import Snowfall from "react-snowfall";
 import { useRouter } from "next/navigation";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-import { signOut, useSession } from "next-auth/react";
-
 const greetingText = "Hi, I'm Nanthawat Inthisaen";
 const rotatingWords = [
   "Full-Stack Developer",
@@ -96,70 +94,84 @@ const food: [string, string, string, number, number][] = [
   [
     "./images/next.png",
     "Next.js",
-    "เชี่ยวชาญการสร้างเว็บที่เร็วและ SEO-friendly ด้วย App Router, Server Components และ Streaming",
+    "พัฒนาเว็บแอประดับ Production ด้วย Next.js โดยใช้ App Router, Server Components และเทคนิคเพิ่มประสิทธิภาพด้าน SEO และ Performance",
     0,
     10,
   ],
   [
+    "https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg",
+    "Zustand",
+    "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
+    0,
+    100,
+  ],
+  [
     "./images/Ts.png",
     "TypeScript",
-    "เขียนโค้ดที่ปลอดภัยและ maintainable ด้วย type safety เต็มรูปแบบ",
+    "เขียนโค้ดที่มีความปลอดภัยสูง ลด Bug และเพิ่มความสามารถในการดูแลระบบด้วย Static Typing",
     140,
     180,
   ],
   [
     "./images/vue.png",
     "Vue.js",
-    "พัฒนาเว็บแอปด้วย Vue 3, Composition API และ Ecosystem ที่หลากหลาย",
+    "พัฒนาเว็บแอปด้วย Vue 3 และ Composition API เพื่อโครงสร้างที่ยืดหยุ่นและขยายระบบได้ง่าย",
     80,
     120,
   ],
   [
     "./images/node.png",
     "Node.js",
-    "สร้าง backend ที่มีประสิทธิภาพสูงด้วย Node.js และ Express.js ",
+    "สร้างระบบ Backend ด้วย Node.js และ Express.js รองรับ API ที่รวดเร็วและรองรับการขยายตัว",
     80,
     120,
   ],
   [
+    "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Prisma.svg",
+    "Prisma",
+    "จัดการฐานข้อมูลด้วย ORM ที่ทันสมัย ช่วยให้ Query ปลอดภัยและทำงานร่วมกับ TypeScript ได้อย่างราบรื่น",
+    170,
+    180,
+  ],
+  [
     "./images/tw.png",
     "Tailwind CSS",
-    "ออกแบบ responsive และสวยเร็วด้วย utility-first CSS",
+    "ออกแบบ UI แบบ Responsive ได้รวดเร็วด้วย Utility-first CSS พร้อมควบคุมดีไซน์ได้อย่างยืดหยุ่น",
     140,
     180,
   ],
-  // [
-  //   "./images/render.jpg",
-  //   "Render.com",
-  //   "ปรับใช้แอปพลิเคชันด้วย Render.com อย่างง่ายดายและรวดเร็ว\n    จัดการเวอร์ชันโค้ดและตั้งค่า CI/CD pipeline เพื่อการ deploy อัตโนมัติ",
-  //   200,
-  //   240,
-  // ],
+  [
+    "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/MaterialUI-Dark.svg",
+    "Material UI",
+    "สร้าง UI มาตรฐานระดับองค์กรด้วย Component ที่พร้อมใช้งานและปรับแต่งได้สูง",
+    200,
+    240,
+  ],
   [
     "./images/github.png",
     "Git & CI/CD",
-    "ใช้ Git และ CI/CD pipeline เพื่อการ อัพเดทงาน มีประสิทธิภาพและราบรื่น",
+    "ควบคุมเวอร์ชันโค้ดและจัดการ Workflow การ Deploy ด้วย Git และระบบ CI/CD อัตโนมัติ",
     300,
     340,
   ],
-  // [
-  //   "./images/Pinialogo.svg",
-  //   "Pinia & Vuex",
-  //   "จัดการสถานะแอปพลิเคชัน Vue.js อย่างมีประสิทธิภาพด้วย Pinia และ Vuex",
-  //   260,
-  //   300,
-  // ],
+  [
+    "./images/Pinialogo.svg",
+    "Pinia & Vuex",
+    "จัดการ State และการเชื่อมต่อ API ใน Vue.js อย่างเป็นระบบด้วย Pinia และ Vuex",
+    260,
+    300,
+  ],
   [
     "./images/ant.png",
     "Ant Design",
-    "สร้าง UI ที่สวยงามและใช้งานง่ายด้วย Ant Design สำหรับ React และ Vue",
+    "พัฒนา UI ระดับ Professional ด้วย Component สำเร็จรูปที่เหมาะกับระบบขนาดใหญ่",
     200,
     80,
   ],
   [
     "./images/vuexys.webp",
     "Vuexy",
-    "สร้าง UI ที่สวยงามและใช้งานง่ายด้วย Vuexy สำหรับ React และ Vue",
+    "ใช้งาน Admin Template ระดับพรีเมียมสำหรับสร้าง Dashboard และระบบหลังบ้านอย่างรวดเร็ว",
     300,
     300,
   ],
@@ -168,14 +180,8 @@ const food: [string, string, string, number, number][] = [
 // ============== Main Component ================
 export default function TypewriterHero() {
   const [show, setShow] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { status, data: session } = useSession();
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -196,7 +202,7 @@ export default function TypewriterHero() {
   const greetingCount = useMotionValue(0);
   const greetingRounded = useTransform(greetingCount, Math.round);
   const greetingDisplay = useTransform(greetingRounded, (latest) =>
-    greetingText.slice(0, latest)
+    greetingText.slice(0, latest),
   );
 
   const wordIndex = useMotionValue(0);
@@ -204,7 +210,7 @@ export default function TypewriterHero() {
   const wordRounded = useTransform(wordCount, Math.round);
   const currentWord = useTransform(
     wordIndex,
-    (latest) => rotatingWords[latest % rotatingWords.length]
+    (latest) => rotatingWords[latest % rotatingWords.length],
   );
   const wordDisplay = useTransform(wordRounded, (latest) => {
     const text = currentWord.get();
@@ -293,12 +299,7 @@ export default function TypewriterHero() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <button
-        onClick={() => signOut({ callbackUrl: "/" })}
-        className="w-full bg-blue-500 text-white py-2 rounded"
-      >
-        Logout
-      </button>
+
       <section className="flex min-h-screen items-center justify-center  px-6">
         <Snowfall snowflakeCount={50} />
 
@@ -379,9 +380,9 @@ export default function TypewriterHero() {
                 string,
                 string,
                 number,
-                number
+                number,
               ],
-              i: number
+              i: number,
             ) => (
               <div
                 key={i}
@@ -425,7 +426,7 @@ export default function TypewriterHero() {
                   <p className="text-gray-300 leading-relaxed">{description}</p>
                 </motion.div>
               </div>
-            )
+            ),
           )}
         </section>
       </section>
