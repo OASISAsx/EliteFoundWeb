@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { formatDateTH } from "../../helper/formatDateTH";
 import { formatCurrency } from "../../helper/formatCurrencyTHB";
-import { flex } from "@mui/system";
 
 export default function BorrowerInfo({ loan }: { loan: any }) {
   const user = loan.usersInformation;
