@@ -55,39 +55,6 @@ interface LoanRow {
   status: "Approved" | "Pending" | "Rejected";
 }
 
-// ---------------- MOCK DATA ----------------
-// const stats = [
-//   {
-//     title: "จำนวนสัญญา",
-//     value: "342",
-//     icon: CreditCard,
-//     color: "#bf5af2",
-//     change: "+5.4%",
-//   },
-//   {
-//     title: "จำนวนเงินที่รออนุมัติ",
-//     value: "1,280",
-//     icon: HourglassTop,
-//     color: "#00f2ff",
-//     change: "+12%",
-//   },
-//   {
-//     title: "อนุมัติ",
-//     value: "210",
-//     icon: CheckCircle,
-//     color: "#32d74b",
-//     change: "82%",
-//   },
-
-//   {
-//     title: "จำนวนเงินที่ใช้",
-//     value: "฿12.5M",
-//     icon: Banknote,
-//     color: "#ffd60a",
-//     change: "+2.1M",
-//   },
-// ];
-
 const chartData = [
   { name: "Mon", v: 3200 },
   { name: "Tue", v: 4500 },
