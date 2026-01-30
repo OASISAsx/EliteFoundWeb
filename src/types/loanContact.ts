@@ -55,6 +55,7 @@ export interface UserloanContactStore {
     data: CreateLoanContractBody,
     id: string,
   ) => Promise<boolean>;
+  updateAdminAppoved: (status: string, id: string) => Promise<boolean>;
 }
 
 export interface ApiResponseLoan<T> {

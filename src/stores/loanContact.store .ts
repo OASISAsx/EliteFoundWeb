@@ -137,6 +137,29 @@ const useLoanContactStore = create<UserloanContactStore>((set, get) => ({
       set({ loading: false });
     }
   },
+  updateAdminAppoved: async (status: string, id: string): Promise<boolean> => {
+    set({ loading: true });
+
+    try {
+      const res = await serverApi.put<ApiResponseLoan<CreateLoanContractBody>>(
+        API.LOANCONTACT.UPDATE_ADMIN_APPROVED(id),
+        { status },
+      );
+
+      set({
+        // LoanContract: res.data.data,
+        status: res.data.success,
+        message: res.data.message,
+      });
+
+      return res.data.success;
+    } catch (err) {
+      set({ status: false });
+      return false;
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));
 
 export { useLoanContactStore };

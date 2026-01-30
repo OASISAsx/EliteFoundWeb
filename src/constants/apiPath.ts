@@ -33,6 +33,7 @@ export const API = {
     GET_BY_ID: (id: string) => `/loanContact/${id}`,
     CREATE: "/loanContact",
     UPDATE: (id: string) => `/loanContact/${id}`,
+    UPDATE_ADMIN_APPROVED: (id: string) => `/loanContactUpdate/${id}`,
   },
 
   UPLOAD: {

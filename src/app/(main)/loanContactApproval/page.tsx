@@ -15,6 +15,7 @@ interface LoanContract {
   creditScore: number;
   employmentStatus: string;
   monthlyIncome: number;
+  usersInformationId: string;
 }
 
 import React, { useEffect, useRef, useState } from "react";
@@ -56,6 +57,7 @@ export default function LoanApprovalTable() {
     pageSize,
     rowCount,
     setPagination,
+    updateAdminAppoved,
   } = useLoanContactStore();
 
   // const called = useRef(false);
@@ -75,7 +77,7 @@ export default function LoanApprovalTable() {
       role.role.apiSecret,
       session.user.backendToken,
     );
-  }, [page, pageSize, session?.user?.id]);
+  }, [openDialog, page, pageSize, session?.user?.id]);
 
   const data = {
     status: {
@@ -99,21 +101,17 @@ export default function LoanApprovalTable() {
   };
 
   // Submit action
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!selectedLoan) return;
 
-    const updatedLoans = dataLoan.map((loan) =>
-      loan.id === selectedLoan.id
-        ? {
-            ...loan,
-            status: actionType === "APPROVED" ? "APPROVED" : "REJECTED",
-          }
-        : loan,
-    );
-
-    // setDataLoan(updatedLoans); // ✅ ต้อง set กลับ
-    setOpenDialog(false);
-    setSelectedLoan(null);
+    const { id } = selectedLoan;
+    // console.log(updatedLoans, "selectedLoan");
+    try {
+      await updateAdminAppoved(actionType, id);
+    } finally {
+      setOpenDialog(false);
+      setSelectedLoan(null);
+    }
   };
 
   const loanColumns: GridColDef[] = [
