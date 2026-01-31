@@ -65,7 +65,7 @@ export const authOptions: NextAuthOptions = {
           );
           console.log("[CREDENTIALS] API_URL:", process.env.API_URL);
 
-          const res = await axios.post(`${process.env.API_URL}/login`, {
+          const res = await axios.post(`${process.env.API_URL}auth/login`, {
             email: credentials.email,
             password: credentials.password,
           });
@@ -105,7 +105,7 @@ export const authOptions: NextAuthOptions = {
     jwt: async ({ token, user, account, profile }) => {
       // ===== GOOGLE LOGIN =====
       if (account?.provider === "google" && profile) {
-        const res = await axios.post(`${process.env.API_URL}/loginGoogle`, {
+        const res = await axios.post(`${process.env.API_URL}auth/loginGoogle`, {
           email: profile.email,
           name: profile.name,
           googleId: profile.sub,
