@@ -2,7 +2,9 @@ services:
   web:
     build:
       context: .
-    ports:
-      - "9000:3000"
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     env_file:
       - .env.dev
+    ports:
+      - "9000:3000"
