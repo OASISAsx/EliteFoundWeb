@@ -7,6 +7,8 @@ export const serverApi = axios.create({
 
 serverApi.interceptors.request.use(
   (config) => {
+    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
     const token = localStorage.getItem("token");
 
     if (token) {
