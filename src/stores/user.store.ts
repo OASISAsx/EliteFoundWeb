@@ -70,17 +70,17 @@ const useUserStore = create<UserListStore>((set, get) => ({
   fetchUser: async (id: string, token: string) => {
     set({ loading: true });
     try {
-      const res = await serverApi.post(
+      const res = await serverApi.get(
         API.USER.GET_BY_ID(id),
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // },
       );
 
-      set({ user: res.data.data[0] });
+      set({ user: res.data.data });
     } catch (err) {
       console.error(err);
     } finally {
@@ -91,16 +91,16 @@ const useUserStore = create<UserListStore>((set, get) => ({
   fetchUserDetail: async (id: string, token: string) => {
     set({ loading: true });
     try {
-      const res = await serverApi.post(
+      const res = await serverApi.get(
         API.USER.GET_BY_ID(id),
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // },
       );
-      const detail = res.data.data[0].usersInformation;
+      const detail = res.data.usersInformation;
 
       set({ userDeail: detail });
 

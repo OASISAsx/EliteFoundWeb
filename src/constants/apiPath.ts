@@ -7,7 +7,7 @@ export const API = {
 
   USER: {
     GET_ALL: "/usersAll",
-    GET_BY_ID: (id: string) => `/user/${id}`,
+    GET_BY_ID: (id: string) => `/users/${id}`,
   },
 
   USER_INFORMATION: {
