@@ -5,7 +5,7 @@ import { useUserStore } from "@/src/stores/user.store";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
-import DashboardPage from "./dashboard/page";
+// import DashboardPage from "./dashboard/page";
 
 export default function Page() {
   const { fetchUserDetail, userDeail } = useUserStore();
@@ -41,6 +41,4 @@ export default function Page() {
 
     checkUserStatus();
   }, [status, session, router, fetchUserDetail]);
-
-  return <DashboardPage />;
 }

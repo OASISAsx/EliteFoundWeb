@@ -62,21 +62,15 @@ export default function AuthPage() {
 
     try {
       if (isLogin) {
-        // Login logic
         const result = await signIn("credentials", {
-          redirect: false,
+          redirect: true,
+          callbackUrl: "/dashboard",
           email,
           password,
         });
 
         if (result?.error) {
-          console.error(result.error);
           showAlert("error", "Login Failed", result.error);
-        } else {
-          showAlert("success", "Welcome Back", "Initializing your session...");
-          setTimeout(() => {
-            router.push("/");
-          }, 1000);
         }
       } else {
         const form = { name, email, password };
@@ -113,11 +107,11 @@ export default function AuthPage() {
     }
   };
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.replace("/");
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === "authenticated") {
+  //     router.replace("/");
+  //   }
+  // }, [status]);
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#0a0a0c]">
@@ -237,7 +231,11 @@ export default function AuthPage() {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => signIn("google")}
+            onClick={() =>
+              signIn("google", {
+                callbackUrl: "/dashboard",
+              })
+            }
             className="relative w-full  cursor-pointer overflow-hidden rounded-xl bg-linear-to-r from-blue-600 to-purple-600  focus:outline-none"
           >
             <motion.div

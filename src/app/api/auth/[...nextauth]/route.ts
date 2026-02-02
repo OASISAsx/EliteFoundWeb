@@ -63,26 +63,24 @@ export const authOptions: NextAuthOptions = {
             "[CREDENTIALS] Calling backend /login with email:",
             credentials.email,
           );
-          console.log("[CREDENTIALS] API_URL:", process.env.API_URL);
 
           const res = await axios.post(`${process.env.API_URL}auth/login`, {
             email: credentials.email,
             password: credentials.password,
           });
 
-          if (!res.data.success || !res.data.data?.id) return null;
+          if (!res.data.success || !res.data.user?.id) return null;
 
-          const user = res.data.data;
+          const user = res.data.user;
 
           return {
             id: user.id,
             name: user.name,
             email: user.email,
-            usersInformationId: user.usersInformationId,
-            usersInformation: user.usersInformation,
-            backendToken: res.data.token, // ✅ เอาจาก root response
+            usersInformationId: user.usersInformationId ?? null,
+            usersInformation: user.usersInformation ?? null,
+            backendToken: res.data.token,
             userRoles: user.userRoles,
-            // roleName: user.userRoles,
           };
         } catch (error) {
           const err = error as AxiosError;
@@ -109,17 +107,19 @@ export const authOptions: NextAuthOptions = {
           email: profile.email,
           name: profile.name,
           googleId: profile.sub,
+          image: profile.image,
         });
+        console.log(res, "res");
+        const backendUser = res.data.user;
 
-        if (res.data?.data?.id) {
-          token.id = String(res.data.data.id);
-          token.name = res.data.data.name;
-          token.email = res.data.data.email;
-          token.usersInformationId = res.data.data.usersInformationId ?? null;
-          token.usersInformation = res.data.data.usersInformation ?? null;
-          token.backendToken = res.data.token;
-          token.userRoles = res.data.data.userRoles;
-        }
+        // ✅ set ครั้งเดียวตอน login
+        token.id = backendUser.id;
+        token.name = backendUser.name;
+        token.email = backendUser.email;
+        token.usersInformationId = backendUser.usersInformationId ?? null;
+        token.usersInformation = backendUser.usersInformation ?? null;
+        token.backendToken = res.data.token;
+        token.userRoles = backendUser.userRoles;
 
         return token;
       }
@@ -131,7 +131,7 @@ export const authOptions: NextAuthOptions = {
         token.email = user.email || "";
         token.usersInformationId = (user as any).usersInformationId ?? null;
         token.usersInformation = (user as any).usersInformation ?? null;
-        token.backendToken = (user as any).backendToken; // ✅ สำคัญมาก
+        token.backendToken = (user as any).backendToken;
         token.userRoles = (user as any).userRoles;
       }
 

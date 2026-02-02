@@ -6,8 +6,8 @@ import {
   Box,
   TextField,
 } from "@mui/material";
-import { formatDateTH } from "../../helper/formatDateTH";
-import { formatCurrency } from "../../helper/formatCurrencyTHB";
+import { formatDateTH } from "@/src/app/helper/formatDateTH";
+import { formatCurrency } from "@/src/app/helper/formatCurrencyTHB";
 import { useRouter } from "next/navigation";
 
 export default function BorrowerInfo({ loan }: { loan: any }) {

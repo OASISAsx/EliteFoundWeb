@@ -6,8 +6,8 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import { formatDateTH } from "../../helper/formatDateTH";
-import { formatCurrency } from "../../helper/formatCurrencyTHB";
+import { formatDateTH } from "@/src/app/helper/formatDateTH";
+import { formatCurrency } from "@/src/app/helper/formatCurrencyTHB";
 
 export default function BorrowerInfo({ loan }: { loan: any }) {
   const user = loan.usersInformation;
