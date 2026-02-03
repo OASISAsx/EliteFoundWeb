@@ -45,10 +45,10 @@ export const API = {
   },
 
   ADDRESS_DROPDOWN: {
-    province: "/provinces",
+    province: "thaiGeo/provinces",
     district: (provinceCode: string) =>
-      `/districts?provinceCode=${provinceCode}`,
+      `thaiGeo/districts?provinceCode=${provinceCode}`,
     subdistrict: (districtCode: string) =>
-      `/subdistricts?districtCode=${districtCode}`,
+      `thaiGeo/subdistricts?districtCode=${districtCode}`,
   },
 };
