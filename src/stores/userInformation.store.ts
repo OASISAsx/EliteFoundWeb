@@ -4,6 +4,7 @@ import type {
   UserInformationStore,
   UserInformation,
   ApiResponse,
+  CreateUserInformationInput,
 } from "../types/userInfomation.type";
 import { API } from "../constants/apiPath";
 import { ActionResultValue } from "../types/ActionResult";
@@ -13,7 +14,6 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
   loading: false,
   status: false,
   message: "",
-
 
   fetchUserInformation: async (usersInformationId: string) => {
     set({ loading: true });
@@ -56,13 +56,24 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
     id: string,
   ): Promise<ActionResultValue> => {
     set({ loading: true });
+    type UserInformationUpdatePayload = Omit<
+      UserInformation,
+      "id" | "createdAt" | "updatedAt"
+    >;
 
+    // 2️⃣‑ฟังก์ชันทำ “clean‑up” (อาจสร้างไว้ข้างบนก็ได้)
+    const sanitizeUserInformation = (
+      user: UserInformation,
+    ): UserInformationUpdatePayload => {
+      const { id, createdAt, updatedAt, ...rest } = user;
+      return rest;
+    };
     try {
-      const { userId, JobDetail, bankInformation, ...rest } = data;
+      const payload = sanitizeUserInformation(data);
 
-      const res = await serverApi.put<ApiResponse<UserInformation>>(
+      const res = await serverApi.put<ApiResponse<CreateUserInformationInput>>(
         API.USER_INFORMATION.UPDATE(id),
-        rest,
+        payload,
       );
 
       set({
@@ -70,7 +81,7 @@ const useUserInformationStore = create<UserInformationStore>((set) => ({
         status: res.data.success,
         message: res.data.message || "",
       });
-
+      console.log(payload, "payload");
       return {
         success: res.data.success,
         message: res.data.message || "",

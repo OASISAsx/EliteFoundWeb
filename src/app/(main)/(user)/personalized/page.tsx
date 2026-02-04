@@ -52,6 +52,7 @@ export default function UsersInformationForm() {
     message,
     status,
     fetchUserInformation,
+    userInformation,
     createInformation,
     updateInformation,
   } = useUserInformationStore();
@@ -61,7 +62,7 @@ export default function UsersInformationForm() {
     severity: "success" as "success" | "error" | "info" | "warning",
   });
 
-  const { fetchUserDetail, userDeail } = useUserStore();
+  // const { fetchUserDetail, userDeail } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
   const [idCardFile, setCardFile] = useState<File | null>(null);
   const [otherFiles, setOtherFiles] = useState<File[] | null>(null);
@@ -90,18 +91,20 @@ export default function UsersInformationForm() {
     other_files: [],
   });
   useEffect(() => {
+    console.log(session?.user);
     if (session?.user?.id) {
-      fetchUserDetail(session.user.id, session.user.backendToken);
+      fetchUserInformation(session.user.id);
     }
   }, [session?.user?.id]);
 
   useEffect(() => {
-    if (!userDeail) return;
-    if (userDeail) {
-      setForm(userDeail);
+    console.log(userInformation, "userInformation");
+    if (!userInformation) return;
+    if (userInformation) {
+      setForm(userInformation);
     }
     console.log(form, "form");
-  }, [userDeail]);
+  }, [userInformation]);
 
   const handleChangeTypePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 1. ดึงเฉพาะตัวเลขออกมา (Raw Value)
@@ -161,8 +164,8 @@ export default function UsersInformationForm() {
       };
       let res: ActionResultValue;
 
-      if (userDeail) {
-        res = await updateInformation(payload, userDeail.id!);
+      if (userInformation) {
+        res = await updateInformation(payload, userInformation.id!);
         console.log(res, "res");
       } else {
         res = await createInformation(payload);

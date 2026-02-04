@@ -101,10 +101,10 @@ const useUserStore = create<UserListStore>((set, get) => ({
         // },
       );
       const detail = res.data.usersInformation;
-
+      console.log(res, "res");
       set({ userDeail: detail });
 
-      return detail; // *** คืนค่ากลับไปให้คนเรียกใช้ ***
+      return detail;
     } catch (err) {
       console.error(err);
       return null;

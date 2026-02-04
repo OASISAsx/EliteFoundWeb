@@ -5,7 +5,6 @@ import { ActionResultValue } from "./ActionResult";
 
 export interface UserInformation {
   id?: string;
-
   firstName: string;
   lastName: string;
   citizenId: string;
@@ -25,7 +24,8 @@ export interface UserInformation {
   districtCode?: number | null;
   subdistrictCode?: number | null;
   zipcode?: string | null;
-
+  createdAt?: string;
+  updatedAt?: string;
   status?: string; // pending | approved | rejected
   id_card_image: string;
   other_files: string[];

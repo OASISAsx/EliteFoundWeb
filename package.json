@@ -25,6 +25,7 @@
     "dayjs": "^1.11.19",
     "framer-motion": "^12.27.1",
     "html2pdf.js": "^0.14.0",
+    "lodash.omit": "^4.5.0",
     "lucide-react": "^0.562.0",
     "motion": "^12.23.26",
     "next": "16.0.10",
