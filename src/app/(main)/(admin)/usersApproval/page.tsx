@@ -21,7 +21,7 @@ import LoanDetailDialog from "./LoanDetailDialog";
 import { renderStatusChip } from "@/src/components/renderStatusChip";
 import { User } from "@/src/types/user.type";
 import { useUserInformationStore } from "@/src/stores/userInformation.store";
-import { formatDateTH } from "../../helper/formatDateTH";
+import { formatDateTH } from "@/src/app/helper/formatDateTH";
 // import { User } from "next-auth";
 // import { LoanContract, mockLoanContracts } from "@/lib/mockData";
 
