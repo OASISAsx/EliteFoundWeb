@@ -124,7 +124,7 @@ export default function AuthPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <p className=" text-2xl font-bold dark:text-white/10  from-blue-400 to-purple-500 bg-clip-text  mb-2 bg-linear-to-r">
-              {isLogin ? "Login" : "Create Account"}
+              {isLogin ? "EliteFund" : "Create Account"}
             </p>
             <p className="text-gray-400 text-sm uppercase tracking-[0.2em]">
               {isLogin
