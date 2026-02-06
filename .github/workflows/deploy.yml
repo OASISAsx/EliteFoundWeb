@@ -7,23 +7,51 @@ on:
 
 jobs:
   merge-and-deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest # ไม่ต้อง self-hosted แล้ว เพราะใช้ SSH เข้า VPS
 
     steps:
-      - uses: actions/checkout@v4
+      # =====================
+      # 📥 Checkout
+      # =====================
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Merge Elite-Fund-web into build
+      # =====================
+      # ✅ Merge Elite-Fund-web -> build
+      # =====================
+      - name: Merge branch
         run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git fetch origin
+
           git checkout build || git checkout -b build
-          git merge Elite-Fund-web
+          git reset --hard origin/build || true
+
+          git merge origin/Elite-Fund-web --no-edit
           git push origin build
 
-      - name: Deploy with Docker
-        run: |
-          cd ~/EliteFoundWeb
-          git reset --hard
-          git pull origin build
-          docker compose down
-          docker compose up -d --build
+      # =====================
+      # 🚀 Deploy to VPS (SSH)
+      # =====================
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            set -e
+            cd /root/nestService
+
+            git fetch origin
+            git reset --hard origin/build
+
+            docker compose down --remove-orphans
+            docker compose up -d --build
+
+            docker image prune -f
