@@ -3,7 +3,7 @@ name: Auto Deploy
 on:
   push:
     branches:
-      - Elite-Fund-web
+      - forNestEliteFund
 
 jobs:
   merge-and-deploy:
@@ -31,7 +31,7 @@ jobs:
           git checkout build || git checkout -b build
           git reset --hard origin/build || true
 
-          git merge origin/Elite-Fund-web --no-edit
+          git merge origin/forNestEliteFund --no-edit
           git push origin build
 
       # =====================
