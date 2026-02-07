@@ -1,8 +1,8 @@
 export const API = {
   AUTH: {
-    LOGIN: "auth/login",
+    LOGIN: "/auth/login",
     LOGIN_GOOGLE: "/loginGoogle",
-    REGISTER: "auth/register",
+    REGISTER: "/auth/register",
   },
 
   USER: {

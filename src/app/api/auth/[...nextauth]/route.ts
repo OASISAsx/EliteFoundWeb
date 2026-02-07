@@ -65,7 +65,7 @@ export const authOptions: NextAuthOptions = {
           );
 
           const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}auth/login`,
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
             {
               email: credentials.email,
               password: credentials.password,
@@ -107,7 +107,7 @@ export const authOptions: NextAuthOptions = {
       // ===== GOOGLE LOGIN =====
       if (account?.provider === "google" && profile) {
         const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}auth/loginGoogle`,
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/loginGoogle`,
           {
             email: profile.email,
             name: profile.name,
