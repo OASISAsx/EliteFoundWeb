@@ -64,10 +64,13 @@ export const authOptions: NextAuthOptions = {
             credentials.email,
           );
 
-          const res = await axios.post(`${process.env.API_URL}auth/login`, {
-            email: credentials.email,
-            password: credentials.password,
-          });
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}auth/login`,
+            {
+              email: credentials.email,
+              password: credentials.password,
+            },
+          );
 
           if (!res.data.success || !res.data.user?.id) return null;
 
@@ -103,12 +106,15 @@ export const authOptions: NextAuthOptions = {
     jwt: async ({ token, user, account, profile }) => {
       // ===== GOOGLE LOGIN =====
       if (account?.provider === "google" && profile) {
-        const res = await axios.post(`${process.env.API_URL}auth/loginGoogle`, {
-          email: profile.email,
-          name: profile.name,
-          googleId: profile.sub,
-          image: profile.image,
-        });
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}auth/loginGoogle`,
+          {
+            email: profile.email,
+            name: profile.name,
+            googleId: profile.sub,
+            image: profile.image,
+          },
+        );
         console.log(res, "res");
         const backendUser = res.data.user;
 

@@ -5,11 +5,14 @@ export async function POST(request: Request) {
   try {
     const { email, password, name } = await request.json();
 
-    const user = await axios.post(`${process.env.API_URL}/register`, {
-      email,
-      password,
-      name,
-    });
+    const user = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/register`,
+      {
+        email,
+        password,
+        name,
+      },
+    );
 
     return NextResponse.json(user.data, { status: 201 });
   } catch (error) {
@@ -23,8 +26,7 @@ export async function POST(request: Request) {
         message: "Signup failed",
         error: errorData || errorMessage,
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
-
