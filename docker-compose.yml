@@ -1,10 +1,15 @@
+version: "3.9"
+
 services:
   web:
     build:
       context: .
       args:
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_API_URL: https://api.elitefund.fun
     env_file:
-      - .env.dev
+      - .env
+    environment:
+      NEXTAUTH_URL: https://elitefund.fun
+      NEXTAUTH_SECRET: 1c9a919c8262adc5384f7a27f1f9940844ae78da80360a99b4c319eea9d8fa6f
     ports:
       - "9000:3000"
