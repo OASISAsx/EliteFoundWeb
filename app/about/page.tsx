@@ -18,6 +18,8 @@ import {
 } from "@mui/material";
 import { GitHub } from "@mui/icons-material";
 
+import PortfolioGrid from "./PortfolioGrid";
+
 export default function SlotReel() {
   const icons = [
     "./images/1.jpg",
@@ -132,11 +134,11 @@ export default function SlotReel() {
   return (
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory overflow-x-hidden">
       {/* ===== PAGE 1 : SLOT ===== */}
-      <section
-        className="h-screen snap-start flex items-center justify-center"
-        ref={heroRef}
-      >
-        <Box
+      <section className="min-h-screen snap-start">
+        <PortfolioGrid />
+      </section>
+
+      {/* <Box
           id="projects"
           sx={{
             minHeight: "100vh",
@@ -146,120 +148,10 @@ export default function SlotReel() {
             px: { xs: 2, sm: 4, md: 6 }, // 👈 เพิ่มระยะห่างซ้ายขวา
           }}
         >
-          <Container maxWidth="xl">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-            >
-              {/* ===== Header ===== */}
-              <motion.div variants={fadeInUp}>
-                {/* <Typography
-                  variant="h3"
-                  align="center"
-                  sx={{ mb: 2, fontWeight: 700 }}
-                >
-                  โปรเจ็คที่ผ่านมา
-                </Typography>
+         
+        </Box> */}
 
-                <Typography
-                  variant="body1"
-                  align="center"
-                  color="text.secondary"
-                  sx={{ mb: 5 }}
-                >
-                  ผลงานที่ฉันภูมิใจและโปรเจ็คที่น่าสนใจที่ได้พัฒนา
-                </Typography> */}
-              </motion.div>
-
-              {/* ===== Projects Grid ===== */}
-              <Grid container spacing={7}>
-                {projects.map((project) => (
-                  <Grid size={{ xs: 12, sm: 6, md: 3 }} key={project.id}>
-                    <motion.div variants={fadeInUp} whileHover={{ y: -8 }}>
-                      <Card
-                        sx={{
-                          height: "400px",
-                          width: "300px",
-                          display: "flex",
-                          flexDirection: "column",
-                          transition: "0.3s",
-                          "&:hover": {
-                            boxShadow: 6,
-                          },
-                        }}
-                      >
-                        <CardMedia
-                          component="img"
-                          height="220"
-                          image={project.image}
-                          alt={project.title}
-                          sx={{ objectFit: "cover" }}
-                        />
-
-                        <CardContent sx={{ flexGrow: 1 }}>
-                          <Typography fontWeight={600} mb={1}>
-                            {project.title}
-                          </Typography>
-
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            mb={2}
-                          >
-                            {project.description}
-                          </Typography>
-
-                          <Box
-                            sx={{
-                              display: "flex",
-                              flexWrap: "wrap",
-                              gap: 1,
-                              mb: 2,
-                            }}
-                          >
-                            {project.tags.map((tag) => (
-                              <Chip
-                                key={tag}
-                                label={tag}
-                                size="small"
-                                color="primary"
-                              />
-                            ))}
-                          </Box>
-
-                          <Box sx={{ display: "flex", gap: 1 }}>
-                            <Button
-                              size="small"
-                              variant="outlined"
-                              startIcon={<GitHub />}
-                              href={project.github}
-                              fullWidth
-                            >
-                              Code
-                            </Button>
-
-                            <Button
-                              size="small"
-                              variant="contained"
-                              href={project.demo}
-                              fullWidth
-                            >
-                              Demo
-                            </Button>
-                          </Box>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  </Grid>
-                ))}
-              </Grid>
-            </motion.div>
-          </Container>
-        </Box>
-
-        {/* <div className="flex sm:w-[10%] md:w-[90%] lg:w-[95%] xl:w-full justify-center">
+      {/* <div className="flex sm:w-[10%] md:w-[90%] lg:w-[95%] xl:w-full justify-center">
           {[0, 1, 2, 3, 4].map((col) => (
             <div
               key={col}
@@ -296,37 +188,6 @@ export default function SlotReel() {
             </div>
           ))}
         </div> */}
-        <motion.button
-          onClick={scrollToNext}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: isInView ? 0.7 : 0,
-            y: isInView ? [0, 12, 0] : 0,
-          }}
-          transition={{
-            repeat: isInView ? Infinity : 0,
-            duration: 1.5,
-            ease: "easeInOut",
-          }}
-          style={{ pointerEvents: isInView ? "auto" : "none" }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </motion.button>
-      </section>
 
       {/* ===== PAGE 2 : NEXT SECTION ===== */}
       <section className="h-screen snap-start relative flex items-center justify-center ">
@@ -367,13 +228,19 @@ export default function SlotReel() {
                 2023 – Present (Poontana Marketing Co., Ltd)
               </p>
               <p className="text-gray-300 leading-relaxed">
-                Worked as a Full-Stack Developer designing and delivering
-                scalable web applications ERP with modern frontend and backend
-                technologies. Led development using Vue, React, and Next.js,
-                integrated APIs with Node.js and Prisma, managed relational and
-                Managed relational (SQL) and NoSQL databases while implementing
-                automated CI/CD workflows using GitHub Actions. GitHub Actions
-                for cloud deployments on Plesk and Render.
+                ทำงานในตำแหน่ง Full-Stack Developer
+                ออกแบบและพัฒนาเว็บแอปพลิเคชัน ERP
+                ที่สามารถรองรับการขยายตัวของระบบ (Scalable) โดยใช้เทคโนโลยีฝั่ง
+                Frontend และ Backend สมัยใหม่ พัฒนาระบบ ERP ที่มีโมดูลหลัก เช่น
+                คลังสินค้า (Stock), การขาย (Sales), การจัดซื้อ (Purchasing),
+                ใบเสนอราคา (Quotation) และรายงาน (Reporting) รวมถึงระบบสำหรับ
+                การวางแผนการเข้าพบลูกค้า, การจัดการ Site Survey
+                และการจัดตารางงานติดตั้ง/บำรุงรักษา พัฒนาฟีเจอร์ Barcode
+                Scanning และระบบคำนวณทางการเงิน พร้อมทั้งนำหลักการ FIFO
+                (First-In, First-Out) มาใช้ในการจัดการการขาย
+                เพื่อให้ลูกค้าได้รับสินค้าล็อตใหม่ล่าสุด สร้างระบบ
+                รายงานอัตโนมัติในรูปแบบ PDF และระบบ Workflow
+                เพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร
               </p>
             </motion.div>
 

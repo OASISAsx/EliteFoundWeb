@@ -1,26 +1,37 @@
 "use client";
 
+import { Box } from "@mui/material";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
 const showcases = [
   {
-    title: "Dashboard Overview",
+    title: "Detail Product",
     description:
-      "Main dashboard showing key metrics, real-time stats, and quick actions.",
-    image: "/stocks/stock2.png",
+      "ตรวจสอบสินค้ารายละเอียดสินค้า ติดตามการซื้อขายจาก SerialNumber",
+    image: "/stocks/stock23.png",
   },
   {
-    title: "Analytics Screen",
+    title: "Total Sales",
     description:
-      "Detailed analytics view with charts, filters, and performance insights.",
-    image: "/stocks/stock9.png",
+      "ตรวจสอบยอดขายสินค้าในแต่ละเดือนเพื่อ ทำเพิ่มการซื้อสินค้าที่ขายดี",
+    image: "/stocks/stock21.png",
   },
   {
-    title: "Settings Panel",
-    description: "Clean and minimal settings layout focused on usability.",
-    image: "/stocks/stock4.png",
+    title: "Purchase Order",
+    description: "รับสินค้าด้วย SerialNumber ของแต่ละสินค้าเพื่อเก็บไว้ในระบบ",
+    image: "/stocks/stock20.png",
   },
+  {
+    title: "Sales Order",
+    description: "ขายสินค้า ตัดสินค้าในระบบด้วย SerialNumber",
+    image: "/stocks/stock5.png",
+  },
+  // {
+  //   title: "Settings Panel",
+  //   description: "Clean and minimal settings layout focused on usability.",
+  //   image: "/stocks/stock4.png",
+  // },
 ];
 
 export default function UIShowcase() {
@@ -53,16 +64,53 @@ export default function UIShowcase() {
           </motion.p>
 
           {/* CONTROLS */}
-          <div className="mt-8 flex gap-3">
-            {showcases.map((_, i) => (
+          <Box className="mt-10 flex w-full items-center justify-between">
+            {/* ซ้าย : dots */}
+            <div className="flex gap-3">
+              {showcases.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  className={`h-2 rounded-full transition-all
+          ${i === index ? "w-8 bg-white" : "w-2 bg-white/30"}
+        `}
+                />
+              ))}
+            </div>
+
+            {/* ขวา : arrows */}
+            <div className="flex items-center gap-4">
               <button
-                key={i}
-                onClick={() => setIndex(i)}
-                className={`h-2 rounded-full transition-all
-                  ${i === index ? "w-8 bg-white" : "w-2 bg-white/30"}`}
-              />
-            ))}
-          </div>
+                onClick={() =>
+                  setIndex(
+                    (prev) => (prev - 1 + showcases.length) % showcases.length,
+                  )
+                }
+                className="
+        flex h-10 w-10 items-center justify-center
+        rounded-full bg-white/10 text-white
+        transition hover:bg-white/20
+      "
+                aria-label="Previous image"
+              >
+                ←
+              </button>
+
+              <button
+                onClick={() =>
+                  setIndex((prev) => (prev + 1) % showcases.length)
+                }
+                className="
+        flex h-10 w-10 items-center justify-center
+        rounded-full bg-white/10 text-white
+        transition hover:bg-white/20
+      "
+                aria-label="Next image"
+              >
+                →
+              </button>
+            </div>
+          </Box>
         </div>
 
         {/* IMAGE */}

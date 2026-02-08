@@ -372,62 +372,66 @@ export default function TypewriterHero() {
           <p className="text-gray-400 text-lg">สิ่งที่ฉันรักและเชี่ยวชาญ</p>
         </div>
 
-        <section className="py-16 px-6 overflow-x-hidden ">
-          {food.map(
-            (
-              [emoji, skillName, description, hueA, hueB]: [
-                string,
-                string,
-                string,
-                number,
-                number,
-              ],
-              i: number,
-            ) => (
-              <div
-                key={i}
-                className="flex flex-col md:flex-row items-center justify-center gap-10 mb-28 "
-              >
-                {/* ===== CARD ===== */}
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.2, duration: 0.6 }}
-                  className="relative"
+        <section className="py-16 px-6 overflow-x-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 gap-x-16 gap-y-28 max-w-7xl mx-auto">
+            {food.map(
+              (
+                [emoji, skillName, description, hueA, hueB]: [
+                  string,
+                  string,
+                  string,
+                  number,
+                  number,
+                ],
+                i: number,
+              ) => (
+                <div
+                  key={i}
+                  className="flex flex-col md:flex-row items-center justify-center gap-10 mb-28 "
                 >
-                  <div
-                    className="absolute inset-0 blur-2xl opacity-40"
-                    style={{
-                      background: `linear-gradient(135deg, hsl(${hueA},100%,60%), hsl(${hueB},100%,60%))`,
-                    }}
-                  />
-                  <div className="relative bg-black/40 rounded-3xl p-10 w-50 h-48 flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
-                    <Image src={emoji} alt="" width={300} height={300} />
-                  </div>
-                </motion.div>
+                  {/* ===== CARD ===== */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2, duration: 0.6 }}
+                    className="relative"
+                  >
+                    <div
+                      className="absolute inset-0 blur-2xl opacity-40"
+                      style={{
+                        background: `linear-gradient(135deg, hsl(${hueA},100%,60%), hsl(${hueB},100%,60%))`,
+                      }}
+                    />
+                    <div className="relative bg-black/40 rounded-3xl p-10 w-50 h-48 flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+                      <Image src={emoji} alt="" width={300} height={300} />
+                    </div>
+                  </motion.div>
 
-                {/* ===== TEXT ===== */}
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.2 + 0.15 }}
-                  className="
+                  {/* ===== TEXT ===== */}
+                  {/* <motion.div
+                    initial={{ opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2 + 0.15 }}
+                    className="
     text-center md:text-left
     w-full
     max-w-xs sm:max-w-sm md:max-w-md md:pl-24
     px-2 sm:px-0
   "
-                >
-                  <h3 className="text-3xl font-bold text-white mb-4 italic">
-                    {skillName}
-                  </h3>
-                  <p className="text-gray-300 leading-relaxed">{description}</p>
-                </motion.div>
-              </div>
-            ),
-          )}
+                  >
+                    <h3 className="text-3xl font-bold text-white mb-4 italic">
+                      {skillName}
+                    </h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      {description}
+                    </p>
+                  </motion.div> */}
+                </div>
+              ),
+            )}
+          </div>
         </section>
       </section>
       <motion.button
