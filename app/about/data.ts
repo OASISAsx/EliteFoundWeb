@@ -29,7 +29,7 @@ export const projects: Project[] = [
     description:
       "ออกแบบและพัฒนาโครงสร้างข้อมูล (Data Structure) เพื่อรองรับการทำงานของระบบอย่างมีประสิทธิภาพออกแบบ Data Structure สำหรับการจัดการข้อมูลในระบบ Backend และ Database",
     image: "./images/data-structure.png",
-    tech: ["Draw.io", "Prisma Studio"],
+    tech: ["Draw.io", "Prisma Studio", "DBeaver "],
   },
   {
     id: "p3",

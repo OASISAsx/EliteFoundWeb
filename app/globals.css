@@ -39,73 +39,37 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+.bg-aurora {
+  background:
+    radial-gradient(
+      600px at 20% 30%,
+      rgba(56, 189, 248, 0.25),
+      transparent 60%
+    ),
+    radial-gradient(
+      500px at 80% 40%,
+      rgba(139, 92, 246, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #020617, #020617);
+  animation: auroraMove 20s ease-in-out infinite alternate;
 }
 
-/* ===============================
-   ตัวอย่าง Gradient Background
-   =============================== */
-.bg-dark-blue-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--accent-darkblue),
-    var(--accent-blue)
-  );
-}
-
-/* ===============================
-   Text Glow / Neon Effect
-   =============================== */
-.text-glow {
-  text-shadow: 0 0 6px var(--accent-blue), 0 0 12px var(--accent-blue);
-}
-
-/* ===============================
-   Card / Section Glow Effect
-   =============================== */
-.card-glow {
-  background: #111827;
-  border-radius: 1rem;
-  box-shadow: 0 0 20px var(--accent-blue) / 20,
-    0 0 40px var(--accent-blue) / 10 inset;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-glow:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 0 30px var(--accent-blue) / 30,
-    0 0 50px var(--accent-blue) / 15 inset;
-}
-
-/* ===============================
-   Smooth Gradient Animation
-   =============================== */
-@keyframes gradientShift {
+@keyframes auroraMove {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    background-position:
+      0% 0%,
+      100% 0%,
+      0% 0%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position:
+      10% 20%,
+      90% 30%,
+      0% 0%;
   }
 }
-
-.bg-animated-gradient {
-  background: linear-gradient(
-    90deg,
-    var(--accent-darkblue),
-    var(--accent-blue),
-    var(--accent-darkblue)
-  );
-  background-size: 300% 300%;
-  animation: gradientShift 15s ease infinite;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-/* .scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-} */

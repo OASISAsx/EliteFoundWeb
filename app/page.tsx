@@ -89,92 +89,135 @@ const splashStyle = (hueA: number, hueB: number): React.CSSProperties => ({
 //     "0 0 1px hsl(0deg 0% 100% / 0.1), 0 0 8px hsl(0deg 0% 100% / 0.1), 0 0 16px hsl(0deg 0% 100% / 0.1), inset 0 0 20px rgba(0,0,0,0.5)",
 //   transformOrigin: "10% 60%",
 // };
+export interface SkillItem {
+  icon: string;
+  name: string;
+  description: string;
+  hueA: number;
+  hueB: number;
+}
 
-const food: [string, string, string, number, number][] = [
-  [
-    "./images/next.png",
-    "Next.js",
-    "พัฒนาเว็บแอประดับ Production ด้วย Next.js โดยใช้ App Router, Server Components และเทคนิคเพิ่มประสิทธิภาพด้าน SEO และ Performance",
-    0,
-    10,
-  ],
-  [
-    "https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg",
-    "Zustand",
-    "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
-    0,
-    100,
-  ],
-  [
-    "./images/Ts.png",
-    "TypeScript",
-    "เขียนโค้ดที่มีความปลอดภัยสูง ลด Bug และเพิ่มความสามารถในการดูแลระบบด้วย Static Typing",
-    140,
-    180,
-  ],
-  [
-    "./images/vue.png",
-    "Vue.js",
-    "พัฒนาเว็บแอปด้วย Vue 3 และ Composition API เพื่อโครงสร้างที่ยืดหยุ่นและขยายระบบได้ง่าย",
-    80,
-    120,
-  ],
-  [
-    "./images/node.png",
-    "Node.js",
-    "สร้างระบบ Backend ด้วย Node.js และ Express.js รองรับ API ที่รวดเร็วและรองรับการขยายตัว",
-    80,
-    120,
-  ],
-  [
-    "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Prisma.svg",
-    "Prisma",
-    "จัดการฐานข้อมูลด้วย ORM ที่ทันสมัย ช่วยให้ Query ปลอดภัยและทำงานร่วมกับ TypeScript ได้อย่างราบรื่น",
-    170,
-    180,
-  ],
-  [
-    "./images/tw.png",
-    "Tailwind CSS",
-    "ออกแบบ UI แบบ Responsive ได้รวดเร็วด้วย Utility-first CSS พร้อมควบคุมดีไซน์ได้อย่างยืดหยุ่น",
-    140,
-    180,
-  ],
-  [
-    "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/MaterialUI-Dark.svg",
-    "Material UI",
-    "สร้าง UI มาตรฐานระดับองค์กรด้วย Component ที่พร้อมใช้งานและปรับแต่งได้สูง",
-    200,
-    240,
-  ],
-  [
-    "./images/github.png",
-    "Git & CI/CD",
-    "ควบคุมเวอร์ชันโค้ดและจัดการ Workflow การ Deploy ด้วย Git และระบบ CI/CD อัตโนมัติ",
-    300,
-    340,
-  ],
-  [
-    "./images/Pinialogo.svg",
-    "Pinia & Vuex",
-    "จัดการ State และการเชื่อมต่อ API ใน Vue.js อย่างเป็นระบบด้วย Pinia และ Vuex",
-    260,
-    300,
-  ],
-  [
-    "./images/ant.png",
-    "Ant Design",
-    "พัฒนา UI ระดับ Professional ด้วย Component สำเร็จรูปที่เหมาะกับระบบขนาดใหญ่",
-    200,
-    80,
-  ],
-  [
-    "./images/vuexys.webp",
-    "Vuexy",
-    "ใช้งาน Admin Template ระดับพรีเมียมสำหรับสร้าง Dashboard และระบบหลังบ้านอย่างรวดเร็ว",
-    300,
-    300,
-  ],
+const skills: SkillItem[] = [
+  {
+    icon: "/images/next.png",
+    name: "Next.js",
+    description:
+      "พัฒนาเว็บแอประดับ Production ด้วย Next.js โดยใช้ App Router, Server Components และเทคนิคเพิ่มประสิทธิภาพด้าน SEO และ Performance",
+    hueA: 600,
+    hueB: 500,
+  },
+  {
+    icon: "https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg",
+    name: "Zustand",
+    description:
+      "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
+    hueA: 0,
+    hueB: 100,
+  },
+  {
+    icon: "/images/Ts.png",
+    name: "TypeScript",
+    description:
+      "เขียนโค้ดที่มีความปลอดภัยสูง ลด Bug และเพิ่มความสามารถในการดูแลระบบด้วย Static Typing",
+    hueA: 140,
+    hueB: 180,
+  },
+  {
+    icon: "/images/vue.png",
+    name: "Vue.js",
+    description:
+      "พัฒนาเว็บแอปด้วย Vue 3 และ Composition API เพื่อโครงสร้างที่ยืดหยุ่นและขยายระบบได้ง่าย",
+    hueA: 80,
+    hueB: 120,
+  },
+  {
+    icon: "/images/node.png",
+    name: "Node.js",
+    description:
+      "สร้างระบบ Backend ด้วย Node.js รองรับ REST API และการทำงานแบบ Asynchronous",
+    hueA: 100,
+    hueB: 140,
+  },
+  {
+    icon: "/images/Express.svg",
+    name: "Express.js",
+    description:
+      "พัฒนา REST API ที่รวดเร็วและยืดหยุ่น ด้วย Express.js สำหรับระบบ Backend",
+    hueA: 200,
+    hueB: 200,
+  },
+  {
+    icon: "/images/NestJS.svg",
+    name: "NestJS",
+    description:
+      "พัฒนา Backend เชิงโครงสร้างด้วย NestJS รองรับ Clean Architecture และระบบขนาดใหญ่",
+    hueA: 10,
+    hueB: 0,
+  },
+  {
+    icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Prisma.svg",
+    name: "Prisma",
+    description:
+      "จัดการฐานข้อมูลด้วย ORM ที่ทันสมัย ช่วยให้ Query ปลอดภัยและทำงานร่วมกับ TypeScript ได้อย่างราบรื่น",
+    hueA: 170,
+    hueB: 180,
+  },
+  {
+    icon: "/images/tw.png",
+    name: "Tailwind CSS",
+    description:
+      "ออกแบบ UI แบบ Responsive ได้รวดเร็วด้วย Utility-first CSS พร้อมควบคุมดีไซน์ได้อย่างยืดหยุ่น",
+    hueA: 140,
+    hueB: 180,
+  },
+  {
+    icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/MaterialUI-Dark.svg",
+    name: "Material UI",
+    description:
+      "สร้าง UI มาตรฐานระดับองค์กรด้วย Component ที่พร้อมใช้งานและปรับแต่งได้สูง",
+    hueA: 200,
+    hueB: 240,
+  },
+  {
+    icon: "/images/github.png",
+    name: "Git & CI/CD",
+    description:
+      "ควบคุมเวอร์ชันโค้ดและจัดการ Workflow การ Deploy ด้วย Git และระบบ CI/CD อัตโนมัติ",
+    hueA: 300,
+    hueB: 340,
+  },
+  {
+    icon: "/images/Pinialogo.svg",
+    name: "Pinia & Vuex",
+    description:
+      "จัดการ State และการเชื่อมต่อ API ใน Vue.js อย่างเป็นระบบด้วย Pinia และ Vuex",
+    hueA: 260,
+    hueB: 300,
+  },
+  {
+    icon: "/images/ant.png",
+    name: "Ant Design",
+    description:
+      "พัฒนา UI ระดับ Professional ด้วย Component สำเร็จรูปที่เหมาะกับระบบขนาดใหญ่",
+    hueA: 200,
+    hueB: 80,
+  },
+  {
+    icon: "/images/vuexys.webp",
+    name: "Vuexy",
+    description:
+      "Admin Template ระดับพรีเมียมสำหรับสร้าง Dashboard และระบบหลังบ้านอย่างรวดเร็ว",
+    hueA: 300,
+    hueB: 300,
+  },
+  {
+    icon: "/images/Linux.svg",
+    name: "Linux",
+    description:
+      "ใช้งาน Linux Server สำหรับ Deploy, Configure และดูแลระบบ Production",
+    hueA: 220,
+    hueB: 260,
+  },
 ];
 
 // ============== Main Component ================
@@ -300,8 +343,17 @@ export default function TypewriterHero() {
     <>
       {/* ===== HERO SECTION ===== */}
 
-      <section className="flex min-h-screen items-center justify-center  px-6">
-        <Snowfall snowflakeCount={50} />
+      <section className="relative min-h-screen overflow-hidden flex items-center justify-center px-6">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Snowfall
+            snowflakeCount={50}
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-7xl w-full">
           {/* Text Part */}
@@ -335,36 +387,41 @@ export default function TypewriterHero() {
 
           {/* Logo Part */}
           <motion.div
-            className="relative w-80 h-80"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.6, scale: 1 }}
-            transition={{ delay: 1, duration: 1.5, ease: "easeOut" }}
+            className="relative w-80 h-96"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <motion.img
-              src="/images/profile.jpg"
+              src="/images/profile2.png"
               alt="Profile"
-              className="w-full h-full object-cover rounded-2xl border-blue-400/10"
+              className="
+      w-full h-full object-cover
+      rounded-2xl
+      border border-white/10
+      saturate-90 contrast-105
+    "
               animate={{
-                rotate: [0, 2, -2, 0],
-                opacity: [0.35, 0.45, 0.35],
-                filter: ["blur(0.6px)", "blur(0.8px)", "blur(1.6px)"],
                 boxShadow: [
-                  "0 0 10px rgba(59,130,246,0.08)",
-                  "0 0 18px rgba(59,130,246,0.15)",
-                  "0 0 10px rgba(59,130,246,0.08)",
+                  "0 12px 30px rgba(0,0,0,0.25)",
+                  "0 18px 45px rgba(0,0,0,0.35)",
+                  "0 12px 30px rgba(0,0,0,0.25)",
                 ],
               }}
               transition={{
+                duration: 6,
                 repeat: Infinity,
-                duration: 10,
                 ease: "easeInOut",
               }}
             />
+
+            {/* soft light overlay */}
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/6 via-transparent to-transparent" />
           </motion.div>
         </div>
       </section>
       {/* ===== STACKED CARDS SECTION (ด้านล่าง) ===== */}
-      <section className=" py-10 px-6 pb-32">
+      <section className="relative py-10 px-6 pb-32 overflow-hidden">
         <div className="text-center mb-2">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             My Skills & Passion
@@ -374,63 +431,71 @@ export default function TypewriterHero() {
 
         <section className="py-16 px-6 overflow-x-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 gap-x-16 gap-y-28 max-w-7xl mx-auto">
-            {food.map(
-              (
-                [emoji, skillName, description, hueA, hueB]: [
-                  string,
-                  string,
-                  string,
-                  number,
-                  number,
-                ],
-                i: number,
-              ) => (
-                <div
-                  key={i}
-                  className="flex flex-col md:flex-row items-center justify-center gap-10 mb-28 "
+            {skills.map((skill, i) => (
+              <div
+                key={skill.name}
+                className="flex flex-col md:flex-row items-center justify-center gap-10 mb-20"
+              >
+                {/* ===== CARD ===== */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{
+                    delay: i * 0.05,
+                    duration: 0.4,
+                    ease: "easeOut",
+                  }}
+                  className="relative"
                 >
-                  {/* ===== CARD ===== */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.2, duration: 0.6 }}
-                    className="relative"
-                  >
-                    <div
-                      className="absolute inset-0 blur-2xl opacity-40"
-                      style={{
-                        background: `linear-gradient(135deg, hsl(${hueA},100%,60%), hsl(${hueB},100%,60%))`,
-                      }}
-                    />
-                    <div className="relative bg-black/40 rounded-3xl p-10 w-50 h-48 flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
-                      <Image src={emoji} alt="" width={300} height={300} />
-                    </div>
-                  </motion.div>
+                  {/* Static Glow (นิ่ง) */}
+                  <div
+                    className="absolute inset-0 blur-2xl opacity-25"
+                    style={{
+                      background: `linear-gradient(
+        135deg,
+        hsl(${skill.hueA}, 100%, 60%),
+        hsl(${skill.hueB}, 100%, 60%)
+      )`,
+                    }}
+                  />
 
-                  {/* ===== TEXT ===== */}
-                  {/* <motion.div
-                    initial={{ opacity: 0, x: 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.2 + 0.15 }}
-                    className="
-    text-center md:text-left
-    w-full
-    max-w-xs sm:max-w-sm md:max-w-md md:pl-24
-    px-2 sm:px-0
-  "
-                  >
-                    <h3 className="text-3xl font-bold text-white mb-4 italic">
-                      {skillName}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      {description}
-                    </p>
-                  </motion.div> */}
-                </div>
-              ),
-            )}
+                  {/* Static Icon */}
+                  <div className="relative z-10">
+                    <Image
+                      src={skill.icon}
+                      alt={skill.name}
+                      width={120}
+                      height={120}
+                      className="object-contain select-none"
+                      draggable={false}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* ===== TEXT ===== */}
+                {/* <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15 + 0.1, duration: 0.5 }}
+                  className="
+        text-center md:text-left
+        w-full
+        max-w-xs sm:max-w-sm md:max-w-md
+        md:pl-24
+        px-2 sm:px-0
+      "
+                >
+                  <h3 className="text-3xl font-bold text-white mb-4 italic">
+                    {skill.name}
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    {skill.description}
+                  </p>
+                </motion.div> */}
+              </div>
+            ))}
           </div>
         </section>
       </section>

@@ -19,13 +19,14 @@ const showcases = [
   },
   {
     title: "Purchase Order",
-    description: "รับสินค้าด้วย SerialNumber ของแต่ละสินค้าเพื่อเก็บไว้ในระบบ",
+    description:
+      "รับสินค้าด้วย SerialNumber และทำเอกสารรายการสินค้า ที่เก็บไว้ในระบบ",
     image: "/stocks/stock20.png",
   },
   {
     title: "Sales Order",
     description: "ขายสินค้า ตัดสินค้าในระบบด้วย SerialNumber",
-    image: "/stocks/stock5.png",
+    image: "/stocks/stock29.png",
   },
   // {
   //   title: "Settings Panel",
