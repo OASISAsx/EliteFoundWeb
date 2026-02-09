@@ -41,18 +41,29 @@ export default function UIShowcase() {
 
   return (
     <section className="w-full max-w-9xl mx-auto px-6 py-24">
+      <motion.h2
+        key={current.title}
+        // initial={{ opacity: 0, y: 20 }}
+        // animate={{ opacity: 1, y: 0 }}
+        // transition={{ duration: 0.4 }}
+        className="text-4xl font-bold text-white "
+      >
+        Poontana ERP
+      </motion.h2>
+      <p className="mt-3 max-w-xl text-white/60">Internship Developer </p>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         {/* TEXT */}
+
         <div className="lg:col-span-5">
-          <motion.h2
+          <motion.h5
             key={current.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="text-4xl font-bold text-white"
+            className="text-4xl font-bold text-gray-400"
           >
             {current.title}
-          </motion.h2>
+          </motion.h5>
 
           <motion.p
             key={current.description}

@@ -15,9 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-aurora">
-      <body className={`${inter.className} antialiased`}>
-        <div className="relative min-h-full overflow-hidden">
+    <html lang="en">
+      <body className={`${inter.className} antialiased  min-h-screen`}>
+        <div className="aurora-layer" />
+        <div className="relative min-h-screen overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-noise" />
           <div className="relative z-10">{children}</div>
         </div>

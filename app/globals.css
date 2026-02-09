@@ -26,36 +26,38 @@ body {
   transition:
     background 0.3s ease,
     color 0.3s ease;
+  height: 100%;
 }
-.bg-aurora {
-  background-attachment: fixed;
+.aurora-layer {
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
 
   background:
     radial-gradient(
       600px at 20% 30%,
-      rgba(56, 189, 248, 0.25),
+      rgba(56, 189, 248, 0.22),
       transparent 60%
     ),
     radial-gradient(
       500px at 80% 40%,
-      rgba(139, 92, 246, 0.25),
+      rgba(139, 92, 246, 0.22),
       transparent 60%
     ),
     linear-gradient(180deg, #020617, #020617);
-  animation: auroraMove 20s ease-in-out infinite alternate;
-}
 
-@keyframes auroraMove {
+  animation: auroraFloat 30s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+@keyframes auroraFloat {
   0% {
-    background-position:
-      0% 0%,
-      100% 0%,
-      0% 0%;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-3%, -2%, 0) scale(1.02);
   }
   100% {
-    background-position:
-      10% 20%,
-      90% 30%,
-      0% 0%;
+    transform: translate3d(3%, 2%, 0) scale(1);
   }
 }
