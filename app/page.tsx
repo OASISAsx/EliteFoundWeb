@@ -474,7 +474,7 @@ export default function TypewriterHero() {
           </div>
         </section>
       </section>
-      <motion.button
+      {/* <motion.button
         onClick={() => {
           window.scrollBy({
             top: window.innerHeight,
@@ -486,7 +486,7 @@ export default function TypewriterHero() {
         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns="https://www.w3.org/2000/svg"
           className="h-10 w-10"
           fill="none"
           viewBox="0 0 24 24"
@@ -499,7 +499,7 @@ export default function TypewriterHero() {
             d="M19 9l-7 7-7-7"
           />
         </svg>
-      </motion.button>
+      </motion.button> */}
       <AnimatePresence>
         {show && (
           <motion.div
