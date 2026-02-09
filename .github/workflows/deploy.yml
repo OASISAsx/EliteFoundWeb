@@ -22,9 +22,8 @@ jobs:
             cd /root/portfolioWave
 
             git fetch origin
-            git reset --hard origin/build
+            git reset --hard origin/portfolioWave
 
             docker compose down --remove-orphans
             docker compose up -d --build
-
             docker image prune -f
