@@ -10,7 +10,7 @@ on:
 
 jobs:
   merge-and-deploy:
-    runs-on: ubuntu-latest # ไม่ต้อง self-hosted แล้ว เพราะใช้ SSH เข้า VPS
+    runs-on: ubuntu-latest
 
     steps:
       # =====================
