@@ -1,21 +1,21 @@
 FROM node:20-alpine
 
-# ติดตั้ง dependency ที่จำเป็น
 RUN apk add --no-cache git openssh
 
 WORKDIR /app
 
-# copy เฉพาะไฟล์ที่จำเป็นก่อน (cache ดี)
+# install deps
 COPY package*.json ./
-
 RUN npm install
 
-# copy source ทั้งหมด
+# copy source
 COPY . .
 
-# build app (เช่น Next.js / Vite)
+# build for production
 RUN npm run build
 
+# Next.js default port
 EXPOSE 3000
 
+# start production server
 CMD ["npm", "run", "start"]
