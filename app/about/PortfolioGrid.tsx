@@ -14,15 +14,13 @@ export default function PortfolioGrid() {
     <Box
       className="relative"
       sx={{
-        minHeight: "100vh",
         px: {
           xs: 3,
           sm: 5,
           lg: 3,
         },
-        py: {
-          xs: 6,
-        },
+
+        py: 6,
       }}
     >
       {!active && (

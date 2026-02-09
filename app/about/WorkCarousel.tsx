@@ -63,11 +63,11 @@ export default function WorkCarousel() {
   return (
     <div className="w-full max-w-7xl mx-auto px-6">
       {/* HEADER */}
-      <div className="mb-12">
+      <div className="py-18 ">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-white"
+          className="text-4xl md:text-5xl font-bold text-white "
         >
           DEXXON
         </motion.h2>

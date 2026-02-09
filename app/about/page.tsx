@@ -138,69 +138,11 @@ export default function SlotReel() {
         <PortfolioGrid />
       </section>
 
-      {/* <Box
-          id="projects"
-          sx={{
-            minHeight: "100vh",
-            display: "flex",
-            alignItems: "center",
-            py: 6,
-            px: { xs: 2, sm: 4, md: 6 }, // 👈 เพิ่มระยะห่างซ้ายขวา
-          }}
-        >
-         
-        </Box> */}
-
-      {/* <div className="flex sm:w-[10%] md:w-[90%] lg:w-[95%] xl:w-full justify-center">
-          {[0, 1, 2, 3, 4].map((col) => (
-            <div
-              key={col}
-              className="
-                relative overflow-hidden rounded-2xl
-                h-48 w-28
-                sm:h-56 sm:w-32
-                md:h-90 md:w-48
-                
-              "
-            >
-              <motion.div
-                className="absolute top-0 left-0 w-full flex flex-col items-center gap-4"
-                animate={{
-                  y: col % 2 === 0 ? ["0%", "-50%"] : ["-50%", "0%"],
-                }}
-                transition={{
-                  duration: 18 + col,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              >
-                {[...icons, ...icons].map((src, i) => (
-                  <Image
-                    key={i}
-                    src={src}
-                    alt=""
-                    width={200}
-                    height={160}
-                    className=" flex items-center justify-center h-52 w-36 sm:h-32 sm:w-32 md:h-80 md:w-66 "
-                  />
-                ))}
-              </motion.div>
-            </div>
-          ))}
-        </div> */}
-
-      {/* ===== PAGE 2 : NEXT SECTION ===== */}
-      <section className="h-screen snap-start relative flex items-center justify-center ">
+      <section className="min-h-screen snap-start relative flex items-center justify-center py-6">
         <div className="max-w-6xl w-full">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-white text-4xl md:text-5xl font-bold mb-16 px-6 pt-2"
-          >
-            Work Experience
-          </motion.h1>
-
+          <h3 className=" text-white text-3xl font-semibold p-10">
+            Work history
+          </h3>
           <div className="relative grid md:grid-cols-2 gap-12 sx:gap-8 px-6">
             <div className="hidden md:block absolute left-1/2 top-0 h-full w-px bg-white/20" />
 
@@ -294,7 +236,7 @@ export default function SlotReel() {
         </motion.div>
       </section>
       <section className="min-h-screen snap-start flex justify-center">
-        <div className="w-full max-w-7xl px-6 pt-24">
+        <div className="w-full max-w-7xl px-6 py-6">
           <WorkCarousel />
         </div>
       </section>
