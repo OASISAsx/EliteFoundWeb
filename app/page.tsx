@@ -356,7 +356,6 @@ export default function TypewriterHero() {
         </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-7xl w-full">
-          {/* Text Part */}
           <div className="text-center lg:text-left space-y-8">
             <h1 className="text-2xl xs:text-2xl md:text-4xl lg:text-6xl font-light text-gray-400 tracking-wider">
               <motion.span className="inline-block">
@@ -385,7 +384,6 @@ export default function TypewriterHero() {
             <p className="mt-12 text-xl text-gray-500">Wave | 23 age</p>
           </div>
 
-          {/* Logo Part */}
           <motion.div
             className="relative w-80 h-96"
             initial={{ opacity: 0, y: 24 }}
@@ -415,7 +413,6 @@ export default function TypewriterHero() {
               }}
             />
 
-            {/* soft light overlay */}
             <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/6 via-transparent to-transparent" />
           </motion.div>
         </div>
@@ -472,28 +469,6 @@ export default function TypewriterHero() {
                     />
                   </div>
                 </motion.div>
-
-                {/* ===== TEXT ===== */}
-                {/* <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 + 0.1, duration: 0.5 }}
-                  className="
-        text-center md:text-left
-        w-full
-        max-w-xs sm:max-w-sm md:max-w-md
-        md:pl-24
-        px-2 sm:px-0
-      "
-                >
-                  <h3 className="text-3xl font-bold text-white mb-4 italic">
-                    {skill.name}
-                  </h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {skill.description}
-                  </p>
-                </motion.div> */}
               </div>
             ))}
           </div>

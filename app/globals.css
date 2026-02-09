@@ -3,22 +3,6 @@
 /* ===============================
    Variables สำหรับ Light / Dark
    =============================== */
-:root {
-  /* Light Theme */
-  --background: #f5f7fa; /* สีขาวอมฟ้าอ่อน */
-  --foreground: #171717; /* ข้อความดำเข้ม */
-  --accent-blue: #0ea5e9; /* สีฟ้าเท่สำหรับ glow / gradient */
-  --accent-darkblue: #1e3a8a; /* ฟ้าเข้มสำหรับ gradient */
-  --font-sans: "Geist Sans", Arial, Helvetica, sans-serif;
-  --font-mono: "Fira Code", monospace;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-}
 
 /* Dark Theme */
 
@@ -44,6 +28,8 @@ body {
     color 0.3s ease;
 }
 .bg-aurora {
+  background-attachment: fixed;
+
   background:
     radial-gradient(
       600px at 20% 30%,

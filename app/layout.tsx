@@ -15,14 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased bg-aurora`}>
-        {/* Background Layer */}
-        <div className="relative min-h-screen bg-future-dark overflow-hidden">
-          {/* Noise Overlay */}
+    <html lang="en" className="bg-aurora">
+      <body className={`${inter.className} antialiased`}>
+        <div className="relative min-h-full overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-noise" />
-
-          {/* Content */}
           <div className="relative z-10">{children}</div>
         </div>
       </body>
