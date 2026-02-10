@@ -41,7 +41,8 @@ export const API = {
     FILE_MULTIPLE: "/upload/multi",
   },
   MAIN_STATUS: {
-    GET_BY_ID: (usersInformationId: string) => `/status/${usersInformationId}`,
+    GET_BY_ID: (usersInformationId: string) =>
+      `loanContact/status/${usersInformationId}`,
   },
 
   ADDRESS_DROPDOWN: {
