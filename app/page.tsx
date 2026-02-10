@@ -271,7 +271,7 @@ const skills: SkillItem[] = [
     hueB: 100,
   },
   {
-    icon: "/tach/Nginx.svg",
+    icon: "/tach/NGINX_logo.svg",
     name: "Nginx",
     description:
       "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
