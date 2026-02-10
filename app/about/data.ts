@@ -75,3 +75,69 @@ export const projects: Project[] = [
   //     tech: ["Next.js", "Tailwind", "Motion"],
   //   },
 ];
+type TimeLineType = {
+  year: string;
+  title: string;
+  company: string;
+  desc: string;
+  image: string;
+};
+
+export const timeline: TimeLineType[] = [
+  {
+    year: "2023",
+    title: " Final Project Study",
+    company: "ซื้อขายของสะสม",
+    desc: "Developed using Next.js and Golang",
+    image: "./images/colection.png",
+  },
+  {
+    year: "2024",
+    title: "Dexon Project",
+    company: "PTT",
+    desc: "Developed using Vue and.Net core",
+    image: "./images/dexon1.jpg",
+  },
+  {
+    year: "2024",
+    title: "Icon Dexon",
+    company: "Design Icon",
+    desc: "Design in Photoshop",
+    image: "./images/iconDexon.png",
+  },
+  {
+    year: "2024",
+    title: "Intern Developer",
+    company: "Certificate",
+    desc: "A certificate of effective and practical work. ",
+    image: "./images/certificave.jpg",
+  },
+  {
+    year: "2025",
+    title: "Developer",
+    company: "eims Stock",
+    desc: "Developed ERP system with vue3, pinia, Express.js",
+    image: "./images/eims.png",
+  },
+  {
+    year: "2025",
+    title: "Developer",
+    company: "Zillion",
+    desc: "Developed ERP system with vue3, pinia, NestJs Prisma",
+    image: "./zillion/8.png",
+  },
+  {
+    year: "2025",
+    title: "Developer",
+    company: "EliteFund",
+    desc: "Developed ERP system with Next, NestJS, MongoDB",
+    image: "./images/EliteFund.png",
+  },
+  {
+    year: "2025",
+    title: "DevOps",
+    company: "set CI/CD pipelines in Project ",
+    desc: "using Ubuntu,Nginx,Git Action, Docker ",
+    image: "./images/CICD.png",
+  },
+];

@@ -8,24 +8,25 @@ const showcases = [
   {
     title: "Detail Product",
     description:
-      "ตรวจสอบสินค้ารายละเอียดสินค้า ติดตามการซื้อขายจาก SerialNumber",
+      "หน้าระบบที่ใช้แสดงข้อมูลรายละเอียดของสินค้าในระดับเชิงลึก ไม่ใช่เพียงข้อมูลทั่วไปของรุ่นสินค้า แต่รวมถึงข้อมูลเฉพาะของสินค้าแต่ละชิ้นที่ถูกระบุด้วย Serial Number ซึ่งทำให้สามารถติดตามประวัติของสินค้าตั้งแต่ต้นทางจนถึงปลายทางได้อย่างครบถ้วน ระบบนี้ช่วยเปลี่ยนมุมมองการจัดการสินค้า จากการมองเป็น “สินค้าในภาพรวม” ไปสู่การมองเป็น “สินค้าแต่ละชิ้น” ซึ่งมีตัวตนและประวัติที่ตรวจสอบได้",
     image: "/stocks/stock23.png",
   },
   {
     title: "Total Sales",
     description:
-      "ตรวจสอบยอดขายสินค้าในแต่ละเดือนเพื่อ ทำเพิ่มการซื้อสินค้าที่ขายดี",
+      "สรุปและแสดงผลยอดขายสินค้าทั้งหมดในช่วงเวลาที่กำหนด โดยมักจะแสดงผลในรูปแบบรายเดือน เพื่อให้สามารถเปรียบเทียบแนวโน้มของยอดขายในแต่ละช่วงเวลาได้อย่างชัดเจน ข้อมูลนี้ไม่เพียงแสดงยอดขายรวมเท่านั้น แต่ยังสามารถแยกดูรายละเอียดตามประเภทสินค้า รุ่นสินค้า หรือช่องทางการขายได้อีกด้วย ระบบ Total Sales ช่วยเปลี่ยนข้อมูลการขายที่กระจัดกระจายให้กลายเป็นข้อมูลเชิงวิเคราะห์ที่เข้าใจง่าย และพร้อมนำไปใช้ในการตัดสินใจทางธุรกิจ",
     image: "/stocks/stock21.png",
   },
   {
     title: "Purchase Order",
     description:
-      "รับสินค้าด้วย SerialNumber และทำเอกสารรายการสินค้า ที่เก็บไว้ในระบบ",
+      "Purchase Order คือเอกสารและกระบวนการที่ใช้ในการสั่งซื้อสินค้า จากผู้ขายหรือซัพพลายเออร์ โดยระบุรายละเอียดของสินค้าที่ต้องการซื้อ เช่น ประเภทสินค้า จำนวน ราคา และเงื่อนไขการจัดส่ง เมื่อมีการจัดส่งสินค้า ระบบจะใช้ข้อมูลจาก Purchase Order เป็นตัวอ้างอิงในการตรวจรับสินค้า เพื่อให้มั่นใจว่าสินค้าที่ได้รับตรงตามที่สั่งซื้อไว้ ระบบ Purchase Order ช่วยสร้างความชัดเจนระหว่างฝ่ายจัดซื้อ ฝ่ายคลังสินค้า และฝ่ายบัญชี ทำให้ทุกฝ่ายสามารถทำงานบนข้อมูลเดียวกันได้อย่างถูกต้อง",
     image: "/stocks/stock20.png",
   },
   {
     title: "Sales Order",
-    description: "ขายสินค้า ตัดสินค้าในระบบด้วย SerialNumber",
+    description:
+      "ในระบบที่มีการติดตามสินค้าแบบรายชิ้น สินค้าทุกชิ้นจะถูกระบุด้วย Serial Number เมื่อมีการขายสินค้า ระบบจะบังคับให้เลือก Serial Number ของสินค้าที่จะขาย เพื่อให้มั่นใจว่าสินค้าที่ถูกขายมีตัวตนอยู่จริงในคลัง และยังไม่เคยถูกขายออกไปก่อนหน้านี้ การขายด้วย Serial Number ช่วยลดความผิดพลาดจากการขายสินค้าซ้ำ การขายสินค้าที่ไม่มีในสต็อก หรือการระบุสินค้าผิดชิ้น และยังช่วยเชื่อมโยงข้อมูลการขายเข้ากับประวัติของสินค้าแต่ละชิ้นโดยอัตโนมัติ",
     image: "/stocks/stock29.png",
   },
   // {
@@ -40,117 +41,157 @@ export default function UIShowcase() {
   const current = showcases[index];
 
   return (
-    <section className="w-full max-w-9xl mx-auto px-6 py-24">
-      <motion.h2
+    <section
+      className="
+    w-full
+    max-w-7xl
+    mx-auto
+    px-2
+    min-h-screen
+    flex
+    items-center
+    justify-center
+  "
+    >
+      <Box
         key={current.title}
-        // initial={{ opacity: 0, y: 20 }}
-        // animate={{ opacity: 1, y: 0 }}
-        // transition={{ duration: 0.4 }}
-        className="text-4xl font-bold text-white "
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 6, // ระยะห่าง header กับ content
+          py: 6,
+        }}
       >
-        Poontana ERP
-      </motion.h2>
-      <p className="mt-3 max-w-xl text-white/60">Full-Stack Developer </p>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-        {/* TEXT */}
-        <div className="lg:col-span-5">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/5 backdrop-blur rounded-2xl p-6 shadow-lg"
+        <div className="flex flex-col items-center justify-end">
+          <motion.h2
+            key={current.title}
+            transition={{ duration: 0.4 }}
+            className="text-3xl font-bold text-white px-3 line-clamp-1"
           >
+            Poontana ERP
+          </motion.h2>
 
-            <motion.h5
-              key={current.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="text-4xl font-bold text-gray-400"
-            >
-              {current.title}
-            </motion.h5>
+          <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">
+            Full-Stack Developer
+          </p>
+        </div>
 
-            <motion.p
-              key={current.description}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-              className="mt-4 text-white/60 leading-relaxed"
-            >
-              {current.description}
-            </motion.p>
+        <div className="w-full max-w-7xl px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* TEXT */}
+            <div className="lg:col-span-6">
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="                w-full
+                max-w-xl       /* ล็อกความกว้างสูงสุด */
+                min-h-[260px]  /* ล็อกความสูงขั้นต่ำ */
+                bg-white/5
+                backdrop-blur
+                rounded-2xl
+                p-6
+                shadow-lg
+                mx-auto        /* กลางทุกจอ */
+                flex
+                flex-col
+                justify-between"
+              >
+                <motion.h6
+                  key={current.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="text-2xl font-bold text-gray-400"
+                >
+                  {current.title}
+                </motion.h6>
 
-            {/* CONTROLS */}
-            <Box className="mt-10 flex w-full items-center justify-between">
-              {/* ซ้าย : dots */}
-              <div className="flex gap-3">
-                {showcases.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setIndex(i)}
-                    className={`h-2 rounded-full transition-all
+                <motion.p
+                  key={current.description}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.4 }}
+                  className="mt-4 text-white/60 leading-relaxed"
+                >
+                  {current.description}
+                </motion.p>
+
+                {/* CONTROLS */}
+                <Box className="mt-10 flex w-full items-center justify-between">
+                  {/* ซ้าย : dots */}
+                  <div className="flex gap-3">
+                    {showcases.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setIndex(i)}
+                        className={`h-2 rounded-full transition-all
           ${i === index ? "w-8 bg-white" : "w-2 bg-white/30"}
         `}
+                      />
+                    ))}
+                  </div>
+
+                  {/* ขวา : arrows */}
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() =>
+                        setIndex(
+                          (prev) =>
+                            (prev - 1 + showcases.length) % showcases.length,
+                        )
+                      }
+                      className="
+        flex h-10 w-10 items-center justify-center
+        rounded-full bg-white/10 text-white
+        transition hover:bg-white/20
+      "
+                      aria-label="Previous image"
+                    >
+                      ←
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        setIndex((prev) => (prev + 1) % showcases.length)
+                      }
+                      className="
+        flex h-10 w-10 items-center justify-center
+        rounded-full bg-white/10 text-white
+        transition hover:bg-white/20
+      "
+                      aria-label="Next image"
+                    >
+                      →
+                    </button>
+                  </div>
+                </Box>
+              </motion.div>
+            </div>
+
+            {/* IMAGE */}
+            <div className="lg:col-span-6">
+              <div className="relative aspect-[34/22] overflow-hidden rounded-2xl bg-white/5">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={current.image}
+                    src={current.image}
+                    alt={current.title}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -40 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-contain"
                   />
-                ))}
+                </AnimatePresence>
               </div>
-
-              {/* ขวา : arrows */}
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={() =>
-                    setIndex(
-                      (prev) => (prev - 1 + showcases.length) % showcases.length,
-                    )
-                  }
-                  className="
-        flex h-10 w-10 items-center justify-center
-        rounded-full bg-white/10 text-white
-        transition hover:bg-white/20
-      "
-                  aria-label="Previous image"
-                >
-                  ←
-                </button>
-
-                <button
-                  onClick={() =>
-                    setIndex((prev) => (prev + 1) % showcases.length)
-                  }
-                  className="
-        flex h-10 w-10 items-center justify-center
-        rounded-full bg-white/10 text-white
-        transition hover:bg-white/20
-      "
-                  aria-label="Next image"
-                >
-                  →
-                </button>
-              </div>
-            </Box>
-          </motion.div>
-        </div>
-
-
-        {/* IMAGE */}
-        <div className="lg:col-span-7">
-          <div className="relative aspect-[32/19] overflow-hidden rounded-2xl bg-white/5">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={current.image}
-                src={current.image}
-                alt={current.title}
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -40 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </AnimatePresence>
+            </div>
           </div>
         </div>
-      </div>
+      </Box>
     </section>
   );
 }

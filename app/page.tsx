@@ -180,7 +180,6 @@ const skills: SkillItem[] = [
     hueB: 100,
   },
 
-
   {
     icon: "https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg",
     name: "Zustand",
@@ -219,8 +218,8 @@ const skills: SkillItem[] = [
     name: "Pinia & Vuex",
     description:
       "จัดการ State และการเชื่อมต่อ API ใน Vue.js อย่างเป็นระบบด้วย Pinia และ Vuex",
-    hueA: 260,
-    hueB: 300,
+    hueA: 100,
+    hueB: 100,
   },
   {
     icon: "/tach/Sequelize.svg",
@@ -239,12 +238,12 @@ const skills: SkillItem[] = [
     hueB: 80,
   },
   {
-    icon: "/images/vuexys.webp",
+    icon: "/tach/v-logo.svg",
     name: "Vuexy",
     description:
       "Admin Template ระดับพรีเมียมสำหรับสร้าง Dashboard และระบบหลังบ้านอย่างรวดเร็ว",
-    hueA: 300,
-    hueB: 300,
+    hueA: 200,
+    hueB: 200,
   },
   {
     icon: "/tach/AWS.svg",
@@ -267,7 +266,7 @@ const skills: SkillItem[] = [
     name: "Ubuntu",
     description:
       "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
-    hueA: 0,
+    hueA: 10,
     hueB: 100,
   },
   {
@@ -291,16 +290,16 @@ const skills: SkillItem[] = [
     name: "MySQL",
     description:
       "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
-    hueA: 100,
-    hueB: 140,
+    hueA: 200,
+    hueB: 200,
   },
   {
-    icon: "/tach/DBeaver.svg",
-    name: "DBeaver",
+    icon: "/tach/Postgresql.svg",
+    name: "Postgresql",
     description:
       "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
-    hueA: 100,
-    hueB: 140,
+    hueA: 200,
+    hueB: 200,
   },
   // {
   //   icon: "/images/Linux.svg",
@@ -462,7 +461,15 @@ export default function TypewriterHero() {
               </motion.span>
             </h1>
 
-            <div className="text-2xl xs:text-2xl md:text-6xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+            <div
+              className="
+    text-2xl xs:text-2xl md:text-6xl lg:text-4xl
+    font-bold
+    text-transparent bg-clip-text
+    bg-gradient-to-r
+    from-cyan-300 via-gray-200 to-gray-500
+  "
+            >
               <motion.span className="flex items-center justify-center lg:justify-start">
                 <motion.span>{wordDisplay}</motion.span>
                 <motion.span

@@ -20,6 +20,7 @@ import {
 import { GitHub } from "@mui/icons-material";
 
 import PortfolioGrid from "./PortfolioGrid";
+import DevTimeline from "./TimelineComponent";
 
 export default function SlotReel() {
   const icons = [
@@ -159,7 +160,6 @@ export default function SlotReel() {
                 </h3>
                 <div className="bg-white h-[45px] w-[160px] rounded-md flex items-center justify-center mb-2">
                   <Image
-
                     src="/images/poon_logo.png"
                     alt="Company logo"
                     width={160}
@@ -167,7 +167,6 @@ export default function SlotReel() {
                     className="object-contain"
                   />
                 </div>
-
               </div>
 
               <p className="text-gray-400 text-sm mb-3">
@@ -213,17 +212,16 @@ export default function SlotReel() {
                 4 months 2022 – 2023 (Dexon technologies Co., Ltd)
               </p>
               <p className="text-gray-300 leading-relaxed">
-                มีส่วนร่วมในการพัฒนาเว็บแอปพลิเคชัน และได้รับประสบการณ์ในการใช้งานเทคโนโลยีฝั่ง Frontend
-                โดยใช้เฟรมเวิร์ก Vue.js และ Tailwind CSS ในการพัฒนาระบบที่เกี่ยวข้องกับงานด้าน Software Engineering
-
+                มีส่วนร่วมในการพัฒนาเว็บแอปพลิเคชัน
+                และได้รับประสบการณ์ในการใช้งานเทคโนโลยีฝั่ง Frontend
+                โดยใช้เฟรมเวิร์ก Vue.js และ Tailwind CSS
+                ในการพัฒนาระบบที่เกี่ยวข้องกับงานด้าน Software Engineering
                 ช่วยเสนอความคิดเห็นและออกแบบโครงสร้างข้อมูล (Data Structure)
                 รวมถึงมีส่วนร่วมในการออกแบบระบบให้เหมาะสมกับการทำงานของแอปพลิเคชัน
-
-                ออกแบบโลโก้และงานด้านกราฟิก
-                โดยใช้โปรแกรม Adobe Photoshop เพื่อสนับสนุนภาพลักษณ์และเอกลักษณ์ของระบบ
-
-                ออกแบบเอกสาร PDF สำหรับการใช้งานภายในระบบ
-                โดยสร้าง Template เฉพาะ (Custom PDF Template) ให้เหมาะสมกับรูปแบบข้อมูลและการใช้งานจริง
+                ออกแบบโลโก้และงานด้านกราฟิก โดยใช้โปรแกรม Adobe Photoshop
+                เพื่อสนับสนุนภาพลักษณ์และเอกลักษณ์ของระบบ ออกแบบเอกสาร PDF
+                สำหรับการใช้งานภายในระบบ โดยสร้าง Template เฉพาะ (Custom PDF
+                Template) ให้เหมาะสมกับรูปแบบข้อมูลและการใช้งานจริง
               </p>
             </motion.div>
           </div>
@@ -238,13 +236,13 @@ export default function SlotReel() {
             xl:block
           "
         >
-          <Image
+          {/* <Image
             src="/images/2590506.png"
             alt="Developer"
             width={320}
             height={170}
             className="object-contain"
-          />
+          /> */}
         </motion.div>
       </section>
       <section className="min-h-screen snap-start flex justify-center">
@@ -253,17 +251,18 @@ export default function SlotReel() {
         </div>
       </section>
       <section className="min-h-screen snap-start flex justify-center">
-        <div className="w-full max-w-7xl px-6 pt-24">
+        <div className="w-full max-w-7xl px-6 pt-8">
           <UIShowcase />
         </div>
       </section>
       <section className="min-h-screen snap-start flex justify-center">
-        <div className="w-full max-w-7xl px-6 pt-24">
+        <div className="w-full max-w-7xl px-6 pt-8">
           <ZCarousel />
         </div>
       </section>
-
+      <section className="min-h-screen snap-start flex justify-center">
+        <DevTimeline />
+      </section>
     </div>
-
   );
 }
