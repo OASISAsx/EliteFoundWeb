@@ -148,7 +148,7 @@ const skills: SkillItem[] = [
     hueB: 140,
   },
   {
-    icon: "/images/Express.png",
+    icon: "/images/Express_logo.png",
     name: "Express.js",
     description:
       "พัฒนา REST API ที่รวดเร็วและยืดหยุ่น ด้วย Express.js สำหรับระบบ Backend",
