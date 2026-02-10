@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Project, projects } from "./data";
 import PortfolioItem from "./PortfolioItem";
 import PortfolioDetail from "./PortfolioDetail";
-import { LayoutGroup } from "motion/react";
+// import { LayoutGroup } from "motion/react";
 import { Box } from "@mui/material";
 
 export default function PortfolioGrid() {
@@ -29,7 +29,7 @@ export default function PortfolioGrid() {
             className="
           mx-auto
           w-full
-          max-w-5xl
+          max-w-4xl
           grid
           grid-cols-1
           sm:grid-cols-2

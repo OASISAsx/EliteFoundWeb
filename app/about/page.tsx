@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import WorkCarousel from "./WorkCarousel";
 import UIShowcase from "./StockCarousel";
+import ZCarousel from "./ZCarousel";
 import {
   Box,
   Button,
@@ -141,7 +142,7 @@ export default function SlotReel() {
       <section className="min-h-screen snap-start relative flex items-center justify-center py-6">
         <div className="max-w-6xl w-full">
           <h3 className=" text-white text-3xl font-semibold p-10">
-            Work history
+            Work History
           </h3>
           <div className="relative grid md:grid-cols-2 gap-12 sx:gap-8 px-6">
             <div className="hidden md:block absolute left-1/2 top-0 h-full w-px bg-white/20" />
@@ -153,17 +154,20 @@ export default function SlotReel() {
               className="bg-white/5 backdrop-blur rounded-2xl p-6 shadow-lg"
             >
               <div className="flex items-center justify-between gap-4 mb-4">
-                <h3 className="text-white text-xl font-semibold">
+                <h3 className="text-white text-xl font-semibold ">
                   Full-Stack Developer
                 </h3>
+                <div className="bg-white h-[45px] w-[160px] rounded-md flex items-center justify-center mb-2">
+                  <Image
 
-                <Image
-                  src="/images/poon_logo.png"
-                  alt="Company logo"
-                  width={160}
-                  height={40}
-                  className="object-contain"
-                />
+                    src="/images/poon_logo.png"
+                    alt="Company logo"
+                    width={160}
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+
               </div>
 
               <p className="text-gray-400 text-sm mb-3">
@@ -192,7 +196,7 @@ export default function SlotReel() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="bg-white/5 backdrop-blur rounded-2xl p-6 shadow-lg"
             >
-              <div className="flex items-center justify-between gap-4 mt-6">
+              <div className="flex items-center justify-between gap-4">
                 <h3 className="text-white text-xl font-semibold">
                   Internship Developer
                 </h3>
@@ -209,9 +213,17 @@ export default function SlotReel() {
                 4 months 2022 – 2023 (Dexon technologies Co., Ltd)
               </p>
               <p className="text-gray-300 leading-relaxed">
-                Assisted in developing web applications and gained experience in
-                frontend technologies use framework vue.js, Tailwind CSS to
-                develop systems related to software engineering.
+                มีส่วนร่วมในการพัฒนาเว็บแอปพลิเคชัน และได้รับประสบการณ์ในการใช้งานเทคโนโลยีฝั่ง Frontend
+                โดยใช้เฟรมเวิร์ก Vue.js และ Tailwind CSS ในการพัฒนาระบบที่เกี่ยวข้องกับงานด้าน Software Engineering
+
+                ช่วยเสนอความคิดเห็นและออกแบบโครงสร้างข้อมูล (Data Structure)
+                รวมถึงมีส่วนร่วมในการออกแบบระบบให้เหมาะสมกับการทำงานของแอปพลิเคชัน
+
+                ออกแบบโลโก้และงานด้านกราฟิก
+                โดยใช้โปรแกรม Adobe Photoshop เพื่อสนับสนุนภาพลักษณ์และเอกลักษณ์ของระบบ
+
+                ออกแบบเอกสาร PDF สำหรับการใช้งานภายในระบบ
+                โดยสร้าง Template เฉพาะ (Custom PDF Template) ให้เหมาะสมกับรูปแบบข้อมูลและการใช้งานจริง
               </p>
             </motion.div>
           </div>
@@ -245,6 +257,13 @@ export default function SlotReel() {
           <UIShowcase />
         </div>
       </section>
+      <section className="min-h-screen snap-start flex justify-center">
+        <div className="w-full max-w-7xl px-6 pt-24">
+          <ZCarousel />
+        </div>
+      </section>
+
     </div>
+
   );
 }

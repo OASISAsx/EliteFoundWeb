@@ -7,7 +7,6 @@ import {
   useMotionValue,
   useTransform,
   animate,
-  Variants,
   useSpring,
   AnimatePresence,
 } from "framer-motion";
@@ -23,7 +22,7 @@ const rotatingWords = [
   "Full-Stack Developer",
   "Frontend Developer",
   "Backend Developer",
-  "Creative Coder",
+  "DevOps Engineer",
 ];
 
 // ============== Card Animation Styles ================
@@ -106,14 +105,7 @@ const skills: SkillItem[] = [
     hueA: 600,
     hueB: 500,
   },
-  {
-    icon: "https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg",
-    name: "Zustand",
-    description:
-      "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
-    hueA: 0,
-    hueB: 100,
-  },
+
   {
     icon: "/images/Ts.png",
     name: "TypeScript",
@@ -131,6 +123,23 @@ const skills: SkillItem[] = [
     hueB: 120,
   },
   {
+    icon: "/images/tw.png",
+    name: "Tailwind CSS",
+    description:
+      "ออกแบบ UI แบบ Responsive ได้รวดเร็วด้วย Utility-first CSS พร้อมควบคุมดีไซน์ได้อย่างยืดหยุ่น",
+    hueA: 140,
+    hueB: 180,
+  },
+  {
+    icon: "/images/react.svg",
+    name: "React.js",
+    description:
+      "พัฒนาเว็บแอปด้วย React 3 และ Composition API เพื่อโครงสร้างที่ยืดหยุ่นและขยายระบบได้ง่าย",
+    hueA: 140,
+    hueB: 180,
+  },
+
+  {
     icon: "/images/node.png",
     name: "Node.js",
     description:
@@ -139,7 +148,7 @@ const skills: SkillItem[] = [
     hueB: 140,
   },
   {
-    icon: "/images/Express.svg",
+    icon: "/images/Express.png",
     name: "Express.js",
     description:
       "พัฒนา REST API ที่รวดเร็วและยืดหยุ่น ด้วย Express.js สำหรับระบบ Backend",
@@ -163,13 +172,24 @@ const skills: SkillItem[] = [
     hueB: 180,
   },
   {
-    icon: "/images/tw.png",
-    name: "Tailwind CSS",
+    icon: "/images/JavaScript.svg",
+    name: "JavaScript",
     description:
-      "ออกแบบ UI แบบ Responsive ได้รวดเร็วด้วย Utility-first CSS พร้อมควบคุมดีไซน์ได้อย่างยืดหยุ่น",
-    hueA: 140,
-    hueB: 180,
+      "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
+    hueA: 0,
+    hueB: 100,
   },
+
+
+  {
+    icon: "https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg",
+    name: "Zustand",
+    description:
+      "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
+    hueA: 0,
+    hueB: 100,
+  },
+
   {
     icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/MaterialUI-Dark.svg",
     name: "Material UI",
@@ -177,6 +197,14 @@ const skills: SkillItem[] = [
       "สร้าง UI มาตรฐานระดับองค์กรด้วย Component ที่พร้อมใช้งานและปรับแต่งได้สูง",
     hueA: 200,
     hueB: 240,
+  },
+  {
+    icon: "/tach/NuxtJS.svg",
+    name: "Nuxt.js",
+    description:
+      "พัฒนาเว็บแอปด้วย Nuxt.js สำหรับการสร้าง Progressive Web Apps และ SSR อย่างมีประสิทธิภาพ",
+    hueA: 100,
+    hueB: 140,
   },
   {
     icon: "/images/github.png",
@@ -191,6 +219,14 @@ const skills: SkillItem[] = [
     name: "Pinia & Vuex",
     description:
       "จัดการ State และการเชื่อมต่อ API ใน Vue.js อย่างเป็นระบบด้วย Pinia และ Vuex",
+    hueA: 260,
+    hueB: 300,
+  },
+  {
+    icon: "/tach/Sequelize.svg",
+    name: "Sequelize",
+    description:
+      "จัดการ Database ด้วย ORM ที่รองรับ PostgreSQL, MySQL และ SQLite",
     hueA: 260,
     hueB: 300,
   },
@@ -211,13 +247,69 @@ const skills: SkillItem[] = [
     hueB: 300,
   },
   {
-    icon: "/images/Linux.svg",
-    name: "Linux",
+    icon: "/tach/AWS.svg",
+    name: "AWS",
     description:
-      "ใช้งาน Linux Server สำหรับ Deploy, Configure และดูแลระบบ Production",
-    hueA: 220,
-    hueB: 260,
+      "Admin Template ระดับพรีเมียมสำหรับสร้าง Dashboard และระบบหลังบ้านอย่างรวดเร็ว",
+    hueA: 200,
+    hueB: 200,
   },
+  {
+    icon: "/tach/Docker.svg",
+    name: "Docker",
+    description:
+      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    hueA: 200,
+    hueB: 200,
+  },
+  {
+    icon: "/tach/Ubuntu.svg",
+    name: "Ubuntu",
+    description:
+      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    hueA: 0,
+    hueB: 100,
+  },
+  {
+    icon: "/tach/Nginx.svg",
+    name: "Nginx",
+    description:
+      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    hueA: 100,
+    hueB: 140,
+  },
+  {
+    icon: "/tach/MongoDB.svg",
+    name: "MongoDB",
+    description:
+      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    hueA: 100,
+    hueB: 140,
+  },
+  {
+    icon: "/tach/MySQL.svg",
+    name: "MySQL",
+    description:
+      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    hueA: 100,
+    hueB: 140,
+  },
+  {
+    icon: "/tach/DBeaver.svg",
+    name: "DBeaver",
+    description:
+      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    hueA: 100,
+    hueB: 140,
+  },
+  // {
+  //   icon: "/images/Linux.svg",
+  //   name: "Linux",
+  //   description:
+  //     "ใช้งาน Linux Server สำหรับ Deploy, Configure และดูแลระบบ Production",
+  //   hueA: 220,
+  //   hueB: 260,
+  // },
 ];
 
 // ============== Main Component ================
@@ -431,7 +523,7 @@ export default function TypewriterHero() {
             {skills.map((skill, i) => (
               <div
                 key={skill.name}
-                className="flex flex-col md:flex-row items-center justify-center gap-10 mb-20"
+                className="flex items-center justify-center gap-10 mb-20"
               >
                 {/* ===== CARD ===== */}
                 <motion.div
@@ -469,6 +561,7 @@ export default function TypewriterHero() {
                     />
                   </div>
                 </motion.div>
+                {/* ===== TEXT ===== */}
               </div>
             ))}
           </div>

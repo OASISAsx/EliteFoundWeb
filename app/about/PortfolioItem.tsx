@@ -48,8 +48,7 @@ export default function PortfolioItem({
           className="
       absolute inset-0
       flex items-center justify-center
-      bg-black/20
-      opacity-100
+     
       transition
       group-hover:bg-black/40
     "
