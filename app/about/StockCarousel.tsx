@@ -7,7 +7,7 @@ const showcases = [
   {
     title: "Login Page",
     description:
-      "Login Page เป็นจุดเริ่มต้นของการเข้าใช้งานระบบ Eims",
+      "Login Page เป็นจุดเริ่มต้นของการเข้าใช้งานระบบ Eims โดยจะส่งข้อมูล Username และ Password เข้าไปตรวจสอบการ Login มีอยู่ในระบบหรือไม่ ถ้ามี username จะทำการ เช็คจาก password hash กลับเอาไปเช็ค database",
     image: "/stocks/loginEwork.png",
   },
   {
