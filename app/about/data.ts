@@ -105,7 +105,7 @@ export const timeline: TimeLineType[] = [
     desc: "Design in Photoshop",
     image: "./images/iconDexon.png",
   },
-   {
+  {
     year: "2024",
     title: "Photo",
     company: "Dexon",
@@ -118,6 +118,13 @@ export const timeline: TimeLineType[] = [
     company: "Certificate",
     desc: "A certificate of effective and practical work. ",
     image: "./images/certificave.jpg",
+  },
+  {
+    year: "2025",
+    title: "DevOps",
+    company: "set CI/CD pipelines in Project ",
+    desc: "Ubuntu,Nginx,Git Action, Docker ",
+    image: "./images/CICD.png",
   },
   {
     year: "2025",
@@ -139,12 +146,5 @@ export const timeline: TimeLineType[] = [
     company: "EliteFund",
     desc: "Developed ERP system with Next, NestJS, MongoDB",
     image: "./images/EliteFund.png",
-  },
-  {
-    year: "2025",
-    title: "DevOps",
-    company: "set CI/CD pipelines in Project ",
-    desc: "using Ubuntu,Nginx,Git Action, Docker ",
-    image: "./images/CICD.png",
   },
 ];
