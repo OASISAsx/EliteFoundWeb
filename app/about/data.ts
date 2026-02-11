@@ -105,6 +105,13 @@ export const timeline: TimeLineType[] = [
     desc: "Design in Photoshop",
     image: "./images/iconDexon.png",
   },
+   {
+    year: "2024",
+    title: "Photo",
+    company: "Dexon",
+    desc: "Intern Project",
+    image: "./images/timeDexxon.jpg",
+  },
   {
     year: "2024",
     title: "Intern Developer",
