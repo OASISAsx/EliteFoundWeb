@@ -17,13 +17,11 @@ import { Anuphan } from "next/font/google";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import "dayjs/locale/th"; // ← สำคัญมาก! ทำให้เดือน/วันเป็นไทย
+import "dayjs/locale/th";
 
-// Plugin พิเศษสำหรับปี พ.ศ. (ถ้าต้องการแสดง พ.ศ. แทน ค.ศ.)
 import buddhistEra from "dayjs/plugin/buddhistEra";
 dayjs.extend(buddhistEra); // เปิดใช้งาน plugin
 
-// ตั้งค่า locale ไทยทั่วทั้งแอพ (เดือน วัน เป็นไทยอัตโนมัติ)
 dayjs.locale("th");
 const anuphan = Anuphan({
   subsets: ["thai"],
