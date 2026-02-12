@@ -48,7 +48,7 @@ export default function SlotReel() {
               </div>
 
               <p className="text-gray-400 text-sm mb-3">
-                2023 – Present (Poontana Marketing Co., Ltd)
+                2024 – Present (Poontana Marketing Co., Ltd)
               </p>
               <p className="text-gray-300 leading-relaxed">
                 ทำงานในตำแหน่ง Full-Stack Developer
@@ -87,7 +87,7 @@ export default function SlotReel() {
                 />
               </div>
               <p className="text-gray-400 text-sm mb-3 mt-10">
-                4 months 2022 – 2023 (Dexon technologies Co., Ltd)
+                4 months 2023 – 2024 (Dexon technologies Co., Ltd)
               </p>
               <p className="text-gray-300 leading-relaxed">
                 มีส่วนร่วมในการพัฒนาเว็บแอปพลิเคชัน
