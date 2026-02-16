@@ -81,7 +81,7 @@ export default function SlotReel() {
                 <Image
                   className="items-center justify-center mb-2 rounded-md "
                   alt=""
-                  src={"./images/dexon.jpg"}
+                  src={"../images/dexon.jpg"}
                   width={160}
                   height={50}
                 />
