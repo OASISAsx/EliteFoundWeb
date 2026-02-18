@@ -44,10 +44,10 @@ export default function DraggableLangButton() {
   }, [dragging]);
 
   const handleChangeLang = () => {
-    if (pathname.startsWith("/th")) {
-      router.push(pathname.replace("/th", "/en"));
-    } else {
+    if (pathname.startsWith("/en")) {
       router.push(pathname.replace("/en", "/th"));
+    } else {
+      router.push(pathname.replace("/th", "/en"));
     }
   };
 

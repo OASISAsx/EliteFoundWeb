@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import DraggableLangButton from "./components/DraggableLangButton";
+import { redirect } from "next/navigation";
 
 export default async function LocaleLayout({
   children,
@@ -12,7 +13,7 @@ export default async function LocaleLayout({
   const { locale } = await params; // ✅ ต้อง await
 
   const messages = await getMessages({ locale });
-
+  // redirect("/en");
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       {/* <DraggableLangButton /> */}
