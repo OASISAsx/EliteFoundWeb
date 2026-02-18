@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html>
       <body className={`${inter.className} antialiased  min-h-screen`}>
         <div className="aurora-layer" />
         <div className="relative min-h-screen overflow-hidden">

@@ -1,0 +1,192 @@
+import {
+  AnimatePresence,
+  motion,
+  MotionValue,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { timeline } from "./data";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+
+export default function DevTimeline() {
+  const [show, setShow] = useState(false);
+  const router = useRouter();
+
+  const backRef = useRef<HTMLButtonElement>(null);
+  const contactRef = useRef<HTMLButtonElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  // Contact button
+  const xContact = useMotionValue(0);
+  const yContact = useMotionValue(0);
+  const springXContact = useSpring(xContact, { stiffness: 200, damping: 20 });
+  const springYContact = useSpring(yContact, { stiffness: 200, damping: 20 });
+
+  // Back button
+  const xBack = useMotionValue(0);
+  const yBack = useMotionValue(0);
+  const springXBack = useSpring(xBack, { stiffness: 200, damping: 20 });
+  const springYBack = useSpring(yBack, { stiffness: 200, damping: 20 });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShow(entry.isIntersecting);
+      },
+      { threshold: 1 },
+    );
+
+    if (bottomRef.current) observer.observe(bottomRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Typewriter logic (เหมือนเดิม)
+  // const greetingCount = useMotionValue(0);
+  // const greetingRounded = useTransform(greetingCount, Math.round);
+
+  // const wordIndex = useMotionValue(0);
+  // const wordCount = useMotionValue(0);
+  const createMouseMove =
+    (x: MotionValue<number>, y: MotionValue<number>) =>
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+
+      const offsetX = e.clientX - rect.left - rect.width / 2;
+      const offsetY = e.clientY - rect.top - rect.height / 2;
+
+      x.set(offsetX * 0.15);
+      y.set(offsetY * 0.15);
+    };
+
+  const createMouseLeave =
+    (x: MotionValue<number>, y: MotionValue<number>) => () => {
+      x.set(0);
+      y.set(0);
+    };
+
+  const onClickMove = () => {
+    router.push("/contact");
+  };
+  const onClickBack = () => {
+    router.push("/");
+  };
+  return (
+    <div className="relative max-w-4xl mx-auto py-20">
+      {/* vertical line */}
+      <div className="absolute left-1/2 top-0 h-full w-[2px] bg-white/10 -translate-x-1/2" />
+      <div className="space-y-24">
+        {timeline.map((item, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className={`relative flex ${
+              i % 2 === 0 ? "justify-start" : "justify-end"
+            }`}
+          >
+            <div ref={bottomRef} className="space-y-24" />
+            {/* dot */}
+            <span className="absolute left-1/2 top-8 h-4 w-4 bg-sky-400 rounded-full -translate-x-1/2 shadow-[0_0_12px_#38bdf8]" />
+
+            {/* card */}
+            <div className="w-[46%] bg-white/5 backdrop-blur rounded-xl overflow-hidden shadow-lg">
+              {/* image */}
+              <div className="relative aspect-video overflow-hidden">
+                <motion.img
+                  src={item.image}
+                  alt={item.title}
+                  initial={{ scale: 1.1, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+
+              {/* content */}
+              <div className="p-6">
+                <p className="text-sky-400 text-sm">{item.year}</p>
+                <h3 className="text-xl font-bold text-white mt-1">
+                  {item.title}
+                </h3>
+                <p className="text-white/70 text-sm">{item.company}</p>
+                <p className="text-white/60 mt-3 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        {show && (
+          <>
+            {/* RIGHT BUTTON */}
+            <motion.div
+              key="contact-btn"
+              className="fixed bottom-6 right-6 z-50"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ type: "spring", stiffness: 160, damping: 20 }}
+            >
+              <motion.button
+                type="button"
+                ref={contactRef}
+                onClick={onClickMove}
+                onMouseMove={createMouseMove(xContact, yContact)}
+                onMouseLeave={createMouseLeave(xContact, yContact)}
+                className="px-6 py-4 rounded-2xl bg-white text-black font-semibold shadow-lg"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <motion.span
+                  style={{ x: springXContact, y: springYContact }}
+                  className="flex items-center"
+                >
+                  Contact
+                  <ArrowForwardIosIcon className="ml-2 text-black" />
+                </motion.span>
+              </motion.button>
+            </motion.div>
+
+            {/* LEFT BUTTON */}
+            <motion.div
+              key="back-btn"
+              className="fixed bottom-6 left-6 z-50"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ type: "spring", stiffness: 160, damping: 20 }}
+            >
+              <motion.button
+                type="button"
+                ref={backRef}
+                onClick={onClickBack}
+                onMouseMove={createMouseMove(xBack, yBack)}
+                onMouseLeave={createMouseLeave(xBack, yBack)}
+                className="px-6 py-4 rounded-2xl bg-white text-black font-semibold shadow-lg"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <motion.span
+                  style={{ x: springXBack, y: springYBack }}
+                  className="flex items-center"
+                >
+                  <ArrowBackIosNewIcon className="mr-2 text-black" />
+                  Back
+                </motion.span>
+              </motion.button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

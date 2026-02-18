@@ -4,22 +4,22 @@ import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 
 const images = [
-  "./works/work1.jpg",
-  "./works/work2.jpg",
-  "./works/work3.jpg",
-  "./works/work4.jpg",
-  "./works/work1.jpg",
-  "./works/work2.jpg",
-  "./works/work3.jpg",
-  "./works/work4.jpg",
-  "./works/work1.jpg",
-  "./works/work2.jpg",
-  "./works/work3.jpg",
-  "./works/work4.jpg",
-  "./works/work1.jpg",
-  "./works/work2.jpg",
-  "./works/work3.jpg",
-  "./works/work4.jpg",
+  "../works/work1.jpg",
+  "../works/work2.jpg",
+  "../works/work3.jpg",
+  "../works/work4.jpg",
+  "../works/work1.jpg",
+  "../works/work2.jpg",
+  "../works/work3.jpg",
+  "../works/work4.jpg",
+  "../works/work1.jpg",
+  "../works/work2.jpg",
+  "../works/work3.jpg",
+  "../works/work4.jpg",
+  "../works/work1.jpg",
+  "../works/work2.jpg",
+  "../works/work3.jpg",
+  "../works/work4.jpg",
 ];
 
 export default function WorkCarousel() {
