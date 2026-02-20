@@ -316,7 +316,7 @@ export default function TypewriterHero() {
   const [show, setShow] = useState(false);
   const router = useRouter();
   const t = useTranslations("Home");
-  const greetingText = `${t("myName")}`;
+  const greetingText = `Nanthawat Inthisaen`;
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -549,11 +549,10 @@ export default function TypewriterHero() {
                   <div
                     className="absolute inset-0 blur-2xl opacity-25"
                     style={{
-                      background: `linear-gradient(
-        135deg,
-        hsl(${skill.hueA}, 100%, 60%),
-        hsl(${skill.hueB}, 100%, 60%)
-      )`,
+                      background: `linear-gradient(135deg,
+                                      hsl(${skill.hueA}, 100%, 60%),
+                                      hsl(${skill.hueB}, 100%, 60%)
+                                    )`,
                     }}
                   />
 

@@ -10,9 +10,12 @@ import {
   MapPin,
   MessageCircle,
   Instagram,
+  Github,
 } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { GitHub } from "@mui/icons-material";
+import { Box, Card } from "@mui/material";
 
 /**
  * Contact Page - All-in-One Component
@@ -50,6 +53,7 @@ export default function Contact() {
     lineUrl: "https://line.me/ti/p/wavekungoasis777-",
     instagramUrl: "https://instagram.com/waveskung",
     pdfUrl: "/PDF/Resume.pdf",
+    github: "https://github.com/OASISAsx",
   };
 
   const handleFormChange = (
@@ -146,7 +150,7 @@ export default function Contact() {
                 <motion.img
                   src="/images/profile2.png"
                   alt="Profile"
-                  className="w-full h-full object-cover rounded-full border-4 border-white/20 saturate-90 contrast-105"
+                  className="w-full h-full object-cover rounded-full  saturate-90 contrast-105"
                   animate={{
                     boxShadow: [
                       "0 12px 30px rgba(0, 212, 255, 0.15)",
@@ -178,66 +182,87 @@ export default function Contact() {
       </section>
 
       {/* Contact Information Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Contact Information
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Email Card */}
-            <a
-              href={`mailto:${contactData.email}`}
-              className="glass glass-hover p-6 flex items-start gap-4 cursor-pointer transition-all duration-300"
-            >
-              <div className="flex-shrink-0 text-accent mt-1">
-                <Mail size={24} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-muted-foreground font-medium mb-1">
-                  Email
-                </p>
-                <p className="text-foreground font-semibold break-words">
-                  {contactData.email}
-                </p>
-              </div>
-            </a>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center", // กลางแนวนอน
+          alignItems: "center", // กลางแนวตั้ง
+        }}
+      >
+        <Card
+          sx={{
+            display: "flex",
+            borderRadius: "12px",
+            justifyContent: "center", // Centers horizontally
+            alignItems: "center", // Centers vertically
+            width: "1200px",
+            background: "rgba(20,20,40,0.7)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            color: "#fff",
+          }}
+        >
+          <section className="py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold mb-8 text-center">
+                Contact Information
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Email Card */}
+                <a
+                  href={`mailto:${contactData.email}`}
+                  className="glass glass-hover p-6 flex items-start gap-4 cursor-pointer transition-all duration-300"
+                >
+                  <div className="flex-shrink-0 text-accent mt-1">
+                    <Mail size={24} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-muted-foreground font-medium mb-1">
+                      Email
+                    </p>
+                    <p className="text-foreground font-semibold break-words">
+                      {contactData.email}
+                    </p>
+                  </div>
+                </a>
 
-            {/* Phone Card */}
-            <a
-              href={`tel:${contactData.phone.replace(/\s/g, "")}`}
-              className="glass glass-hover p-6 flex items-start gap-4 cursor-pointer transition-all duration-300"
-            >
-              <div className="flex-shrink-0 text-accent mt-1">
-                <Phone size={24} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-muted-foreground font-medium mb-1">
-                  Phone
-                </p>
-                <p className="text-foreground font-semibold break-words">
-                  {contactData.phone}
-                </p>
-              </div>
-            </a>
+                {/* Phone Card */}
+                <a
+                  href={`tel:${contactData.phone.replace(/\s/g, "")}`}
+                  className="glass glass-hover p-6 flex items-start gap-4 cursor-pointer transition-all duration-300"
+                >
+                  <div className="flex-shrink-0 text-accent mt-1">
+                    <Phone size={24} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-muted-foreground font-medium mb-1">
+                      Phone
+                    </p>
+                    <p className="text-foreground font-semibold break-words">
+                      {contactData.phone}
+                    </p>
+                  </div>
+                </a>
 
-            {/* Address Card */}
-            <div className="glass glass-hover p-6 flex items-start gap-4">
-              <div className="flex-shrink-0 text-accent mt-1">
-                <MapPin size={24} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-muted-foreground font-medium mb-1">
-                  Address
-                </p>
-                <p className="text-foreground font-semibold break-words">
-                  {contactData.address}
-                </p>
+                {/* Address Card */}
+                <div className="glass glass-hover p-6 flex items-start gap-4">
+                  <div className="flex-shrink-0 text-accent mt-1">
+                    <MapPin size={24} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-muted-foreground font-medium mb-1">
+                      Address
+                    </p>
+                    <p className="text-foreground font-semibold break-words">
+                      {contactData.address}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
+          </section>
+        </Card>
+      </Box>
       {/* Main Content Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -382,6 +407,15 @@ export default function Contact() {
                     title="Follow on Instagram"
                   >
                     <Instagram size={20} />
+                  </a>
+                  <a
+                    href={contactData.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass glass-hover p-4 flex items-center justify-center text-accent hover:scale-110 transition-transform duration-300 rounded-full"
+                    title="Follow on Instagram"
+                  >
+                    <Github size={20} />
                   </a>
                 </div>
               </div>
