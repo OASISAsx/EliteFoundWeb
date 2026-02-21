@@ -88,14 +88,14 @@ export const timeline: TimeLineType[] = [
     year: "2025",
     title: "Developer",
     company: "eims Stock",
-    desc: "Developed ERP system with vue3, pinia, Express.js",
+    desc: "Developed ERP system with vue3, Nuxt, pinia, Express.js",
     image: "../images/eims.png",
   },
   {
     year: "2025",
     title: "Developer",
     company: "Zillion",
-    desc: "Developed ERP system with vue3, pinia, NestJs Prisma",
+    desc: "Developed ERP system with vue3, Nuxt, pinia, NestJs Prisma",
     image: "../zillion/8.png",
   },
   {
@@ -122,7 +122,7 @@ export const timeline: TimeLineType[] = [
   },
   {
     year: "2024",
-    title: "Photo",
+    title: "DIS Team",
     company: "Dexon",
     desc: "Intern Project",
     image: "../images/timeDexxon.jpg",
@@ -138,14 +138,14 @@ export const timeline: TimeLineType[] = [
     year: "2024",
     title: "Dexon Project",
     company: "PTT",
-    desc: "Developed using Vue and.Net core",
+    desc: "Developed using Vue2 and.Net core",
     image: "../images/dexon1.jpg",
   },
   {
     year: "2023",
     title: " Final Project Study",
     company: "ซื้อขายของสะสม",
-    desc: "Developed using Next.js and Golang",
+    desc: "Developed using React , Next.js and Golang gin and gorm",
     image: "../images/colection.png",
   },
 ];
