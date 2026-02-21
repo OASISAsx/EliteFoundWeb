@@ -44,12 +44,6 @@ export default function DevTimeline() {
     return () => observer.disconnect();
   }, []);
 
-  // Typewriter logic (เหมือนเดิม)
-  // const greetingCount = useMotionValue(0);
-  // const greetingRounded = useTransform(greetingCount, Math.round);
-
-  // const wordIndex = useMotionValue(0);
-  // const wordCount = useMotionValue(0);
   const createMouseMove =
     (x: MotionValue<number>, y: MotionValue<number>) =>
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,9 +72,9 @@ export default function DevTimeline() {
     <div className="relative max-w-6xl mx-auto py-20 px-4">
       <div className="relative max-w-6xl mx-auto py-20 px-4">
         {/* เส้นกลาง */}
-        <div className="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-white/10 -translate-x-1/2" />
 
         <div className="space-y-24">
+          <div className="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-white/10 -translate-x-1/2" />
           {timeline.map((item, i) => (
             <motion.div
               key={i}
@@ -133,7 +127,7 @@ export default function DevTimeline() {
           ))}
         </div>
       </div>
-
+      <div ref={bottomRef} className="h-10" />
       {/* ปุ่มเหมือนเดิม ไม่ต้องแก้ */}
       <AnimatePresence mode="wait">
         {show && (
