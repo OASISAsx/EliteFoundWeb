@@ -102,7 +102,7 @@ export const timeline: TimeLineType[] = [
     year: "2025",
     title: "Developer",
     company: "EliteFund",
-    desc: "Developed ERP system with Next, NestJS, MongoDB",
+    desc: "Developed ERP system with React Next, NestJS, MongoDB",
     image: "../images/EliteFund.png",
   },
 
