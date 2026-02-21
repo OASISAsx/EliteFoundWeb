@@ -38,7 +38,7 @@ export const API = {
 
   UPLOAD: {
     FILE: "/upload/single",
-    FILE_MULTIPLE: "/upload/multi",
+    FILE_MULTIPLE: "/upload/multiple",
   },
   MAIN_STATUS: {
     GET_BY_ID: (usersInformationId: string) =>

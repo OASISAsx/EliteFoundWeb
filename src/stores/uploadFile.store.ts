@@ -58,7 +58,7 @@ export const useUploadFileStore = create<UploadFileState>((set) => ({
 
       const res = await serverApi.post(API.UPLOAD.FILE_MULTIPLE, formData);
 
-      const results: UploadFileResult[] = res.data.data;
+      const results: UploadFileResult[] = res.data.files;
 
       set({ multiFiles: results });
 
