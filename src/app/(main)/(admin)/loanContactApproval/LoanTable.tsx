@@ -29,10 +29,10 @@ export default function LoanTable({
       sx={{
         border: "none", // ขอบนอก
         "& .MuiDataGrid-cell": {
-          borderBottom: "none", // เส้นใต้แต่ละ cell
+          borderBottom: "none",
         },
         "& .MuiDataGrid-columnHeaders": {
-          borderBottom: "none", // เส้นใต้ header
+          borderBottom: "none",
         },
       }}
       paginationMode="server"

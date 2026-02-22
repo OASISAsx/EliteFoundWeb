@@ -7,12 +7,16 @@ import { signOut } from "next-auth/react";
 import { useUserStore } from "@/src/stores/user.store";
 import { IconButton } from "@mui/material";
 import { LogOutIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 // import { useUserStore } from "@/stores/user.store";
 export default function Navbar() {
+  const router = useRouter();
   const handleLogout = async () => {
     await signOut({ redirect: false });
     useUserStore.getState().logout();
-    window.location.href = "/login";
+    router.push("/login");
+    // window.location.href = "/login";
   };
 
   return (

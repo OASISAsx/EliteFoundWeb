@@ -16,7 +16,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useUserStore } from "@/src/stores/user.store";
 import { useLoanContactStore } from "@/src/stores/loanContact.store ";
 import LoanStatusCards from "@/src/components/cardLoanStatus";
-import LoanTable from "./LoanTable";
+import LoanTable from "./UserTable";
 import LoanDetailDialog from "./LoanDetailDialog";
 import { renderStatusChip } from "@/src/components/renderStatusChip";
 import { User } from "@/src/types/user.type";

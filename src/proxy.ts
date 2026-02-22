@@ -8,39 +8,37 @@ const PUBLIC_PATHS = [
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  console.log("🔥 PROXY:", pathname);
-
-  // ✅ Always allow auth flow
-  if (PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
-    return NextResponse.next();
-  }
-
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
-
-  /**
-   * ⭐ IMPORTANT:
-   * Allow first landing after OAuth even if token is not ready yet
-   */
-
-  if (!token && pathname === "/dashboard") {
+  console.log("🔥 PROXY:", pathname);
+  // console.log("COOKIES:", request.cookies.getAll());
+  // console.log("TOKEN:", token);
+  if (token && pathname === "/login") {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+  // ✅ Always allow auth flow
+  if (PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
     return NextResponse.next();
   }
+  // 🔥 login แล้ว ห้ามเข้า login
 
-  // 🔐 Protect others
-  if (!token) {
+  // ✅ 3. ยังไม่ login ห้ามเข้า dashboard
+  if (!token && pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  // ✅ 4. เข้า root
   if (pathname === "/") {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(
+      new URL(token ? "/dashboard" : "/login", request.url),
+    );
   }
 
-  if (token && pathname === "/login") {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  // ✅ 5. Protect ทุก path ที่เหลือ
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   const role = token.role;
