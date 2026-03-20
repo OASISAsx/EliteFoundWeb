@@ -20,6 +20,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import PortfolioGrid from "./about/PortfolioGrid";
 import WorkCarousel from "./about/WorkCarousel";
 import DevTimeline from "./about/TimelineComponent";
+import { Card } from "@mui/material";
 
 const rotatingWords = [
   "Full-Stack Developer",
@@ -317,7 +318,7 @@ const skills: SkillItem[] = [
 // ============== Main Component ================
 export default function TypewriterHero() {
   const [show, setShow] = useState(false);
-  const router = useRouter();
+
   // const t = useTranslations("Home");
   const greetingText = `Nanthawat Inthisaen`;
   useEffect(() => {
@@ -355,45 +356,8 @@ export default function TypewriterHero() {
     return latest <= text.length ? text.slice(0, latest) : text;
   });
 
-  const ref = useRef<HTMLButtonElement>(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // spring นุ่ม ๆ
-  const springX = useSpring(x, { stiffness: 200, damping: 20 });
-  const springY = useSpring(y, { stiffness: 200, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-
-    const rect = ref.current.getBoundingClientRect();
-
-    const offsetX = e.clientX - rect.left - rect.width / 2;
-    const offsetY = e.clientY - rect.top - rect.height / 2;
-
-    // จำกัดระยะการเคลื่อนไหว (ยิ่งเล็กยิ่ง iOS)
-    x.set(offsetX * 0.15);
-    y.set(offsetY * 0.15);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   const [isGreetingComplete, setIsGreetingComplete] = useState(false);
-  // const { data: session, status } = useSession();
-  // useEffect(() => {
-  //   if (status === "authenticated") {
-  //     session?.user && console.log("User ID:", session.user.id);
-  //   } else if (status === "unauthenticated") {
-  //     router.push("/login");
-  //   }
-  // }, [router]);
-  const onClickMove = () => {
-    router.push("/about");
-  };
+
   useEffect(() => {
     const controls = animate(greetingCount, greetingText.length, {
       duration: greetingText.length * 0.08,
@@ -453,7 +417,7 @@ export default function TypewriterHero() {
         <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none" />
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-blue-500/8 blur-[120px] pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-20 max-w-7xl w-full">
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-20 max-w-7xl w-full my-20">
           {/* ===== LEFT: Text ===== */}
           <div className="flex-1 text-center lg:text-left space-y-6">
             {/* Greeting */}
@@ -493,42 +457,52 @@ export default function TypewriterHero() {
             <div className="w-16 h-px bg-gradient-to-r from-cyan-400 to-transparent mx-auto lg:mx-0" />
 
             {/* Stats row */}
-            <motion.div
-              className="flex items-center justify-center lg:justify-start gap-8"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
+            <Card
+              sx={{
+                borderRadius: "12px",
+                padding: "20px",
+                width: { xs: "100%", sm: "80%", md: "400px", lg: "500px" },
+                background: "rgba(20,20,40,0.7)",
+                backdropFilter: "blur(10px)",
+              }}
             >
-              {[
-                { value: "2+", label: "Years Exp." },
-                { value: "20+", label: "Projects" },
-                { value: "10+", label: "Technologies" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center lg:text-left">
-                  <div className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white">
-                    {stat.value}
+              <motion.div
+                className="flex items-center justify-center lg:justify-start gap-8"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+              >
+                {[
+                  { value: "2+", label: "Years Exp." },
+                  { value: "20+", label: "Projects" },
+                  { value: "10+", label: "Technologies" },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center lg:text-left">
+                    <div className="px-4 text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white">
+                      {stat.value}
+                    </div>
+                    <div className=" px-4 text-xs text-gray-500 tracking-widest uppercase mt-0.5">
+                      {stat.label}
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-500 tracking-widest uppercase mt-0.5">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+                ))}
+              </motion.div>
 
-            {/* CTA buttons */}
-            <motion.div
-              className="flex items-center justify-center lg:justify-start gap-4 pt-2"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.6 }}
-            >
-              <button className="px-6 py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300">
-                View Work
-              </button>
-              <button className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
-                Contact
-              </button>
-            </motion.div>
+              {/* CTA buttons */}
+              <motion.div
+                className="flex items-center justify-center lg:justify-start gap-4 pt-2"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5, duration: 0.6 }}
+              >
+                <button className="px-6 py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300">
+                  View Work
+                </button>
+                <button className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
+                  Contact
+                </button>
+              </motion.div>
+            </Card>
           </div>
 
           {/* ===== RIGHT: Profile Image ===== */}
