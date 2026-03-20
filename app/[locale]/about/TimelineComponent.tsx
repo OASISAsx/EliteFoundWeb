@@ -133,7 +133,7 @@ export default function DevTimeline() {
         {show && (
           <>
             {/* RIGHT BUTTON */}
-            <motion.div
+            {/* <motion.div
               key="contact-btn"
               className="fixed bottom-6 right-6 z-50"
               initial={{ opacity: 0, y: 40 }}
@@ -162,7 +162,7 @@ export default function DevTimeline() {
             </motion.div>
 
             {/* LEFT BUTTON */}
-            <motion.div
+            {/* <motion.div
               key="back-btn"
               className="fixed bottom-6 left-6 z-50"
               initial={{ opacity: 0, y: 40 }}
@@ -188,7 +188,7 @@ export default function DevTimeline() {
                   Back
                 </motion.span>
               </motion.button>
-            </motion.div>
+            </motion.div> */}
           </>
         )}
       </AnimatePresence>

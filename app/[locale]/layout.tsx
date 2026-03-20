@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import DraggableLangButton from "./components/DraggableLangButton";
-import { redirect } from "next/navigation";
+
+import Navbar from "./components/NavBar";
 
 export default async function LocaleLayout({
   children,
@@ -17,6 +17,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       {/* <DraggableLangButton /> */}
+      <Navbar />
       {children}
     </NextIntlClientProvider>
   );

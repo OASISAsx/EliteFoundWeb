@@ -17,6 +17,9 @@ import Image from "next/image";
 import Snowfall from "react-snowfall";
 import { useRouter } from "next/navigation";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import PortfolioGrid from "./about/PortfolioGrid";
+import WorkCarousel from "./about/WorkCarousel";
+import DevTimeline from "./about/TimelineComponent";
 
 const rotatingWords = [
   "Full-Stack Developer",
@@ -315,7 +318,7 @@ const skills: SkillItem[] = [
 export default function TypewriterHero() {
   const [show, setShow] = useState(false);
   const router = useRouter();
-  const t = useTranslations("Home");
+  // const t = useTranslations("Home");
   const greetingText = `Nanthawat Inthisaen`;
   useEffect(() => {
     const handleScroll = () => {
@@ -434,27 +437,34 @@ export default function TypewriterHero() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-
-      <section className="relative min-h-screen overflow-hidden flex items-center justify-center px-6">
+      <section
+        id="home"
+        className="relative min-h-screen overflow-hidden flex items-center justify-center px-6"
+      >
+        {/* Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Snowfall
             snowflakeCount={50}
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-            }}
+            style={{ position: "absolute", width: "100%", height: "100%" }}
           />
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-7xl w-full">
-          <div className="text-center lg:text-left space-y-8">
-            <h1 className="text-2xl xs:text-2xl md:text-4xl lg:text-6xl font-light text-gray-400 tracking-wider">
+        {/* Ambient glow blobs */}
+        <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-blue-500/8 blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-20 max-w-7xl w-full">
+          {/* ===== LEFT: Text ===== */}
+          <div className="flex-1 text-center lg:text-left space-y-6">
+            {/* Greeting */}
+            <h1 className="text-4xl md:text-4xl font-light text-gray-500 tracking-[0.3em] uppercase">
               <motion.span className="inline-block">
-                <motion.span>{greetingDisplay}</motion.span>
+                <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-gray-200 to-gray-500 font-semibold">
+                  {greetingDisplay}
+                </motion.span>
                 {!isGreetingComplete && (
                   <motion.span
-                    className="inline-block w-1 h-12 ml-1 bg-gray-400 align-middle"
+                    className="inline-block w-0.5 h-5 ml-1 bg-cyan-400 align-middle"
                     animate={{ opacity: [1, 0] }}
                     transition={{ repeat: Infinity, duration: 0.8 }}
                   />
@@ -462,49 +472,86 @@ export default function TypewriterHero() {
               </motion.span>
             </h1>
 
-            <div
-              className="
-    text-2xl xs:text-2xl md:text-6xl lg:text-4xl
-    font-bold
-    text-transparent bg-clip-text
-    bg-gradient-to-r
-    from-cyan-300 via-gray-200 to-gray-500
-  "
-            >
-              <motion.span className="flex items-center justify-center lg:justify-start">
-                <motion.span>{wordDisplay}</motion.span>
-                <motion.span
-                  className="inline-block w-1 h-12 ml-2 bg-white"
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ repeat: Infinity, duration: 0.8 }}
-                />
-              </motion.span>
+            {/* Name / Role */}
+            <div className="space-y-2">
+              <div className="text-2xl md:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-gray-400 leading-tight">
+                <motion.span className="flex items-center justify-center lg:justify-start">
+                  <motion.span>{wordDisplay}</motion.span>
+                  <motion.span
+                    className="inline-block w-0.5 h-12 ml-2 bg-cyan-400"
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ repeat: Infinity, duration: 0.8 }}
+                  />
+                </motion.span>
+              </div>
+              <p className="text-gray-500 text-lg tracking-wider">
+                Wave · 24 years old
+              </p>
             </div>
 
-            <p className="mt-12 text-xl text-gray-500">Wave | 23 age</p>
+            {/* Divider */}
+            <div className="w-16 h-px bg-gradient-to-r from-cyan-400 to-transparent mx-auto lg:mx-0" />
+
+            {/* Stats row */}
+            <motion.div
+              className="flex items-center justify-center lg:justify-start gap-8"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+            >
+              {[
+                { value: "2+", label: "Years Exp." },
+                { value: "20+", label: "Projects" },
+                { value: "10+", label: "Technologies" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center lg:text-left">
+                  <div className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-gray-500 tracking-widest uppercase mt-0.5">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* CTA buttons */}
+            <motion.div
+              className="flex items-center justify-center lg:justify-start gap-4 pt-2"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.6 }}
+            >
+              <button className="px-6 py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300">
+                View Work
+              </button>
+              <button className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
+                Contact
+              </button>
+            </motion.div>
           </div>
 
+          {/* ===== RIGHT: Profile Image ===== */}
           <motion.div
-            className="relative w-80 h-96"
+            className="relative shrink-0"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
           >
+            {/* Outer glow ring */}
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-transparent to-blue-500/10 blur-xl" />
+
+            {/* Border frame */}
+            <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-cyan-400/30 via-white/5 to-transparent" />
+
+            {/* Image */}
             <motion.img
               src="/images/profile2.png"
               alt="Profile"
-              className="
-      w-full h-full object-cover
-      rounded-2xl
-      border border-white/10
-      saturate-90 contrast-105
-    "
+              className="relative w-72 h-88 md:w-80 md:h-96 object-cover rounded-2xl saturate-90 contrast-105"
+              style={{ height: "24rem" }}
               animate={{
-                boxShadow: [
-                  "0 12px 30px rgba(0,0,0,0.25)",
-                  "0 18px 45px rgba(0,0,0,0.35)",
-                  "0 12px 30px rgba(0,0,0,0.25)",
-                ],
+                y: [0, -8, 0],
               }}
               transition={{
                 duration: 6,
@@ -513,12 +560,135 @@ export default function TypewriterHero() {
               }}
             />
 
-            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/6 via-transparent to-transparent" />
+            {/* Overlay shimmer */}
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-cyan-400/5 via-transparent to-white/5" />
+
+            {/* Floating badge */}
+            <motion.div
+              className="absolute -bottom-5 -left-5 bg-gray-900/90 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2.5"
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.0, duration: 0.5 }}
+            >
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-xs text-gray-300 tracking-wider">
+                Available for work
+              </span>
+            </motion.div>
           </motion.div>
         </div>
       </section>
+      <section
+        id="about"
+        className="min-h-screen snap-start relative flex items-center justify-center"
+      >
+        <div className="max-w-6xl w-full">
+          <h3 className=" text-white text-3xl font-semibold p-10">
+            Work History
+          </h3>
+          <div className="relative grid md:grid-cols-2 gap-12 sx:gap-8 px-6">
+            <div className="hidden md:block absolute left-1/2 top-0 h-full w-px bg-white/20" />
+
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white/5 backdrop-blur rounded-2xl p-6 shadow-lg"
+            >
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <h3 className="text-white text-xl font-semibold ">
+                  Full-Stack Developer
+                </h3>
+                <div className="bg-white h-[45px] w-[160px] rounded-md flex items-center justify-center mb-2">
+                  <Image
+                    src="/images/poon_logo.png"
+                    alt="Company logo"
+                    width={160}
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+
+              <p className="text-gray-400 text-sm mb-3">
+                2024 – Present (Poontana Marketing Co., Ltd)
+              </p>
+              <p className="text-gray-300 leading-relaxed">
+                ทำงานในตำแหน่ง Full-Stack Developer
+                ออกแบบและพัฒนาเว็บแอปพลิเคชัน ERP
+                ที่สามารถรองรับการขยายตัวของระบบ (Scalable) โดยใช้เทคโนโลยีฝั่ง
+                Frontend และ Backend สมัยใหม่ พัฒนาระบบ ERP ที่มีโมดูลหลัก เช่น
+                คลังสินค้า (Stock), การขาย (Sales), การจัดซื้อ (Purchasing),
+                ใบเสนอราคา (Quotation) และรายงาน (Reporting) รวมถึงระบบสำหรับ
+                การวางแผนการเข้าพบลูกค้า, การจัดการ Site Survey
+                และการจัดตารางงานติดตั้ง/บำรุงรักษา พัฒนาฟีเจอร์ Barcode
+                Scanning และระบบคำนวณทางการเงิน พร้อมทั้งนำหลักการ FIFO
+                (First-In, First-Out) มาใช้ในการจัดการการขาย
+                เพื่อให้ลูกค้าได้รับสินค้าล็อตใหม่ล่าสุด สร้างระบบ
+                รายงานอัตโนมัติในรูปแบบ PDF และระบบ Workflow
+                เพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="bg-white/5 backdrop-blur rounded-2xl p-6 shadow-lg"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="text-white text-xl font-semibold">
+                  Internship Developer
+                </h3>
+
+                <Image
+                  className="items-center justify-center mb-2 rounded-md "
+                  alt=""
+                  src={"../images/dexon.jpg"}
+                  width={160}
+                  height={50}
+                />
+              </div>
+              <p className="text-gray-400 text-sm mb-3 mt-10">
+                4 months 2023 – 2024 (Dexon technologies Co., Ltd)
+              </p>
+              <p className="text-gray-300 leading-relaxed">
+                มีส่วนร่วมในการพัฒนาเว็บแอปพลิเคชัน
+                และได้รับประสบการณ์ในการใช้งานเทคโนโลยีฝั่ง Frontend
+                โดยใช้เฟรมเวิร์ก Vue.js และ Tailwind CSS
+                ในการพัฒนาระบบที่เกี่ยวข้องกับงานด้าน Software Engineering
+                ช่วยเสนอความคิดเห็นและออกแบบโครงสร้างข้อมูล (Data Structure)
+                รวมถึงมีส่วนร่วมในการออกแบบระบบให้เหมาะสมกับการทำงานของแอปพลิเคชัน
+                ออกแบบโลโก้และงานด้านกราฟิก โดยใช้โปรแกรม Adobe Photoshop
+                เพื่อสนับสนุนภาพลักษณ์และเอกลักษณ์ของระบบ ออกแบบเอกสาร PDF
+                สำหรับการใช้งานภายในระบบ โดยสร้าง Template เฉพาะ (Custom PDF
+                Template) ให้เหมาะสมกับรูปแบบข้อมูลและการใช้งานจริง
+              </p>
+            </motion.div>
+          </div>
+        </div>
+        <motion.div
+          className="
+                 absolute bottom-8 right-8
+                 hidden md:block
+                 lg:hidden
+                 sm:hidden
+                 ms:hidden
+                 xl:block
+               "
+        >
+          {/* <Image
+                 src="/images/2590506.png"
+                 alt="Developer"
+                 width={320}
+                 height={170}
+                 className="object-contain"
+               /> */}
+        </motion.div>
+      </section>
+
       {/* ===== STACKED CARDS SECTION (ด้านล่าง) ===== */}
-      <section className="relative py-10 px-6 pb-32 overflow-hidden">
+      <section id="skills" className="relative py-10 px-6  overflow-hidden">
         <div className="text-center mb-2">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             My Skills & Passion
@@ -526,54 +696,77 @@ export default function TypewriterHero() {
           <p className="text-gray-400 text-lg">สิ่งที่ฉันรักและเชี่ยวชาญ</p>
         </div>
 
-        <section className="py-16 px-6 overflow-x-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 gap-x-16 gap-y-28 max-w-7xl mx-auto">
-            {skills.map((skill, i) => (
-              <div
-                key={skill.name}
-                className="flex items-center justify-center gap-10 mb-20"
-              >
-                {/* ===== CARD ===== */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{
-                    delay: i * 0.05,
-                    duration: 0.4,
-                    ease: "easeOut",
-                  }}
-                  className="relative"
-                >
-                  {/* Static Glow (นิ่ง) */}
-                  <div
-                    className="absolute inset-0 blur-2xl opacity-25"
-                    style={{
-                      background: `linear-gradient(135deg,
-                                      hsl(${skill.hueA}, 100%, 60%),
-                                      hsl(${skill.hueB}, 100%, 60%)
-                                    )`,
-                    }}
-                  />
+        <section className="py-16 overflow-hidden">
+          <style>{`
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 40s linear infinite;
+    }
+    .marquee-wrapper {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+      );
+    }
+  `}</style>
 
-                  {/* Static Icon */}
-                  <div className="relative z-10">
-                    <Image
-                      src={skill.icon}
-                      alt={skill.name}
-                      width={120}
-                      height={120}
-                      className="object-contain select-none"
-                      draggable={false}
+          <div className="marquee-wrapper relative overflow-hidden py-16">
+            <div className="marquee-track gap-16">
+              {[...skills, ...skills].map((skill, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center justify-center gap-3 w-[120px] shrink-0"
+                >
+                  <div className="relative">
+                    <div
+                      className="absolute inset-0 blur-2xl opacity-25"
+                      //     style={{
+                      //       background: `linear-gradient(135deg,
+                      // hsl(${skill.hueA}, 100%, 60%),
+                      // hsl(${skill.hueB}, 100%, 60%))`,
+                      //     }}
                     />
+                    <div className="relative z-10 w-[90px] h-[90px]">
+                      <Image
+                        src={skill.icon}
+                        alt={skill.name}
+                        fill
+                        className="object-contain select-none"
+                        draggable={false}
+                      />
+                    </div>
                   </div>
-                </motion.div>
-                {/* ===== TEXT ===== */}
-              </div>
-            ))}
+                  <span className="text-gray-400 text-sm text-center">
+                    {skill.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </section>
+      {/* <section className="min-h-screen snap-start">
+        <PortfolioGrid />
+      </section> */}
+      <section id="projects" className="min-h-screen snap-start">
+        <DevTimeline />
+      </section>
+
       {/* <motion.button
         onClick={() => {
           window.scrollBy({
@@ -600,7 +793,7 @@ export default function TypewriterHero() {
           />
         </svg>
       </motion.button> */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {show && (
           <motion.div
             className="fixed bottom-6 right-6 z-50"
@@ -629,7 +822,7 @@ export default function TypewriterHero() {
             </motion.button>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </>
   );
 }
