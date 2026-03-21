@@ -8,66 +8,75 @@ import {
 } from "framer-motion";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { timeline } from "./data";
+import { timeline, TimeLineType } from "./data";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import DialogTimeline from "./DialogTimeline";
 
 export default function DevTimeline() {
-  const [show, setShow] = useState(false);
-  const router = useRouter();
+  // const [show, setShow] = useState(false);
+  // const router = useRouter();
+  const [dialog , setDialog] = useState(false);
+ const [selectedItem, setSelectedItem] = useState<TimeLineType | null>(null);
 
-  const backRef = useRef<HTMLButtonElement>(null);
-  const contactRef = useRef<HTMLButtonElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
-  // Contact button
-  const xContact = useMotionValue(0);
-  const yContact = useMotionValue(0);
-  const springXContact = useSpring(xContact, { stiffness: 200, damping: 20 });
-  const springYContact = useSpring(yContact, { stiffness: 200, damping: 20 });
+console.log(timeline,'timeline')
+const selectItems = (item: TimeLineType) => {
+  setSelectedItem(item);
+  setDialog(true);
 
-  // Back button
-  const xBack = useMotionValue(0);
-  const yBack = useMotionValue(0);
-  const springXBack = useSpring(xBack, { stiffness: 200, damping: 20 });
-  const springYBack = useSpring(yBack, { stiffness: 200, damping: 20 });
+};
+  // const backRef = useRef<HTMLButtonElement>(null);
+  // const contactRef = useRef<HTMLButtonElement>(null);
+  // const bottomRef = useRef<HTMLDivElement>(null);
+  // // Contact button
+  // const xContact = useMotionValue(0);
+  // const yContact = useMotionValue(0);
+  // const springXContact = useSpring(xContact, { stiffness: 200, damping: 20 });
+  // const springYContact = useSpring(yContact, { stiffness: 200, damping: 20 });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShow(entry.isIntersecting);
-      },
-      { threshold: 1 },
-    );
+  // // Back button
+  // const xBack = useMotionValue(0);
+  // const yBack = useMotionValue(0);
+  // const springXBack = useSpring(xBack, { stiffness: 200, damping: 20 });
+  // const springYBack = useSpring(yBack, { stiffness: 200, damping: 20 });
 
-    if (bottomRef.current) observer.observe(bottomRef.current);
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     ([entry]) => {
+  //       setShow(entry.isIntersecting);
+  //     },
+  //     { threshold: 1 },
+  //   );
 
-    return () => observer.disconnect();
-  }, []);
+  //   if (bottomRef.current) observer.observe(bottomRef.current);
 
-  const createMouseMove =
-    (x: MotionValue<number>, y: MotionValue<number>) =>
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      const rect = e.currentTarget.getBoundingClientRect();
+  //   return () => observer.disconnect();
+  // }, []);
 
-      const offsetX = e.clientX - rect.left - rect.width / 2;
-      const offsetY = e.clientY - rect.top - rect.height / 2;
+  // const createMouseMove =
+  //   (x: MotionValue<number>, y: MotionValue<number>) =>
+  //   (e: React.MouseEvent<HTMLButtonElement>) => {
+  //     const rect = e.currentTarget.getBoundingClientRect();
 
-      x.set(offsetX * 0.15);
-      y.set(offsetY * 0.15);
-    };
+  //     const offsetX = e.clientX - rect.left - rect.width / 2;
+  //     const offsetY = e.clientY - rect.top - rect.height / 2;
 
-  const createMouseLeave =
-    (x: MotionValue<number>, y: MotionValue<number>) => () => {
-      x.set(0);
-      y.set(0);
-    };
+  //     x.set(offsetX * 0.15);
+  //     y.set(offsetY * 0.15);
+  //   };
 
-  const onClickMove = () => {
-    router.push("/contact");
-  };
-  const onClickBack = () => {
-    router.push("/");
-  };
+  // const createMouseLeave =
+  //   (x: MotionValue<number>, y: MotionValue<number>) => () => {
+  //     x.set(0);
+  //     y.set(0);
+  //   };
+
+  // const onClickMove = () => {
+  //   router.push("/contact");
+  // };
+  // const onClickBack = () => {
+  //   router.push("/");
+  // };
   return (
     <div className="relative max-w-6xl mx-auto py-20 px-4">
       <div className="relative max-w-6xl mx-auto py-20 px-4">
@@ -78,11 +87,12 @@ export default function DevTimeline() {
           {timeline.map((item, i) => (
             <motion.div
               key={i}
+              onClick={() => selectItems(item)}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative"
+              className="relative cursor-pointer"
             >
               <div className="grid grid-cols-1 md:grid-cols-[1fr_40px_1fr] items-start">
                 {/* ซ้าย */}
@@ -112,7 +122,7 @@ export default function DevTimeline() {
 
                     <div className="p-6 md:p-8">
                       <p className="text-sky-400 text-sm">{item.year}</p>
-                      <h3 className="text-2xl font-bold text-white mt-1">
+                      <h3 className="text-xl font-bold text-white mt-1">
                         {item.title}
                       </h3>
                       <p className="text-white/70 text-sm">{item.company}</p>
@@ -126,11 +136,12 @@ export default function DevTimeline() {
             </motion.div>
           ))}
         </div>
+        <DialogTimeline item={selectedItem} dialog={dialog} onClose={() => setDialog(false)}/>
       </div>
-      <div ref={bottomRef} className="h-10" />
+      {/* <div ref={bottomRef} className="h-10" /> */}
       {/* ปุ่มเหมือนเดิม ไม่ต้องแก้ */}
-      <AnimatePresence mode="wait">
-        {show && (
+      {/* <AnimatePresence mode="wait"> */}
+        {/* {show && ( */}
           <>
             {/* RIGHT BUTTON */}
             {/* <motion.div
@@ -190,8 +201,8 @@ export default function DevTimeline() {
               </motion.button>
             </motion.div> */}
           </>
-        )}
-      </AnimatePresence>
+        {/* )} */}
+      {/* </AnimatePresence> */}
     </div>
   );
 }

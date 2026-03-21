@@ -75,35 +75,40 @@ export const projects: Project[] = [
   //     tech: ["Next.js", "Tailwind", "Motion"],
   //   },
 ];
-type TimeLineType = {
+export type TimeLineType = {
   year: string;
   title: string;
   company: string;
   desc: string;
   image: string;
+  items: ReactNode;
 };
-
+import { ReactNode } from "react";
+import UIShowcase from "./StockCarousel";
 export const timeline: TimeLineType[] = [
   {
     year: "2025",
-    title: "Developer",
-    company: "eims Stock",
+    title: "Full Stack Developer",
+    company: "EIMS Stock",
     desc: "Developed ERP system with vue3, Nuxt, pinia, Express.js",
     image: "../images/eims.png",
+    items: <UIShowcase/>
   },
   {
     year: "2025",
-    title: "Developer",
+    title: "Full Stack Developer",
     company: "Zillion",
     desc: "Developed ERP system with vue3, Nuxt, pinia, NestJs Prisma",
     image: "../zillion/8.png",
+     items: <UIShowcase/>
   },
   {
-    year: "2025",
+    year: "Present",
     title: "Developer",
     company: "EliteFund",
     desc: "Developed ERP system with React Next, NestJS, MongoDB",
     image: "../images/EliteFund.png",
+     items: <UIShowcase/>
   },
 
   {
@@ -112,34 +117,39 @@ export const timeline: TimeLineType[] = [
     company: "set CI/CD pipelines in Project ",
     desc: "Ubuntu,Nginx,Git Action, Docker ",
     image: "../images/CICD.png",
+     items: <UIShowcase/>
   },
   {
     year: "2024",
-    title: "Icon Dexon",
-    company: "Design Icon",
+    title: "Icon Design",
+    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "Design in Photoshop",
     image: "../images/iconDexon.png",
+     items: <UIShowcase/>
   },
   {
     year: "2024",
     title: "DIS Team",
-    company: "Dexon",
+    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "Intern Project",
     image: "../images/timeDexxon.jpg",
+     items: <UIShowcase/>
   },
   {
     year: "2024",
-    title: "Intern Developer",
-    company: "Certificate",
+    title: "Certificate",
+    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "A certificate of effective and practical work. ",
     image: "../images/certificave.jpg",
+     items: <UIShowcase/>
   },
   {
     year: "2024",
-    title: "Dexon Project",
-    company: "PTT",
+    title: "PTT Project",
+    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "Developed using Vue2 and.Net core",
     image: "../images/dexon1.jpg",
+     items: <UIShowcase/>
   },
   {
     year: "2023",
@@ -147,5 +157,6 @@ export const timeline: TimeLineType[] = [
     company: "ซื้อขายของสะสม",
     desc: "Developed using React , Next.js and Golang gin and gorm",
     image: "../images/colection.png",
+     items: <UIShowcase/>
   },
 ];
