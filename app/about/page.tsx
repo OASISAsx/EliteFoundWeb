@@ -2,13 +2,16 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import PortfolioGrid from "../[locale]/about/PortfolioGrid";
+import WorkCarousel from "../[locale]/about/WorkCarousel";
+import UIShowcase from "../[locale]/about/StockCarousel";
+import DevTimeline from "../[locale]/about/TimelineComponent";
 
-import WorkCarousel from "./WorkCarousel";
-import UIShowcase from "./StockCarousel";
-import ZCarousel from "./ZCarousel";
-
-import PortfolioGrid from "./PortfolioGrid";
-import DevTimeline from "./TimelineComponent";
+// import WorkCarousel from "./WorkCarousel";
+// import UIShowcase from "./StockCarousel";
+// import ZCarousel from "./ZCarousel";
+// import PortfolioGrid from "./PortfolioGrid";
+// import DevTimeline from "./TimelineComponent";
 
 export default function SlotReel() {
   return (
@@ -133,11 +136,11 @@ export default function SlotReel() {
           <UIShowcase />
         </div>
       </section>
-      <section className="min-h-screen snap-start flex justify-center">
+      {/* <section className="min-h-screen snap-start flex justify-center">
         <div className="w-full max-w-7xl px-6 pt-8">
           <ZCarousel />
         </div>
-      </section>
+      </section> */}
       <section className="min-h-screen snap-start flex justify-center">
         <DevTimeline />
       </section>
