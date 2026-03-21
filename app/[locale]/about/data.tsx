@@ -85,6 +85,8 @@ export type TimeLineType = {
 };
 import { ReactNode } from "react";
 import UIShowcase from "./StockCarousel";
+import UIShowcaseZ from "./ZCarousel";
+
 export const timeline: TimeLineType[] = [
   {
     year: "2025",
@@ -92,7 +94,7 @@ export const timeline: TimeLineType[] = [
     company: "EIMS Stock",
     desc: "Developed ERP system with vue3, Nuxt, pinia, Express.js",
     image: "../images/eims.png",
-    items: <UIShowcase/>
+    items: <UIShowcase />,
   },
   {
     year: "2025",
@@ -100,7 +102,7 @@ export const timeline: TimeLineType[] = [
     company: "Zillion",
     desc: "Developed ERP system with vue3, Nuxt, pinia, NestJs Prisma",
     image: "../zillion/8.png",
-     items: <UIShowcase/>
+    items: <UIShowcaseZ />,
   },
   {
     year: "Present",
@@ -108,7 +110,7 @@ export const timeline: TimeLineType[] = [
     company: "EliteFund",
     desc: "Developed ERP system with React Next, NestJS, MongoDB",
     image: "../images/EliteFund.png",
-     items: <UIShowcase/>
+    items: <UIShowcase />,
   },
 
   {
@@ -117,7 +119,7 @@ export const timeline: TimeLineType[] = [
     company: "set CI/CD pipelines in Project ",
     desc: "Ubuntu,Nginx,Git Action, Docker ",
     image: "../images/CICD.png",
-     items: <UIShowcase/>
+    items: <UIShowcase />,
   },
   {
     year: "2024",
@@ -125,7 +127,7 @@ export const timeline: TimeLineType[] = [
     company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "Design in Photoshop",
     image: "../images/iconDexon.png",
-     items: <UIShowcase/>
+    items: <UIShowcase />,
   },
   {
     year: "2024",
@@ -133,7 +135,7 @@ export const timeline: TimeLineType[] = [
     company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "Intern Project",
     image: "../images/timeDexxon.jpg",
-     items: <UIShowcase/>
+    items: <UIShowcase />,
   },
   {
     year: "2024",
@@ -141,7 +143,7 @@ export const timeline: TimeLineType[] = [
     company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "A certificate of effective and practical work. ",
     image: "../images/certificave.jpg",
-     items: <UIShowcase/>
+    items: <UIShowcase />,
   },
   {
     year: "2024",
@@ -149,7 +151,7 @@ export const timeline: TimeLineType[] = [
     company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
     desc: "Developed using Vue2 and.Net core",
     image: "../images/dexon1.jpg",
-     items: <UIShowcase/>
+    items: <UIShowcase />,
   },
   {
     year: "2023",
@@ -157,6 +159,6 @@ export const timeline: TimeLineType[] = [
     company: "ซื้อขายของสะสม",
     desc: "Developed using React , Next.js and Golang gin and gorm",
     image: "../images/colection.png",
-     items: <UIShowcase/>
+    items: <UIShowcase />,
   },
 ];

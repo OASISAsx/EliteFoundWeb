@@ -16,15 +16,14 @@ import DialogTimeline from "./DialogTimeline";
 export default function DevTimeline() {
   // const [show, setShow] = useState(false);
   // const router = useRouter();
-  const [dialog , setDialog] = useState(false);
- const [selectedItem, setSelectedItem] = useState<TimeLineType | null>(null);
+  const [dialog, setDialog] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<TimeLineType | null>(null);
 
-console.log(timeline,'timeline')
-const selectItems = (item: TimeLineType) => {
-  setSelectedItem(item);
-  setDialog(true);
-
-};
+  console.log(timeline, "timeline");
+  const selectItems = (item: TimeLineType) => {
+    setSelectedItem(item);
+    setDialog(true);
+  };
   // const backRef = useRef<HTMLButtonElement>(null);
   // const contactRef = useRef<HTMLButtonElement>(null);
   // const bottomRef = useRef<HTMLDivElement>(null);
@@ -136,15 +135,19 @@ const selectItems = (item: TimeLineType) => {
             </motion.div>
           ))}
         </div>
-        <DialogTimeline item={selectedItem} dialog={dialog} onClose={() => setDialog(false)}/>
+        <DialogTimeline
+          item={selectedItem}
+          dialog={dialog}
+          onClose={() => setDialog(false)}
+        />
       </div>
       {/* <div ref={bottomRef} className="h-10" /> */}
       {/* ปุ่มเหมือนเดิม ไม่ต้องแก้ */}
       {/* <AnimatePresence mode="wait"> */}
-        {/* {show && ( */}
-          <>
-            {/* RIGHT BUTTON */}
-            {/* <motion.div
+      {/* {show && ( */}
+      <>
+        {/* RIGHT BUTTON */}
+        {/* <motion.div
               key="contact-btn"
               className="fixed bottom-6 right-6 z-50"
               initial={{ opacity: 0, y: 40 }}
@@ -173,7 +176,7 @@ const selectItems = (item: TimeLineType) => {
             </motion.div>
 
             {/* LEFT BUTTON */}
-            {/* <motion.div
+        {/* <motion.div
               key="back-btn"
               className="fixed bottom-6 left-6 z-50"
               initial={{ opacity: 0, y: 40 }}
@@ -200,8 +203,8 @@ const selectItems = (item: TimeLineType) => {
                 </motion.span>
               </motion.button>
             </motion.div> */}
-          </>
-        {/* )} */}
+      </>
+      {/* )} */}
       {/* </AnimatePresence> */}
     </div>
   );
