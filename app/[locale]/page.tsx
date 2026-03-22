@@ -406,7 +406,7 @@ export default function TypewriterHero() {
                 >
                   {[
                     { value: "2+", label: "Years Exp." },
-                    { value: "20+", label: "Projects" },
+                    { value: "5+", label: "Projects" },
                     { value: "10+", label: "Technologies" },
                   ].map((stat) => (
                     <div key={stat.label} className="text-center lg:text-left">

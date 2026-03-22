@@ -52,7 +52,7 @@ export default function WorkHistory() {
               Pipeline Test ก่อนที่จะทำการ Deploy แบบอัตโนมัติ ไปที่ Production
               พัฒนา Real-time System ด้วย WebSocket (Socket.IO) ทำ Message
               เพื่อให้ลูกค้าติดต่อหา ทีม Admin คอยแก้ปัญหา และ ทำหน้า Scan Login
-              เข้าหน้าผ่านทาง QR Code บนจอ kiosk สำหรับอัปเดตข้อมูลแบบทันที
+              เข้างานผ่านทาง QR Code บนจอ kiosk สำหรับอัปเดตข้อมูลแบบทันที
               {/* ทำงานในตำแหน่ง Full-Stack Developer ออกแบบและพัฒนาเว็บแอปพลิเคชัน
               ERP ที่สามารถรองรับการขยายตัวของระบบ (Scalable)
               โดยใช้เทคโนโลยีฝั่ง Frontend และ Backend สมัยใหม่ พัฒนาระบบ ERP
