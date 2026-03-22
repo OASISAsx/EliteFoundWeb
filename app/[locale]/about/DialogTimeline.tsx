@@ -49,7 +49,7 @@ export default function DialogTimeline({ dialog, onClose, item }: Props) {
         open={dialog}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Modal title
+          Project
         </DialogTitle>
         <IconButton
           aria-label="close"

@@ -64,6 +64,7 @@ export default function UIShowcaseZ() {
   const [index, setIndex] = useState(0);
   const current = showcases[index];
   const [openImage, setOpenImage] = useState<string | null>(null);
+  const images = showcases.map((item) => item.image);
   return (
     <Box
       key={current.title}
@@ -82,7 +83,7 @@ export default function UIShowcaseZ() {
           transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-white px-3 line-clamp-1"
         >
-          Zillion ERP
+          Poontana ERP
         </motion.h2>
 
         <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">
@@ -98,15 +99,16 @@ export default function UIShowcaseZ() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="                w-full
-                max-w-xl       /* ล็อกความกว้างสูงสุด */
-                min-h-[260px]  /* ล็อกความสูงขั้นต่ำ */
+              className="                
+              w-full
+                max-w-xl       
+                min-h-[260px] 
                 bg-white/5
                 backdrop-blur
                 rounded-2xl
                 p-6
                 shadow-lg
-                mx-auto        /* กลางทุกจอ */
+                mx-auto       
                 flex
                 flex-col
                 justify-between"
@@ -206,12 +208,20 @@ export default function UIShowcaseZ() {
                     onClick={() => setOpenImage(null)}
                   >
                     <motion.img
-                      src={openImage}
-                      className="max-w-[90%] max-h-[90%] object-contain rounded-xl"
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0.8 }}
-                      onClick={(e) => e.stopPropagation()} // กันปิดตอนกดรูป
+                      key={current.image}
+                      src={current.image}
+                      className="max-w-[90%] max-h-[90%] object-contain rounded-xl cursor-pointer"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.8, opacity: 0 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+
+                        // 👉 ไปภาพถัดไป
+                        setIndex((prev) =>
+                          prev === images.length - 1 ? 0 : prev + 1,
+                        );
+                      }}
                     />
                   </motion.div>
                 )}

@@ -129,7 +129,9 @@ export default function Contact() {
       console.error("Download error:", error);
       toast.error("Failed to download file. Please try again.");
     } finally {
-      setIsPdfLoading(false);
+      setTimeout(() => {
+        setIsPdfLoading(false);
+      }, 3000); // 1 วินาที
     }
   };
 

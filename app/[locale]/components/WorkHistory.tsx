@@ -37,7 +37,23 @@ export default function WorkHistory() {
               2024 – Present (Poontana Marketing Co., Ltd)
             </p>
             <p className="text-gray-300 leading-relaxed">
-              ทำงานในตำแหน่ง Full-Stack Developer ออกแบบและพัฒนาเว็บแอปพลิเคชัน
+              ออกแบบและพัฒนา ERP Web Application ที่รองรับการขยายตัวของระบบ
+              (Scalable Architecture) ครอบคลุมทั้ง Frontend และ Backend
+              พัฒนาโมดูลหลักของระบบ ได้แก่ Stock, Sales, Purchasing, Quotation
+              และ Reporting ออกแบบระบบ Customer Visit Planning, Site Survey และ
+              Job Scheduling สำหรับงานติดตั้งและบำรุงรักษา พัฒนา Barcode
+              Scanning System
+              เพื่อเพิ่มความรวดเร็วและความแม่นยำในการจัดการสินค้า ออกแบบและพัฒนา
+              Financial Calculation System รองรับกระบวนการทางธุรกิจ นำหลักการ
+              FIFO (First-In, First-Out) มาใช้ในการจัดการสินค้า
+              เพื่อให้การขายมีความถูกต้องตามลำดับล็อต สร้างระบบ Automated PDF
+              Reporting ลดขั้นตอนการทำงานแบบ Manual พัฒนา Workflow System
+              เพื่อเพิ่มประสิทธิภาพการทำงานภายในองค์กร ออกแบบและติดตั้ง CI/CD
+              Pipeline Test ก่อนที่จะทำการ Deploy แบบอัตโนมัติ ไปที่ Production
+              พัฒนา Real-time System ด้วย WebSocket (Socket.IO) ทำ Message
+              เพื่อให้ลูกค้าติดต่อหา ทีม Admin คอยแก้ปัญหา และ ทำหน้า Scan Login
+              เข้าหน้าผ่านทาง QR Code บนจอ kiosk สำหรับอัปเดตข้อมูลแบบทันที
+              {/* ทำงานในตำแหน่ง Full-Stack Developer ออกแบบและพัฒนาเว็บแอปพลิเคชัน
               ERP ที่สามารถรองรับการขยายตัวของระบบ (Scalable)
               โดยใช้เทคโนโลยีฝั่ง Frontend และ Backend สมัยใหม่ พัฒนาระบบ ERP
               ที่มีโมดูลหลัก เช่น คลังสินค้า (Stock), การขาย (Sales), การจัดซื้อ
@@ -48,7 +64,7 @@ export default function WorkHistory() {
               First-Out) มาใช้ในการจัดการการขาย
               เพื่อให้ลูกค้าได้รับสินค้าล็อตใหม่ล่าสุด สร้างระบบ
               รายงานอัตโนมัติในรูปแบบ PDF และระบบ Workflow
-              เพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร
+              เพื่อเพิ่มประสิทธิภาพในการทำงานขององค์กร */}
             </p>
           </motion.div>
 

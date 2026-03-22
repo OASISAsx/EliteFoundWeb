@@ -86,13 +86,14 @@ export type TimeLineType = {
 import { ReactNode } from "react";
 import UIShowcase from "./StockCarousel";
 import UIShowcaseZ from "./ZCarousel";
+import UIShowcasePoon from "./PoonCarousel";
 
 export const timeline: TimeLineType[] = [
   {
     year: "2025",
     title: "Full Stack Developer",
     company: "EIMS Stock",
-    desc: "Developed ERP system with vue3, Nuxt, pinia, Express.js",
+    desc: "Developed ERP system with vue3, Nuxt, pinia, NestJS, Express.js",
     image: "../images/eims.png",
     items: <UIShowcase />,
   },
@@ -105,12 +106,12 @@ export const timeline: TimeLineType[] = [
     items: <UIShowcaseZ />,
   },
   {
-    year: "Present",
-    title: "Developer",
-    company: "EliteFund",
-    desc: "Developed ERP system with React Next, NestJS, MongoDB",
-    image: "../images/EliteFund.png",
-    items: <UIShowcase />,
+    year: "2025",
+    title: "Full Stack Developer",
+    company: "Poon EWork ERP",
+    desc: "Developed ERP system with Vue2, Express.js, Sequelize , MySQL",
+    image: "../poon/poonLogin.png",
+    items: <UIShowcasePoon />,
   },
 
   {

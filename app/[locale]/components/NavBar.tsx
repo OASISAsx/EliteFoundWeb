@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { Download, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 const navLinks = [
   { label: "Home", id: "home" },
   { label: "About", id: "about" },
@@ -13,21 +14,17 @@ const navLinks = [
 const scrollTo = (id: string) => {
   const el = document.getElementById(id);
   if (!el) return;
-  const offset = 64; // ความสูง navbar
-  const top = el.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top, behavior: "smooth" });
+
+  el.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
 };
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("Home");
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+  const [isPdfLoading, setIsPdfLoading] = useState(false);
   // ปิด menu เมื่อ resize → desktop
   useEffect(() => {
     const onResize = () => {
@@ -37,17 +34,79 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  const handleDownloadPDF = async () => {
+    try {
+      setIsPdfLoading(true);
+
+      const response = await fetch("/PDF/Resume.pdf");
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "profile.pdf";
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast.success("PDF downloaded successfully!");
+    } catch (error) {
+      console.error("Download error:", error);
+      toast.error("Failed to download file. Please try again.");
+    } finally {
+      setTimeout(() => {
+        setIsPdfLoading(false);
+      }, 500); // 1 วินาที
+    }
+  };
+  useEffect(() => {
+    const sections = navLinks.map((link) => document.getElementById(link.id));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            const found = navLinks.find((l) => l.id === id);
+            if (found) {
+              setActive(found.label);
+            }
+          }
+        });
+      },
+      {
+        root: null, // ถ้า scroll ใน div เดี๋ยวแก้ด้านล่าง
+        rootMargin: "-50% 0px -50% 0px", // เอากลางจอเป็นตัวตัด
+        threshold: 0,
+      },
+    );
+
+    sections.forEach((sec) => {
+      if (sec) observer.observe(sec);
+    });
+
+    return () => {
+      sections.forEach((sec) => {
+        if (sec) observer.unobserve(sec);
+      });
+    };
+  }, []);
+
   return (
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-gray-950/80 backdrop-blur-md border-b border-white/5"
-            : "bg-transparent"
-        }`}
+        animate={{
+          y: 0,
+          opacity: 1,
+          backgroundColor:
+            active === "Home" ? "rgba(3,7,18,0)" : "rgba(3,7,18,0.8)",
+        }}
+        transition={{ duration: 0.4 }}
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/5"
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
@@ -87,10 +146,19 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <a
-            href="#contact"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/10 transition-all duration-300"
+            onClick={handleDownloadPDF}
+            className="hidden md:inline-flex items-center gap-2 justify-center px-5 py-2 rounded-full border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/10 transition-all duration-300"
           >
-            Hire me
+            {isPdfLoading ? (
+              <>
+                <Loader2 size={18} className="animate-spin" />
+              </>
+            ) : (
+              <>
+                <Download size={18} />
+                <span>Profile</span>
+              </>
+            )}
           </a>
 
           {/* Mobile hamburger */}
@@ -168,7 +236,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-2.5 rounded-full border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/10 transition-all duration-300"
                 >
-                  Hire me
+                  Download Resume
                 </a>
               </motion.li>
             </ul>

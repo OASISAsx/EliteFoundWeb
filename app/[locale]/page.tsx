@@ -332,175 +332,179 @@ export default function TypewriterHero() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section
-        id="home"
-        className="relative min-h-screen overflow-hidden flex items-center justify-center px-6"
-      >
-        {/* Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <Snowfall
-            snowflakeCount={50}
-            style={{ position: "absolute", width: "100%", height: "100%" }}
-          />
-        </div>
-
-        {/* Ambient glow blobs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-blue-500/8 blur-[120px] pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-20 max-w-7xl w-full my-20">
-          {/* ===== LEFT: Text ===== */}
-          <div className="flex-1 text-center lg:text-left space-y-6">
-            {/* Greeting */}
-            <h1 className="text-4xl md:text-4xl font-light text-gray-500 tracking-[0.3em] uppercase">
-              <motion.span className="inline-block">
-                <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-gray-200 to-gray-500 font-semibold">
-                  {greetingDisplay}
-                </motion.span>
-                {!isGreetingComplete && (
-                  <motion.span
-                    className="inline-block w-0.5 h-5 ml-1 bg-cyan-400 align-middle"
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ repeat: Infinity, duration: 0.8 }}
-                  />
-                )}
-              </motion.span>
-            </h1>
-
-            {/* Name / Role */}
-            <div className="space-y-2">
-              <div className="text-2xl md:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-gray-400 leading-tight">
-                <motion.span className="flex items-center justify-center lg:justify-start">
-                  <motion.span>{wordDisplay}</motion.span>
-                  <motion.span
-                    className="inline-block w-0.5 h-12 ml-2 bg-cyan-400"
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ repeat: Infinity, duration: 0.8 }}
-                  />
-                </motion.span>
-              </div>
-              <p className="text-gray-500 text-lg tracking-wider">
-                Wave · 24 years old
-              </p>
-            </div>
-
-            {/* Divider */}
-            <div className="w-16 h-px bg-gradient-to-r from-cyan-400 to-transparent mx-auto lg:mx-0" />
-
-            {/* Stats row */}
-            <Card
-              sx={{
-                borderRadius: "12px",
-                padding: "20px",
-                width: { xs: "100%", sm: "80%", md: "400px", lg: "500px" },
-                background: "rgba(20,20,40,0.7)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <motion.div
-                className="flex items-center justify-center lg:justify-start gap-8"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.6 }}
-              >
-                {[
-                  { value: "2+", label: "Years Exp." },
-                  { value: "20+", label: "Projects" },
-                  { value: "10+", label: "Technologies" },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center lg:text-left">
-                    <div className="px-4 text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white">
-                      {stat.value}
-                    </div>
-                    <div className=" px-4 text-xs text-gray-500 tracking-widest uppercase mt-0.5">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* CTA buttons */}
-              <motion.div
-                className="flex items-center justify-center lg:justify-start gap-4 pt-2"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5, duration: 0.6 }}
-              >
-                <button className="px-6 py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300">
-                  View Work
-                </button>
-                <button className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
-                  Contact
-                </button>
-              </motion.div>
-            </Card>
+      <div className="h-screen overflow-y-scroll snap-y snap-mandatory no-scrollbar">
+        <section
+          id="home"
+          className="relative snap-start min-h-screen  scroll-mt-16 overflow-hidden flex items-center justify-center px-6"
+        >
+          {/* Background */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Snowfall
+              snowflakeCount={50}
+              style={{ position: "absolute", width: "100%", height: "100%" }}
+            />
           </div>
 
-          {/* ===== RIGHT: Profile Image ===== */}
-          <motion.div
-            className="relative shrink-0"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          >
-            {/* Outer glow ring */}
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-transparent to-blue-500/10 blur-xl" />
+          {/* Ambient glow blobs */}
+          <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-blue-500/8 blur-[120px] pointer-events-none" />
 
-            {/* Border frame */}
-            <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-cyan-400/30 via-white/5 to-transparent" />
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-20 max-w-7xl w-full my-20">
+            {/* ===== LEFT: Text ===== */}
+            <div className="flex-1 text-center lg:text-left space-y-6">
+              {/* Greeting */}
+              <h1 className="text-4xl md:text-4xl font-light text-gray-500 tracking-[0.3em] uppercase">
+                <motion.span className="inline-block">
+                  <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-gray-200 to-gray-500 font-semibold">
+                    {greetingDisplay}
+                  </motion.span>
+                  {!isGreetingComplete && (
+                    <motion.span
+                      className="inline-block w-0.5 h-5 ml-1 bg-cyan-400 align-middle"
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ repeat: Infinity, duration: 0.8 }}
+                    />
+                  )}
+                </motion.span>
+              </h1>
 
-            {/* Image */}
-            <motion.img
-              src="/images/profile2.png"
-              alt="Profile"
-              className="relative w-72 h-88 md:w-80 md:h-96 object-cover rounded-2xl saturate-90 contrast-105"
-              style={{ height: "24rem" }}
-              animate={{
-                y: [0, -8, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
+              {/* Name / Role */}
+              <div className="space-y-2">
+                <div className="text-2xl md:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-gray-400 leading-tight">
+                  <motion.span className="flex items-center justify-center lg:justify-start">
+                    <motion.span>{wordDisplay}</motion.span>
+                    <motion.span
+                      className="inline-block w-0.5 h-12 ml-2 bg-cyan-400"
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ repeat: Infinity, duration: 0.8 }}
+                    />
+                  </motion.span>
+                </div>
+                <p className="text-gray-500 text-lg tracking-wider">
+                  Wave · 24 years old
+                </p>
+              </div>
 
-            {/* Overlay shimmer */}
-            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-cyan-400/5 via-transparent to-white/5" />
+              {/* Divider */}
+              <div className="w-16 h-px bg-gradient-to-r from-cyan-400 to-transparent mx-auto lg:mx-0" />
 
-            {/* Floating badge */}
+              {/* Stats row */}
+              <Card
+                sx={{
+                  borderRadius: "12px",
+                  padding: "20px",
+                  width: { xs: "100%", sm: "80%", md: "400px", lg: "500px" },
+                  background: "rgba(20,20,40,0.7)",
+                  backdropFilter: "blur(10px)",
+                }}
+              >
+                <motion.div
+                  className="flex items-center justify-center lg:justify-start gap-8"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                >
+                  {[
+                    { value: "2+", label: "Years Exp." },
+                    { value: "20+", label: "Projects" },
+                    { value: "10+", label: "Technologies" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center lg:text-left">
+                      <div className="px-4 text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white">
+                        {stat.value}
+                      </div>
+                      <div className=" px-4 text-xs text-gray-500 tracking-widest uppercase mt-0.5">
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+
+                {/* CTA buttons */}
+                <motion.div
+                  className="flex items-center justify-center lg:justify-start gap-4 pt-2"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5, duration: 0.6 }}
+                >
+                  <button className="px-6 py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300">
+                    View Work
+                  </button>
+                  <button className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
+                    Contact
+                  </button>
+                </motion.div>
+              </Card>
+            </div>
+
+            {/* ===== RIGHT: Profile Image ===== */}
             <motion.div
-              className="absolute -bottom-5 -left-5 bg-gray-900/90 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2.5"
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.0, duration: 0.5 }}
+              className="relative shrink-0"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
             >
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs text-gray-300 tracking-wider">
-                Available for work
-              </span>
+              {/* Outer glow ring */}
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-transparent to-blue-500/10 blur-xl" />
+
+              {/* Border frame */}
+              <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-cyan-400/30 via-white/5 to-transparent" />
+
+              {/* Image */}
+              <motion.img
+                src="/images/profile2.png"
+                alt="Profile"
+                className="relative w-72 h-88 md:w-80 md:h-96 object-cover rounded-2xl saturate-90 contrast-105"
+                style={{ height: "24rem" }}
+                animate={{
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Overlay shimmer */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-cyan-400/5 via-transparent to-white/5" />
+
+              {/* Floating badge */}
+              <motion.div
+                className="absolute -bottom-5 -left-5 bg-gray-900/90 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2.5"
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.0, duration: 0.5 }}
+              >
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs text-gray-300 tracking-wider">
+                  Available for work
+                </span>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-      <section
-        id="about"
-        className="min-h-screen snap-start relative flex items-center justify-center"
-      >
-        <WorkHistory />
-      </section>
+          </div>
+        </section>
+        <section
+          id="about"
+          className="min-h-screen snap-start relative flex items-center justify-center"
+        >
+          <WorkHistory />
+        </section>
 
-      {/* ===== STACKED CARDS SECTION (ด้านล่าง) ===== */}
-      <section id="skills" className="relative py-10 px-6  overflow-hidden">
-        <div className="text-center mb-2">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My Skills & Passion
-          </h2>
-          <p className="text-gray-400 text-lg">สิ่งที่ฉันรักและเชี่ยวชาญ</p>
-        </div>
+        {/* ===== STACKED CARDS SECTION (ด้านล่าง) ===== */}
+        <section
+          id="skills"
+          className="snap-start min-h-screen flex flex-col justify-center px-6 overflow-hidden scroll-mt-16"
+        >
+          <div className="text-center mb-2">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              My Skills & Passion
+            </h2>
+            <p className="text-gray-400 text-lg">สิ่งที่ฉันรักและเชี่ยวชาญ</p>
+          </div>
 
-        <section className="py-16 overflow-hidden">
-          <style>{`
+          <section className="py-16 overflow-hidden">
+            <style>{`
     @keyframes marquee {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
@@ -528,49 +532,49 @@ export default function TypewriterHero() {
     }
   `}</style>
 
-          <div className="marquee-wrapper relative overflow-hidden py-16">
-            <div className="marquee-track gap-16">
-              {[...skills, ...skills].map((skill, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center justify-center gap-3 w-[120px] shrink-0"
-                >
-                  <div className="relative">
-                    <div
-                      className="absolute inset-0 blur-2xl opacity-25"
-                      //     style={{
-                      //       background: `linear-gradient(135deg,
-                      // hsl(${skill.hueA}, 100%, 60%),
-                      // hsl(${skill.hueB}, 100%, 60%))`,
-                      //     }}
-                    />
-                    <div className="relative z-10 w-[90px] h-[90px]">
-                      <Image
-                        src={skill.icon}
-                        alt={skill.name}
-                        fill
-                        className="object-contain select-none"
-                        draggable={false}
+            <div className="marquee-wrapper relative overflow-hidden py-16">
+              <div className="marquee-track gap-16">
+                {[...skills, ...skills].map((skill, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-center justify-center gap-3 w-[120px] shrink-0"
+                  >
+                    <div className="relative">
+                      <div
+                        className="absolute inset-0 blur-2xl opacity-25"
+                        style={{
+                          background: `linear-gradient(135deg,
+                        hsl(${skill.hueA}, 100%, 60%),
+                        hsl(${skill.hueB}, 100%, 60%))`,
+                        }}
                       />
+                      <div className="relative z-10 w-[90px] h-[90px]">
+                        <Image
+                          src={skill.icon}
+                          alt={skill.name}
+                          fill
+                          className="object-contain select-none"
+                          draggable={false}
+                        />
+                      </div>
                     </div>
+                    <span className="text-gray-400 text-sm text-center">
+                      {skill.name}
+                    </span>
                   </div>
-                  <span className="text-gray-400 text-sm text-center">
-                    {skill.name}
-                  </span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </section>
         </section>
-      </section>
-      {/* <section className="min-h-screen snap-start">
+        {/* <section className="min-h-screen snap-start">
         <PortfolioGrid />
       </section> */}
-      <section id="projects" className="min-h-screen snap-start">
-        <DevTimeline />
-      </section>
+        <section id="projects" className="min-h-screen snap-start">
+          <DevTimeline />
+        </section>
 
-      {/* <motion.button
+        {/* <motion.button
         onClick={() => {
           window.scrollBy({
             top: window.innerHeight,
@@ -596,7 +600,7 @@ export default function TypewriterHero() {
           />
         </svg>
       </motion.button> */}
-      {/* <AnimatePresence>
+        {/* <AnimatePresence>
         {show && (
           <motion.div
             className="fixed bottom-6 right-6 z-50"
@@ -626,6 +630,7 @@ export default function TypewriterHero() {
           </motion.div>
         )}
       </AnimatePresence> */}
+      </div>
     </>
   );
 }
