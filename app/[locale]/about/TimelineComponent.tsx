@@ -19,7 +19,6 @@ export default function DevTimeline() {
   const [dialog, setDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TimeLineType | null>(null);
 
-  console.log(timeline, "timeline");
   const selectItems = (item: TimeLineType) => {
     setSelectedItem(item);
     setDialog(true);

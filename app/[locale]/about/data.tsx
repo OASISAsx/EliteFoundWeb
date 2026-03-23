@@ -87,6 +87,7 @@ import { ReactNode } from "react";
 import UIShowcase from "./StockCarousel";
 import UIShowcaseZ from "./ZCarousel";
 import UIShowcasePoon from "./PoonCarousel";
+import UIDevOpsShowcase from "./DevOpsCarousel";
 
 export const timeline: TimeLineType[] = [
   {
@@ -94,7 +95,7 @@ export const timeline: TimeLineType[] = [
     title: "Full Stack Developer",
     company: "EIMS Stock",
     desc: "Developed ERP system with vue3, Nuxt, pinia, NestJS, Express.js",
-    image: "../images/eims.png",
+    image: "../stocks/eimsLogin.png",
     items: <UIShowcase />,
   },
   {
@@ -120,7 +121,7 @@ export const timeline: TimeLineType[] = [
     company: "set CI/CD pipelines in Project ",
     desc: "Ubuntu,Nginx,Git Action, Docker ",
     image: "../images/CICD.png",
-    items: <UIShowcase />,
+    items: <UIDevOpsShowcase />,
   },
   {
     year: "2024",

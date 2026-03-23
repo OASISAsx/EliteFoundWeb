@@ -31,8 +31,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function DialogTimeline({ dialog, onClose, item }: Props) {
   if (!dialog) return null;
 
-  console.log(item, "item");
-
   return (
     <React.Fragment>
       <BootstrapDialog

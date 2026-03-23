@@ -34,7 +34,7 @@ export default function WorkHistory() {
             </div>
 
             <p className="text-gray-400 text-sm mb-3">
-              2024 – Present (Poontana Marketing Co., Ltd)
+              2024 May – Present (Poontana Marketing Co., Ltd)
             </p>
             <p className="text-gray-300 leading-relaxed">
               ออกแบบและพัฒนา ERP Web Application ที่รองรับการขยายตัวของระบบ
@@ -44,11 +44,7 @@ export default function WorkHistory() {
               Job Scheduling สำหรับงานติดตั้งและบำรุงรักษา พัฒนา Barcode
               Scanning System
               เพื่อเพิ่มความรวดเร็วและความแม่นยำในการจัดการสินค้า ออกแบบและพัฒนา
-              Financial Calculation System รองรับกระบวนการทางธุรกิจ นำหลักการ
-              FIFO (First-In, First-Out) มาใช้ในการจัดการสินค้า
-              เพื่อให้การขายมีความถูกต้องตามลำดับล็อต สร้างระบบ Automated PDF
-              Reporting ลดขั้นตอนการทำงานแบบ Manual พัฒนา Workflow System
-              เพื่อเพิ่มประสิทธิภาพการทำงานภายในองค์กร ออกแบบและติดตั้ง CI/CD
+              Financial Calculation System รองรับกระบวนการทางธุรกิจ น ออกแบบและติดตั้ง CI/CD
               Pipeline Test ก่อนที่จะทำการ Deploy แบบอัตโนมัติ ไปที่ Production
               พัฒนา Real-time System ด้วย WebSocket (Socket.IO) ทำ Message
               เพื่อให้ลูกค้าติดต่อหา ทีม Admin คอยแก้ปัญหา และ ทำหน้า Scan Login
@@ -91,16 +87,7 @@ export default function WorkHistory() {
               4 months 2023 – 2024 (Dexon technologies Co., Ltd)
             </p>
             <p className="text-gray-300 leading-relaxed">
-              มีส่วนร่วมในการพัฒนาเว็บแอปพลิเคชัน
-              และได้รับประสบการณ์ในการใช้งานเทคโนโลยีฝั่ง Frontend
-              โดยใช้เฟรมเวิร์ก Vue.js และ Tailwind CSS
-              ในการพัฒนาระบบที่เกี่ยวข้องกับงานด้าน Software Engineering
-              ช่วยเสนอความคิดเห็นและออกแบบโครงสร้างข้อมูล (Data Structure)
-              รวมถึงมีส่วนร่วมในการออกแบบระบบให้เหมาะสมกับการทำงานของแอปพลิเคชัน
-              ออกแบบโลโก้และงานด้านกราฟิก โดยใช้โปรแกรม Adobe Photoshop
-              เพื่อสนับสนุนภาพลักษณ์และเอกลักษณ์ของระบบ ออกแบบเอกสาร PDF
-              สำหรับการใช้งานภายในระบบ โดยสร้าง Template เฉพาะ (Custom PDF
-              Template) ให้เหมาะสมกับรูปแบบข้อมูลและการใช้งานจริง
+              พัฒนาเว็บแอปพลิเคชันด้วย Vue.js และ Tailwind CSS โดยเน้นแนวทาง Software Engineering อย่างเป็นระบบ มีบทบาทในการออกแบบโครงสร้างข้อมูล (Data Structure) และสถาปัตยกรรมระบบ เพื่อรองรับการทำงานที่มีประสิทธิภาพและขยายต่อได้ในอนาคต แก้ไขและปรับปรุงปัญหาในฝั่ง Frontend พร้อมเพิ่มประสิทธิภาพด้าน SEO และ Performance ให้ระบบโหลดเร็วและตอบสนองดี มีส่วนร่วมในการออกแบบ UX/UI และโครงสร้างระบบให้สอดคล้องกับการใช้งานจริง รวมถึงออกแบบ Branding เช่น โลโก้และงานกราฟิกด้วย Adobe Photoshop เพื่อเสริมภาพลักษณ์ของโปรดักต์ นอกจากนี้ยังพัฒนา Custom PDF Template สำหรับเอกสารภายในระบบ โดยออกแบบให้รองรับโครงสร้างข้อมูลจริงและใช้งานได้อย่างมืออาชีพ
             </p>
           </motion.div>
         </div>
