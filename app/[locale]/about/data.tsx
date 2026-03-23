@@ -88,10 +88,12 @@ import UIShowcase from "./StockCarousel";
 import UIShowcaseZ from "./ZCarousel";
 import UIShowcasePoon from "./PoonCarousel";
 import UIDevOpsShowcase from "./DevOpsCarousel";
+import UIShowcaseDexon from "./DexonCarousel";
+import UIShowcaseColection from "./finalCarousel";
 
 export const timeline: TimeLineType[] = [
   {
-    year: "2025",
+    year: "2025 - Present",
     title: "Full Stack Developer",
     company: "EIMS Stock",
     desc: "Developed ERP system with vue3, Nuxt, pinia, NestJS, Express.js",
@@ -99,7 +101,7 @@ export const timeline: TimeLineType[] = [
     items: <UIShowcase />,
   },
   {
-    year: "2025",
+    year: "2025 - Present",
     title: "Full Stack Developer",
     company: "Zillion",
     desc: "Developed ERP system with vue3, Nuxt, pinia, NestJs Prisma",
@@ -107,7 +109,7 @@ export const timeline: TimeLineType[] = [
     items: <UIShowcaseZ />,
   },
   {
-    year: "2025",
+    year: "2024 - Present",
     title: "Full Stack Developer",
     company: "Poon EWork ERP",
     desc: "Developed ERP system with Vue2, Express.js, Sequelize , MySQL",
@@ -116,51 +118,51 @@ export const timeline: TimeLineType[] = [
   },
 
   {
-    year: "2025",
+    year: "2024 - Present",
     title: "DevOps",
-    company: "set CI/CD pipelines in Project ",
-    desc: "Ubuntu,Nginx,Git Action, Docker ",
-    image: "../images/CICD.png",
+    company: "Setting CI/CD pipelines in Project ",
+    desc: "Ubuntu Linux, Nginx, Git Action, Docker",
+    image: "../images/DevOps.jpeg",
     items: <UIDevOpsShowcase />,
   },
+  // {
+  //   year: "2024",
+  //   title: "Icon Design",
+  //   company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
+  //   desc: "Design in Photoshop",
+  //   image: "../images/iconDexon.png",
+  //   items: <UIShowcase />,
+  // },
+  // {
+  //   year: "2024",
+  //   title: "DIS Team",
+  //   company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
+  //   desc: "Intern Project",
+  //   image: "../images/timeDexxon.jpg",
+  //   items: <UIShowcase />,
+  // },
+  // {
+  //   year: "2024",
+  //   title: "Certificate",
+  //   company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
+  //   desc: "A certificate of effective and practical work. ",
+  //   image: "../images/certificave.jpg",
+  //   items: <UIShowcase />,
+  // },
   {
-    year: "2024",
-    title: "Icon Design",
-    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
-    desc: "Design in Photoshop",
-    image: "../images/iconDexon.png",
-    items: <UIShowcase />,
-  },
-  {
-    year: "2024",
-    title: "DIS Team",
-    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
-    desc: "Intern Project",
-    image: "../images/timeDexxon.jpg",
-    items: <UIShowcase />,
-  },
-  {
-    year: "2024",
-    title: "Certificate",
-    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
-    desc: "A certificate of effective and practical work. ",
-    image: "../images/certificave.jpg",
-    items: <UIShowcase />,
-  },
-  {
-    year: "2024",
+    year: "Nov 2023 - Feb 2024",
     title: "PTT Project",
     company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
-    desc: "Developed using Vue2 and.Net core",
-    image: "../images/dexon1.jpg",
-    items: <UIShowcase />,
+    desc: "Developed using Vue2 and C# .Net core",
+    image: "../works/work1.jpg",
+    items: <UIShowcaseDexon />,
   },
   {
-    year: "2023",
+    year: "Feb 2023 - Sep 2023",
     title: " Final Project Study",
-    company: "ซื้อขายของสะสม",
-    desc: "Developed using React , Next.js and Golang gin and gorm",
+    company: "Buy and sell collectibles",
+    desc: "Developed using React , Next.js and Golang ,Gin",
     image: "../images/colection.png",
-    items: <UIShowcase />,
+    items: <UIShowcaseColection />,
   },
 ];

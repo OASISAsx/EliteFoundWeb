@@ -22,8 +22,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
   "& .MuiDialog-paper": {
-    backgroundColor: "#1e223b", // สี bg
-    color: "#fff", // สี text
+    backgroundColor: "#1e223b",
+    color: "#fff",
     borderRadius: "16px",
   },
 }));
@@ -38,16 +38,18 @@ export default function DialogTimeline({ dialog, onClose, item }: Props) {
         fullWidth
         PaperProps={{
           sx: {
-            height: "80vh", // ใช้ vh จะชัวร์กว่า
+            height: "80vh",
             maxHeight: "80vh",
-            m: 0, // 🔥 ตัด margin ออก
+            m: 0,
           },
         }}
         onClose={onClose}
         open={dialog}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Project
+          <Typography sx={{ fontFamily: "sans-serif" }}>
+            {item?.year}
+          </Typography>
         </DialogTitle>
         <IconButton
           aria-label="close"

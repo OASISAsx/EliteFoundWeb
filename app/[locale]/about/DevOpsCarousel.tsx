@@ -5,31 +5,29 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 const showcases = [
   {
-    title: "Login Page",
+    title: "DevOps Infrastructure Setup",
     description:
-      "Login Page เป็นจุดเริ่มต้นของการเข้าใช้งานระบบ Eims โดยจะส่งข้อมูล Username และ Password เข้าไปตรวจสอบการ Login มีอยู่ในระบบหรือไม่ ถ้ามี username จะทำการ เช็คจาก password hash กลับเอาไปเช็ค database",
+      "ออกแบบและติดตั้ง Server Infrastructure สำหรับรองรับการ Deploy โปรเจกต์แบบ Production พร้อมตั้งค่า Docker และ Containerization เพื่อให้ระบบสามารถรันผ่าน Domain ได้อย่างเสถียร",
     image: "/devOps/CICD.png",
   },
-   {
-    title: "Detail Product",
+  {
+    title: "Continuous Integration (CI)",
     description:
-      "หน้าระบบที่ใช้แสดงข้อมูลรายละเอียดของสินค้าในระดับเชิงลึก ไม่ใช่เพียงข้อมูลทั่วไปของรุ่นสินค้า แต่รวมถึงข้อมูลเฉพาะของสินค้าแต่ละชิ้นที่ถูกระบุด้วย Serial Number ซึ่งทำให้สามารถติดตามประวัติของสินค้าตั้งแต่ต้นทางจนถึงปลายทางได้อย่างครบถ้วน ระบบนี้ช่วยเปลี่ยนมุมมองการจัดการสินค้า จากการมองเป็น “สินค้าในภาพรวม” ไปสู่การมองเป็น “สินค้าแต่ละชิ้น” ซึ่งมีตัวตนและประวัติที่ตรวจสอบได้",
+      "วางระบบ CI Pipeline สำหรับตรวจสอบคุณภาพโค้ดอัตโนมัติ เช่น การ Run Test, Lint และ Build Validation ก่อนนำขึ้น Production",
     image: "/devOps/CI-Test.png",
   },
   {
-    title: "Total Sales",
+    title: "Pre-deployment Workflow",
     description:
-      "สรุปและแสดงผลยอดขายสินค้าทั้งหมดในช่วงเวลาที่กำหนด โดยมักจะแสดงผลในรูปแบบรายเดือน เพื่อให้สามารถเปรียบเทียบแนวโน้มของยอดขายในแต่ละช่วงเวลาได้อย่างชัดเจน ข้อมูลนี้ไม่เพียงแสดงยอดขายรวมเท่านั้น แต่ยังสามารถแยกดูรายละเอียดตามประเภทสินค้า รุ่นสินค้า หรือช่องทางการขายได้อีกด้วย ระบบ Total Sales ช่วยเปลี่ยนข้อมูลการขายที่กระจัดกระจายให้กลายเป็นข้อมูลเชิงวิเคราะห์ที่เข้าใจง่าย และพร้อมนำไปใช้ในการตัดสินใจทางธุรกิจ",
+      "ออกแบบขั้นตอนก่อน Deployment เพื่อให้มั่นใจว่าแอปพลิเคชันผ่านการทดสอบครบถ้วน ลดความเสี่ยงของ Bug ใน Production",
     image: "/devOps/deployment.png",
   },
   {
-    title: "Detail Product",
+    title: "Docker Container Orchestration",
     description:
-      "หน้าระบบที่ใช้แสดงข้อมูลรายละเอียดของสินค้าในระดับเชิงลึก ไม่ใช่เพียงข้อมูลทั่วไปของรุ่นสินค้า แต่รวมถึงข้อมูลเฉพาะของสินค้าแต่ละชิ้นที่ถูกระบุด้วย Serial Number ซึ่งทำให้สามารถติดตามประวัติของสินค้าตั้งแต่ต้นทางจนถึงปลายทางได้อย่างครบถ้วน ระบบนี้ช่วยเปลี่ยนมุมมองการจัดการสินค้า จากการมองเป็น “สินค้าในภาพรวม” ไปสู่การมองเป็น “สินค้าแต่ละชิ้น” ซึ่งมีตัวตนและประวัติที่ตรวจสอบได้",
+      "สร้างและจัดการ Docker Containers ด้วย docker-compose เพื่อควบคุม Service ต่าง ๆ ให้สามารถทำงานร่วมกันได้อย่างมีประสิทธิภาพ",
     image: "/devOps/docker-compose.png",
   },
-  
-  
 ];
 
 export default function UIDevOpsShowcase() {
@@ -55,11 +53,11 @@ export default function UIDevOpsShowcase() {
           transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-white px-3 line-clamp-1"
         >
-          Poontana ERP
+          Setting CI/CD pipelines in Project
         </motion.h2>
 
         <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">
-          Full-Stack Developer
+          DevOps Infrastructure Setup
         </p>
       </div>
 

@@ -1,16 +1,8 @@
-import {
-  AnimatePresence,
-  motion,
-  MotionValue,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { motion } from "framer-motion";
+
 import { timeline, TimeLineType } from "./data";
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 import DialogTimeline from "./DialogTimeline";
 
 export default function DevTimeline() {
@@ -81,7 +73,7 @@ export default function DevTimeline() {
         {/* เส้นกลาง */}
 
         <div className="space-y-24">
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-white/10 -translate-x-1/2" />
+          <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-white/10 -translate-x-1/2" />
           {timeline.map((item, i) => (
             <motion.div
               key={i}
