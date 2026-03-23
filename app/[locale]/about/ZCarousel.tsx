@@ -83,7 +83,7 @@ export default function UIShowcaseZ() {
           transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-white px-3 line-clamp-1"
         >
-          Poontana ERP
+          Zillion ERP
         </motion.h2>
 
         <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">

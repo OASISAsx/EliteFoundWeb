@@ -95,11 +95,11 @@ export default function UIShowcaseColection() {
           transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-white px-3 line-clamp-1"
         >
-          Dexon
+          Buy and sell collectibles
         </motion.h2>
 
         <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">
-          Intern Developer
+          Students developing the system
         </p>
       </div>
 
