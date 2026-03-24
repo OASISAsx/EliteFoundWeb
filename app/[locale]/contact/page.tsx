@@ -100,13 +100,13 @@ const INFO_CARDS = [
   {
     icon: <RateReviewOutlinedIcon sx={{ fontSize: 24 }} />,
     title: "Feedback & Suggestions",
-    desc: "We value your feedback and are continuously working to improve Snappy.",
+    desc: "We value your feedback and are continuously working to improve.",
     color: "#8b5cf6",
   },
   {
     icon: <NewspaperOutlinedIcon sx={{ fontSize: 24 }} />,
     title: "Media Inquiries",
-    desc: "For press inquiries, please contact us at media@snappyapp.com.",
+    desc: "For press inquiries, please contact us at wave001133@gmail.com",
     color: "#a78bfa",
   },
 ];
