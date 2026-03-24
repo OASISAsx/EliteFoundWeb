@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 "use client";
 
 import { useState, useRef } from "react";
@@ -22,6 +23,7 @@ import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import SendIcon from "@mui/icons-material/Send";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import emailjs from "@emailjs/browser";
 
 // ── Dark MUI Theme ──────────────────────────────────────────────────────────
 const darkTheme = createTheme({
@@ -126,7 +128,7 @@ export default function ContactPage() {
     firstName: "",
     lastName: "",
     email: "",
-    countryCode: "+62",
+    countryCode: "+66",
     phone: "",
     message: "",
   });
@@ -146,10 +148,33 @@ export default function ContactPage() {
     if (field === "message") setCharCount(value.length);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!form.email || !form.message) return;
-    setSubmitted(true);
-    setSnack(true);
+    const currentDate = new Date();
+
+    const formatted = currentDate.toLocaleString("th-TH", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAIL_SERVICE!,
+        process.env.NEXT_PUBLIC_EMAIL_TEMPLATE!,
+        {
+          from_name: `${form.firstName} ${form.lastName}`,
+          email: form.email,
+          phone: `${form.countryCode}${form.phone}`,
+          message: form.message,
+          time: formatted,
+        },
+        process.env.NEXT_PUBLIC_EMAIL_KEY!,
+      );
+
+      setSubmitted(true);
+      setSnack(true);
+    } catch (err) {
+      console.error("Send email failed:", err);
+    }
   };
 
   const stagger = (i: number) => ({
@@ -354,7 +379,7 @@ export default function ContactPage() {
                             firstName: "",
                             lastName: "",
                             email: "",
-                            countryCode: "+62",
+                            countryCode: "+66",
                             phone: "",
                             message: "",
                           });
@@ -490,11 +515,11 @@ export default function ContactPage() {
                             sx={{
                               py: 1.5,
                               background:
-                                "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+                                "linear-gradient(135deg, #6366f1 0%, #67c4f9 100%)",
                               boxShadow: "0 8px 32px rgba(99,102,241,0.35)",
                               "&:hover": {
                                 background:
-                                  "linear-gradient(135deg, #818cf8 0%, #a78bfa 100%)",
+                                  "linear-gradient(135deg, #818cf8 0%, #67c4f9 100%)",
                                 boxShadow: "0 12px 40px rgba(99,102,241,0.5)",
                               },
                             }}
