@@ -11,33 +11,33 @@ const showcases = [
     image: "/works/work4.jpg",
   },
   {
-    title: "ประชุม",
+    title: "ประชุมปรับ UI ระบบใหม่",
     description:
-      "",
+      "ปรับ UI ให้มีความใช้ง่ายและ และทันสมัยตอบโจยท์กับทุกอุสาหกรรม",
     image: "/works/work5.jpg",
   },
   {
-    title: "ประชุม2",
+    title: "Final Project",
     description:
-      "",
+      "พัฒนาโปรเจกต์ครบวงจรตั้งแต่การออกแบบระบบ (System Design) ไปจนถึงการพัฒนาและ Deploy เพื่อรองรับการใช้งานจริง",
     image: "/works/work3.jpg",
   },
   {
-    title: "Design Icons",
+    title: "Icon Design",
     description:
-      "",
+      "ออกแบบ Icon สำหรับใช้งานภายในระบบ โดยคำนึงถึง Branding และลิขสิทธิ์ขององค์กร",
     image: "/images/iconDexon.png",
   },
   {
-    title: "DIS TEAM",
+    title: "Team Collaboration",
     description:
-      "",
+      "ทำงานร่วมกับทีมในการพัฒนาระบบ วางแผน และแก้ไขปัญหา เพื่อให้โปรเจกต์สำเร็จตามเป้าหมาย",
     image: "/images/timeDexxon.jpg",
   },
   {
-    title: "CERTIFICATE",
+    title: "Certificate",
     description:
-      "",
+      "ใบรับรองความสามารถและผลงานที่เกี่ยวข้องกับสายงาน Software Engineering และการพัฒนาระบบ",
     image: "/images/certificave.jpg",
   },
 ];
@@ -65,7 +65,7 @@ export default function UIShowcaseDexon() {
           transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-white px-3 line-clamp-1"
         >
-         DEXON TECHNOLOGY PLC.
+          DEXON TECHNOLOGY PLC.
         </motion.h2>
 
         <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">

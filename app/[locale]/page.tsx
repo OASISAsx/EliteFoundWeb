@@ -16,6 +16,7 @@ import DevTimeline from "./about/TimelineComponent";
 import { Card } from "@mui/material";
 import WorkHistory from "./components/WorkHistory";
 import ContactPage from "./contact/page";
+import { GitHub } from "@mui/icons-material";
 
 const rotatingWords = [
   "Full-Stack Developer",
@@ -77,7 +78,7 @@ const skills: SkillItem[] = [
 
   {
     icon: "/images/node.png",
-    name: "Node.js",
+    name: "NodeJS",
     description:
       "สร้างระบบ Backend ด้วย Node.js รองรับ REST API และการทำงานแบบ Asynchronous",
     hueA: 100,
@@ -85,7 +86,7 @@ const skills: SkillItem[] = [
   },
   {
     icon: "/images/Express_logo.png",
-    name: "Express.js",
+    name: "Express",
     description:
       "พัฒนา REST API ที่รวดเร็วและยืดหยุ่น ด้วย Express.js สำหรับระบบ Backend",
     hueA: 200,
@@ -135,7 +136,7 @@ const skills: SkillItem[] = [
   },
   {
     icon: "/tach/NuxtJS.svg",
-    name: "Nuxt.js",
+    name: "Nuxt",
     description:
       "พัฒนาเว็บแอปด้วย Nuxt.js สำหรับการสร้าง Progressive Web Apps และ SSR อย่างมีประสิทธิภาพ",
     hueA: 100,
@@ -143,7 +144,7 @@ const skills: SkillItem[] = [
   },
   {
     icon: "/images/github.png",
-    name: "Git & CI/CD",
+    name: "GitHub",
     description:
       "ควบคุมเวอร์ชันโค้ดและจัดการ Workflow การ Deploy ด้วย Git และระบบ CI/CD อัตโนมัติ",
     hueA: 300,
@@ -151,7 +152,7 @@ const skills: SkillItem[] = [
   },
   {
     icon: "/images/Pinialogo.svg",
-    name: "Pinia & Vuex",
+    name: "Pinia ",
     description:
       "จัดการ State และการเชื่อมต่อ API ใน Vue.js อย่างเป็นระบบด้วย Pinia และ Vuex",
     hueA: 100,
@@ -423,17 +424,23 @@ export default function TypewriterHero() {
 
                 {/* CTA buttons */}
                 <motion.div
-                  className="flex items-center justify-center lg:justify-start gap-4 pt-2"
+                  className="flex items-center justify-center lg:justify-start gap-4 pt-6"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.5, duration: 0.6 }}
                 >
-                  <button className="px-6 py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300">
-                    View Work
+                  <button
+                    onClick={() =>
+                      window.open("https://github.com/OASISAsx", "_blank")
+                    }
+                    className="flex justify-center items-center px-6 cursor-pointer py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300"
+                  >
+                    <GitHub />
+                    <span className="px-2">GitHub</span>
                   </button>
-                  <button className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
+                  {/* <button onClick={() => } className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
                     Contact
-                  </button>
+                  </button> */}
                 </motion.div>
               </Card>
             </div>
@@ -576,7 +583,7 @@ export default function TypewriterHero() {
         </section>
 
         <section id="contact" className="min-h-screen snap-start">
-          <ContactPage/>
+          <ContactPage />
         </section>
 
         {/* <motion.button

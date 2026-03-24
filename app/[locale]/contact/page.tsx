@@ -415,6 +415,7 @@ export default function ContactPage() {
                             label="First name"
                             size="small"
                             fullWidth
+                            required
                             value={form.firstName}
                             onChange={(e) =>
                               handleChange("firstName", e.target.value)
@@ -424,6 +425,7 @@ export default function ContactPage() {
                             label="Last name"
                             size="small"
                             fullWidth
+                            required
                             value={form.lastName}
                             onChange={(e) =>
                               handleChange("lastName", e.target.value)
@@ -436,6 +438,7 @@ export default function ContactPage() {
                           label="Your email"
                           type="email"
                           size="small"
+                          required
                           fullWidth
                           value={form.email}
                           onChange={(e) =>
@@ -474,11 +477,19 @@ export default function ContactPage() {
                           <TextField
                             label="Phone number"
                             size="small"
+                            required
                             fullWidth
+                            type="tel"
+                            placeholder="0812345678"
                             value={form.phone}
-                            onChange={(e) =>
-                              handleChange("phone", e.target.value)
-                            }
+                            inputProps={{ maxLength: 10 }}
+                            onChange={(e) => {
+                              const value = e.target.value.replace(
+                                /[^0-9]/g,
+                                "",
+                              );
+                              handleChange("phone", value);
+                            }}
                           />
                         </div>
 
