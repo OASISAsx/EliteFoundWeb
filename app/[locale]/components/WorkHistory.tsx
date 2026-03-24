@@ -85,7 +85,7 @@ export default function WorkHistory() {
               />
             </div>
             <p className="text-gray-400 text-sm mb-3 mt-10">
-              4 months 2023 – 2024 (Dexon technologies Co., Ltd)
+              Nov 2023 - Feb 2024 (Dexon technologies Co., Ltd)
             </p>
             <p className="text-gray-300 leading-relaxed">
               พัฒนาเว็บแอปพลิเคชันด้วย Vue.js และ Tailwind CSS โดยเน้นแนวทาง
@@ -93,7 +93,7 @@ export default function WorkHistory() {
               มีบทบาทในการออกแบบโครงสร้างข้อมูล (Data Structure)
               และสถาปัตยกรรมระบบ
               เพื่อรองรับการทำงานที่มีประสิทธิภาพและขยายต่อได้ในอนาคต
-              แก้ไขและปรับปรุงปัญหาในฝั่ง Frontend พร้อมเพิ่มประสิทธิภาพด้าน SEO
+              แก้ไขและปรับปรุงปัญหาในฝั่ง Frontend พร้อมเพิ่มประสิทธิภาพด้าน Optimization
               และ Performance ให้ระบบโหลดเร็วและตอบสนองดี มีส่วนร่วมในการออกแบบ
               UX/UI และโครงสร้างระบบให้สอดคล้องกับการใช้งานจริง รวมถึงออกแบบ
               Branding เช่น โลโก้และงานกราฟิกด้วย Adobe Photoshop

@@ -15,6 +15,7 @@ import Snowfall from "react-snowfall";
 import DevTimeline from "./about/TimelineComponent";
 import { Card } from "@mui/material";
 import WorkHistory from "./components/WorkHistory";
+import ContactPage from "./contact/page";
 
 const rotatingWords = [
   "Full-Stack Developer",
@@ -500,7 +501,7 @@ export default function TypewriterHero() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               My Skills & Passion
             </h2>
-            <p className="text-gray-400 text-lg">สิ่งที่ฉันรักและเชี่ยวชาญ</p>
+            <p className="text-gray-400 text-lg">Library & FrameWork</p>
           </div>
 
           <section className="py-16 overflow-hidden">
@@ -572,6 +573,10 @@ export default function TypewriterHero() {
       </section> */}
         <section id="projects" className="min-h-screen snap-start">
           <DevTimeline />
+        </section>
+
+        <section id="contact" className="min-h-screen snap-start">
+          <ContactPage/>
         </section>
 
         {/* <motion.button

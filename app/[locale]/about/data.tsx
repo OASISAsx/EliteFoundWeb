@@ -152,7 +152,7 @@ export const timeline: TimeLineType[] = [
   {
     year: "Nov 2023 - Feb 2024",
     title: "PTT Project",
-    company: "DEXON TECHNOLOGY PUBLIC COMPANY LIMITED",
+    company: "DEXON TECHNOLOGY PLC.",
     desc: "Developed using Vue2 and C# .Net core",
     image: "../works/work1.jpg",
     items: <UIShowcaseDexon />,

@@ -119,7 +119,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden md:flex items-center gap-1 cursor-pointer">
             {navLinks.map((link) => (
               <li key={link.label}>
                 <a
