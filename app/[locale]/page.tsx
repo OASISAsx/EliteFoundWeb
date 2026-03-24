@@ -16,7 +16,7 @@ import DevTimeline from "./about/TimelineComponent";
 import { Card } from "@mui/material";
 import WorkHistory from "./components/WorkHistory";
 import ContactPage from "./contact/page";
-import { GitHub } from "@mui/icons-material";
+import { GitHub, LinkedIn } from "@mui/icons-material";
 
 const rotatingWords = [
   "Full-Stack Developer",
@@ -438,9 +438,18 @@ export default function TypewriterHero() {
                     <GitHub />
                     <span className="px-2">GitHub</span>
                   </button>
-                  {/* <button onClick={() => } className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm tracking-wider hover:bg-white/10 transition-all duration-300">
-                    Contact
-                  </button> */}
+                  <button
+                    onClick={() =>
+                      window.open(
+                        "https://www.linkedin.com/in/nanthawat-inthisaen-b6a409305",
+                        "_blank",
+                      )
+                    }
+                    className="flex justify-center items-center px-6 cursor-pointer py-2.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/20 transition-all duration-300"
+                  >
+                    <LinkedIn />
+                    <span className="px-2">LinkedIn</span>
+                  </button>
                 </motion.div>
               </Card>
             </div>

@@ -31,7 +31,7 @@ const darkTheme = createTheme({
     primary: { main: "#6366f1" },
     background: { default: "#0a0a0f", paper: "#111118" },
   },
-  // typography: { fontFamily: 'var(--font-body)' },
+  typography: { fontFamily: "var(--font-body)" },
   components: {
     MuiTextField: {
       styleOverrides: {
@@ -200,36 +200,6 @@ export default function ContactPage() {
             backgroundSize: "64px 64px",
           }}
         />
-
-        {/* ── Nav ── */}
-        {/* <motion.nav
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="relative z-10 flex items-center justify-between px-8 py-5 border-b border-white/[0.05]"
-        >
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm">S</div>
-            <span className="text-white font-semibold tracking-tight text-lg">Snappy</span>
-          </div>
-          <div className="hidden md:flex items-center gap-7 text-sm text-white/50">
-            {['Home', 'Apps', 'Services', 'Blog', 'Business', 'Download'].map((item, i) => (
-              <motion.a
-                key={item}
-                href="#"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 + i * 0.05 }}
-                className={`hover:text-white transition-colors ${item === 'Home' ? 'text-white font-medium' : ''}`}
-              >
-                {item}
-              </motion.a>
-            ))}
-          </div>
-          <div className="flex items-center gap-2 text-sm text-white/50">
-            <span>🌐</span><span>EN</span>
-          </div>
-        </motion.nav> */}
 
         {/* ── Main Content ── */}
         <main className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-30">
