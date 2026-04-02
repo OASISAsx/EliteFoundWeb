@@ -144,7 +144,6 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Desktop CTA */}
           <a
             onClick={handleDownloadPDF}
             className="hidden md:inline-flex items-center gap-2 justify-center px-5 py-2 rounded-full border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/10 transition-all duration-300"
