@@ -3,15 +3,15 @@ kind: Ingress
 metadata:
   name: portfolio-ingress
   annotations:
-    kubernetes.io/ingress.class: 'nginx'
-    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     # ไม่ใส่ rewrite-target เพราะเราจะเข้าหน้าเว็บตรงๆ
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - nanthawat.elitefund.fun
-      secretName: event-seat-tls
+      secretName: portfolio-tls-new # <--- ต้องชื่อนี้ให้ตรงกับข้อ 1
   rules:
     - host: nanthawat.elitefund.fun
       http:
