@@ -213,6 +213,22 @@ const skills: SkillItem[] = [
     hueB: 100,
   },
   {
+    icon: "/devOps/k8s.svg",
+    name: "Kubernetes",
+    description:
+      "บริหารจัดการระบบด้วย Kubernetes (K8s) เพื่อรองรับการทำงานแบบ Containerized Architecture ช่วยให้ระบบสามารถ Scale ได้อัตโนมัติ (Auto-scaling), เพิ่มความเสถียร (High Availability) และรองรับการ Deploy แบบ Rolling Update / Blue-Green Deployment เพื่อให้การอัปเดตระบบเป็นไปอย่างราบรื่นและไม่มี Downtime",
+    hueA: 200,
+    hueB: 200,
+  },
+  {
+    icon: "/devOps/Jenkins.png",
+    name: "Jenkins",
+    description:
+      "จัดการ CI/CD Pipeline อย่างมีประสิทธิภาพด้วย Jenkins สำหรับการ Deploy อัตโนมัติ",
+    hueA: 10,
+    hueB: 100,
+  },
+  {
     icon: "/tach/NGINX_logo.svg",
     name: "Nginx",
     description:
