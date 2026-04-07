@@ -2,10 +2,16 @@
 "use client";
 
 // import Grid from "@mui/material/Grid";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  animate,
+  useScroll,
+} from "framer-motion";
 // import { useTranslations } from "next-intl";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Snowfall from "react-snowfall";
 // import { useRouter } from "next/navigation";
@@ -36,7 +42,7 @@ export interface SkillItem {
 const skills: SkillItem[] = [
   {
     icon: "/images/next.png",
-    name: "Next.js",
+    name: "NextJs",
     description:
       "พัฒนาเว็บแอประดับ Production ด้วย Next.js โดยใช้ App Router, Server Components และเทคนิคเพิ่มประสิทธิภาพด้าน SEO และ Performance",
     hueA: 600,
@@ -69,7 +75,7 @@ const skills: SkillItem[] = [
   },
   {
     icon: "/images/react.svg",
-    name: "React.js",
+    name: "React",
     description:
       "พัฒนาเว็บแอปด้วย React 3 และ Composition API เพื่อโครงสร้างที่ยืดหยุ่นและขยายระบบได้ง่าย",
     hueA: 140,
@@ -248,6 +254,12 @@ const skills: SkillItem[] = [
   // },
 ];
 
+const skillShowcaseRows: SkillItem[][] = [
+  skills.slice(0, 7),
+  skills.slice(7, 14),
+  skills.slice(14),
+];
+
 // ============== Main Component ================
 export default function TypewriterHero() {
   // const [show, setShow] = useState(false);
@@ -290,6 +302,18 @@ export default function TypewriterHero() {
   });
 
   const [isGreetingComplete, setIsGreetingComplete] = useState(false);
+  const heroSectionRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroSectionRef,
+    offset: ["start start", "end start"],
+  });
+  const profileScrollY = useTransform(scrollYProgress, [0, 1], [0, -144]);
+  const profileScrollScale = useTransform(
+    scrollYProgress,
+    [0, 0.65, 1],
+    [1, 1.03, 0.98],
+  );
+  const profileScrollRotate = useTransform(scrollYProgress, [0, 1], [0, -3]);
 
   useEffect(() => {
     const controls = animate(greetingCount, greetingText.length, {
@@ -337,6 +361,7 @@ export default function TypewriterHero() {
       <div className="h-screen overflow-y-scroll snap-y snap-mandatory no-scrollbar">
         <section
           id="home"
+          ref={heroSectionRef}
           className="relative snap-start min-h-screen  scroll-mt-16 overflow-hidden flex items-center justify-center px-6"
         >
           {/* Background */}
@@ -351,7 +376,7 @@ export default function TypewriterHero() {
           <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none" />
           <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-blue-500/8 blur-[120px] pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-20 max-w-7xl w-full my-20">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-end justify-center gap-20 max-w-7xl w-full my-20">
             {/* ===== LEFT: Text ===== */}
             <div className="flex-1 text-center lg:text-left space-y-6">
               {/* Greeting */}
@@ -456,25 +481,28 @@ export default function TypewriterHero() {
 
             {/* ===== RIGHT: Profile Image ===== */}
             <motion.div
-              className="relative shrink-0"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+              style={{
+                y: profileScrollY,
+                scale: profileScrollScale,
+                rotate: profileScrollRotate,
+              }}
             >
-              {/* Outer glow ring */}
-              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-transparent to-blue-500/10 blur-xl" />
+              <div className="absolute inset-x-8 bottom-3 h-8 rounded-full bg-cyan-400/20 blur-2xl" />
+              <div className="absolute inset-x-10 bottom-0 h-6 rounded-full bg-blue-500/25 blur-xl" />
 
-              {/* Border frame */}
-              <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-cyan-400/30 via-white/5 to-transparent" />
+              {/* Outer glow ring */}
+              <div className="absolute inset-6 rounded-[40%] bg-gradient-to-b from-cyan-400/16 via-transparent to-blue-500/16 blur-3xl" />
 
               {/* Image */}
               <motion.img
-                src="/images/profile2.png"
+                src="/images/profile2Fix.png"
                 alt="Profile"
-                className="relative w-72 h-88 md:w-80 md:h-96 object-cover rounded-2xl saturate-90 contrast-105"
-                style={{ height: "24rem" }}
+                className="profile-cutout-image relative z-10 w-[18rem] md:w-[22rem] lg:w-[24rem] h-auto object-contain saturate-105 contrast-110"
                 animate={{
-                  y: [0, -8, 0],
+                  y: [0, -10, 0],
                 }}
                 transition={{
                   duration: 6,
@@ -484,11 +512,12 @@ export default function TypewriterHero() {
               />
 
               {/* Overlay shimmer */}
-              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-cyan-400/5 via-transparent to-white/5" />
+              <div className="pointer-events-none absolute inset-x-12 top-8 h-24 rounded-full bg-white/10 blur-3xl" />
+              <div className="pointer-events-none absolute inset-x-16 bottom-8 h-20 rounded-full bg-cyan-300/10 blur-3xl" />
 
               {/* Floating badge */}
-              <motion.div
-                className="absolute -bottom-5 -left-5 bg-gray-900/90 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2.5"
+              {/* <motion.div
+                className="absolute bottom-4 -left-2 bg-gray-900/90 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2.5"
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.0, duration: 0.5 }}
@@ -497,7 +526,7 @@ export default function TypewriterHero() {
                 <span className="text-xs text-gray-300 tracking-wider">
                   Available for work
                 </span>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
           </div>
         </section>
@@ -511,78 +540,123 @@ export default function TypewriterHero() {
         {/* ===== STACKED CARDS SECTION (ด้านล่าง) ===== */}
         <section
           id="skills"
-          className="snap-start min-h-screen flex flex-col justify-center px-6 overflow-hidden scroll-mt-16"
+          className="snap-start min-h-screen relative flex flex-col justify-center px-4  overflow-hidden scroll-mt-16"
         >
-          <div className="text-center mb-2">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              My Skills & Passion
-            </h2>
-            <p className="text-gray-400 text-lg">Library & FrameWork</p>
-          </div>
+          <div className="absolute top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]" />
+          <div className="absolute bottom-20 right-8 h-56 w-56 rounded-full bg-blue-500/10 blur-[120px]" />
 
-          <section className="py-16 overflow-hidden">
-            <style>{`
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: marquee 40s linear infinite;
-    }
-    .marquee-wrapper {
-      -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 15%,
-        black 85%,
-        transparent 100%
-      );
-      mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 15%,
-        black 85%,
-        transparent 100%
-      );
-    }
-  `}</style>
+          <div className="relative z-10 mx-auto w-full max-w-7xl">
+            <motion.div
+              className="mb-10 text-center"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              <span className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[10px] uppercase tracking-[0.35em] text-cyan-200">
+                Toolkit
+              </span>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
+                My Skills Passion
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-xs text-gray-400 md:text-base">
+                Tech stack ที่ผมใช้สร้างงานจริงทั้ง frontend, backend และ
+                deployment
+              </p>
+            </motion.div>
 
-            <div className="marquee-wrapper relative overflow-hidden py-16">
-              <div className="marquee-track gap-16">
-                {[...skills, ...skills].map((skill, i) => (
+            <div className="space-y-4 [perspective:1400px]">
+              {skillShowcaseRows.map((row, rowIndex) => {
+                const isReverse = rowIndex % 2 === 1;
+                const duration = 42 + rowIndex * 6;
+
+                return (
                   <div
-                    key={i}
-                    className="flex flex-col items-center justify-center gap-3 w-[120px] shrink-0"
+                    key={`skills-row-${rowIndex}`}
+                    className="relative overflow-hidden rounded-[1.6rem] border border-white/8 bg-white/[0.035] px-3 py-3 shadow-[0_20px_56px_rgba(3,8,20,0.28)] backdrop-blur-xl"
                   >
-                    <div className="relative">
-                      <div
-                        className="absolute inset-0 blur-2xl opacity-25"
-                        style={{
-                          background: `linear-gradient(135deg,
-                        hsl(${skill.hueA}, 100%, 60%),
-                        hsl(${skill.hueB}, 100%, 60%))`,
-                        }}
-                      />
-                      <div className="relative z-10 w-[90px] h-[90px]">
-                        <Image
-                          src={skill.icon}
-                          alt={skill.name}
-                          fill
-                          className="object-contain select-none"
-                          draggable={false}
-                        />
-                      </div>
-                    </div>
-                    <span className="text-gray-400 text-sm text-center">
-                      {skill.name}
-                    </span>
+                    <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#07101f] via-[#07101f]/70 to-transparent" />
+                    <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#07101f] via-[#07101f]/70 to-transparent" />
+
+                    <motion.div
+                      className="flex w-max gap-3 md:gap-4"
+                      animate={{
+                        x: isReverse ? ["-50%", "0%"] : ["0%", "-50%"],
+                      }}
+                      transition={{
+                        duration,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    >
+                      {[...row, ...row].map((skill, cardIndex) => (
+                        <div
+                          key={`${skill.name}-${rowIndex}-${cardIndex}`}
+                          className="relative h-[142px] w-[136px] shrink-0 overflow-hidden rounded-[1.35rem] border border-white/10 bg-gradient-to-b from-white/10 via-slate-950/80 to-slate-950/95 p-3 md:h-[170px] md:w-[168px]"
+                        >
+                          <div
+                            className="absolute inset-0 opacity-75"
+                            style={{
+                              background: `radial-gradient(circle at top,
+                              hsla(${skill.hueA}, 100%, 68%, 0.30),
+                              transparent 52%),
+                              linear-gradient(135deg,
+                              hsla(${skill.hueA}, 100%, 60%, 0.14),
+                              hsla(${skill.hueB}, 100%, 60%, 0.06))`,
+                            }}
+                          />
+                          <div className="absolute inset-x-4 bottom-2 h-8 rounded-full bg-black/35 blur-2xl" />
+
+                          <div className="relative z-10 flex h-full flex-col">
+                            <div className="mb-2 flex items-start justify-between">
+                              <span className="text-[10px] uppercase tracking-[0.3em] text-cyan-100/70">
+                                {String((cardIndex % row.length) + 1).padStart(
+                                  2,
+                                  "0",
+                                )}
+                              </span>
+                              <span className="rounded-full border border-white/10 px-2 py-1 text-[9px] uppercase tracking-[0.2em] text-white/55">
+                                Skill
+                              </span>
+                            </div>
+
+                            <div className="relative flex flex-1 items-center justify-center">
+                              <div
+                                className="absolute h-16 w-16 rounded-full blur-2xl"
+                                style={{
+                                  background: `radial-gradient(circle,
+                                  hsla(${skill.hueB}, 100%, 68%, 0.42),
+                                  transparent 72%)`,
+                                }}
+                              />
+                              <div className="relative h-[58px] w-[58px] md:h-[70px] md:w-[70px]">
+                                <Image
+                                  src={skill.icon}
+                                  alt={skill.name}
+                                  fill
+                                  className="object-contain drop-shadow-[0_12px_28px_rgba(15,23,42,0.45)] select-none"
+                                  draggable={false}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="relative z-10 mt-2">
+                              <h3 className="text-xs font-semibold tracking-[0.08em] text-white md:text-sm">
+                                {skill.name}
+                              </h3>
+                              {/* <p className="mt-1 line-clamp-2 text-[10px] text-gray-400 md:text-[11px]">
+                                {skill.description}
+                              </p> */}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </motion.div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
-          </section>
+          </div>
         </section>
         {/* <section className="min-h-screen snap-start">
         <PortfolioGrid />

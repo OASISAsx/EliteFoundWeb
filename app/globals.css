@@ -74,3 +74,10 @@ body {
     transform: translate3d(3%, 2%, 0) scale(1);
   }
 }
+
+.profile-cutout-image {
+  filter:
+    drop-shadow(0 28px 36px rgba(4, 10, 24, 0.45))
+    drop-shadow(0 10px 20px rgba(34, 211, 238, 0.18))
+    drop-shadow(0 0 28px rgba(59, 130, 246, 0.16));
+}

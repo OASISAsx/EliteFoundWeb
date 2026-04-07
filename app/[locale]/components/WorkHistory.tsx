@@ -4,8 +4,7 @@ import Image from "next/image";
 export default function WorkHistory() {
   return (
     <div>
-      {" "}
-      <div className="max-w-6xl w-full">
+      <div className="max-w-6xl w-full pt-10">
         <h3 className=" text-white text-3xl font-semibold p-10">
           Work History
         </h3>
@@ -39,17 +38,24 @@ export default function WorkHistory() {
             <p className="text-gray-300 leading-relaxed">
               ออกแบบและพัฒนา ERP Web Application ที่รองรับการขยายตัวของระบบ
               (Scalable Architecture) ครอบคลุมทั้ง Frontend และ Backend
-              พัฒนาโมดูลหลักของระบบ ได้แก่ Stock, Sales, Purchasing, Quotation
-              และ Reporting ออกแบบระบบ Customer Visit Planning, Site Survey และ
-              Job Scheduling สำหรับงานติดตั้งและบำรุงรักษา พัฒนา Barcode
-              Scanning System
+              โดยพัฒนาโมดูลหลักของระบบ ได้แก่ Stock, Sales, Purchasing,
+              Quotation และ Reporting ออกแบบระบบ Customer Visit Planning, Site
+              Survey และ Job Scheduling สำหรับงานติดตั้งและบำรุงรักษา พร้อมพัฒนา
+              Barcode Scanning System
               เพื่อเพิ่มความรวดเร็วและความแม่นยำในการจัดการสินค้า ออกแบบและพัฒนา
-              Financial Calculation System รองรับกระบวนการทางธุรกิจ Marketing
-              ออกแบบและติดตั้ง CI/CD Pipeline Test ก่อนที่จะทำการ Deploy
-              แบบอัตโนมัติ ไปที่ Production พัฒนา Real-time System ด้วย
-              WebSocket (Socket.IO) ทำ Message เพื่อให้ลูกค้าติดต่อหา ทีม Admin
-              คอยแก้ปัญหา และ ทำหน้า Scan Login เข้างานผ่านทาง QR Code บนจอ
-              kiosk สำหรับอัปเดตข้อมูลแบบทันที
+              Financial Calculation System เพื่อรองรับกระบวนการทางธุรกิจด้าน
+              Marketing และการคำนวณทางการเงินที่ซับซ้อน พัฒนา Real-time System
+              ด้วย WebSocket (Socket.IO) สำหรับระบบ Messaging
+              เพื่อให้ลูกค้าสามารถติดต่อทีม Admin ได้แบบทันที และพัฒนา Scan
+              Login ผ่าน QR Code บนหน้าจอ Kiosk
+              สำหรับการลงเวลาทำงานและอัปเดตข้อมูลแบบเรียลไทม์ ออกแบบและติดตั้ง
+              CI/CD Pipeline โดยมีการทดสอบระบบ (Testing) ก่อนทำการ Deploy
+              แบบอัตโนมัติไปยัง Production บริหารจัดการระบบด้วย Kubernetes (K8s)
+              เพื่อรองรับการทำงานแบบ Containerized Architecture
+              ช่วยให้ระบบสามารถ Scale ได้อัตโนมัติ (Auto-scaling),
+              เพิ่มความเสถียร (High Availability) และรองรับการ Deploy แบบ
+              Rolling Update / Blue-Green Deployment
+              เพื่อให้การอัปเดตระบบเป็นไปอย่างราบรื่นและไม่มี Downtime
               {/* ทำงานในตำแหน่ง Full-Stack Developer ออกแบบและพัฒนาเว็บแอปพลิเคชัน
               ERP ที่สามารถรองรับการขยายตัวของระบบ (Scalable)
               โดยใช้เทคโนโลยีฝั่ง Frontend และ Backend สมัยใหม่ พัฒนาระบบ ERP
