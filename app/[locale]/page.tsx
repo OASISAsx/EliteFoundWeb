@@ -126,6 +126,22 @@ const skills: SkillItem[] = [
     hueB: 180,
   },
   {
+    icon: "/tach/Sequelize.svg",
+    name: "Sequelize",
+    key: "sequelize",
+    description: "",
+    hueA: 260,
+    hueB: 300,
+  },
+  {
+    icon: "/images/rabbitmq-icon.svg",
+    name: "RabbitMQ",
+    key: "rabbitmq",
+    description: "",
+    hueA: 10,
+    hueB: 100,
+  },
+  {
     icon: "/images/redux-icon.svg",
     name: "Redux",
     key: "redux",
@@ -157,22 +173,7 @@ const skills: SkillItem[] = [
     hueA: 200,
     hueB: 240,
   },
-  {
-    icon: "/images/github.png",
-    name: "GitHub",
-    key: "github",
-    description: "",
-    hueA: 300,
-    hueB: 340,
-  },
-  {
-    icon: "/tach/Sequelize.svg",
-    name: "Sequelize",
-    key: "sequelize",
-    description: "",
-    hueA: 260,
-    hueB: 300,
-  },
+
   {
     icon: "/images/ant.png",
     name: "Ant Design",
@@ -181,13 +182,21 @@ const skills: SkillItem[] = [
     hueA: 200,
     hueB: 80,
   },
+  // {
+  //   icon: "/tach/v-logo.svg",
+  //   name: "Vuexy",
+  //   key: "vuexy",
+  //   description: "",
+  //   hueA: 200,
+  //   hueB: 200,
+  // },
   {
-    icon: "/tach/v-logo.svg",
-    name: "Vuexy",
-    key: "vuexy",
+    icon: "/images/github.png",
+    name: "GitHub",
+    key: "github",
     description: "",
-    hueA: 200,
-    hueB: 200,
+    hueA: 300,
+    hueB: 340,
   },
   {
     icon: "/tach/AWS.svg",
@@ -542,25 +551,12 @@ export default function TypewriterHero() {
               {/* Overlay shimmer */}
               <div className="pointer-events-none absolute inset-x-12 top-8 h-24 rounded-full bg-white/10 blur-3xl" />
               <div className="pointer-events-none absolute inset-x-16 bottom-8 h-20 rounded-full bg-cyan-300/10 blur-3xl" />
-
-              {/* Floating badge */}
-              {/* <motion.div
-                className="absolute bottom-4 -left-2 bg-gray-900/90 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2.5"
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.0, duration: 0.5 }}
-              >
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs text-gray-300 tracking-wider">
-                  Available for work
-                </span>
-              </motion.div> */}
             </motion.div>
           </div>
         </section>
         <section
           id="about"
-          className="min-h-screen snap-start relative flex items-center justify-center"
+          className="min-h-screen snap-start relative pb-20 flex items-center justify-center"
         >
           <WorkHistory />
         </section>
@@ -568,7 +564,7 @@ export default function TypewriterHero() {
         {/* ===== STACKED CARDS SECTION (ด้านล่าง) ===== */}
         <section
           id="skills"
-          className="snap-start min-h-screen relative flex flex-col justify-center px-4  overflow-hidden scroll-mt-16"
+          className="snap-start min-h-screen relative flex flex-col justify-center px-4 p-10 overflow-hidden scroll-mt-16"
         >
           <div className="absolute top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]" />
           <div className="absolute bottom-20 right-8 h-56 w-56 rounded-full bg-blue-500/10 blur-[120px]" />

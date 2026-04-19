@@ -39,7 +39,7 @@
       "github": "Version control and deployment workflow management with Git and automated CI/CD",
       "sequelize": "Manage databases with ORM supporting PostgreSQL, MySQL, and SQLite",
       "antdesign": "Build professional UI with pre-built components suited for large-scale systems",
-      "vuexy": "Premium admin template for rapid Dashboard and back-office system development",
+      "rabbitmq": "Message broker for efficient communication between distributed systems",
       "aws": "Cloud computing platform for scalable, reliable application hosting and services",
       "docker": "Manage containers for deployment and efficient Microservices architecture",
       "ubuntu": "Linux server management for deployment and production system administration",
