@@ -222,7 +222,7 @@ const skills: SkillItem[] = [
     hueB: 200,
   },
   {
-    icon: "/devOps/Jenkins.png",
+    icon: "/devOps/jenkins.svg",
     name: "Jenkins",
     key: "jenkins",
     description: "",
