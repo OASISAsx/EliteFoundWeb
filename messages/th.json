@@ -222,7 +222,7 @@
       "subtitle": "DevOps Infrastructure Setup",
       "0": {
         "title": "DevOps Infrastructure Setup",
-        "description": "ออกแบบและติดตั้ง Server Infrastructure สำหรับรองรับการ Deploy โปรเจกต์แบบ Production พร้อมตั้งค่า Docker และ Containerization เพื่อให้ระบบสามารถรันผ่าน Domain ได้อย่างเสถียร"
+        "description": "ออกแบบและพัฒนา Server Infrastructure สำหรับระบบ Production โดยใช้ Docker และ Kubernetes รองรับการทำงานแบบ Auto Scaling และ High Availability พร้อมติดตั้ง Nginx เป็น Reverse Proxy และ Ingress Controller เพื่อจัดการ Traffic และ Routing ภายในระบบ รวมถึงตั้งค่า SSL Certificate ผ่าน Let's Encrypt เพื่อเพิ่มความปลอดภัยของการสื่อสารข้อมูล (HTTPS)"
       },
       "1": {
         "title": "Continuous Integration (CI)",
@@ -233,8 +233,12 @@
         "description": "ออกแบบขั้นตอนก่อน Deployment เพื่อให้มั่นใจว่าแอปพลิเคชันผ่านการทดสอบครบถ้วน ลดความเสี่ยงของ Bug ใน Production"
       },
       "3": {
-        "title": "Docker Container Orchestration",
-        "description": "สร้างและจัดการ Docker Containers ด้วย docker-compose เพื่อควบคุม Service ต่าง ๆ ให้สามารถทำงานร่วมกันได้อย่างมีประสิทธิภาพ"
+        "title": "Container Orchestration with Docker & Kubernetes",
+        "description": "ออกแบบและจัดการระบบแบบ Container ด้วย Docker และ docker-compose สำหรับสภาพแวดล้อมในการพัฒนา และใช้ Kubernetes สำหรับจัดการระบบในระดับ Production เพื่อรองรับการทำงานร่วมกันของ Service อย่างมีประสิทธิภาพ พร้อมรองรับการขยายตัว (Scalability) และความพร้อมใช้งานสูง (High Availability)"
+      },
+      "4": {
+        "title": "Jenkins CI/CD",
+        "description": "นำ Jenkins pipelines มาใช้สำหรับการทำ Continuous Integration และ Continuous Deployment อัตโนมัติ รวมถึงการ Build, Test และ Deploy"
       }
     },
     "dexon": {

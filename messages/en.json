@@ -222,7 +222,7 @@
       "subtitle": "DevOps Infrastructure Setup",
       "0": {
         "title": "DevOps Infrastructure Setup",
-        "description": "Designed and deployed Server Infrastructure for production-level project deployment, with Docker and Containerization configuration for stable domain-accessible systems."
+        "description": "Designed and deployed a production-ready server infrastructure using Docker and Kubernetes, enabling high availability and auto-scaling. Configured Nginx as a reverse proxy and Ingress Controller for traffic management and routing, and implemented SSL/TLS via Let's Encrypt to ensure secure HTTPS communication."
       },
       "1": {
         "title": "Continuous Integration (CI)",
@@ -233,8 +233,12 @@
         "description": "Designed pre-deployment steps to ensure the application passes comprehensive testing, reducing production bug risks."
       },
       "3": {
-        "title": "Docker Container Orchestration",
-        "description": "Created and managed Docker Containers using docker-compose to orchestrate multiple services for efficient collaboration."
+        "title": "Container Orchestration with Docker & Kubernetes",
+        "description": "Designed and managed containerized applications using Docker and docker-compose for local development, and leveraged Kubernetes for production-grade orchestration. Enabled efficient service communication, scalability, and high availability through automated deployment, service management, and resource scaling."
+      },
+      "4": {
+        "title": "Jenkins CI/CD",
+        "description": "Implemented Jenkins pipelines for continuous integration and continuous deployment, automating the build, test, and deployment processes."
       }
     },
     "dexon": {

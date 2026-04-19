@@ -6,10 +6,11 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 const showcases = [
-  { image: "/devOps/CICD.png" },
+  { image: "/devOps/get-pods.png" },
   { image: "/devOps/CI-Test.png" },
   { image: "/devOps/deployment.png" },
-  { image: "/devOps/docker-compose.png" },
+  { image: "/devOps/create-container.png" },
+  { image: "/devOps/jenkins-CICD.png" },
 ];
 
 export default function UIDevOpsShowcase() {
