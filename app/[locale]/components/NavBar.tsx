@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-const navLinks = [
-  { label: "Home", id: "home" },
-  { label: "About", id: "about" },
-  { label: "Skills", id: "skills" },
-  { label: "Projects", id: "projects" },
-  { label: "Contact", id: "contact" },
-];
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
+
+const navIds = ["home", "about", "skills", "projects", "contact"];
+
 const scrollTo = (id: string) => {
   const el = document.getElementById(id);
   if (!el) return;
@@ -22,9 +20,26 @@ const scrollTo = (id: string) => {
 };
 
 export default function Navbar() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const navLinks = navIds.map((id) => ({
+    label: t(id),
+    id,
+  }));
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState("Home");
+  const [active, setActive] = useState(navLinks[0].label);
   const [isPdfLoading, setIsPdfLoading] = useState(false);
+
+  const switchLocale = (newLocale: string) => {
+    const segments = pathname.split("/");
+    segments[1] = newLocale;
+    router.push(segments.join("/"));
+  };
+
   // ปิด menu เมื่อ resize → desktop
   useEffect(() => {
     const onResize = () => {
@@ -144,10 +159,35 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <a
-            onClick={handleDownloadPDF}
-            className="hidden md:inline-flex items-center gap-2 justify-center px-5 py-2 rounded-full border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/10 transition-all duration-300"
-          >
+          <div className="hidden md:flex items-center gap-3">
+            {/* Language Switcher */}
+            <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-0.5">
+              <button
+                onClick={() => switchLocale("en")}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-wider transition-all duration-200 ${
+                  locale === "en"
+                    ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/30"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => switchLocale("th")}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-wider transition-all duration-200 ${
+                  locale === "th"
+                    ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/30"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                TH
+              </button>
+            </div>
+
+            <a
+              onClick={handleDownloadPDF}
+              className="inline-flex items-center gap-2 justify-center px-5 py-2 rounded-full border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/10 transition-all duration-300 cursor-pointer"
+            >
             {isPdfLoading ? (
               <>
                 <Loader2 size={18} className="animate-spin" />
@@ -155,10 +195,11 @@ export default function Navbar() {
             ) : (
               <>
                 <Download size={18} />
-                <span>Profile</span>
+                <span>{t("profile")}</span>
               </>
             )}
           </a>
+          </div>
 
           {/* Mobile hamburger */}
           <button
@@ -235,8 +276,39 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-2.5 rounded-full border border-cyan-400/30 text-cyan-300 text-sm tracking-wider hover:bg-cyan-400/10 transition-all duration-300"
                 >
-                  Download Resume
+                  {t("downloadResume")}
                 </a>
+              </motion.li>
+
+              {/* Mobile Language Switcher */}
+              <motion.li
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: (navLinks.length + 1) * 0.06, duration: 0.25 }}
+                className="pt-2"
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => { switchLocale("en"); setMenuOpen(false); }}
+                    className={`flex-1 py-2 rounded-full text-sm font-medium tracking-wider transition-all duration-200 ${
+                      locale === "en"
+                        ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/30"
+                        : "text-gray-400 border border-white/10 hover:text-white"
+                    }`}
+                  >
+                    🇬🇧 EN
+                  </button>
+                  <button
+                    onClick={() => { switchLocale("th"); setMenuOpen(false); }}
+                    className={`flex-1 py-2 rounded-full text-sm font-medium tracking-wider transition-all duration-200 ${
+                      locale === "th"
+                        ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/30"
+                        : "text-gray-400 border border-white/10 hover:text-white"
+                    }`}
+                  >
+                    🇹🇭 TH
+                  </button>
+                </div>
               </motion.li>
             </ul>
           </motion.div>

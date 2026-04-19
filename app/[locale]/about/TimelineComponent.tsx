@@ -1,15 +1,72 @@
 import { motion } from "framer-motion";
 
-import { timeline, TimeLineType } from "./data";
+import { TimeLineType } from "./data";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import DialogTimeline from "./DialogTimeline";
+import UIShowcase from "./StockCarousel";
+import UIShowcaseZ from "./ZCarousel";
+import UIShowcasePoon from "./PoonCarousel";
+import UIDevOpsShowcase from "./DevOpsCarousel";
+import UIShowcaseDexon from "./DexonCarousel";
+import UIShowcaseColection from "./finalCarousel";
 
 export default function DevTimeline() {
-  // const [show, setShow] = useState(false);
-  // const router = useRouter();
+  const t = useTranslations("timeline");
   const [dialog, setDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TimeLineType | null>(null);
+
+  const timelineData: TimeLineType[] = [
+    {
+      year: "2025 - Present",
+      title: t("eimsStock.title"),
+      company: t("eimsStock.company"),
+      desc: t("eimsStock.desc"),
+      image: "../stocks/eimsLogin.png",
+      items: <UIShowcase />,
+    },
+    {
+      year: "2025 - Present",
+      title: t("zillion.title"),
+      company: t("zillion.company"),
+      desc: t("zillion.desc"),
+      image: "../zillion/8.png",
+      items: <UIShowcaseZ />,
+    },
+    {
+      year: "2024 - Present",
+      title: t("poonErp.title"),
+      company: t("poonErp.company"),
+      desc: t("poonErp.desc"),
+      image: "../poon/poonLogin.png",
+      items: <UIShowcasePoon />,
+    },
+    {
+      year: "2024 - Present",
+      title: t("devops.title"),
+      company: t("devops.company"),
+      desc: t("devops.desc"),
+      image: "../images/DevOps.jpeg",
+      items: <UIDevOpsShowcase />,
+    },
+    {
+      year: "Nov 2023 - Feb 2024",
+      title: t("pttProject.title"),
+      company: t("pttProject.company"),
+      desc: t("pttProject.desc"),
+      image: "../works/work1.jpg",
+      items: <UIShowcaseDexon />,
+    },
+    {
+      year: "Feb 2023 - Sep 2023",
+      title: t("finalProject.title"),
+      company: t("finalProject.company"),
+      desc: t("finalProject.desc"),
+      image: "../images/colection.png",
+      items: <UIShowcaseColection />,
+    },
+  ];
 
   const selectItems = (item: TimeLineType) => {
     setSelectedItem(item);
@@ -74,7 +131,7 @@ export default function DevTimeline() {
 
         <div className="space-y-24">
           <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-white/10 -translate-x-1/2" />
-          {timeline.map((item, i) => (
+          {timelineData.map((item, i) => (
             <motion.div
               key={i}
               onClick={() => selectItems(item)}

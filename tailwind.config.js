@@ -16,6 +16,15 @@ module.exports = {
         sans: ["Geist Sans", "Arial", "Helvetica", "sans-serif"],
         mono: ["Fira Code", "monospace"],
       },
+      keyframes: {
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(200%)" },
+        },
+      },
+      animation: {
+        shimmer: "shimmer 1.5s ease-in-out",
+      },
       theme: {
         screens: {
           sm: "640px",

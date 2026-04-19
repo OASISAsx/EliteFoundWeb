@@ -9,7 +9,7 @@ import {
   animate,
   useScroll,
 } from "framer-motion";
-// import { useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -24,264 +24,276 @@ import WorkHistory from "./components/WorkHistory";
 import ContactPage from "./contact/page";
 import { GitHub, LinkedIn } from "@mui/icons-material";
 
-const rotatingWords = [
-  "Full-Stack Developer",
-  "Frontend Developer",
-  "Backend Developer",
-  "DevOps Engineer",
-];
-
 export interface SkillItem {
   icon: string;
   name: string;
+  key: string;
   description: string;
   hueA: number;
   hueB: number;
 }
 
 const skills: SkillItem[] = [
+  // Frontend Frameworks
+
   {
     icon: "/images/next.png",
     name: "NextJs",
-    description:
-      "พัฒนาเว็บแอประดับ Production ด้วย Next.js โดยใช้ App Router, Server Components และเทคนิคเพิ่มประสิทธิภาพด้าน SEO และ Performance",
+    key: "nextjs",
+    description: "",
     hueA: 600,
     hueB: 500,
-  },
-
-  {
-    icon: "/images/Ts.png",
-    name: "TypeScript",
-    description:
-      "เขียนโค้ดที่มีความปลอดภัยสูง ลด Bug และเพิ่มความสามารถในการดูแลระบบด้วย Static Typing",
-    hueA: 140,
-    hueB: 180,
   },
   {
     icon: "/images/vue.png",
     name: "Vue.js",
-    description:
-      "พัฒนาเว็บแอปด้วย Vue 3 และ Composition API เพื่อโครงสร้างที่ยืดหยุ่นและขยายระบบได้ง่าย",
+    key: "vuejs",
+    description: "",
     hueA: 80,
     hueB: 120,
   },
   {
+    icon: "/tach/NuxtJS.svg",
+    name: "Nuxt",
+    key: "nuxt",
+    description: "",
+    hueA: 100,
+    hueB: 140,
+  },
+  // Languages
+  {
+    icon: "/images/JavaScript.svg",
+    name: "JavaScript",
+    key: "javascript",
+    description: "",
+    hueA: 600,
+    hueB: 500,
+  },
+  {
+    icon: "/images/Ts.png",
+    name: "TypeScript",
+    key: "typescript",
+    description: "",
+    hueA: 140,
+    hueB: 180,
+  },
+  {
     icon: "/images/tw.png",
     name: "Tailwind CSS",
-    description:
-      "ออกแบบ UI แบบ Responsive ได้รวดเร็วด้วย Utility-first CSS พร้อมควบคุมดีไซน์ได้อย่างยืดหยุ่น",
+    key: "tailwindcss",
+    description: "",
     hueA: 140,
     hueB: 180,
   },
   {
     icon: "/images/react.svg",
     name: "React",
-    description:
-      "พัฒนาเว็บแอปด้วย React 3 และ Composition API เพื่อโครงสร้างที่ยืดหยุ่นและขยายระบบได้ง่าย",
+    key: "react",
+    description: "",
     hueA: 140,
     hueB: 180,
   },
-
   {
     icon: "/images/node.png",
     name: "NodeJS",
-    description:
-      "สร้างระบบ Backend ด้วย Node.js รองรับ REST API และการทำงานแบบ Asynchronous",
+    key: "nodejs",
+    description: "",
     hueA: 100,
     hueB: 140,
   },
   {
     icon: "/images/Express_logo.png",
     name: "Express",
-    description:
-      "พัฒนา REST API ที่รวดเร็วและยืดหยุ่น ด้วย Express.js สำหรับระบบ Backend",
+    key: "express",
+    description: "",
     hueA: 200,
     hueB: 200,
   },
   {
     icon: "/images/NestJS.svg",
     name: "NestJS",
-    description:
-      "พัฒนา Backend เชิงโครงสร้างด้วย NestJS รองรับ Clean Architecture และระบบขนาดใหญ่",
+    key: "nestjs",
+    description: "",
     hueA: 10,
     hueB: 0,
   },
   {
     icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/Prisma.svg",
     name: "Prisma",
-    description:
-      "จัดการฐานข้อมูลด้วย ORM ที่ทันสมัย ช่วยให้ Query ปลอดภัยและทำงานร่วมกับ TypeScript ได้อย่างราบรื่น",
+    key: "prisma",
+    description: "",
     hueA: 170,
     hueB: 180,
   },
   {
-    icon: "/images/JavaScript.svg",
-    name: "JavaScript",
-    description:
-      "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
+    icon: "/images/redux-icon.svg",
+    name: "Redux",
+    key: "redux",
+    description: "",
     hueA: 0,
     hueB: 100,
   },
-
   {
     icon: "https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg",
     name: "Zustand",
-    description:
-      "จัดการ State อย่างมีประสิทธิภาพใน React และ Next.js สำหรับการเชื่อมต่อและแสดงผลข้อมูลจาก API",
+    key: "zustand",
+    description: "",
     hueA: 0,
     hueB: 100,
   },
-
+  {
+    icon: "/images/Pinialogo.svg",
+    name: "Pinia",
+    key: "pinia",
+    description: "",
+    hueA: 100,
+    hueB: 100,
+  },
   {
     icon: "https://raw.githubusercontent.com/tandpfun/skill-icons/refs/heads/main/icons/MaterialUI-Dark.svg",
     name: "Material UI",
-    description:
-      "สร้าง UI มาตรฐานระดับองค์กรด้วย Component ที่พร้อมใช้งานและปรับแต่งได้สูง",
+    key: "materialui",
+    description: "",
     hueA: 200,
     hueB: 240,
   },
   {
-    icon: "/tach/NuxtJS.svg",
-    name: "Nuxt",
-    description:
-      "พัฒนาเว็บแอปด้วย Nuxt.js สำหรับการสร้าง Progressive Web Apps และ SSR อย่างมีประสิทธิภาพ",
-    hueA: 100,
-    hueB: 140,
-  },
-  {
     icon: "/images/github.png",
     name: "GitHub",
-    description:
-      "ควบคุมเวอร์ชันโค้ดและจัดการ Workflow การ Deploy ด้วย Git และระบบ CI/CD อัตโนมัติ",
+    key: "github",
+    description: "",
     hueA: 300,
     hueB: 340,
   },
   {
-    icon: "/images/Pinialogo.svg",
-    name: "Pinia ",
-    description:
-      "จัดการ State และการเชื่อมต่อ API ใน Vue.js อย่างเป็นระบบด้วย Pinia และ Vuex",
-    hueA: 100,
-    hueB: 100,
-  },
-  {
     icon: "/tach/Sequelize.svg",
     name: "Sequelize",
-    description:
-      "จัดการ Database ด้วย ORM ที่รองรับ PostgreSQL, MySQL และ SQLite",
+    key: "sequelize",
+    description: "",
     hueA: 260,
     hueB: 300,
   },
   {
     icon: "/images/ant.png",
     name: "Ant Design",
-    description:
-      "พัฒนา UI ระดับ Professional ด้วย Component สำเร็จรูปที่เหมาะกับระบบขนาดใหญ่",
+    key: "antdesign",
+    description: "",
     hueA: 200,
     hueB: 80,
   },
   {
     icon: "/tach/v-logo.svg",
     name: "Vuexy",
-    description:
-      "Admin Template ระดับพรีเมียมสำหรับสร้าง Dashboard และระบบหลังบ้านอย่างรวดเร็ว",
+    key: "vuexy",
+    description: "",
     hueA: 200,
     hueB: 200,
   },
   {
     icon: "/tach/AWS.svg",
     name: "AWS",
-    description:
-      "Admin Template ระดับพรีเมียมสำหรับสร้าง Dashboard และระบบหลังบ้านอย่างรวดเร็ว",
+    key: "aws",
+    description: "",
     hueA: 200,
     hueB: 200,
   },
   {
     icon: "/tach/Docker.svg",
     name: "Docker",
-    description:
-      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    key: "docker",
+    description: "",
     hueA: 200,
     hueB: 200,
   },
   {
     icon: "/tach/Ubuntu.svg",
     name: "Ubuntu",
-    description:
-      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    key: "ubuntu",
+    description: "",
     hueA: 10,
     hueB: 100,
   },
   {
     icon: "/devOps/k8s.svg",
     name: "Kubernetes",
-    description:
-      "บริหารจัดการระบบด้วย Kubernetes (K8s) เพื่อรองรับการทำงานแบบ Containerized Architecture ช่วยให้ระบบสามารถ Scale ได้อัตโนมัติ (Auto-scaling), เพิ่มความเสถียร (High Availability) และรองรับการ Deploy แบบ Rolling Update / Blue-Green Deployment เพื่อให้การอัปเดตระบบเป็นไปอย่างราบรื่นและไม่มี Downtime",
+    key: "kubernetes",
+    description: "",
     hueA: 200,
     hueB: 200,
   },
   {
     icon: "/devOps/Jenkins.png",
     name: "Jenkins",
-    description:
-      "จัดการ CI/CD Pipeline อย่างมีประสิทธิภาพด้วย Jenkins สำหรับการ Deploy อัตโนมัติ",
+    key: "jenkins",
+    description: "",
     hueA: 10,
     hueB: 100,
   },
   {
     icon: "/tach/NGINX_logo.svg",
     name: "Nginx",
-    description:
-      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    key: "nginx",
+    description: "",
     hueA: 100,
     hueB: 140,
   },
   {
     icon: "/tach/MongoDB.svg",
     name: "MongoDB",
-    description:
-      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    key: "mongodb",
+    description: "",
     hueA: 100,
     hueB: 140,
   },
   {
     icon: "/tach/MySQL.svg",
     name: "MySQL",
-    description:
-      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    key: "mysql",
+    description: "",
     hueA: 200,
     hueB: 200,
   },
   {
     icon: "/tach/Postgresql.svg",
     name: "Postgresql",
-    description:
-      "จัดการ Container สำหรับ Deploy และระบบ Microservices อย่างมีประสิทธิภาพ",
+    key: "postgresql",
+    description: "",
     hueA: 200,
     hueB: 200,
   },
-  // {
-  //   icon: "/images/Linux.svg",
-  //   name: "Linux",
-  //   description:
-  //     "ใช้งาน Linux Server สำหรับ Deploy, Configure และดูแลระบบ Production",
-  //   hueA: 220,
-  //   hueB: 260,
-  // },
-];
-
-const skillShowcaseRows: SkillItem[][] = [
-  skills.slice(0, 7),
-  skills.slice(7, 14),
-  skills.slice(14),
+  {
+    icon: "/images/copilot-icon.svg",
+    name: "GitHub Copilot",
+    key: "githubCopilot",
+    description: "",
+    hueA: 200,
+    hueB: 200,
+  },
+  {
+    icon: "/images/claude-ai-icon.svg",
+    name: "Claude Code",
+    key: "claudeCode",
+    description: "",
+    hueA: 10,
+    hueB: 100,
+  },
 ];
 
 // ============== Main Component ================
 export default function TypewriterHero() {
   // const [show, setShow] = useState(false);
 
-  // const t = useTranslations("Home");
-  const greetingText = `Nanthawat Inthisaen`;
+  const t = useTranslations("Home");
+  const tSkills = useTranslations("skills");
+  const greetingText = t("greeting");
+
+  // Rotating words with translations
+  const rotatingWords = [
+    t("roles.fullstack"),
+    t("roles.frontend"),
+    t("roles.backend"),
+    t("roles.devops"),
+  ];
   // useEffect(() => {
   //   const handleScroll = () => {
   //     const scrollTop = window.scrollY;
@@ -424,7 +436,7 @@ export default function TypewriterHero() {
                   </motion.span>
                 </div>
                 <p className="text-gray-500 text-lg tracking-wider">
-                  Wave · 24 years old
+                  {t("nickname")}
                 </p>
               </div>
 
@@ -448,9 +460,9 @@ export default function TypewriterHero() {
                   transition={{ delay: 1.2, duration: 0.6 }}
                 >
                   {[
-                    { value: "2+", label: "Years Exp." },
-                    { value: "5+", label: "Projects" },
-                    { value: "10+", label: "Technologies" },
+                    { value: "2+", label: t("stats.yearsExp") },
+                    { value: "5+", label: t("stats.projects") },
+                    { value: "10+", label: t("stats.technologies") },
                   ].map((stat) => (
                     <div key={stat.label} className="text-center lg:text-left">
                       <div className="px-4 text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white">
@@ -570,107 +582,87 @@ export default function TypewriterHero() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <span className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[10px] uppercase tracking-[0.35em] text-cyan-200">
-                Toolkit
+                {tSkills("badge")}
               </span>
               <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
-                My Skills Passion
+                {tSkills("title")}
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-xs text-gray-400 md:text-base">
-                Tech stack ที่ผมใช้สร้างงานจริงทั้ง frontend, backend และ
-                deployment
+                {tSkills("description")}
               </p>
             </motion.div>
 
-            <div className="space-y-4 [perspective:1400px]">
-              {skillShowcaseRows.map((row, rowIndex) => {
-                const isReverse = rowIndex % 2 === 1;
-                const duration = 42 + rowIndex * 6;
-
-                return (
+            {/* Modern Grid Layout - Compact & Fast */}
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10">
+              {skills.map((skill, index) => (
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    duration: 0.3,
+                    delay: index * 0.03,
+                    ease: "easeOut",
+                  }}
+                  whileHover={{
+                    y: -6,
+                    scale: 1.08,
+                    transition: { duration: 0.2 },
+                  }}
+                  className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-b from-white/[0.06] to-slate-950/90 p-2.5 transition-shadow hover:border-white/20 hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)]"
+                >
+                  {/* Gradient Glow on Hover */}
                   <div
-                    key={`skills-row-${rowIndex}`}
-                    className="relative overflow-hidden rounded-[1.6rem] border border-white/8 bg-white/[0.035] px-3 py-3 shadow-[0_20px_56px_rgba(3,8,20,0.28)] backdrop-blur-xl"
-                  >
-                    <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#07101f] via-[#07101f]/70 to-transparent" />
-                    <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#07101f] via-[#07101f]/70 to-transparent" />
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{
+                      background: `radial-gradient(circle at 50% 0%,
+                        hsla(${skill.hueA}, 80%, 60%, 0.12),
+                        transparent 60%)`,
+                    }}
+                  />
 
-                    <motion.div
-                      className="flex w-max gap-3 md:gap-4"
-                      animate={{
-                        x: isReverse ? ["-50%", "0%"] : ["0%", "-50%"],
-                      }}
-                      transition={{
-                        duration,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    >
-                      {[...row, ...row].map((skill, cardIndex) => (
-                        <div
-                          key={`${skill.name}-${rowIndex}-${cardIndex}`}
-                          className="relative h-[142px] w-[136px] shrink-0 overflow-hidden rounded-[1.35rem] border border-white/10 bg-gradient-to-b from-white/10 via-slate-950/80 to-slate-950/95 p-3 md:h-[170px] md:w-[168px]"
-                        >
-                          <div
-                            className="absolute inset-0 opacity-75"
-                            style={{
-                              background: `radial-gradient(circle at top,
-                              hsla(${skill.hueA}, 100%, 68%, 0.30),
-                              transparent 52%),
-                              linear-gradient(135deg,
-                              hsla(${skill.hueA}, 100%, 60%, 0.14),
-                              hsla(${skill.hueB}, 100%, 60%, 0.06))`,
-                            }}
-                          />
-                          <div className="absolute inset-x-4 bottom-2 h-8 rounded-full bg-black/35 blur-2xl" />
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col items-center text-center">
+                    {/* Icon - Smaller */}
+                    <div className="relative mb-2 h-12 w-12 transition-transform duration-300 group-hover:scale-110">
+                      <div
+                        className="absolute inset-0 rounded-full opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-50"
+                        style={{
+                          background: `radial-gradient(circle, hsla(${skill.hueB}, 90%, 65%, 0.4), transparent 70%)`,
+                        }}
+                      />
+                      <Image
+                        src={skill.icon}
+                        alt={skill.name}
+                        fill
+                        className="object-contain drop-shadow-md select-none"
+                        draggable={false}
+                      />
+                    </div>
 
-                          <div className="relative z-10 flex h-full flex-col">
-                            <div className="mb-2 flex items-start justify-between">
-                              <span className="text-[10px] uppercase tracking-[0.3em] text-cyan-100/70">
-                                {String((cardIndex % row.length) + 1).padStart(
-                                  2,
-                                  "0",
-                                )}
-                              </span>
-                              <span className="rounded-full border border-white/10 px-2 py-1 text-[9px] uppercase tracking-[0.2em] text-white/55">
-                                Skill
-                              </span>
-                            </div>
+                    {/* Skill Name - Smaller */}
+                    <h3 className="text-[10px] font-semibold text-white transition-colors group-hover:text-cyan-200 sm:text-xs">
+                      {skill.name}
+                    </h3>
 
-                            <div className="relative flex flex-1 items-center justify-center">
-                              <div
-                                className="absolute h-16 w-16 rounded-full blur-2xl"
-                                style={{
-                                  background: `radial-gradient(circle,
-                                  hsla(${skill.hueB}, 100%, 68%, 0.42),
-                                  transparent 72%)`,
-                                }}
-                              />
-                              <div className="relative h-[58px] w-[58px] md:h-[70px] md:w-[70px]">
-                                <Image
-                                  src={skill.icon}
-                                  alt={skill.name}
-                                  fill
-                                  className="object-contain drop-shadow-[0_12px_28px_rgba(15,23,42,0.45)] select-none"
-                                  draggable={false}
-                                />
-                              </div>
-                            </div>
+                    {/* Translated description tooltip */}
+                    <div className="pointer-events-none absolute -bottom-1 left-1/2 z-50 w-48 -translate-x-1/2 translate-y-full rounded-lg border border-white/10 bg-slate-900/95 px-3 py-2 text-[10px] leading-relaxed text-gray-300 opacity-0 shadow-xl backdrop-blur-sm transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+                      {tSkills(`items.${skill.key}`)}
+                    </div>
 
-                            <div className="relative z-10 mt-2">
-                              <h3 className="text-xs font-semibold tracking-[0.08em] text-white md:text-sm">
-                                {skill.name}
-                              </h3>
-                              {/* <p className="mt-1 line-clamp-2 text-[10px] text-gray-400 md:text-[11px]">
-                                {skill.description}
-                              </p> */}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </motion.div>
+                    {/* Index number - Smaller */}
+                    <span className="mt-1 text-[8px] font-mono tracking-wider text-white/25 transition-colors group-hover:text-cyan-400/40">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                );
-              })}
+
+                  {/* Subtle shine effect on hover */}
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                    <div className="absolute -left-full h-full w-1/2 skew-x-12 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:animate-[shimmer_1.5s_ease-in-out]" />
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>

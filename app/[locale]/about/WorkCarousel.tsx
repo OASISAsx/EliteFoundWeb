@@ -2,6 +2,7 @@
 
 import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const images = [
   "../works/work1.jpg",
@@ -23,11 +24,11 @@ const images = [
 ];
 
 export default function WorkCarousel() {
+  const t = useTranslations("carousels.work");
   const baseX = useMotionValue(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const [loopWidth, setLoopWidth] = useState<number | null>(null);
 
-  // วัดความกว้างจริงของ 1 loop
   useLayoutEffect(() => {
     if (!contentRef.current) return;
 
@@ -39,7 +40,7 @@ export default function WorkCarousel() {
       width += (children[i] as HTMLElement).offsetWidth;
     }
 
-    // gap-6 = 24px * จำนวนช่องว่าง
+    // gap-6 = 24px
     width += (half - 1) * 24;
 
     setLoopWidth(width);
@@ -48,11 +49,10 @@ export default function WorkCarousel() {
   const speed = 200; // px / sec
 
   useAnimationFrame((_, delta) => {
-    if (!loopWidth) return; // ⭐ สำคัญมาก
+    if (!loopWidth) return;
 
     let x = baseX.get() - (speed * delta) / 1000;
 
-    // loop แบบปลอดภัย (กัน frame กระโดด)
     while (x <= -loopWidth) {
       x += loopWidth;
     }
@@ -63,16 +63,16 @@ export default function WorkCarousel() {
   return (
     <div className="w-full max-w-7xl mx-auto px-6">
       {/* HEADER */}
-      <div className="py-8 ">
+      <div className="py-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-white "
+          className="text-4xl md:text-5xl font-bold text-white"
         >
-          DEXXON
+          {t("heading")}
         </motion.h2>
 
-        <p className="mt-3 max-w-xl text-white/60">Internship Developer </p>
+        <p className="mt-3 max-w-xl text-white/60">{t("subtitle")}</p>
       </div>
 
       {/* CONTENT */}
@@ -103,7 +103,6 @@ export default function WorkCarousel() {
 
         {/* DESCRIPTION */}
         <motion.div
-          // initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, x: 80 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -111,27 +110,10 @@ export default function WorkCarousel() {
           className="lg:col-span-5"
         >
           <h3 className="text-2xl font-semibold text-white mb-4">
-            Description
+            {t("descriptionTitle")}
           </h3>
 
-          <p className="  text-white/60 leading-relaxed">
-            โครงการนี้มีวัตถุประสงค์เพื่อพัฒนา software system
-            ที่มีประสิทธิภาพในการสนับสนุนการทำงานของ software engineers
-            ในการจัดการ industrial equipment data โดยมุ่งเน้นการติดตามและประเมิน
-            service life ของระบบท่อ เช่น pipelines และ piping systems
-            ภายในอุตสาหกรรม
-            ระบบที่พัฒนาขึ้นจะช่วยให้ผู้ใช้งานสามารถบันทึกและบริหารจัดการข้อมูลอุปกรณ์ผ่าน
-            centralized digital platform
-            ซึ่งทำหน้าที่เป็นแหล่งจัดเก็บข้อมูลแบบรวมศูนย์ (centralized data
-            management) เพื่อเพิ่มความถูกต้องและความสะดวกในการเข้าถึงข้อมูล
-            นอกจากนี้ ระบบยังสามารถประมวลผลข้อมูลเพื่อคำนวณ critical parameters
-            ที่เกี่ยวข้องกับ equipment lifespan, operating conditions,
-            และปัจจัยที่ส่งผลต่อการเสื่อมสภาพของอุปกรณ์ (degradation factors)
-            ซึ่งช่วยสนับสนุนการประเมินสภาพอุปกรณ์อย่างเป็นระบบและมีความน่าเชื่อถือ
-            ในการใช้งานจริง วิเคราะห์ข้อมูลได้อย่างชัดเจน
-            และนำผลลัพธ์ที่ได้ไปใช้ประกอบการตัดสินใจ (decision-making)
-            ด้านการวางแผนบำรุงรักษาและการบริหารจัดการอุปกรณ์ในภาคอุตสาหกรรมอย่างมีประสิทธิภาพ
-          </p>
+          <p className="text-white/60 leading-relaxed">{t("description")}</p>
 
           <button
             onClick={() =>
@@ -145,7 +127,7 @@ export default function WorkCarousel() {
                    text-white border border-white/20 px-5 py-2.5 rounded-full
                    hover:bg-white hover:text-black transition"
           >
-            View project
+            {t("viewProject")}
           </button>
         </motion.div>
       </div>

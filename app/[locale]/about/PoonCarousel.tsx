@@ -3,53 +3,26 @@
 import { Box } from "@mui/material";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 const showcases = [
-  {
-    title: "POON EWORK Platform",
-    description:
-      "พัฒนา Web Application หลักขององค์กรสำหรับบริหารจัดการงานด้าน Marketing และ Service Workflow ครอบคลุมตั้งแต่การรับงานไปจนถึงการดำเนินงานจริง",
-    image: "/poon/poonLogin.png",
-  },
-  {
-    title: "Real-time Messaging System",
-    description:
-      "พัฒนาระบบ Chat ระหว่างลูกค้าและ Admin แบบ Real-time ด้วย Socket.IO เพื่อรองรับการสื่อสาร แก้ไขปัญหา และติดตามงานได้ทันที",
-    image: "/poon/poon1.png",
-  },
-  {
-    title: "Service Work Management",
-    description:
-      "ออกแบบระบบจัดการงานบริการ (Service Workflow) สำหรับสร้างและติดตามงานก่อนที่ช่างจะออกไปให้บริการลูกค้า",
-    image: "/poon/ework1.png",
-  },
-  {
-    title: "Work Type & Service Logic",
-    description:
-      "ออกแบบ Business Logic สำหรับจำแนกประเภทงานซ่อม เช่น ซ่อมหน้างาน, รับเครื่องกลับ, หรือจัดเครื่องสำรอง รวมถึงกำหนดเงื่อนไขการใช้อะไหล่และลิมิตการเปลี่ยนหมึกในแต่ละเดือน",
-    image: "/poon/poon2.png",
-  },
-  {
-    title: "Task Assignment & Delivery",
-    description:
-      "พัฒนาระบบมอบหมายงานให้ช่างผ่านแอปพลิเคชัน เพื่อให้สามารถรับงานและดำเนินการต่อได้แบบเป็นลำดับขั้น",
-    image: "/poon/serviceEwork.png",
-  },
-  {
-    title: "Role & Permission Management",
-    description:
-      "ออกแบบระบบสิทธิ์การใช้งาน (RBAC) ให้ผู้จัดการสามารถควบคุมการเข้าถึงเมนูและฟีเจอร์ต่าง ๆ ของพนักงานในแต่ละแผนกได้",
-    image: "/poon/poonMenu.png",
-  },
+  { image: "/poon/poonLogin.png" },
+  { image: "/poon/poon1.png" },
+  { image: "/poon/ework1.png" },
+  { image: "/poon/poon2.png" },
+  { image: "/poon/serviceEwork.png" },
+  { image: "/poon/poonMenu.png" },
 ];
 
 export default function UIShowcasePoon() {
+  const t = useTranslations("carousels.poon");
   const [index, setIndex] = useState(0);
   const current = showcases[index];
   const [openImage, setOpenImage] = useState<string | null>(null);
   const images = showcases.map((item) => item.image);
   return (
     <Box
-      key={current.title}
+      key={`poon-${index}`}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -61,15 +34,15 @@ export default function UIShowcasePoon() {
     >
       <div className="flex flex-col items-center justify-end">
         <motion.h2
-          key={current.title}
+          key={`heading-${index}`}
           transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-white px-3 line-clamp-1"
         >
-          Poontana ERP
+          {t("heading")}
         </motion.h2>
 
         <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">
-          Full-Stack Developer
+          {t("subtitle")}
         </p>
       </div>
 
@@ -81,56 +54,40 @@ export default function UIShowcasePoon() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="                
-              w-full
-                max-w-xl       
-                min-h-65 
-                bg-white/5
-                backdrop-blur
-                rounded-2xl
-                p-6
-                shadow-lg
-                mx-auto       
-                flex
-                flex-col
-                justify-between"
+              className="w-full max-w-xl min-h-65 bg-white/5 backdrop-blur rounded-2xl p-6 shadow-lg mx-auto flex flex-col justify-between"
             >
               <motion.h6
-                key={current.title}
+                key={`title-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
                 className="text-2xl font-bold text-gray-400"
               >
-                {current.title}
+                {t(`${index}.title`)}
               </motion.h6>
 
               <motion.p
-                key={current.description}
+                key={`desc-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="mt-4 text-white/60 leading-relaxed"
               >
-                {current.description}
+                {t(`${index}.description`)}
               </motion.p>
 
               {/* CONTROLS */}
               <Box className="mt-10 flex w-full items-center justify-between">
-                {/* ซ้าย : dots */}
                 <div className="flex gap-3">
                   {showcases.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setIndex(i)}
-                      className={`h-2 rounded-full transition-all
-          ${i === index ? "w-8 bg-white" : "w-2 bg-white/30"}
-        `}
+                      className={`h-2 rounded-full transition-all ${i === index ? "w-8 bg-white" : "w-2 bg-white/30"}`}
                     />
                   ))}
                 </div>
 
-                {/* ขวา : arrows */}
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() =>
@@ -139,11 +96,7 @@ export default function UIShowcasePoon() {
                           (prev - 1 + showcases.length) % showcases.length,
                       )
                     }
-                    className="
-        flex h-10 w-10 items-center justify-center
-        rounded-full bg-white/10 text-white
-        transition hover:bg-white/20
-      "
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
                     aria-label="Previous image"
                   >
                     ←
@@ -153,11 +106,7 @@ export default function UIShowcasePoon() {
                     onClick={() =>
                       setIndex((prev) => (prev + 1) % showcases.length)
                     }
-                    className="
-        flex h-10 w-10 items-center justify-center
-        rounded-full bg-white/10 text-white
-        transition hover:bg-white/20
-      "
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
                     aria-label="Next image"
                   >
                     →
@@ -174,10 +123,9 @@ export default function UIShowcasePoon() {
                 <motion.img
                   key={current.image}
                   src={current.image}
-                  alt={current.title}
+                  alt={t(`${index}.title`)}
                   onClick={() => setOpenImage(current.image)}
-                  className="absolute
-                   inset-0 w-full h-full object-contain"
+                  className="absolute inset-0 w-full h-full object-contain"
                 />
               </AnimatePresence>
               <AnimatePresence>
@@ -198,8 +146,6 @@ export default function UIShowcasePoon() {
                       exit={{ scale: 0.8, opacity: 0 }}
                       onClick={(e) => {
                         e.stopPropagation();
-
-                        // 👉 ไปภาพถัดไป
                         setIndex((prev) =>
                           prev === images.length - 1 ? 0 : prev + 1,
                         );

@@ -6,9 +6,25 @@ import PortfolioItem from "./PortfolioItem";
 import PortfolioDetail from "./PortfolioDetail";
 // import { LayoutGroup } from "motion/react";
 import { Box } from "@mui/material";
+import { useTranslations } from "next-intl";
+
+const projectTranslationKeys: Record<string, string> = {
+  p1: "cicd",
+  p2: "dataStructure",
+  p3: "systemAnalyst",
+  p4: "appSecurity",
+};
 
 export default function PortfolioGrid() {
   const [active, setActive] = useState<Project | null>(null);
+  const t = useTranslations("projects");
+
+  const translatedProjects = projects.map((p) => ({
+    ...p,
+    description: projectTranslationKeys[p.id]
+      ? t(`${projectTranslationKeys[p.id]}.description`)
+      : p.description,
+  }));
 
   return (
     <Box
@@ -38,7 +54,7 @@ export default function PortfolioGrid() {
           gap-30
         "
           >
-            {projects.map((p: Project) => (
+            {translatedProjects.map((p: Project) => (
               <PortfolioItem
                 key={p.id}
                 project={p}

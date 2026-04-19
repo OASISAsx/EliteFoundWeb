@@ -1,11 +1,324 @@
 {
   "Home": {
     "myName": "Nanthawat Inthisaen",
-    "description": "This is the homepage"
+    "description": "This is the homepage",
+    "greeting": "Nanthawat Inthisaen",
+    "nickname": "Wave · 24 years old",
+    "roles": {
+      "fullstack": "Full-Stack Developer",
+      "frontend": "Frontend Developer",
+      "backend": "Backend Developer",
+      "devops": "DevOps Engineer"
+    },
+    "stats": {
+      "yearsExp": "Years Exp.",
+      "projects": "Projects",
+      "technologies": "Technologies"
+    }
+  },
+  "skills": {
+    "badge": "Toolkit",
+    "title": "My Skills Passion",
+    "description": "Tech stack I use to build real projects: frontend, backend, and deployment",
+    "items": {
+      "nextjs": "Build production-grade web apps with Next.js using App Router, Server Components, and SEO/Performance optimization techniques",
+      "typescript": "Write safe, bug-free code with improved maintainability through Static Typing",
+      "vuejs": "Develop web apps with Vue 3 and Composition API for flexible and scalable architecture",
+      "tailwindcss": "Rapidly design responsive UI with Utility-first CSS and flexible design control",
+      "react": "Build interactive web applications with React for flexible and scalable component architecture",
+      "nodejs": "Build Backend systems with Node.js supporting REST API and Asynchronous operations",
+      "express": "Develop fast and flexible REST APIs with Express.js for Backend systems",
+      "nestjs": "Build structured Backend with NestJS supporting Clean Architecture and enterprise-scale systems",
+      "prisma": "Manage databases with a modern ORM that ensures type-safe queries and seamless TypeScript integration",
+      "javascript": "Manage State efficiently in React and Next.js for API connection and data rendering",
+      "redux": "Manage State efficiently in React and Next.js for API connection and data rendering",
+      "zustand": "Manage State efficiently in React and Next.js for API connection and data rendering",
+      "pinia": "Manage State and API connections in Vue.js systematically with Pinia and Vuex",
+      "materialui": "Build enterprise-grade UI with ready-to-use, highly customizable components",
+      "nuxt": "Develop web apps with Nuxt.js for efficient Progressive Web Apps and SSR",
+      "github": "Version control and deployment workflow management with Git and automated CI/CD",
+      "sequelize": "Manage databases with ORM supporting PostgreSQL, MySQL, and SQLite",
+      "antdesign": "Build professional UI with pre-built components suited for large-scale systems",
+      "vuexy": "Premium admin template for rapid Dashboard and back-office system development",
+      "aws": "Cloud computing platform for scalable, reliable application hosting and services",
+      "docker": "Manage containers for deployment and efficient Microservices architecture",
+      "ubuntu": "Linux server management for deployment and production system administration",
+      "kubernetes": "Manage systems with Kubernetes (K8s) for Containerized Architecture with auto-scaling, high availability, and Rolling Update / Blue-Green Deployment for smooth, zero-downtime updates",
+      "jenkins": "Manage CI/CD Pipelines efficiently with Jenkins for automated deployment",
+      "nginx": "High-performance web server and reverse proxy for load balancing and deployment",
+      "mongodb": "NoSQL database for flexible, document-based data management",
+      "mysql": "Relational database management for structured data and complex queries",
+      "postgresql": "Advanced relational database with powerful features for enterprise applications",
+      "githubCopilot": "AI-powered code assistant for efficient coding with intelligent code suggestions and auto-completion",
+      "claudeCode": "AI-powered code assistant for efficient coding with intelligent code suggestions and auto-completion"
+    }
+  },
+  "workHistory": {
+    "title": "Work History",
+    "jobs": {
+      "poontana": {
+        "position": "Full-Stack Developer",
+        "period": "2024 May – Present (Poontana Marketing Co., Ltd)",
+        "description": "Designed and developed a scalable ERP Web Application covering both Frontend and Backend. Built core system modules including Stock, Sales, Purchasing, Quotation, and Reporting. Designed Customer Visit Planning, Site Survey, and Job Scheduling systems for installation and maintenance work. Developed a Barcode Scanning System to improve speed and accuracy in inventory management. Designed and developed a Financial Calculation System to support complex business processes in Marketing and financial calculations. Built real-time systems with WebSocket (Socket.IO) for Messaging, enabling customers to contact the Admin team instantly. Developed QR Code Scan Login on Kiosk screens for time attendance and real-time data updates. Designed and implemented CI/CD Pipeline with automated testing before deployment to Production. Managed the system with Kubernetes (K8s) to support Containerized Architecture, enabling auto-scaling, high availability, and Rolling Update / Blue-Green Deployment for smooth system updates with zero downtime."
+      },
+      "dexon": {
+        "position": "Internship Developer",
+        "period": "Nov 2023 - Feb 2024 (Dexon Technologies Co., Ltd)",
+        "description": "Developed web applications with a systematic Software Engineering approach. Designed data structures and system architecture to support efficient and scalable operations. Fixed and improved Frontend issues while enhancing Optimization and Performance for faster loading and better responsiveness. Participated in UX/UI design and system architecture aligned with real-world usage. Designed branding elements such as logos and graphics using Adobe Photoshop to enhance product image. Developed custom PDF templates for internal documents, designed to support real data structures and professional use."
+      }
+    }
+  },
+  "timeline": {
+    "eimsStock": {
+      "title": "Full Stack Developer",
+      "company": "EIMS Stock",
+      "desc": "Developed system with NextJS, Zustand, NestJS, Express, Prisma"
+    },
+    "zillion": {
+      "title": "Full Stack Developer",
+      "company": "Zillion",
+      "desc": "Developed ERP system with Vue3, Nuxt, Pinia, NestJS, Prisma"
+    },
+    "poonErp": {
+      "title": "Full Stack Developer",
+      "company": "Poon EWork ERP",
+      "desc": "Developed ERP system with Vue2, Express.js, Sequelize, MySQL"
+    },
+    "devops": {
+      "title": "DevOps",
+      "company": "Setting CI/CD pipelines in Project",
+      "desc": "Ubuntu Linux, Nginx, Git Action, Docker"
+    },
+    "pttProject": {
+      "title": "PTT Project",
+      "company": "DEXON TECHNOLOGY PLC.",
+      "desc": "Developed using Vue2 and C# .NET Core"
+    },
+    "finalProject": {
+      "title": "Final Project Study",
+      "company": "Buy and sell collectibles",
+      "desc": "Developed using React, Next.js and Golang, Gin"
+    }
+  },
+  "projects": {
+    "cicd": {
+      "description": "Designed and developed a CI/CD pipeline for web applications with automated build, test, and deploy processes. Configured Linux servers, managed Docker containers, Nginx reverse proxy, SSL, and domain connections for production-level deployment."
+    },
+    "dataStructure": {
+      "description": "Designed and developed data structures to support efficient system operations. Designed data structures for data management in Backend and Database systems."
+    },
+    "systemAnalyst": {
+      "description": "Gathered requirements from clients, analyzed system needs, and designed system development approaches (System Analysis) including Data Flow, Process Flow, and data structures to support Backend development."
+    },
+    "appSecurity": {
+      "description": "Designed and managed system security covering Authentication, Authorization, JWT, password encryption, and Secret management for Backend and Production Environment."
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "downloadResume": "Download Resume",
+    "profile": "Profile"
   },
   "common": {
     "title": "Nanthawat Inthisaen",
     "contact": "Contact",
     "back": "Back"
+  },
+  "carousels": {
+    "stock": {
+      "heading": "Poontana ERP",
+      "subtitle": "Full-Stack Developer",
+      "0": {
+        "title": "POON EIMS",
+        "description": "POON EIMS is an end-to-end inventory and warehouse management platform designed to connect every business workflow from sales, purchasing, to services. With centralized data and real-time processing, the Stock team can accurately inspect, control, and analyze data, reducing errors and increasing operational efficiency."
+      },
+      "1": {
+        "title": "Detail Product",
+        "description": "A system page for displaying in-depth product details — not just general model information, but specific data for each individual item identified by Serial Number, enabling full tracking from source to destination. This transforms inventory management from viewing 'products in bulk' to tracking 'each individual item' with verifiable history."
+      },
+      "2": {
+        "title": "Total Sales",
+        "description": "Summarizes and displays total product sales over a specified period, typically on a monthly basis, for clear trend comparison. Data can be broken down by product type, model, or sales channel. The Total Sales system transforms scattered sales data into easy-to-understand analytical insights ready for business decision-making."
+      },
+      "3": {
+        "title": "Purchase Order",
+        "description": "Purchase Order is the document and process used to order products from vendors or suppliers, specifying product details, quantities, prices, and delivery conditions. The system uses PO data as reference for receiving goods to ensure deliveries match orders. It creates clarity between Purchasing, Warehouse, and Accounting departments."
+      },
+      "4": {
+        "title": "Sales Order",
+        "description": "Implements FIFO (First-In, First-Out) principles for product sales to ensure correct lot sequencing. Built Automated PDF Reporting to reduce manual work. Developed Workflow System to increase organizational efficiency. With serial number tracking, every sold item is verified to exist in stock and hasn't been previously sold, reducing errors from duplicate sales or selling out-of-stock items."
+      }
+    },
+    "zillion": {
+      "heading": "Zillion ERP",
+      "subtitle": "Full-Stack Developer",
+      "0": {
+        "title": "Zillion ERP",
+        "description": "An enterprise system for a company that builds or maintains houses and buildings according to assigned projects."
+      },
+      "1": {
+        "title": "Total Projects",
+        "description": "Project creation and management for internal document storage. Total Projects is a module for creating and managing various projects within the organization, serving as a central hub for collecting documents, data, and activities related to each project. Users can create new projects, define project details, and systematically store related documents."
+      },
+      "2": {
+        "title": "Quotation",
+        "description": "Quotation creation and approval status tracking system. Users can pull related data from existing projects such as customer info, work details, and conditions. The system supports tracking quotation status from creation, sending to clients, through to approval or rejection, making the quoting process clear and transparent."
+      },
+      "3": {
+        "title": "Quotation Details",
+        "description": "Managing quotation details from Master Data products. Quotation Details handles in-depth quotation information by pulling product data directly from the Master Data system. Using Master data reduces redundancy and discrepancies, ensuring quotations are accurate and standardized across the system."
+      },
+      "4": {
+        "title": "Control List",
+        "description": "Collects product items from quotations for each project, summarizing what products are used and aggregating total project costs until project completion."
+      },
+      "5": {
+        "title": "Sales Attendance",
+        "description": "Sales staff check-in/check-out tracking system. Sales Attendance records and tracks sales employees' attendance status. The system enables managers to monitor working hours, field visits, and work status clearly. Data can be used for performance evaluation, sales planning, and HR management."
+      },
+      "6": {
+        "title": "Installation",
+        "description": "Product installation management and on-site data recording. The Installation system manages product installations for customers, from planning, team assignment, to recording on-site data such as installation details, work status, and photos. It enables real-time progress tracking and supports future auditing."
+      },
+      "7": {
+        "title": "Manage Menu",
+        "description": "Manage Menu is a module for managing system menus, allowing users to see and access only menus relevant to their department or role. The system links menus with access rights (Role/Department) to systematically control menu display, reducing complexity and preventing unauthorized access."
+      }
+    },
+    "poon": {
+      "heading": "Poontana ERP",
+      "subtitle": "Full-Stack Developer",
+      "0": {
+        "title": "POON EWORK Platform",
+        "description": "Developed the organization's main Web Application for managing Marketing and Service Workflow, covering everything from receiving work orders to actual execution."
+      },
+      "1": {
+        "title": "Real-time Messaging System",
+        "description": "Developed a real-time Chat system between customers and Admin using Socket.IO for instant communication, problem resolution, and work tracking."
+      },
+      "2": {
+        "title": "Service Work Management",
+        "description": "Designed a Service Workflow management system for creating and tracking service jobs before technicians go out to serve customers."
+      },
+      "3": {
+        "title": "Work Type & Service Logic",
+        "description": "Designed Business Logic for classifying repair types such as on-site repair, equipment return, or spare equipment provision, including conditions for parts usage and monthly ink replacement limits."
+      },
+      "4": {
+        "title": "Task Assignment & Delivery",
+        "description": "Developed a task assignment system for technicians through the application, enabling sequential job acceptance and execution."
+      },
+      "5": {
+        "title": "Role & Permission Management",
+        "description": "Designed an RBAC (Role-Based Access Control) system allowing managers to control employee access to menus and features by department."
+      }
+    },
+    "devops": {
+      "heading": "Setting CI/CD pipelines in Project",
+      "subtitle": "DevOps Infrastructure Setup",
+      "0": {
+        "title": "DevOps Infrastructure Setup",
+        "description": "Designed and deployed Server Infrastructure for production-level project deployment, with Docker and Containerization configuration for stable domain-accessible systems."
+      },
+      "1": {
+        "title": "Continuous Integration (CI)",
+        "description": "Set up CI Pipeline for automated code quality checks including Test runs, Lint, and Build Validation before production deployment."
+      },
+      "2": {
+        "title": "Pre-deployment Workflow",
+        "description": "Designed pre-deployment steps to ensure the application passes comprehensive testing, reducing production bug risks."
+      },
+      "3": {
+        "title": "Docker Container Orchestration",
+        "description": "Created and managed Docker Containers using docker-compose to orchestrate multiple services for efficient collaboration."
+      }
+    },
+    "dexon": {
+      "heading": "DEXON TECHNOLOGY PLC.",
+      "subtitle": "Intern Developer",
+      "0": {
+        "title": "PTT Project",
+        "description": "Developed a software engineering system for efficiently managing industrial equipment data, focusing on tracking pipe service life including pipeline and piping systems. The system records equipment data for lifespan calculations, displays data via Summary Dashboard and Summary Table, and sends email alerts based on defined conditions."
+      },
+      "1": {
+        "title": "UI Redesign Meeting",
+        "description": "Redesigned the UI for improved usability and modern aesthetics suitable for all industries."
+      },
+      "2": {
+        "title": "Final Project",
+        "description": "Developed a complete project from System Design through to development and deployment for real-world usage."
+      },
+      "3": {
+        "title": "Icon Design",
+        "description": "Designed icons for system use, considering organizational branding and copyright requirements."
+      },
+      "4": {
+        "title": "Team Collaboration",
+        "description": "Collaborated with the team on system development, planning, and problem-solving to achieve project goals."
+      },
+      "5": {
+        "title": "Certificate",
+        "description": "Certification of capabilities and achievements related to Software Engineering and system development."
+      }
+    },
+    "final": {
+      "heading": "Buy and sell collectibles",
+      "subtitle": "Students developing the system",
+      "0": {
+        "title": "Online Collectibles Marketplace",
+        "description": "🛒 An online collectibles marketplace developed as a central platform for users to buy and sell collectible items such as figures, cards, models, or rare items. Focused on enabling convenient, safe, and fully traceable transactions. This system was created as a graduation final project."
+      },
+      "1": {
+        "title": "Detail Product",
+        "description": "Users can browse all product listings with details such as: • Product images • Price • Product description • Product status (Available / SOLD OUT)"
+      },
+      "2": {
+        "title": "Payment",
+        "description": "Before purchasing, users can view in-depth product information including reviews from other buyers to help with decision-making."
+      },
+      "3": {
+        "title": "Payment Success",
+        "description": "When users select a product, the system guides them through the payment process, supporting: • Upload payment slip • Payment verification (Check Slip)"
+      },
+      "4": {
+        "title": "History Purchase",
+        "description": "Users can review their order history including the status of each transaction."
+      },
+      "5": {
+        "title": "Review",
+        "description": "After receiving the product, buyers can rate and write reviews to increase seller credibility."
+      },
+      "6": {
+        "title": "Product SOLD OUT",
+        "description": "The system manages product status such as: • Out of Stock (SOLD OUT) • Sales Closed"
+      },
+      "7": {
+        "title": "Register Seller",
+        "description": "Users can register as sellers and use features including: • Post Products • Manage product listings • Check orders"
+      },
+      "8": {
+        "title": "Check Slip",
+        "description": "Payment verification system where buyers can upload transfer slips and sellers or admins can verify payment accuracy before proceeding with product delivery."
+      },
+      "9": {
+        "title": "Seller Sales Dashboard",
+        "description": "A seller dashboard displaying sales summaries such as total revenue, order count, and order status to help sellers analyze and track sales performance effectively."
+      },
+      "10": {
+        "title": "Post Product",
+        "description": "A system for sellers to add products to the platform, with the ability to set product details such as name, price, images, and descriptions for users to access and purchase."
+      }
+    },
+    "work": {
+      "heading": "DEXXON",
+      "subtitle": "Internship Developer",
+      "descriptionTitle": "Description",
+      "description": "This project aims to develop an efficient software system to support software engineers in managing industrial equipment data, focusing on tracking and evaluating the service life of pipe systems such as pipelines and piping systems within industry. The system enables users to record and manage equipment data through a centralized digital platform, serving as a centralized data management hub to increase accuracy and data accessibility. Additionally, the system processes data to calculate critical parameters related to equipment lifespan, operating conditions, and degradation factors, supporting systematic and reliable equipment condition assessment for practical use, clear data analysis, and effective decision-making for maintenance planning and industrial equipment management.",
+      "viewProject": "View project"
+    }
   }
 }

@@ -3,77 +3,28 @@
 import { Box } from "@mui/material";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const showcases = [
-  {
-    title: "Zillion ERP",
-    description:
-      "เป็นระบบขององค์กรที่ทำธุระกิจ สร้างหรือบำรุงบ้าน หรือตัวอาคาร ตามโครงการที่ได้รับมอบหมาย",
-    image: "/zillion/8.png",
-  },
-  {
-    title: "Total Projects",
-    description:
-      "การสร้างและบริหารโครงการเพื่อจัดเก็บเอกสารภายในองค์กร Total Projects เป็นโมดูลสำหรับสร้างและจัดการโครงการต่าง ๆ ภายในองค์กร โดยใช้เป็นศูนย์กลางในการรวบรวมเอกสาร ข้อมูล และกิจกรรมที่เกี่ยวข้องกับการบริหารงานแต่ละโครงการ ผู้ใช้งานสามารถสร้างโครงการใหม่ กำหนดรายละเอียดโครงการ และจัดเก็บเอกสารที่เกี่ยวข้องได้อย่างเป็นระบบ ช่วยให้การติดตามความคืบหน้าและการค้นหาข้อมูลโครงการทำได้สะดวกและมีประสิทธิภาพมากขึ้น",
-    image: "/zillion/7.png",
-  },
-  {
-    title: "Quotation",
-    description:
-      "ระบบสร้างใบเสนอราคาและติดตามสถานะการอนุมัติ Quotation เป็นระบบสำหรับสร้างใบเสนอราคาให้กับลูกค้า โดยสามารถดึงข้อมูลที่เกี่ยวข้องมาจากโครงการที่มีอยู่ในระบบ เช่น ข้อมูลลูกค้า รายละเอียดงาน และเงื่อนไขต่าง ๆ ระบบยังรองรับการติดตามสถานะของใบเสนอราคา ตั้งแต่ขั้นตอนการสร้าง การส่งให้ลูกค้า ไปจนถึงการอนุมัติหรือปฏิเสธ ช่วยให้กระบวนการเสนอราคามีความชัดเจน โปร่งใส และลดความผิดพลาดในการทำงาน",
-    image: "/zillion/6.png",
-  },
-  {
-    title: "Quotation Details",
-    description:
-      "การจัดการรายละเอียดใบเสนอราคาจากข้อมูลสินค้า Master Quotation Details เป็นส่วนที่ใช้จัดการรายละเอียดเชิงลึกของใบเสนอราคา โดยดึงข้อมูลสินค้าจากระบบ Master Data มาใช้งานโดยตรง เช่น ชื่อสินค้า ราคา และรายละเอียดสินค้า การใช้ข้อมูลจาก Master ช่วยลดความซ้ำซ้อนและความคลาดเคลื่อนของข้อมูล ทำให้ใบเสนอราคามีความถูกต้องและเป็นมาตรฐานเดียวกันทั้งระบบ",
-    image: "/zillion/5.png",
-  },
-  {
-    title: "Control List",
-    description:
-      "นำรายการสินค้าที่ทำใบเสนอราคาแต่ละโครงการจะรอรวมสินค้าว่าใช้สินค้าอะไรบ้าง รวมค่าใช้ทั้งหมดของโครงการจนโครงการเสร็จ",
-    image: "/zillion/zillion3.png",
-  },
-  {
-    title: "Sales Attendance",
-    description:
-      "ระบบติดตามการเข้า–ออกงานของพนักงานขาย Sales Attendance เป็นโมดูลที่ใช้สำหรับบันทึกและติดตามสถานะการเข้า–ออกงานของพนักงานขาย ระบบช่วยให้ผู้บริหารสามารถตรวจสอบเวลาการทำงาน การลงพื้นที่ หรือสถานะการปฏิบัติงานของทีมขายได้อย่างชัดเจน ข้อมูลที่ได้สามารถนำไปใช้ในการประเมินประสิทธิภาพการทำงาน วางแผนงานขาย และบริหารทรัพยากรบุคคลได้อย่างเหมาะสม",
-    image: "/zillion/4.png",
-  },
-  {
-    title: "Installation",
-    description:
-      "การจัดการงานติดตั้งสินค้าและบันทึกข้อมูลหน้างาน Installation เป็นระบบที่ใช้บริหารจัดการงานติดตั้งสินค้าให้กับลูกค้า ตั้งแต่การวางแผนงานติดตั้ง การมอบหมายทีมงาน ไปจนถึงการบันทึกข้อมูลหน้างานจริง เช่น รายละเอียดการติดตั้ง สถานะงาน และภาพประกอบ ระบบช่วยให้การติดตั้งสินค้าเป็นไปอย่างเป็นขั้นตอน สามารถติดตามความคืบหน้าได้แบบเรียลไทม์ และรองรับการตรวจสอบหรืออ้างอิงข้อมูลในภายหลัง",
-    image: "/zillion/3.png",
-  },
-  {
-    title: "Manage Menu",
-    description:
-      "Manage Menu เป็นโมดูลสำหรับจัดการเมนูการใช้งานภายในระบบ โดยกำหนดให้ผู้ใช้งานสามารถเห็นและเข้าถึงเฉพาะเมนูที่เกี่ยวข้องกับแผนกหรือหน้าที่ที่ตนเองรับผิดชอบเท่านั้น ระบบจะเชื่อมโยงเมนูกับสิทธิ์การใช้งาน (Role / Department) เพื่อควบคุมการแสดงผลเมนูอย่างเป็นระบบ ลดความซับซ้อนในการใช้งาน และป้องกันการเข้าถึงข้อมูลหรือฟังก์ชันที่ไม่เกี่ยวข้อง ",
-    image: "/zillion/2.png",
-  },
-  // {
-  //   title: "Approve",
-  //   description:
-  //     "ระบบอนุมัติรายการผ่านการตรวจสอบจาก Menager Approve เป็นระบบสำหรับจัดการกระบวนการอนุมัติเอกสารหรือรายการต่าง ๆ ภายในองค์กร โดยรายการที่จะเข้าสู่ขั้นตอนการอนุมัติจะต้องผ่านการตรวจสอบความถูกต้องจากหัวหน้าหรือผู้รับผิดชอบในขั้นต้นก่อน เมื่อข้อมูลถูกตรวจสอบและยืนยันความถูกต้องเรียบร้อยแล้ว ระบบจึงจะส่งต่อให้ผู้มีอำนาจอนุมัติทำการพิจารณา ",
-  //   image: "/zillion/1.png",
-  // },
-  // {
-  //   title: "Settings Panel",
-  //   description: "Clean and minimal settings layout focused on usability.",
-  //   image: "/stocks/stock4.png",
-  // },
+  { image: "/zillion/8.png" },
+  { image: "/zillion/7.png" },
+  { image: "/zillion/6.png" },
+  { image: "/zillion/5.png" },
+  { image: "/zillion/zillion3.png" },
+  { image: "/zillion/4.png" },
+  { image: "/zillion/3.png" },
+  { image: "/zillion/2.png" },
 ];
 
 export default function UIShowcaseZ() {
+  const t = useTranslations("carousels.zillion");
   const [index, setIndex] = useState(0);
   const current = showcases[index];
   const [openImage, setOpenImage] = useState<string | null>(null);
   const images = showcases.map((item) => item.image);
   return (
     <Box
-      key={current.title}
+      key={`zillion-${index}`}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -85,15 +36,15 @@ export default function UIShowcaseZ() {
     >
       <div className="flex flex-col items-center justify-end">
         <motion.h2
-          key={current.title}
+          key={`heading-${index}`}
           transition={{ duration: 0.4 }}
           className="text-3xl font-bold text-white px-3 line-clamp-1"
         >
-          Zillion ERP
+          {t("heading")}
         </motion.h2>
 
         <p className="mt-2 max-w-xl text-white/60 px-4 line-clamp-1">
-          Full-Stack Developer
+          {t("subtitle")}
         </p>
       </div>
 
@@ -105,56 +56,40 @@ export default function UIShowcaseZ() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="                
-              w-full
-                max-w-xl       
-                min-h-[260px] 
-                bg-white/5
-                backdrop-blur
-                rounded-2xl
-                p-6
-                shadow-lg
-                mx-auto       
-                flex
-                flex-col
-                justify-between"
+              className="w-full max-w-xl min-h-[260px] bg-white/5 backdrop-blur rounded-2xl p-6 shadow-lg mx-auto flex flex-col justify-between"
             >
               <motion.h6
-                key={current.title}
+                key={`title-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
                 className="text-2xl font-bold text-gray-400"
               >
-                {current.title}
+                {t(`${index}.title`)}
               </motion.h6>
 
               <motion.p
-                key={current.description}
+                key={`desc-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="mt-4 text-white/60 leading-relaxed"
               >
-                {current.description}
+                {t(`${index}.description`)}
               </motion.p>
 
               {/* CONTROLS */}
               <Box className="mt-10 flex w-full items-center justify-between">
-                {/* ซ้าย : dots */}
                 <div className="flex gap-3">
                   {showcases.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setIndex(i)}
-                      className={`h-2 rounded-full transition-all
-          ${i === index ? "w-8 bg-white" : "w-2 bg-white/30"}
-        `}
+                      className={`h-2 rounded-full transition-all ${i === index ? "w-8 bg-white" : "w-2 bg-white/30"}`}
                     />
                   ))}
                 </div>
 
-                {/* ขวา : arrows */}
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() =>
@@ -163,11 +98,7 @@ export default function UIShowcaseZ() {
                           (prev - 1 + showcases.length) % showcases.length,
                       )
                     }
-                    className="
-        flex h-10 w-10 items-center justify-center
-        rounded-full bg-white/10 text-white
-        transition hover:bg-white/20
-      "
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
                     aria-label="Previous image"
                   >
                     ←
@@ -177,11 +108,7 @@ export default function UIShowcaseZ() {
                     onClick={() =>
                       setIndex((prev) => (prev + 1) % showcases.length)
                     }
-                    className="
-        flex h-10 w-10 items-center justify-center
-        rounded-full bg-white/10 text-white
-        transition hover:bg-white/20
-      "
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
                     aria-label="Next image"
                   >
                     →
@@ -198,10 +125,9 @@ export default function UIShowcaseZ() {
                 <motion.img
                   key={current.image}
                   src={current.image}
-                  alt={current.title}
+                  alt={t(`${index}.title`)}
                   onClick={() => setOpenImage(current.image)}
-                  className="absolute
-                   inset-0 w-full h-full object-contain"
+                  className="absolute inset-0 w-full h-full object-contain"
                 />
               </AnimatePresence>
               <AnimatePresence>
@@ -222,8 +148,6 @@ export default function UIShowcaseZ() {
                       exit={{ scale: 0.8, opacity: 0 }}
                       onClick={(e) => {
                         e.stopPropagation();
-
-                        // 👉 ไปภาพถัดไป
                         setIndex((prev) =>
                           prev === images.length - 1 ? 0 : prev + 1,
                         );
