@@ -72,26 +72,26 @@
     "eimsStock": {
       "title": "Full-Stack Developer",
       "company": "EIMS Stock",
-      "desc": "พัฒนาระบบด้วย NextJS, Zustand, NestJS, Express, Prisma"
+      "desc": "พัฒนาระบบด้วย NextJS, Zustand, NestJS, Express, Prisma, RabbitMQ, Redis, MySQL"
     },
     "zillion": {
       "title": "Full-Stack Developer",
       "company": "Zillion",
-      "desc": "พัฒนาระบบ ERP ด้วย Vue3, Nuxt, Pinia, NestJS, Prisma"
+      "desc": "พัฒนาระบบ ERP ด้วย Nuxt, Pinia, NestJS, Prisma, ProstgreSQL"
     },
     "poonErp": {
       "title": "Full-Stack Developer",
       "company": "Poon EWork ERP",
-      "desc": "พัฒนาระบบ ERP ด้วย Vue2, Express.js, Sequelize, MySQL"
+      "desc": "พัฒนาระบบ ERP ด้วย Vue2, Express.js, Sequelize, RabbitMQ, Redis, MySQL"
     },
     "devops": {
       "title": "DevOps",
       "company": "วางระบบ CI/CD ในโปรเจกต์",
-      "desc": "Ubuntu Linux, Nginx, Git Action, Docker"
+      "desc": "Ubuntu Linux, Nginx, Git Action, Docker, Kubernetes, Jenkins"
     },
     "pttProject": {
       "title": "PTT Project",
-      "company": "บริษัท ดีซอน เทคโนโลยี จำกัด (มหาชน)",
+      "company": "บริษัท เดกซอน เทคโนโลยี จำกัด (มหาชน)",
       "desc": "พัฒนาด้วย Vue2 และ C# .NET Core"
     },
     "finalProject": {
@@ -198,7 +198,7 @@
       },
       "1": {
         "title": "Real-time Messaging System",
-        "description": "พัฒนาระบบ Chat ระหว่างลูกค้าและ Admin แบบ Real-time ด้วย Socket.IO เพื่อรองรับการสื่อสาร แก้ไขปัญหา และติดตามงานได้ทันที"
+        "description": "พัฒนาระบบ Chat ระหว่างลูกค้าและ Admin แบบ Real-time ด้วย Socket.IO เพื่อรองรับการสื่อสาร แก้ไขปัญหา และติดตามงานได้ทันที โดยจะเก็บข้อมูลไว้ที่ประวัติแชทที่ Redis เพื่อให้สามารถเรียกดูประวัติการสนทนาได้อย่างรวดเร็ว และ ให้ RabbitMQ เป็น Message Broker สำหรับการจัดการคิวของข้อความและการสื่อสารระหว่างระบบต่าง ๆ "
       },
       "2": {
         "title": "Service Work Management",
